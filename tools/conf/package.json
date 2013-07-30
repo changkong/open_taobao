@@ -1,0 +1,223 @@
+[
+    {"Name":"user", "Caption":"用户API",
+      "Desc":"提供了用户基本信息查询功能", 
+      "Prefix":[
+      "taobao.user.",
+      "taobao.users.get"
+    ]},
+    {"Name":"item", "Caption":"类目API", 
+      "Desc":"提供了标准类目，类目属性和类目属性值的查询功能", 
+      "Prefix":[
+      "taobao.itemcats.",
+      "taobao.itemprops.get",
+      "taobao.itempropvalues.get",
+      "taobao.topats.itemcats.get"
+    ]},
+    {"Name":"product", "Caption":"商品API", 
+      "Desc":"提供了商品以及商品相关的sku，邮费增加，修改功能", 
+      "Prefix":[
+      "taobao.aftersale.get",
+      "taobao.item.",
+      "taobao.items.",
+      "taobao.product.",
+      "taobao.products.",
+      "taobao.skus.",
+      "taobao.topats.items.all.get",
+      "taobao.ump.promotion.get",
+      "tmall.brandcat.",
+      "tmall.product."
+    ]},
+    {"Name":"trade", "Caption":"交易API", 
+      "Desc":"提供了订单下载，修改收货地址、修改交易备注等功能", 
+      "Prefix":[
+      "taobao.topats.trades.",
+      "taobao.trade.",
+      "taobao.trades.sold."
+    ]},
+    {"Name":"pinjia", "Caption":"评价API", 
+      "Desc":"提供了评价的添加和查询功能", 
+      "Prefix":[
+      "taobao.traderate.",
+      "taobao.traderates.get"
+    ]},
+    {"Name":"delivery", "Caption":"物流API", 
+      "Desc":"提供了发货，物流单详情，区域地址和物流公司信息查询功能", 
+      "Prefix":[
+      "alibaba.logistics.",
+      "taobao.areas.get",
+      "taobao.delivery.",
+      "taobao.logistics.",
+      "taobao.topats.delivery.send"
+    ]},
+    {"Name":"shop", "Caption":"店铺API", 
+      "Desc":"提供了店铺查询，店铺自定义类目的查询和更新", 
+      "Prefix":[
+      "taobao.sellercats.",
+      "taobao.shop.",
+      "taobao.shopcats.list.get"
+    ]},
+    {"Name":"fenxiao", "Caption":"分销API", 
+      "Desc":"提供了分销商信息和采购单信息的查询以及分销产品的添加和更新等功能", 
+      "Prefix":[
+      "taobao.fenxiao.",
+      "taobao.inventory.",
+      "taobao.scitem.",
+      "taobao.topats.fenxiao.orders.get"
+    ]},
+    {"Name":"wangwang", "Caption":"旺旺API", 
+      "Desc":"提供了旺旺聊天记录，平均等待时间，客服评价统计，客服未回复人数和客服接待数等绩效考核功能", 
+      "Prefix":[
+      "taobao.wangwang."
+    ]},
+    {"Name":"taobaoke", "Caption":"淘客API", 
+      "Desc":"提供了淘宝客商品列表和淘宝客单品详情推广，店铺推广，类目和关键字推广以及淘客报表查询等功能.常见的淘客问题，请看该文档的“功能介绍”", 
+      "Prefix":[
+      "taobao.taobaoke."
+    ]},
+    {"Name":"notice", "Caption":"主动通知业务API", 
+      "Desc":"配合主动通知业务，提供商品，交易，退款和评价等数据或状态变更的查询功能，使用：http://open.taobao.com/doc/category_list.htm?spm=0.0.0.0.maU6vt&id=87", 
+      "Prefix":[
+      "taobao.comet.discardinfo.get",
+      "taobao.increment.",
+      "taobao.topats.increment.messages.get"
+    ]},
+    {"Name":"tools", "Caption":"工具类API", 
+      "Desc":"提供了系统时间查询、关键词过滤、定时任务管理、异步任务管理等功能的API", 
+      "Prefix":[
+      "taobao.appip.get",
+      "taobao.feedback.add",
+      "taobao.kfc.keyword.search",
+      "taobao.time.get",
+      "taobao.topats.result.get",
+      "taobao.topats.task.delete",
+      "taobao.topats.tasks.get"
+    ]},
+    {"Name":"wlb", "Caption":"物流宝API", 
+      "Desc":"提供了物流宝库存，商品，订单和发货等功能", 
+      "Prefix":[
+      "taobao.inventory.ipc.inventorydetail.get",
+      "taobao.wlb."
+    ]},
+    {"Name":"simba", "Caption":"直通车API", 
+      "Desc":"提供卖家直通车投放管理功能，增值包现已开放申请", 
+      "Prefix":[
+      "taobao.simba.",
+      "taobao.topats.simba.campkeywordbase.get",
+      "taobao.topats.simba.campkeywordeffect.get"
+    ]},
+    {"Name":"favorite", "Caption":"收藏夹API", 
+      "Desc":"提供了收藏夹添加和查询功能", 
+      "Prefix":[
+      "taobao.favorite."
+    ]},
+    {"Name":"jipiao", "Caption":"机票API", 
+      "Desc":"", 
+      "Prefix":[
+      "taobao.jipiao.",
+      "taobao.trip."
+    ]},
+    {"Name":"marketing", "Caption":"营销API", 
+      "Desc":"提供淘宝营销工具的业务，包括店铺优惠券、会员关系管理等", 
+      "Prefix":[
+      "taobao.marketing.",
+      "taobao.promotion.",
+      "taobao.ump."
+    ]},
+    {"Name":"udp", "Caption":"数据API", 
+      "Desc":"提供淘宝数据开放", 
+      "Prefix":[
+      "taobao.udp."
+    ]},
+    {"Name":"hotel", "Caption":"酒店API", 
+      "Desc":"淘宝酒店业务", 
+      "Prefix":[
+      "taobao.hotel.",
+      "taobao.hotels.search"
+    ]},
+    {"Name":"crm", "Caption":"店铺会员管理API", 
+      "Desc":"API无需订购ecrm工具也可调用。开放淘宝卖家的会员数据，并且提供对会员的相关管理，设置操作。", 
+      "Prefix":[
+      "taobao.crm.",
+      "taobao.hanoi.",
+      "tmall.crm."
+    ]},
+    {"Name":"dmt", "Caption":"多媒体平台API", 
+      "Desc":"解决淘宝各种文件上传、管理维护、使用的统一解决方案平台", 
+      "Prefix":[
+      "taobao.picture.",
+      "taobao.video.",
+      "taobao.videos.search"
+    ]},
+    {"Name":"subuser", "Caption":"子账号管理API", 
+      "Desc":"提供子账号相关的帐号及角色的查询、授权等信息及操作", 
+      "Prefix":[
+      "taobao.sellercenter.",
+      "taobao.subuser.",
+      "taobao.subusers.get"
+    ]},
+    {"Name":"fuwu", "Caption":"服务平台API", 
+      "Desc":"提供服务平台相关API，包括用户应用订购关系相关查询，定向营销等功能", 
+      "Prefix":[
+      "taobao.fuwu.sale.link.gen",
+      "taobao.vas."
+    ]},
+    {"Name":"refund", "Caption":"退款API", 
+      "Desc":"提供了卖家接收退款，退款留言等功能", 
+      "Prefix":[
+      "taobao.refund.",
+      "taobao.refunds.",
+      "taobao.topats.refunds.receive.get"
+    ]},
+    {"Name":"recommend", "Caption":"关联推荐API", 
+      "Desc":"通过商品、类目、用户等条件推荐优质商品", 
+      "Prefix":[
+      "taobao.categoryrecommend.items.get",
+      "taobao.itemrecommend.items.get",
+      "taobao.shoprecommend.items.get",
+      "taobao.shoprecommend.shops.get",
+      "taobao.userrecommend.items.get"
+    ]},
+    {"Name":"widget", "Caption":"组件API", 
+      "Desc":"组件API列表", 
+      "Prefix":[
+      "taobao.widget."
+    ]},
+    {"Name":"alipy", "Caption":"支付宝API", 
+      "Desc":"提供查询商家支付宝财务流水功能", 
+      "Prefix":[
+      "alipay."
+    ]},
+    {"Name":"jp", "Caption":"天猫精品库API", 
+      "Desc":"提供天猫精选的商品、店铺、活动等，方便合作伙伴做天猫导购", 
+      "Prefix":[
+      "taobao.spmeffect.get",
+      "tmall.items.discount.search",
+      "tmall.selected.items.search",
+      "tmall.temai."
+    ]},
+    {"Name":"rds", "Caption":"聚石塔API", 
+      "Desc":"管理聚石塔DB实例", 
+      "Prefix":[
+      "taobao.rds"
+    ]},
+    {"Name":"trvael", "Caption":"旅行度假API", 
+      "Desc":"提供旅行商品发布管理功能", 
+      "Prefix":[
+      "taobao.travel."
+    ]},
+    {"Name":"caipiao", "Caption":"彩票API", 
+      "Desc":"支持营销活动赠送彩票功能实现", 
+      "Prefix":[
+      "taobao.caipiao."
+    ]},
+    {"Name":"bill", "Caption":"账务API", 
+      "Desc":"提供商家账务信息查询", 
+      "Prefix":[
+      "taobao.bill."
+    ]},
+    {"Name":"eai", "Caption":"天猫退款退货API", 
+      "Desc":"天猫逆向流程API", 
+      "Prefix":[
+      "tmall.eai."
+    ]}
+]
