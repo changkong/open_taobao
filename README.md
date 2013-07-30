@@ -120,6 +120,7 @@ open_taobao
 
   * API分类淘宝没有给出配置文件, 是根据[淘宝API列表](http://open.taobao.com/doc/category_list.htm?id=102), 手工维护的配置表, 原理根据 api 前缀分类
   * 配置文件是 tools/conf/package.json, 若分类有问题，可修改该配置文件, 然后重新生成SDK
+
 * **调用参数:** 所有调用参数，只支持字符串类型
 * **返回结果:** 做了 string int float 对象 的判断转型, 调用方便
 * **淘宝错误:** 对淘宝返回错误做了包装, 都会通过 error 对象返回
