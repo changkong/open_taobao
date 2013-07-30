@@ -123,6 +123,9 @@ open_taobao
 * **调用参数:** 所有调用参数，只支持字符串类型
 * **返回结果:** 做了 string int float 对象 的判断转型, 调用方便
 * **淘宝错误:** 对淘宝返回错误做了包装, 都会通过 error 对象返回
+* **对象命名:** 尽量参照淘宝官方其他SDK的命名方式, 例如:
+
+  * 获取卖家信息的淘宝API是 taobao.user.seller.get, open_taobao 中对应 github.com/changkong/open_taobao/api/user 包 UserSellerGetRequest 对象的 GetResponse 方法
 
 Good Enjoy
 ==========
