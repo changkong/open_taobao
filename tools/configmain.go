@@ -6,9 +6,13 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
+	"regexp"
 )
+
+var RedirectUriRegexp = regexp.MustCompile("^http://[\\w.:]+/callback$")
 
 type ConfMainT struct {
 	AppKey      string
@@ -41,7 +45,38 @@ func NewConfMain(confFile string) (*ConfMainT, error) {
 	return &confMain, nil
 }
 
-func (c *ConfMainT) Save() error {
+func (c *ConfMainT) SavePara(appKey, appSecret, redirectUri string) error {
+	c.AppKey = appKey
+	c.AppSecret = appSecret
+	c.RedirectUri = redirectUri
+
+	if appKey == "" {
+		return errors.New("App Key 为空, 保存错误!")
+	}
+	if appSecret == "" {
+		return errors.New("App Secret 为空, 保存错误!")
+	}
+	if redirectUri == "" {
+		return errors.New("RedirectUri 为空, 保存错误!")
+	}
+	if !RedirectUriRegexp.MatchString(redirectUri) {
+		return errors.New("当前测试程序, 只支持 RedirectUri 为 http://域名或IP/callback 的格式")
+	}
+
+	body, err := json.MarshalIndent(c, "", "  ")
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(c.ConfFile, body, 0600)
+}
+
+func (c *ConfMainT) SaveAccessToken(accessToken string) error {
+	c.AccessToken = accessToken
+
+	if accessToken == "" {
+		return errors.New("accessToken 为空, 保存错误!")
+	}
+
 	body, err := json.MarshalIndent(c, "", "  ")
 	if err != nil {
 		return err

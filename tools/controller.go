@@ -74,10 +74,8 @@ func (c *Controller) Save(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		c.SetErr(err.Error())
 	} else {
-		c.ConfMain.AppKey = r.Form.Get("AppKey")
-		c.ConfMain.AppSecret = r.Form.Get("AppSecret")
-		c.ConfMain.RedirectUri = r.Form.Get("RedirectUri")
-		err = c.ConfMain.Save()
+		err = c.ConfMain.SavePara(r.Form.Get("AppKey"),
+			r.Form.Get("AppSecret"), r.Form.Get("RedirectUri"))
 		if err != nil {
 			c.SetErr(err.Error())
 		} else {
@@ -183,8 +181,7 @@ func (c *Controller) Callback(w http.ResponseWriter, r *http.Request) {
 				c.SetErr(err.Error())
 			} else {
 				fmt.Println("accessToken:", resp.AccessToken)
-				c.ConfMain.AccessToken = resp.AccessToken
-				err = c.ConfMain.Save()
+				err = c.ConfMain.SaveAccessToken(resp.AccessToken)
 				if err != nil {
 					c.SetErr("授权成功，保存配置失败！" + err.Error())
 				} else {

@@ -69,7 +69,6 @@ body,td,input {
 					<input type="submit" value="保存参数"/>
 					<a href="http://open.taobao.com/doc/detail.htm?id=994">[https免签调用方式详解]</a>
 					<a href="http://open.taobao.com/doc/detail.htm?id=118">[OAuth2.0授权方式]</a>
-
 				</td>
 			</tr>
 			<tr>
@@ -88,10 +87,14 @@ body,td,input {
 				<span class="explain">在淘宝中登记，通过该链接，淘宝将用户授权信息传递给应用</span></td>
 			</tr>
 			<tr>
+				<td class="caption">&nbsp;</td>
+				<td colspan=2>
+				<span style="color:blue;">注意, 当前测试程序, RedirectUri 须是 http://域名或IP[:端口]/callback 的格式, 且能访问到本服务, 用户授权才能正常</span></td>
+			</tr>
+			<tr>
 				<td class="title">用户授权</td>
 				<td colspan=2>
 					<input type="button"  onclick="window.location='/auth'" value="重新授权"/>
-					<span style="color:blue;">需保证 RedirectUri 能正常访问本web服务, 用户授权才能正常</span>
 				</td>
 			</tr>
 			<tr>

@@ -23,7 +23,7 @@ func main() {
 	http.HandleFunc("/makeapi", controller.MakeApi)
 	http.HandleFunc("/user/buyer/get", controller.UserBuyerGet)
 	http.HandleFunc("/user/seller/get", controller.UserSellerGet)
-	http.HandleFunc("/api/taobao/util/callback", controller.Callback)
+	http.HandleFunc("/callback", controller.Callback)
 	http.HandleFunc("/", controller.Home)
 
 	fmt.Println("start 80 ......")
