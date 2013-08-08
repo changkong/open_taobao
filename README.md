@@ -12,7 +12,8 @@ open_taobao
 ========
 
 * **主包:** 0.0.1
-* **子包:** 根据淘宝 20130730 的 ApiMetadata.xml 生成
+* **子包:** 根据淘宝 20130808 的 ApiMetadata.xml 生成
+* **工具程序:** 0.0.1
 
 安装说明
 ========
@@ -129,7 +130,8 @@ open_taobao
   * 获取卖家信息的淘宝API是 taobao.user.seller.get
   * open_taobao 中对应 user 子包的 UserSellerGetRequest 对象的 GetResponse 方法
 
-* **web框架:** 由于只是个测试小工具, 也不考虑并发 session 等高级功能, 因此直接使用 go 自带功能完成, 依赖最小
+* **前端框架:** bootstrap jquery
+* **后端框架:**直接使用 go 自带功能
 
 Good Enjoy
 ==========
