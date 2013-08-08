@@ -4,7 +4,7 @@
 
 package crm
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 卖家设置的等级优惠信息 */
 type GradePromotion struct {

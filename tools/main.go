@@ -10,21 +10,19 @@ import (
 )
 
 func main() {
-
-	controller, err := NewController()
+	var utilPage UtilPage
+	err := utilPage.Init()
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	http.HandleFunc("/refresh", controller.Refresh)
-	http.HandleFunc("/save", controller.Save)
-	http.HandleFunc("/auth", controller.Auth)
-	http.HandleFunc("/makeapi", controller.MakeApi)
-	http.HandleFunc("/user/buyer/get", controller.UserBuyerGet)
-	http.HandleFunc("/user/seller/get", controller.UserSellerGet)
-	http.HandleFunc("/callback", controller.Callback)
-	http.HandleFunc("/", controller.Home)
+	http.HandleFunc("/auth/", new(CtrlAuth).Show)
+	http.HandleFunc("/test/", new(CtrlTest).Show)
+	http.HandleFunc("/make/", new(CtrlMake).Show)
+
+	http.HandleFunc("/assets/", utilPage.Static)
+	http.HandleFunc("/", utilPage.Home)
 
 	fmt.Println("start 80 ......")
 	err = http.ListenAndServe(":80", nil)

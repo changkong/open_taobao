@@ -4,7 +4,7 @@
 
 package trade
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 批量异步任务结果 */
 type Task struct {

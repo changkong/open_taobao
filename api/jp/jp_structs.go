@@ -4,7 +4,7 @@
 
 package jp
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* Appkey的站点导购数据 */
 type SpmResult struct {

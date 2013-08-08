@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<metadata versionNo="20130729">
+<metadata versionNo="20130808">
 <structs>
 <struct>
 <name>UserCredit</name>
@@ -2543,36 +2543,6 @@ step (万人团)</desc>
 <type>Number</type>
 <level>Basic</level>
 <desc>账号对应的权重</desc>
-</prop>
-</props>
-</struct>
-<struct>
-<name>ImprItemDO</name>
-<desc>评价大印象返回的印象词接口</desc>
-<props>
-<prop>
-<name>attribute_id</name>
-<type>Number</type>
-<level>Basic</level>
-<desc>印象标签的id</desc>
-</prop>
-<prop>
-<name>count</name>
-<type>Number</type>
-<level>Basic</level>
-<desc>被买家评价提及到的印象标签次数</desc>
-</prop>
-<prop>
-<name>status</name>
-<type>Number</type>
-<level>Basic</level>
-<desc>印象标签情感倾向 1表示正面 -1表示负面 0表示中性</desc>
-</prop>
-<prop>
-<name>title</name>
-<type>String</type>
-<level>Basic</level>
-<desc>印象标签的名称</desc>
 </prop>
 </props>
 </struct>
@@ -5295,42 +5265,6 @@ ONROAD 在途库存</desc>
 </props>
 </struct>
 <struct>
-<name>ImprFeedInfoDO</name>
-<desc>大家印象标签对应评价信息对象</desc>
-<props>
-<prop>
-<name>biz_type</name>
-<type>Number</type>
-<level>Basic</level>
-<desc>1:主评  2:追评</desc>
-</prop>
-<prop>
-<name>feedback</name>
-<type>String</type>
-<level>Basic</level>
-<desc>评价内容</desc>
-</prop>
-<prop>
-<name>gmt_create</name>
-<type>Date</type>
-<level>Basic</level>
-<desc>评价创建时间</desc>
-</prop>
-<prop>
-<name>gmt_modified</name>
-<type>Date</type>
-<level>Basic</level>
-<desc>评价的修改时间</desc>
-</prop>
-<prop>
-<name>impr_words</name>
-<type>String</type>
-<level>Basic Array</level>
-<desc>从评价内容里提取的语义标签</desc>
-</prop>
-</props>
-</struct>
-<struct>
 <name>ItemProp</name>
 <desc>商品属性</desc>
 <props>
@@ -5734,24 +5668,6 @@ md5值为长整数时为图片替换后的时间戳</desc>
 </props>
 </struct>
 <struct>
-<name>INWordBase</name>
-<desc>词基础数据对象</desc>
-<props>
-<prop>
-<name>in_record_base_list</name>
-<type>INRecordBase</type>
-<level>Object Array</level>
-<desc>词数据信息列表</desc>
-</prop>
-<prop>
-<name>word</name>
-<type>String</type>
-<level>Basic</level>
-<desc>词名称</desc>
-</prop>
-</props>
-</struct>
-<struct>
 <name>Area</name>
 <desc>地址区域结构</desc>
 <props>
@@ -5784,6 +5700,24 @@ md5值为长整数时为图片替换后的时间戳</desc>
 <type>String</type>
 <level>Basic</level>
 <desc>具体一个地区的邮编</desc>
+</prop>
+</props>
+</struct>
+<struct>
+<name>INWordBase</name>
+<desc>词基础数据对象</desc>
+<props>
+<prop>
+<name>in_record_base_list</name>
+<type>INRecordBase</type>
+<level>Object Array</level>
+<desc>词数据信息列表</desc>
+</prop>
+<prop>
+<name>word</name>
+<type>String</type>
+<level>Basic</level>
+<desc>词名称</desc>
 </prop>
 </props>
 </struct>
@@ -6910,6 +6844,36 @@ finish: 交易完成</desc>
 </props>
 </struct>
 <struct>
+<name>LoginUser</name>
+<desc>登录分销用户信息</desc>
+<props>
+<prop>
+<name>create_time</name>
+<type>Date</type>
+<level>Basic</level>
+<desc>入驻时间</desc>
+</prop>
+<prop>
+<name>nick</name>
+<type>String</type>
+<level>Basic</level>
+<desc>会员NICK</desc>
+</prop>
+<prop>
+<name>user_id</name>
+<type>Number</type>
+<level>Basic</level>
+<desc>分销用户ID</desc>
+</prop>
+<prop>
+<name>user_type</name>
+<type>String</type>
+<level>Basic</level>
+<desc>分销用户类型(1:分销商，2:供应商，3:非分销平台用户)</desc>
+</prop>
+</props>
+</struct>
+<struct>
 <name>ItemDescModule</name>
 <desc>商品详情模块</desc>
 <props>
@@ -6954,36 +6918,6 @@ finish: 交易完成</desc>
 <type>String</type>
 <level>Basic</level>
 <desc>cat_mod:表示是运营设置的类目维度模块，usr_mod表示的是商家自定义模块。</desc>
-</prop>
-</props>
-</struct>
-<struct>
-<name>LoginUser</name>
-<desc>登录分销用户信息</desc>
-<props>
-<prop>
-<name>create_time</name>
-<type>Date</type>
-<level>Basic</level>
-<desc>入驻时间</desc>
-</prop>
-<prop>
-<name>nick</name>
-<type>String</type>
-<level>Basic</level>
-<desc>会员NICK</desc>
-</prop>
-<prop>
-<name>user_id</name>
-<type>Number</type>
-<level>Basic</level>
-<desc>分销用户ID</desc>
-</prop>
-<prop>
-<name>user_type</name>
-<type>String</type>
-<level>Basic</level>
-<desc>分销用户类型(1:分销商，2:供应商，3:非分销平台用户)</desc>
 </prop>
 </props>
 </struct>
@@ -8933,7 +8867,7 @@ IMMEDIATELY（即时到账）</desc>
 <name>grade</name>
 <type>Number</type>
 <level>Basic</level>
-<desc>会员等级，0：无会员等级，1：普通会员，2：高级会员，3：VIP会员， 4：至尊VIP会员</desc>
+<desc>会员等级，0：店铺客户，1：普通会员，2：高级会员，3：VIP会员， 4：至尊VIP会员</desc>
 </prop>
 <prop>
 <name>group_ids</name>
@@ -9143,7 +9077,7 @@ IMMEDIATELY（即时到账）</desc>
 <name>relation_source</name>
 <type>Number</type>
 <level>Basic</level>
-<desc>关系来源，1交易成功，2未成交</desc>
+<desc>关系来源，1交易成功，2未成交，3卖家主动吸纳</desc>
 </prop>
 <prop>
 <name>status</name>
@@ -16347,31 +16281,6 @@ TRADE_CLOSED(交易关闭)&lt;br&gt;TRADE_REFUNDING（退款中）</desc>
 <type>WaitingTimeById</type>
 <level>Object Array</level>
 <desc>等待时长列表</desc>
-</prop>
-</props>
-</struct>
-<struct>
-<name>ImprFeedIdDO</name>
-<desc>单条交易子订单语义标签对象</desc>
-<props>
-<prop>
-<name>feed_info_list</name>
-<type>ImprFeedInfoDO</type>
-<level>Object Array</level>
-<desc>存放主评和追评的评价标签信息 
-biz_type(1:主评 2:追评)</desc>
-</prop>
-<prop>
-<name>nick</name>
-<type>String</type>
-<level>Basic</level>
-<desc>被评价者昵称</desc>
-</prop>
-<prop>
-<name>rate</name>
-<type>Number</type>
-<level>Basic</level>
-<desc>评价结果（1好评 0中评 -1差评）</desc>
 </prop>
 </props>
 </struct>
@@ -25414,9 +25323,9 @@ order_amounts.sku_properties_name,order_amounts.sku_id,order_amounts.num,order_a
 <name>fields</name>
 <type>Field List</type>
 <required>required</required>
-<desc>1.Trade中可以指定返回的fields：seller_nick, buyer_nick, title, type, created, tid, seller_rate,buyer_flag, buyer_rate, status, payment, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment, commission_fee, buyer_memo, seller_memo, alipay_no,alipay_id,buyer_message, pic_path, num_iid, num, price, buyer_alipay_no, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,seller_flag, seller_alipay_no, seller_mobile, seller_phone, seller_name, seller_email, available_confirm_fee, has_post_fee, timeout_action_time, snapshot_url, cod_fee, cod_status, shipping_type, trade_memo, is_3D,buyer_email,buyer_area, trade_from,is_lgtype,is_force_wlb,is_brand_sale,buyer_cod_fee,discount_fee,seller_cod_fee,express_agency_fee,invoice_name,service_orders,credit_cardfee,step_trade_status,step_paid_fee,mark_desc,has_yfx,yfx_fee,yfx_id,yfx_type,trade_source(注：当该授权用户为卖家时不能查看买家buyer_memo,buyer_flag),eticket_ext,send_time, is_daixiao 
-2.Order中可以指定返回fields：orders.title, orders.pic_path, orders.price, orders.num, orders.num_iid, orders.sku_id, orders.refund_status, orders.status, orders.oid, orders.total_fee, orders.payment, orders.discount_fee, orders.adjust_fee, orders.snapshot_url, orders.timeout_action_time，orders.sku_properties_name, orders.item_meal_name, orders.item_meal_id，item_memo,orders.buyer_rate, orders.seller_rate, orders.outer_iid, orders.outer_sku_id, orders.refund_id, orders.seller_type, orders.is_oversold,orders.end_time,orders.order_from,orders.consign_time,orders.shipping_type,orders.logistics_company,orders.invice_no, orders.is_daixiao 
-3.fields：orders（返回Order的所有内容） 
+<desc>1.Trade中可以指定返回的fields：seller_nick, buyer_nick, title, type, created, tid, seller_rate,buyer_flag, buyer_rate, status, payment, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment, commission_fee, buyer_memo, seller_memo, alipay_no,alipay_id,buyer_message, pic_path, num_iid, num, price, buyer_alipay_no, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,seller_flag, seller_alipay_no, seller_mobile, seller_phone, seller_name, seller_email, available_confirm_fee, has_post_fee, timeout_action_time, snapshot_url, cod_fee, cod_status, shipping_type, trade_memo, is_3D,buyer_email,buyer_area, trade_from,is_lgtype,is_force_wlb,is_brand_sale,buyer_cod_fee,discount_fee,seller_cod_fee,express_agency_fee,invoice_name,service_orders,credit_cardfee,step_trade_status,step_paid_fee,mark_desc,has_yfx,yfx_fee,yfx_id,yfx_type,trade_source(注：当该授权用户为卖家时不能查看买家buyer_memo,buyer_flag),eticket_ext,send_time, is_daixiao,is_part_consign
+2.Order中可以指定返回fields：orders.title, orders.pic_path, orders.price, orders.num, orders.num_iid, orders.sku_id, orders.refund_status, orders.status, orders.oid, orders.total_fee, orders.payment, orders.discount_fee, orders.adjust_fee, orders.snapshot_url, orders.timeout_action_time，orders.sku_properties_name, orders.item_meal_name, orders.item_meal_id，item_memo,orders.buyer_rate, orders.seller_rate, orders.outer_iid, orders.outer_sku_id, orders.refund_id, orders.seller_type, orders.is_oversold,orders.end_time,orders.order_from,orders.consign_time,orders.shipping_type,orders.logistics_company,orders.invice_no, orders.is_daixiao
+3.fields：orders（返回Order的所有内容）
 4.flelds：promotion_details(返回promotion_details所有内容，优惠详情),invoice_name(发票抬头)</desc>
 </param>
 <param>
@@ -25766,11 +25675,12 @@ order_amounts.sku_properties_name,order_amounts.sku_id,order_amounts.num,order_a
 <name>fields</name>
 <type>Field List</type>
 <required>required</required>
-<desc>需要返回的字段。目前支持有：&lt;br&gt; 
-1. Trade中可以指定返回的fields:&lt;br&gt; 
-seller_nick, buyer_nick, title, type, created,  tid, seller_rate,seller_can_rate, buyer_rate,can_rate, status, payment, discount_fee, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment,  pic_path, num_iid, num, price, cod_fee, cod_status, shipping_type, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,seller_flag,alipay_id,alipay_no,is_lgtype,is_force_wlb,is_brand_sale,buyer_area,has_buyer_message, credit_card_fee, lg_aging_type, lg_aging, step_trade_status,step_paid_fee,mark_desc,has_yfx,yfx_fee,yfx_id,yfx_type,trade_source,send_time,is_daixiao,is_wt&lt;br&gt; 
-2. Order中可以指定返回fields：orders.title, orders.pic_path, orders.price, orders.num, orders.num_iid, orders.sku_id, orders.refund_status, orders.status, orders.oid, orders.total_fee, orders.payment, orders.discount_fee, orders.adjust_fee, orders.sku_properties_name, orders.item_meal_name, orders.buyer_rate, orders.seller_rate, orders.outer_iid, orders.outer_sku_id, orders.refund_id, orders.seller_type, orders.end_time,orders.order_from,orders.consign_time,orders.shipping_type,orders.logistics_company,orders.invice_no,orders.is_daixiao&lt;br&gt; 
-3. fields：orders（返回2中Order的所有内容） 
+<desc>需要返回的字段。目前支持有：&lt;br&gt;
+1. Trade中可以指定返回的fields:&lt;br&gt;
+seller_nick, buyer_nick, title, type, created,  tid, seller_rate,seller_can_rate, buyer_rate,can_rate, status, payment, discount_fee, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment,  pic_path, num_iid, num, price, cod_fee, cod_status, shipping_type, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,seller_flag,alipay_id,alipay_no,is_lgtype,is_force_wlb,is_brand_sale,buyer_area,has_buyer_message, credit_card_fee, lg_aging_type, lg_aging, step_trade_status,step_paid_fee,mark_desc,has_yfx,yfx_fee,yfx_id,yfx_type,trade_source,send_time,is_daixiao,is_wt,is_part_consign
+&lt;br&gt;
+2. Order中可以指定返回fields：orders.title, orders.pic_path, orders.price, orders.num, orders.num_iid, orders.sku_id, orders.refund_status, orders.status, orders.oid, orders.total_fee, orders.payment, orders.discount_fee, orders.adjust_fee, orders.sku_properties_name, orders.item_meal_name, orders.buyer_rate, orders.seller_rate, orders.outer_iid, orders.outer_sku_id, orders.refund_id, orders.seller_type, orders.end_time,orders.order_from,orders.consign_time,orders.shipping_type,orders.logistics_company,orders.invice_no,orders.is_daixiao&lt;br&gt;
+3. fields：orders（返回2中Order的所有内容）
 4.fields:service_orders(返回service_order中所有内容)</desc>
 </param>
 <param>
@@ -25916,11 +25826,11 @@ tmall_i18n（天猫国际）;
 <name>fields</name>
 <type>Field List</type>
 <required>required</required>
-<desc>需要返回的字段。目前支持有： 
-1.Trade中可以指定返回的fields:seller_nick, buyer_nick, title, type, created, tid, seller_rate,seller_can_rate, buyer_rate,can_rate,status, payment, discount_fee, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment,pic_path, num_iid, num, price, cod_fee, cod_status, shipping_type, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,alipay_id,alipay_no,is_lgtype,is_force_wlb,is_brand_sale,has_buyer_message,credit_card_fee,step_trade_status,step_paid_fee,mark_desc,send_time,,has_yfx,yfx_fee,yfx_id,yfx_type,trade_source,seller_flag,is_daixiao 
-2.Order中可以指定返回fields： 
-orders.title, orders.pic_path, orders.price, orders.num, orders.num_iid, orders.sku_id, orders.refund_status, orders.status, orders.oid, orders.total_fee, orders.payment, orders.discount_fee, orders.adjust_fee, orders.sku_properties_name, orders.item_meal_name, orders.buyer_rate, orders.seller_rate, orders.outer_iid, orders.outer_sku_id, orders.refund_id, orders.seller_type，orders.end_time, orders.order_from,orders.consign_time,orders.shipping_type,orders.logistics_company,orders.invice_no,orders.is_daixiao 
-3.fields：orders（返回Order的所有内容） 
+<desc>需要返回的字段。目前支持有：
+1.Trade中可以指定返回的fields:seller_nick, buyer_nick, title, type, created, tid, seller_rate,seller_can_rate, buyer_rate,can_rate,status, payment, discount_fee, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment,pic_path, num_iid, num, price, cod_fee, cod_status, shipping_type, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,alipay_id,alipay_no,is_lgtype,is_force_wlb,is_brand_sale,has_buyer_message,credit_card_fee,step_trade_status,step_paid_fee,mark_desc,send_time,,has_yfx,yfx_fee,yfx_id,yfx_type,trade_source,seller_flag,is_daixiao,is_part_consign
+2.Order中可以指定返回fields：
+orders.title, orders.pic_path, orders.price, orders.num, orders.num_iid, orders.sku_id, orders.refund_status, orders.status, orders.oid, orders.total_fee, orders.payment, orders.discount_fee, orders.adjust_fee, orders.sku_properties_name, orders.item_meal_name, orders.buyer_rate, orders.seller_rate, orders.outer_iid, orders.outer_sku_id, orders.refund_id, orders.seller_type，orders.end_time, orders.order_from,orders.consign_time,orders.shipping_type,orders.logistics_company,orders.invice_no,orders.is_daixiao
+3.fields：orders（返回Order的所有内容）
 4.fields:service_orders(返回service_order中所有内容)</desc>
 </param>
 <param>
@@ -26044,11 +25954,11 @@ tmall_i18n（天猫国际）;
 <name>fields</name>
 <type>Field List</type>
 <required>required</required>
-<desc>需要返回的字段。目前支持有： 
-1.Trade中可以指定返回的fields:seller_nick, buyer_nick, title, type, created, tid, seller_rate, buyer_rate, status, payment, discount_fee, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment,pic_path, num_iid, num, price, cod_fee, cod_status, shipping_type, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,alipay_id,alipay_no,is_lgtype,is_force_wlb,is_brand_sale,has_buyer_message,credit_card_fee,step_trade_status,step_paid_fee,mark_desc，is_daixiao 
-2.Order中可以指定返回fields： 
-orders.title, orders.pic_path, orders.price, orders.num, orders.num_iid, orders.sku_id, orders.refund_status, orders.status, orders.oid, orders.total_fee, orders.payment, orders.discount_fee, orders.adjust_fee, orders.sku_properties_name, orders.item_meal_name, orders.buyer_rate, orders.seller_rate, orders.outer_iid, orders.outer_sku_id, orders.refund_id, orders.seller_type，orders.end_time, orders.order_from,orders.consign_time,orders.shipping_type,orders.logistics_company,orders.invice_no，orders.is_daixiao 
-3.fields：orders（返回Order的所有内容） 
+<desc>需要返回的字段。目前支持有：
+1.Trade中可以指定返回的fields:seller_nick, buyer_nick, title, type, created, tid, seller_rate, buyer_rate, status, payment, discount_fee, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment,pic_path, num_iid, num, price, cod_fee, cod_status, shipping_type, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,alipay_id,alipay_no,is_lgtype,is_force_wlb,is_brand_sale,has_buyer_message,credit_card_fee,step_trade_status,step_paid_fee,mark_desc，is_daixiao,is_part_consign
+2.Order中可以指定返回fields：
+orders.title, orders.pic_path, orders.price, orders.num, orders.num_iid, orders.sku_id, orders.refund_status, orders.status, orders.oid, orders.total_fee, orders.payment, orders.discount_fee, orders.adjust_fee, orders.sku_properties_name, orders.item_meal_name, orders.buyer_rate, orders.seller_rate, orders.outer_iid, orders.outer_sku_id, orders.refund_id, orders.seller_type，orders.end_time, orders.order_from,orders.consign_time,orders.shipping_type,orders.logistics_company,orders.invice_no，orders.is_daixiao
+3.fields：orders（返回Order的所有内容）
 4.fields:service_orders(返回service_order中所有内容)</desc>
 </param>
 <param>
@@ -26215,72 +26125,6 @@ tmall_i18n（天猫国际）。
 <type>Boolean</type>
 <level>Basic</level>
 <desc>商城卖家给评价解释是否成功。</desc>
-</param>
-</response>
-</api>
-<api>
-<name>taobao.traderate.impr.imprword.byaucid.get</name>
-<desc>根据商品id获取这个商品id对应的大家印象</desc>
-<request>
-<param>
-<name>auction_id</name>
-<type>Number</type>
-<required>required</required>
-<desc>淘宝的商品id</desc>
-</param>
-</request>
-<response>
-<param>
-<name>impr_word_list</name>
-<type>ImprItemDO</type>
-<level>Object Array</level>
-<desc>返回的大家印象的结构体</desc>
-</param>
-</response>
-</api>
-<api>
-<name>taobao.traderate.impr.imprword.byfeedid.get</name>
-<desc>根据卖家nick和交易id（如果是子订单，输入子订单id），查询到该条评价的大家印象标签</desc>
-<request>
-<param>
-<name>child_trade_id</name>
-<type>Number</type>
-<required>required</required>
-<desc>交易订单id号（如果包含子订单，请使用子订单id号）</desc>
-</param>
-</request>
-<response>
-<param>
-<name>impr_feed</name>
-<type>ImprFeedIdDO</type>
-<level>Object</level>
-<desc>根据子订单和买家昵称找到的评价和印象词结果</desc>
-</param>
-</response>
-</api>
-<api>
-<name>taobao.traderate.impr.imprwords.get</name>
-<desc>根据淘宝后台类目的一级类目和叶子类目</desc>
-<request>
-<param>
-<name>cat_leaf_id</name>
-<type>Number</type>
-<required>optional</required>
-<desc>淘宝叶子类目id</desc>
-</param>
-<param>
-<name>cat_root_id</name>
-<type>Number</type>
-<required>required</required>
-<desc>淘宝一级类目id</desc>
-</param>
-</request>
-<response>
-<param>
-<name>impr_words</name>
-<type>String</type>
-<level>Basic Array</level>
-<desc>返回类目下所有大家印象的标签</desc>
 </param>
 </response>
 </api>
@@ -41604,6 +41448,42 @@ incrementalPrice是整数，以“分”为单位，不能小于1，不能大于
 </response>
 </api>
 <api>
+<name>taobao.jipiao.policystatus.update</name>
+<desc>根据外部产品id，进行政策状态更新，挂起/解挂/删除</desc>
+<request>
+<param>
+<name>policy_id</name>
+<type>String</type>
+<required>required</required>
+<max_length>6500</max_length>
+<max_list_size>100</max_list_size>
+<desc>type为0，表示机票政策id；type为1，表示机票政策out_product_id；最大支持政策数100，注意不要如果不要超出字符串的长度限制，超出的话，请调小批量的个数</desc>
+</param>
+<param>
+<name>status</name>
+<type>Number</type>
+<required>required</required>
+<desc>政策的状态: 0，挂起；1，解挂；2，删除</desc>
+</param>
+<param>
+<name>type</name>
+<type>Number</type>
+<required>required</required>
+<max_value>1</max_value>
+<min_value>0</min_value>
+<desc>0，表示按政策id进行查询；1，表示按政策外部id进行查询</desc>
+</param>
+</request>
+<response>
+<param>
+<name>is_success</name>
+<type>Boolean</type>
+<level>Basic</level>
+<desc>机票政策状态更新结果，true，成功；false，失败</desc>
+</param>
+</response>
+</api>
+<api>
 <name>taobao.trip.jipiao.agent.itinerary.send</name>
 <desc>国内机票代理商行程单信息回填</desc>
 <request>
@@ -45692,9 +45572,8 @@ count参数的填写规范：
 <required>optional</required>
 <max_length>32</max_length>
 <max_value>4</max_value>
-<min_value>1</min_value>
-<desc>会员等级，0：返回所有会员1：普通客户，2：高级会员，3：VIP会员， 4：至尊VIP会员 
-(如果要查交易关闭的会员  请选择taobao.crm.members.search接口的 relation_source=2)</desc>
+<min_value>-1</min_value>
+<desc>会员等级，0：店铺客户，1：普通会员，2：高级会员，3：VIP会员， 4：至尊VIP会员。如果不传入值则默认为全部等级。</desc>
 </param>
 <param>
 <name>max_last_trade_time</name>
@@ -45843,8 +45722,8 @@ count参数的填写规范：
 <required>optional</required>
 <max_length>32</max_length>
 <max_value>4</max_value>
-<min_value>1</min_value>
-<desc>会员等级，1：普通客户，2：高级会员，3：VIP会员， 4：至尊VIP会员</desc>
+<min_value>-1</min_value>
+<desc>会员等级，0：店铺客户，1：普通会员，2：高级会员，3：VIP会员， 4：至尊VIP会员</desc>
 </param>
 <param>
 <name>page_size</name>
@@ -45908,7 +45787,7 @@ count参数的填写规范：
 <required>optional</required>
 <max_length>32</max_length>
 <max_value>4</max_value>
-<min_value>1</min_value>
+<min_value>-1</min_value>
 <desc>会员等级，0：店铺客户，1：普通客户，2：高级会员，3：VIP会员, 4：至尊VIP会员</desc>
 </param>
 <param>
@@ -46021,9 +45900,9 @@ count参数的填写规范：
 <type>Number</type>
 <required>optional</required>
 <max_length>32</max_length>
-<max_value>2</max_value>
+<max_value>3</max_value>
 <min_value>1</min_value>
-<desc>关系来源，1交易成功，2未成交(grade=0)</desc>
+<desc>关系来源，1交易成功，2未成交，3卖家手动吸纳</desc>
 </param>
 </request>
 <response>

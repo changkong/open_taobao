@@ -4,7 +4,7 @@
 
 package dmt
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 图片分类 */
 type PictureCategory struct {

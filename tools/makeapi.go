@@ -111,7 +111,7 @@ func MakeApis(confPackage *ConfPackageT, data *DataT) *[]string {
 		tdata.PkgDesc = v.Desc
 		tdata.PkgName = v.Name
 		tdata.PkgPath = "../api/" + v.Name
-		tdata.ViewPath = "./views/"
+		tdata.ViewPath = "./template/"
 		tdata.Apis = data.MapPkgApi[v.Name]
 		tdata.Structs = data.MapPkgStruct[v.Name]
 		err := MakePkg(tdata)

@@ -4,7 +4,7 @@
 
 package caipiao
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 卖家商品信息 */
 type LotteryWangcaiSellerGoodsInfo struct {

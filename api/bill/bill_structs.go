@@ -4,7 +4,7 @@
 
 package bill
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 费用科目 */
 type Account struct {

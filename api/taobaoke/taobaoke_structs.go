@@ -4,7 +4,7 @@
 
 package taobaoke
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 淘宝客商品 */
 type TaobaokeItem struct {

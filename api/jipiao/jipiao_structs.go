@@ -4,7 +4,7 @@
 
 package jipiao
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 全量、增量的添加政策压缩包的json对应对象 */
 type BatchPolicy struct {

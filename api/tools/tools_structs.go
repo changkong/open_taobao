@@ -4,7 +4,7 @@
 
 package tools
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* KFC 关键词过滤匹配结果 */
 type KfcSearchResult struct {

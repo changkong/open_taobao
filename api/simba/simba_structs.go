@@ -4,7 +4,7 @@
 
 package simba
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 推广组 */
 type ADGroup struct {

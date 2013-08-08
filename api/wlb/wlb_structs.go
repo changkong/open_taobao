@@ -4,7 +4,7 @@
 
 package wlb
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 库存明细 */
 type IpcInventoryDetailDo struct {

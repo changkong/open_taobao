@@ -12,7 +12,7 @@ import (
 	"regexp"
 )
 
-var RedirectUriRegexp = regexp.MustCompile("^http://[\\w.:]+/callback$")
+var RedirectUriRegexp = regexp.MustCompile("^http://[\\w.:]+/auth/callback$")
 
 type ConfMainT struct {
 	AppKey      string
@@ -25,6 +25,13 @@ type ConfMainT struct {
 
 func (c *ConfMainT) IsNoAccessToken() bool {
 	return c.AccessToken == ""
+}
+
+func (c *ConfMainT) GetAuthMsg() string {
+	if c.AccessToken == "" {
+		return "用户未授权"
+	}
+	return ""
 }
 
 func NewConfMain(confFile string) (*ConfMainT, error) {
@@ -45,23 +52,27 @@ func NewConfMain(confFile string) (*ConfMainT, error) {
 	return &confMain, nil
 }
 
+func (c *ConfMainT) CheckPara() error {
+	if c.AppKey == "" {
+		return errors.New("App Key 不能为空!")
+	}
+	if c.AppSecret == "" {
+		return errors.New("App Secret 不能为空!")
+	}
+	if c.RedirectUri == "" {
+		return errors.New("RedirectUri 不能为空!")
+	}
+	if !RedirectUriRegexp.MatchString(c.RedirectUri) {
+		return errors.New("测试程序, 只支持 RedirectUri 为 http://域名或IP/callback 的格式")
+	}
+
+	return nil
+}
+
 func (c *ConfMainT) SavePara(appKey, appSecret, redirectUri string) error {
 	c.AppKey = appKey
 	c.AppSecret = appSecret
 	c.RedirectUri = redirectUri
-
-	if appKey == "" {
-		return errors.New("App Key 为空, 保存错误!")
-	}
-	if appSecret == "" {
-		return errors.New("App Secret 为空, 保存错误!")
-	}
-	if redirectUri == "" {
-		return errors.New("RedirectUri 为空, 保存错误!")
-	}
-	if !RedirectUriRegexp.MatchString(redirectUri) {
-		return errors.New("当前测试程序, 只支持 RedirectUri 为 http://域名或IP/callback 的格式")
-	}
 
 	body, err := json.MarshalIndent(c, "", "  ")
 	if err != nil {

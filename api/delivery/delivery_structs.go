@@ -4,7 +4,7 @@
 
 package delivery
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 撤销运单结果 */
 type CancelOrderResult struct {

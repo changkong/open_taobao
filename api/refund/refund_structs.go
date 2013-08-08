@@ -4,7 +4,7 @@
 
 package refund
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 退款结构 */
 type Refund struct {

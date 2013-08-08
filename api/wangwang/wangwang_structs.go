@@ -4,7 +4,7 @@
 
 package wangwang
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 关键词列表 */
 type WordList struct {

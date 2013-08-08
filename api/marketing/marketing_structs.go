@@ -4,7 +4,7 @@
 
 package marketing
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 优惠信息对象 */
 type PromotionDisplayTop struct {

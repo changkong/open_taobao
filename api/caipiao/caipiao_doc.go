@@ -3,6 +3,6 @@
 // license that can be found in the LICENSE file.
 
 // 支持营销活动赠送彩票功能实现
-// auto sdk from taobao ApiMetadata.xml version 20130729
+// auto sdk from taobao ApiMetadata.xml version 20130808
 // auther: dz7changkong@qq.com
 package caipiao

@@ -4,7 +4,7 @@
 
 package user
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 用户 */
 type User struct {

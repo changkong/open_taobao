@@ -624,8 +624,7 @@ func (r *CrmMembersGetRequest) SetCurrentPage(value string) {
 	r.SetValue("current_page", value)
 }
 
-/* 会员等级，0：返回所有会员1：普通客户，2：高级会员，3：VIP会员， 4：至尊VIP会员
-(如果要查交易关闭的会员  请选择taobao.crm.members.search接口的 relation_source=2) */
+/* 会员等级，0：店铺客户，1：普通会员，2：高级会员，3：VIP会员， 4：至尊VIP会员。如果不传入值则默认为全部等级。 */
 func (r *CrmMembersGetRequest) SetGrade(value string) {
 	r.SetValue("grade", value)
 }
@@ -762,7 +761,7 @@ func (r *CrmMembersIncrementGetRequest) SetEndModify(value string) {
 	r.SetValue("end_modify", value)
 }
 
-/* 会员等级，1：普通客户，2：高级会员，3：VIP会员， 4：至尊VIP会员 */
+/* 会员等级，0：店铺客户，1：普通会员，2：高级会员，3：VIP会员， 4：至尊VIP会员 */
 func (r *CrmMembersIncrementGetRequest) SetGrade(value string) {
 	r.SetValue("grade", value)
 }
@@ -896,7 +895,7 @@ func (r *CrmMembersSearchRequest) SetProvince(value string) {
 	r.SetValue("province", value)
 }
 
-/* 关系来源，1交易成功，2未成交(grade=0) */
+/* 关系来源，1交易成功，2未成交，3卖家手动吸纳 */
 func (r *CrmMembersSearchRequest) SetRelationSource(value string) {
 	r.SetValue("relation_source", value)
 }

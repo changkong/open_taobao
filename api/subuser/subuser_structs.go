@@ -4,7 +4,7 @@
 
 package subuser
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 子账号角色 */
 type Role struct {

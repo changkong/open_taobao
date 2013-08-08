@@ -4,7 +4,7 @@
 
 package fuwu
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 应用订单信息 */
 type ArticleBizOrder struct {

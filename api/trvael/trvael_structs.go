@@ -4,7 +4,7 @@
 
 package trvael
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 旅游商品结构。 */
 type TravelItem struct {

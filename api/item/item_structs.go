@@ -4,7 +4,7 @@
 
 package item
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 授权 */
 type SellerAuthorize struct {

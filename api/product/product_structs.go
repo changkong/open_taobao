@@ -4,7 +4,7 @@
 
 package product
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 卖家设置售后服务对象 */
 type AfterSale struct {

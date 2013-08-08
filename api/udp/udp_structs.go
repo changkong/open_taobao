@@ -4,7 +4,7 @@
 
 package udp
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* TargetSearchTopResult */
 type TargetSearchTopResult struct {

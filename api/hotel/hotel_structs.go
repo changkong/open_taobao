@@ -4,7 +4,7 @@
 
 package hotel
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* Hotel（酒店）结构。各字段详细说明可参考接口定义，如：酒店发布接口。 */
 type Hotel struct {

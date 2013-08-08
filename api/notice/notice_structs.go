@@ -4,7 +4,7 @@
 
 package notice
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 用户丢失消息的数据结构 */
 type DiscardInfo struct {

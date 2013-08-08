@@ -401,6 +401,43 @@ type JipiaoPolicyProcessResponseResult struct {
 	Response *JipiaoPolicyProcessResponse `json:"jipiao_policy_process_response"`
 }
 
+/* 根据外部产品id，进行政策状态更新，挂起/解挂/删除 */
+type JipiaoPolicystatusUpdateRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+/* type为0，表示机票政策id；type为1，表示机票政策out_product_id；最大支持政策数100，注意不要如果不要超出字符串的长度限制，超出的话，请调小批量的个数 */
+func (r *JipiaoPolicystatusUpdateRequest) SetPolicyId(value string) {
+	r.SetValue("policy_id", value)
+}
+
+/* 政策的状态: 0，挂起；1，解挂；2，删除 */
+func (r *JipiaoPolicystatusUpdateRequest) SetStatus(value string) {
+	r.SetValue("status", value)
+}
+
+/* 0，表示按政策id进行查询；1，表示按政策外部id进行查询 */
+func (r *JipiaoPolicystatusUpdateRequest) SetType(value string) {
+	r.SetValue("type", value)
+}
+
+func (r *JipiaoPolicystatusUpdateRequest) GetResponse(accessToken string) (*JipiaoPolicystatusUpdateResponse, []byte, error) {
+	var resp JipiaoPolicystatusUpdateResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.jipiao.policystatus.update", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type JipiaoPolicystatusUpdateResponse struct {
+	IsSuccess bool `json:"is_success"`
+}
+
+type JipiaoPolicystatusUpdateResponseResult struct {
+	Response *JipiaoPolicystatusUpdateResponse `json:"jipiao_policystatus_update_response"`
+}
+
 /* 国内机票代理商行程单信息回填 */
 type TripJipiaoAgentItinerarySendRequest struct {
 	open_taobao.TaobaoMethodRequest

@@ -4,7 +4,7 @@
 
 package favorite
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* 商品或店铺的信息 */
 type CollectItem struct {

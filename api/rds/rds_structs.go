@@ -4,7 +4,7 @@
 
 package rds
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* rds创建、查询、删除返回结果数据结构 */
 type RdsDbInfo struct {

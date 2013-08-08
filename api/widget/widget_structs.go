@@ -4,7 +4,7 @@
 
 package widget
 
-const VersionNo = "20130729"
+const VersionNo = "20130808"
 
 /* Widget获取到的商品信息 */
 type WidgetItem struct {
