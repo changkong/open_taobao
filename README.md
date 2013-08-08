@@ -85,6 +85,12 @@ open_taobao
 * 根据淘宝最新 ApiMetadata.xml 重新生成SDK源码并编译, 保证代码最新
 * ApiMetadata.xml 在 tools/conf 目录下，可从 [淘宝这里](http://api.taobao.com/myresources/standardSdk.htm) 下载最新配置
 
+界面图片
+
+![auth](./tools/photos/auth.jpg)
+![test](./tools/photos/test.jpg)
+![make](./tools/photos/make.jpg)
+
 代码样例
 ========
 
