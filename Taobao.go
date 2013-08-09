@@ -2,7 +2,6 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-// 淘宝开放平台的 go 语言 SDK
 package open_taobao
 
 import (
