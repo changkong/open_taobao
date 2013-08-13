@@ -92,28 +92,34 @@ open_taobao
 
 * **获取授权url**(供用户访问、授权)
 
-  * url, err := open_taobao.GetUrlForAuth(AppKey, RedirectUri, "")
-  * 可参考 tools/CtrlAuth.go 的 do 方法
+```go
+url, err := open_taobao.GetUrlForAuth(AppKey, RedirectUri, "")
+// 可参考 tools/CtrlAuth.go 的 do 方法
+```
   
 * **获取用户授权后的处理**(接收淘宝回调信息)
 
-  * var req open_taobao.TokenGetRequest
-  * req.SetAppKey(AppKey)
-  * req.SetAppSecret(AppSecret)
-  * req.SetRedirectUri(RedirectUri)
-  * req.SetCode(code)
-  * req.SetState("")
-  * resp, _, err := req.GetResponse()
-  * 成功后 resp.AccessToken 就是访问令牌，可以用来调用功能API了
-  * 可参考 tools/CtrlAuth.go 的 callback 方法
+```go
+var req open_taobao.TokenGetRequest
+req.SetAppKey(AppKey)
+req.SetAppSecret(AppSecret)
+req.SetRedirectUri(RedirectUri)
+req.SetCode(code)
+req.SetState("")
+resp, _, err := req.GetResponse()
+// 成功后 resp.AccessToken 就是访问令牌，可以用来调用功能API了
+// 可参考 tools/CtrlAuth.go 的 callback 方法
+```
 
 * **调用功能API**
 
-  * var req user.UserBuyerGetRequest
-  * req.SetFields("user_id, nick")
-  * resp, data, err := req.GetResponse(AccessToken)
-  * 成功后 resp 是结果对象, data 是返回的原始json串
-  * 可参考 tools/CtrlTest.go 的 userBuyerGet 或 userSellerGet 方法
+```go
+var req user.UserBuyerGetRequest
+req.SetFields("user_id, nick")
+resp, data, err := req.GetResponse(AccessToken)
+// 成功后 resp 是结果对象, data 是返回的原始json串
+// 可参考 tools/CtrlTest.go 的 userBuyerGet 或 userSellerGet 方法
+```
 
 * **其他资源**
 
