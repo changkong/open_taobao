@@ -8,10 +8,15 @@ import (
 	"github.com/changkong/open_taobao"
 )
 
+
+
+
+
 /* 在rds实例里创建数据库 */
 type RdsDbCreateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 数据库名 */
 func (r *RdsDbCreateRequest) SetDbName(value string) {
@@ -22,6 +27,7 @@ func (r *RdsDbCreateRequest) SetDbName(value string) {
 func (r *RdsDbCreateRequest) SetInstanceName(value string) {
 	r.SetValue("instance_name", value)
 }
+
 
 func (r *RdsDbCreateRequest) GetResponse(accessToken string) (*RdsDbCreateResponse, []byte, error) {
 	var resp RdsDbCreateResponseResult
@@ -40,10 +46,15 @@ type RdsDbCreateResponseResult struct {
 	Response *RdsDbCreateResponse `json:"rds_db_create_response"`
 }
 
+
+
+
+
 /* 通过api删除用户RDS的数据库 */
 type RdsDbDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 数据库的name，可以通过 taobao.rds.db.get 获取 */
 func (r *RdsDbDeleteRequest) SetDbName(value string) {
@@ -54,6 +65,7 @@ func (r *RdsDbDeleteRequest) SetDbName(value string) {
 func (r *RdsDbDeleteRequest) SetInstanceName(value string) {
 	r.SetValue("instance_name", value)
 }
+
 
 func (r *RdsDbDeleteRequest) GetResponse(accessToken string) (*RdsDbDeleteResponse, []byte, error) {
 	var resp RdsDbDeleteResponseResult
@@ -72,10 +84,15 @@ type RdsDbDeleteResponseResult struct {
 	Response *RdsDbDeleteResponse `json:"rds_db_delete_response"`
 }
 
+
+
+
+
 /* 查询rds实例下的数据库 */
 type RdsDbGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 数据库状态，默认值1 */
 func (r *RdsDbGetRequest) SetDbStatus(value string) {
@@ -86,6 +103,7 @@ func (r *RdsDbGetRequest) SetDbStatus(value string) {
 func (r *RdsDbGetRequest) SetInstanceName(value string) {
 	r.SetValue("instance_name", value)
 }
+
 
 func (r *RdsDbGetRequest) GetResponse(accessToken string) (*RdsDbGetResponse, []byte, error) {
 	var resp RdsDbGetResponseResult
@@ -103,3 +121,6 @@ type RdsDbGetResponse struct {
 type RdsDbGetResponseResult struct {
 	Response *RdsDbGetResponse `json:"rds_db_get_response"`
 }
+
+
+

@@ -8,10 +8,15 @@ import (
 	"github.com/changkong/open_taobao"
 )
 
+
+
+
+
 /* 查询费用账户信息 */
 type BillAccountsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需要获取的科目ID */
 func (r *BillAccountsGetRequest) SetAids(value string) {
@@ -23,6 +28,7 @@ func (r *BillAccountsGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
 
+
 func (r *BillAccountsGetRequest) GetResponse(accessToken string) (*BillAccountsGetResponse, []byte, error) {
 	var resp BillAccountsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.bill.accounts.get", &resp)
@@ -33,18 +39,23 @@ func (r *BillAccountsGetRequest) GetResponse(accessToken string) (*BillAccountsG
 }
 
 type BillAccountsGetResponse struct {
-	Accounts     []*Account `json:"accounts"`
-	TotalResults int        `json:"total_results"`
+	Accounts []*Account `json:"accounts"`
+	TotalResults int `json:"total_results"`
 }
 
 type BillAccountsGetResponseResult struct {
 	Response *BillAccountsGetResponse `json:"bill_accounts_get_response"`
 }
 
+
+
+
+
 /* 查询单笔账单明细 */
 type BillBillGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 账单编号 */
 func (r *BillBillGetRequest) SetBid(value string) {
@@ -55,6 +66,7 @@ func (r *BillBillGetRequest) SetBid(value string) {
 func (r *BillBillGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
+
 
 func (r *BillBillGetRequest) GetResponse(accessToken string) (*BillBillGetResponse, []byte, error) {
 	var resp BillBillGetResponseResult
@@ -73,10 +85,15 @@ type BillBillGetResponseResult struct {
 	Response *BillBillGetResponse `json:"bill_bill_get_response"`
 }
 
+
+
+
+
 /* 查询账单明细数据 */
 type BillBillsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 科目编号 */
 func (r *BillBillsGetRequest) SetAccountId(value string) {
@@ -123,6 +140,7 @@ func (r *BillBillsGetRequest) SetTradeId(value string) {
 	r.SetValue("trade_id", value)
 }
 
+
 func (r *BillBillsGetRequest) GetResponse(accessToken string) (*BillBillsGetResponse, []byte, error) {
 	var resp BillBillsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.bill.bills.get", &resp)
@@ -133,19 +151,24 @@ func (r *BillBillsGetRequest) GetResponse(accessToken string) (*BillBillsGetResp
 }
 
 type BillBillsGetResponse struct {
-	Bills        []*Bill `json:"bills"`
-	HasNext      bool    `json:"has_next"`
-	TotalResults int     `json:"total_results"`
+	Bills []*Bill `json:"bills"`
+	HasNext bool `json:"has_next"`
+	TotalResults int `json:"total_results"`
 }
 
 type BillBillsGetResponseResult struct {
 	Response *BillBillsGetResponse `json:"bill_bills_get_response"`
 }
 
+
+
+
+
 /* 查询单笔虚拟账户明细 */
 type BillBookBillGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 虚拟账户流水编号 */
 func (r *BillBookBillGetRequest) SetBid(value string) {
@@ -156,6 +179,7 @@ func (r *BillBookBillGetRequest) SetBid(value string) {
 func (r *BillBookBillGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
+
 
 func (r *BillBookBillGetRequest) GetResponse(accessToken string) (*BillBookBillGetResponse, []byte, error) {
 	var resp BillBookBillGetResponseResult
@@ -174,10 +198,15 @@ type BillBookBillGetResponseResult struct {
 	Response *BillBookBillGetResponse `json:"bill_book_bill_get_response"`
 }
 
+
+
+
+
 /* 查询虚拟账户明细数据 */
 type BillBookBillsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 虚拟账户科目编号 */
 func (r *BillBookBillsGetRequest) SetAccountId(value string) {
@@ -214,6 +243,7 @@ func (r *BillBookBillsGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
+
 func (r *BillBookBillsGetRequest) GetResponse(accessToken string) (*BillBookBillsGetResponse, []byte, error) {
 	var resp BillBookBillsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.bill.book.bills.get", &resp)
@@ -224,11 +254,14 @@ func (r *BillBookBillsGetRequest) GetResponse(accessToken string) (*BillBookBill
 }
 
 type BillBookBillsGetResponse struct {
-	Bills        []*BookBill `json:"bills"`
-	HasNext      bool        `json:"has_next"`
-	TotalResults int         `json:"total_results"`
+	Bills []*BookBill `json:"bills"`
+	HasNext bool `json:"has_next"`
+	TotalResults int `json:"total_results"`
 }
 
 type BillBookBillsGetResponseResult struct {
 	Response *BillBookBillsGetResponse `json:"bill_book_bills_get_response"`
 }
+
+
+

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-//
-// auto sdk from taobao ApiMetadata.xml version 20130808
+// 
+// auto sdk from taobao ApiMetadata.xml version 20131127
 // auther: dz7changkong@qq.com
 package jipiao

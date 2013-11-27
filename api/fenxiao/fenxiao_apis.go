@@ -8,12 +8,17 @@ import (
 	"github.com/changkong/open_taobao"
 )
 
+
+
+
+
 /* 合作授权审批 */
 type FenxiaoCooperationAuditRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 1:审批通过，审批通过后要加入授权产品线列表；
+
+/* 1:审批通过，审批通过后要加入授权产品线列表； 
 2:审批拒绝 */
 func (r *FenxiaoCooperationAuditRequest) SetAuditResult(value string) {
 	r.SetValue("audit_result", value)
@@ -39,6 +44,7 @@ func (r *FenxiaoCooperationAuditRequest) SetRequisitionId(value string) {
 	r.SetValue("requisition_id", value)
 }
 
+
 func (r *FenxiaoCooperationAuditRequest) GetResponse(accessToken string) (*FenxiaoCooperationAuditResponse, []byte, error) {
 	var resp FenxiaoCooperationAuditResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.cooperation.audit", &resp)
@@ -56,10 +62,15 @@ type FenxiaoCooperationAuditResponseResult struct {
 	Response *FenxiaoCooperationAuditResponse `json:"fenxiao_cooperation_audit_response"`
 }
 
+
+
+
+
 /* 获取供应商的合作关系信息 */
 type FenxiaoCooperationGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 合作结束时间yyyy-MM-dd HH:mm:ss */
 func (r *FenxiaoCooperationGetRequest) SetEndDate(value string) {
@@ -91,6 +102,7 @@ func (r *FenxiaoCooperationGetRequest) SetTradeType(value string) {
 	r.SetValue("trade_type", value)
 }
 
+
 func (r *FenxiaoCooperationGetRequest) GetResponse(accessToken string) (*FenxiaoCooperationGetResponse, []byte, error) {
 	var resp FenxiaoCooperationGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.cooperation.get", &resp)
@@ -102,17 +114,22 @@ func (r *FenxiaoCooperationGetRequest) GetResponse(accessToken string) (*Fenxiao
 
 type FenxiaoCooperationGetResponse struct {
 	Cooperations []*Cooperation `json:"cooperations"`
-	TotalResults int            `json:"total_results"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoCooperationGetResponseResult struct {
 	Response *FenxiaoCooperationGetResponse `json:"fenxiao_cooperation_get_response"`
 }
 
+
+
+
+
 /* 追加授权产品线 */
 type FenxiaoCooperationProductcatAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 合作关系id */
 func (r *FenxiaoCooperationProductcatAddRequest) SetCooperateId(value string) {
@@ -128,6 +145,7 @@ func (r *FenxiaoCooperationProductcatAddRequest) SetGradeId(value string) {
 func (r *FenxiaoCooperationProductcatAddRequest) SetProductLineList(value string) {
 	r.SetValue("product_line_list", value)
 }
+
 
 func (r *FenxiaoCooperationProductcatAddRequest) GetResponse(accessToken string) (*FenxiaoCooperationProductcatAddResponse, []byte, error) {
 	var resp FenxiaoCooperationProductcatAddResponseResult
@@ -146,10 +164,15 @@ type FenxiaoCooperationProductcatAddResponseResult struct {
 	Response *FenxiaoCooperationProductcatAddResponse `json:"fenxiao_cooperation_productcat_add_response"`
 }
 
+
+
+
+
 /* 终止与分销商的合作关系 */
 type FenxiaoCooperationTerminateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 合作编号 */
 func (r *FenxiaoCooperationTerminateRequest) SetCooperateId(value string) {
@@ -165,6 +188,7 @@ func (r *FenxiaoCooperationTerminateRequest) SetEndRemainDays(value string) {
 func (r *FenxiaoCooperationTerminateRequest) SetEndRemark(value string) {
 	r.SetValue("end_remark", value)
 }
+
 
 func (r *FenxiaoCooperationTerminateRequest) GetResponse(accessToken string) (*FenxiaoCooperationTerminateResponse, []byte, error) {
 	var resp FenxiaoCooperationTerminateResponseResult
@@ -183,10 +207,15 @@ type FenxiaoCooperationTerminateResponseResult struct {
 	Response *FenxiaoCooperationTerminateResponse `json:"fenxiao_cooperation_terminate_response"`
 }
 
+
+
+
+
 /* 供应商更新合作的分销商等级 */
 type FenxiaoCooperationUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分销商ID */
 func (r *FenxiaoCooperationUpdateRequest) SetDistributorId(value string) {
@@ -202,6 +231,7 @@ func (r *FenxiaoCooperationUpdateRequest) SetGradeId(value string) {
 func (r *FenxiaoCooperationUpdateRequest) SetTradeType(value string) {
 	r.SetValue("trade_type", value)
 }
+
 
 func (r *FenxiaoCooperationUpdateRequest) GetResponse(accessToken string) (*FenxiaoCooperationUpdateResponse, []byte, error) {
 	var resp FenxiaoCooperationUpdateResponseResult
@@ -220,15 +250,21 @@ type FenxiaoCooperationUpdateResponseResult struct {
 	Response *FenxiaoCooperationUpdateResponse `json:"fenxiao_cooperation_update_response"`
 }
 
-/* 供货方或采购方通过采购申请单审核 */
+
+
+
+
+/* 供应商或分销商通过采购申请/经销采购单审核 */
 type FenxiaoDealerRequisitionorderAgreeRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 采购申请单编号 */
+
+/* 采购申请/经销采购单编号 */
 func (r *FenxiaoDealerRequisitionorderAgreeRequest) SetDealerOrderId(value string) {
 	r.SetValue("dealer_order_id", value)
 }
+
 
 func (r *FenxiaoDealerRequisitionorderAgreeRequest) GetResponse(accessToken string) (*FenxiaoDealerRequisitionorderAgreeResponse, []byte, error) {
 	var resp FenxiaoDealerRequisitionorderAgreeResponseResult
@@ -247,21 +283,26 @@ type FenxiaoDealerRequisitionorderAgreeResponseResult struct {
 	Response *FenxiaoDealerRequisitionorderAgreeResponse `json:"fenxiao_dealer_requisitionorder_agree_response"`
 }
 
-/* 供货方或采购方关闭采购申请单 */
+
+
+
+
+/* 供应商或分销商关闭采购申请/经销采购单 */
 type FenxiaoDealerRequisitionorderCloseRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 采购申请单编号 */
+
+/* 经销采购单编号 */
 func (r *FenxiaoDealerRequisitionorderCloseRequest) SetDealerOrderId(value string) {
 	r.SetValue("dealer_order_id", value)
 }
 
-/* 关闭原因：
-1：长时间无法联系到分销商，取消交易。
-2：分销商错误提交申请，取消交易。
-3：缺货，近段时间都无法发货。
-4：分销商恶意提交申请单。
+/* 关闭原因： 
+1：长时间无法联系到分销商，取消交易。 
+2：分销商错误提交申请，取消交易。 
+3：缺货，近段时间都无法发货。 
+4：分销商恶意提交申请单。 
 5：其他原因。 */
 func (r *FenxiaoDealerRequisitionorderCloseRequest) SetReason(value string) {
 	r.SetValue("reason", value)
@@ -271,6 +312,7 @@ func (r *FenxiaoDealerRequisitionorderCloseRequest) SetReason(value string) {
 func (r *FenxiaoDealerRequisitionorderCloseRequest) SetReasonDetail(value string) {
 	r.SetValue("reason_detail", value)
 }
+
 
 func (r *FenxiaoDealerRequisitionorderCloseRequest) GetResponse(accessToken string) (*FenxiaoDealerRequisitionorderCloseResponse, []byte, error) {
 	var resp FenxiaoDealerRequisitionorderCloseResponseResult
@@ -289,42 +331,46 @@ type FenxiaoDealerRequisitionorderCloseResponseResult struct {
 	Response *FenxiaoDealerRequisitionorderCloseResponse `json:"fenxiao_dealer_requisitionorder_close_response"`
 }
 
-/* 批量查询采购申请单，目前支持供货方和采购方查询 */
+
+
+
+
+/* 批量查询采购申请/经销采购单，目前支持供应商和分销商查询 */
 type FenxiaoDealerRequisitionorderGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 采购申请单最迟修改时间。与start_date字段的最大时间间隔不能超过30天 */
+
+/* 采购申请/经销采购单最迟修改时间。与start_date字段的最大时间间隔不能超过30天 */
 func (r *FenxiaoDealerRequisitionorderGetRequest) SetEndDate(value string) {
 	r.SetValue("end_date", value)
 }
 
-/* 多个字段用","分隔。 fields 如果为空：返回所有采购申请单对象(dealer_orders)字段。 如果不为空：返回指定采购单对象(dealer_orders)字段。 例1： dealer_order_details.product_id 表示只返回product_id 例2： dealer_order_details 表示只返回明细列表 */
+/* 多个字段用","分隔。 fields 如果为空：返回所有采购申请/经销采购单对象(dealer_orders)字段。 如果不为空：返回指定采购单对象(dealer_orders)字段。 例1： dealer_order_details.product_id 表示只返回product_id 例2： dealer_order_details 表示只返回明细列表 */
 func (r *FenxiaoDealerRequisitionorderGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
 
-/* 查询者自己在所要查询的采购申请单中的身份。
-1：供货方。
-2：采购方。
+/* 查询者自己在所要查询的采购申请/经销采购单中的身份。 
+1：供应商。 
+2：分销商。 
 注：填写其他值当做错误处理。 */
 func (r *FenxiaoDealerRequisitionorderGetRequest) SetIdentity(value string) {
 	r.SetValue("identity", value)
 }
 
-/* 采购申请单状态。
-0：全部状态。
-1：采购方刚申请，待供货方审核。
-2：供货方驳回，待采购方审核。
-3：供货方修改后，待采购方审核。
-4：采购方驳回修改，待供货方再审核。
-5：双方审核通过，待采购方付款。
-6：采购方已付款，待供货方确认。
-7：付款成功，待供货方出库。
-8：供货方出库，待采购方入库。
-9：采购方入库，交易成功。
-10：采购申请单关闭。
-
+/* 采购申请/经销采购单状态。 
+0：全部状态。 
+1：分销商提交申请，待供应商审核。 
+2：供应商驳回申请，待分销商确认。 
+3：供应商修改后，待分销商确认。 
+4：分销商拒绝修改，待供应商再审核。 
+5：审核通过下单成功，待分销商付款。 
+7：付款成功，待供应商发货。 
+8：供应商发货，待分销商收货。 
+9：分销商收货，交易成功。 
+10：采购申请/经销采购单关闭。 
+ 
 注：无值按默认值0计，超出状态范围返回错误信息。 */
 func (r *FenxiaoDealerRequisitionorderGetRequest) SetOrderStatus(value string) {
 	r.SetValue("order_status", value)
@@ -340,10 +386,11 @@ func (r *FenxiaoDealerRequisitionorderGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-/* 采购申请单最早修改时间 */
+/* 采购申请/经销采购单最早修改时间 */
 func (r *FenxiaoDealerRequisitionorderGetRequest) SetStartDate(value string) {
 	r.SetValue("start_date", value)
 }
+
 
 func (r *FenxiaoDealerRequisitionorderGetRequest) GetResponse(accessToken string) (*FenxiaoDealerRequisitionorderGetResponse, []byte, error) {
 	var resp FenxiaoDealerRequisitionorderGetResponseResult
@@ -356,19 +403,24 @@ func (r *FenxiaoDealerRequisitionorderGetRequest) GetResponse(accessToken string
 
 type FenxiaoDealerRequisitionorderGetResponse struct {
 	DealerOrders []*DealerOrder `json:"dealer_orders"`
-	TotalResults int            `json:"total_results"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoDealerRequisitionorderGetResponseResult struct {
 	Response *FenxiaoDealerRequisitionorderGetResponse `json:"fenxiao_dealer_requisitionorder_get_response"`
 }
 
-/* 供货方或采购方修改采购申请单明细，如果商品总数量被修改为0（或删除所有商品明细）则关闭采购申请单，否则状态变为供货方或采购方审核通过。 */
+
+
+
+
+/* 供应商或分销商修改采购申请/经销采购单明细，如果商品总数量被修改为0（或删除所有商品明细）则关闭采购申请/经销采购单，否则状态变为供应商或分销商审核通过。 */
 type FenxiaoDealerRequisitionorderModifyRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 采购申请单编号 */
+
+/* 经销采购单编号 */
 func (r *FenxiaoDealerRequisitionorderModifyRequest) SetDealerOrderId(value string) {
 	r.SetValue("dealer_order_id", value)
 }
@@ -378,12 +430,12 @@ func (r *FenxiaoDealerRequisitionorderModifyRequest) SetDeleteDetailIds(value st
 	r.SetValue("delete_detail_ids", value)
 }
 
-/* 采购申请单的商品明细的新的采购价格。格式为商品明细id:价格修改值,商品明细id:价格修改值 */
+/* 经销采购单的商品明细的新的采购价格。格式为商品明细id:价格修改值,商品明细id:价格修改值 */
 func (r *FenxiaoDealerRequisitionorderModifyRequest) SetDetailIdPrices(value string) {
 	r.SetValue("detail_id_prices", value)
 }
 
-/* 修改采购申请单的商品明细的新的库存。格式为商品明细id:库存修改值,商品明细id:库存修改值 */
+/* 修改经销采购单的商品明细的新的库存。格式为商品明细id:库存修改值,商品明细id:库存修改值 */
 func (r *FenxiaoDealerRequisitionorderModifyRequest) SetDetailIdQuantities(value string) {
 	r.SetValue("detail_id_quantities", value)
 }
@@ -392,6 +444,7 @@ func (r *FenxiaoDealerRequisitionorderModifyRequest) SetDetailIdQuantities(value
 func (r *FenxiaoDealerRequisitionorderModifyRequest) SetNewPostFee(value string) {
 	r.SetValue("new_post_fee", value)
 }
+
 
 func (r *FenxiaoDealerRequisitionorderModifyRequest) GetResponse(accessToken string) (*FenxiaoDealerRequisitionorderModifyResponse, []byte, error) {
 	var resp FenxiaoDealerRequisitionorderModifyResponseResult
@@ -410,21 +463,27 @@ type FenxiaoDealerRequisitionorderModifyResponseResult struct {
 	Response *FenxiaoDealerRequisitionorderModifyResponse `json:"fenxiao_dealer_requisitionorder_modify_response"`
 }
 
-/* 按编号查询采购申请单，目前支持供货方和采购方查询。 */
+
+
+
+
+/* 按编号查询采购申请/经销采购单，目前支持供应商和分销商查询。 */
 type FenxiaoDealerRequisitionorderQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 采购申请单编号。
-多个编号用英文符号的逗号隔开。最多支持50个采购申请单编号的查询。 */
+
+/* 经销采购单编号。 
+多个编号用英文符号的逗号隔开。最多支持50个经销采购单编号的查询。 */
 func (r *FenxiaoDealerRequisitionorderQueryRequest) SetDealerOrderIds(value string) {
 	r.SetValue("dealer_order_ids", value)
 }
 
-/* 多个字段用","分隔。 fields 如果为空：返回所有采购申请单对象(dealer_orders)字段。 如果不为空：返回指定采购单对象(dealer_orders)字段。 例1： dealer_order_details.product_id 表示只返回product_id 例2： dealer_order_details 表示只返回明细列表 */
+/* 多个字段用","分隔。 fields 如果为空：返回所有经销采购单对象(dealer_orders)字段。 如果不为空：返回指定采购单对象(dealer_orders)字段。 例1： dealer_order_details.product_id 表示只返回product_id 例2： dealer_order_details 表示只返回明细列表 */
 func (r *FenxiaoDealerRequisitionorderQueryRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
+
 
 func (r *FenxiaoDealerRequisitionorderQueryRequest) GetResponse(accessToken string) (*FenxiaoDealerRequisitionorderQueryResponse, []byte, error) {
 	var resp FenxiaoDealerRequisitionorderQueryResponseResult
@@ -443,12 +502,17 @@ type FenxiaoDealerRequisitionorderQueryResponseResult struct {
 	Response *FenxiaoDealerRequisitionorderQueryResponse `json:"fenxiao_dealer_requisitionorder_query_response"`
 }
 
-/* 供货方或采购方驳回采购申请单 */
+
+
+
+
+/* 供应商或分销商驳回采购申请/经销采购单 */
 type FenxiaoDealerRequisitionorderRefuseRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 采购申请单编号 */
+
+/* 采购申请/经销采购单编号 */
 func (r *FenxiaoDealerRequisitionorderRefuseRequest) SetDealerOrderId(value string) {
 	r.SetValue("dealer_order_id", value)
 }
@@ -462,6 +526,7 @@ func (r *FenxiaoDealerRequisitionorderRefuseRequest) SetReason(value string) {
 func (r *FenxiaoDealerRequisitionorderRefuseRequest) SetReasonDetail(value string) {
 	r.SetValue("reason_detail", value)
 }
+
 
 func (r *FenxiaoDealerRequisitionorderRefuseRequest) GetResponse(accessToken string) (*FenxiaoDealerRequisitionorderRefuseResponse, []byte, error) {
 	var resp FenxiaoDealerRequisitionorderRefuseResponseResult
@@ -480,10 +545,65 @@ type FenxiaoDealerRequisitionorderRefuseResponseResult struct {
 	Response *FenxiaoDealerRequisitionorderRefuseResponse `json:"fenxiao_dealer_requisitionorder_refuse_response"`
 }
 
+
+
+
+
+/* 供应商修改经销采购单备注 */
+type FenxiaoDealerRequisitionorderRemarkUpdateRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 经销采购单ID */
+func (r *FenxiaoDealerRequisitionorderRemarkUpdateRequest) SetDealerOrderId(value string) {
+	r.SetValue("dealer_order_id", value)
+}
+
+/* 备注留言，可为空 */
+func (r *FenxiaoDealerRequisitionorderRemarkUpdateRequest) SetSupplierMemo(value string) {
+	r.SetValue("supplier_memo", value)
+}
+
+/* 旗子的标记，必选。 
+1-5之间的数字。 
+非1-5之间，都采用1作为默认。 
+1:红色 
+2:黄色 
+3:绿色 
+4:蓝色 
+5:粉红色 */
+func (r *FenxiaoDealerRequisitionorderRemarkUpdateRequest) SetSupplierMemoFlag(value string) {
+	r.SetValue("supplier_memo_flag", value)
+}
+
+
+func (r *FenxiaoDealerRequisitionorderRemarkUpdateRequest) GetResponse(accessToken string) (*FenxiaoDealerRequisitionorderRemarkUpdateResponse, []byte, error) {
+	var resp FenxiaoDealerRequisitionorderRemarkUpdateResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.dealer.requisitionorder.remark.update", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type FenxiaoDealerRequisitionorderRemarkUpdateResponse struct {
+	IsSuccess bool `json:"is_success"`
+}
+
+type FenxiaoDealerRequisitionorderRemarkUpdateResponseResult struct {
+	Response *FenxiaoDealerRequisitionorderRemarkUpdateResponse `json:"fenxiao_dealer_requisitionorder_remark_update_response"`
+}
+
+
+
+
+
 /* 新增等级折扣 */
 type FenxiaoDiscountAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 折扣名称,长度不能超过25字节 */
 func (r *FenxiaoDiscountAddRequest) SetDiscountName(value string) {
@@ -510,6 +630,7 @@ func (r *FenxiaoDiscountAddRequest) SetTargetTypes(value string) {
 	r.SetValue("target_types", value)
 }
 
+
 func (r *FenxiaoDiscountAddRequest) GetResponse(accessToken string) (*FenxiaoDiscountAddResponse, []byte, error) {
 	var resp FenxiaoDiscountAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.discount.add", &resp)
@@ -527,10 +648,15 @@ type FenxiaoDiscountAddResponseResult struct {
 	Response *FenxiaoDiscountAddResponse `json:"fenxiao_discount_add_response"`
 }
 
+
+
+
+
 /* 修改等级折扣 */
 type FenxiaoDiscountUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 详情ID，例如：”0,1002,1003” */
 func (r *FenxiaoDiscountUpdateRequest) SetDetailIds(value string) {
@@ -577,6 +703,7 @@ func (r *FenxiaoDiscountUpdateRequest) SetTargetTypes(value string) {
 	r.SetValue("target_types", value)
 }
 
+
 func (r *FenxiaoDiscountUpdateRequest) GetResponse(accessToken string) (*FenxiaoDiscountUpdateResponse, []byte, error) {
 	var resp FenxiaoDiscountUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.discount.update", &resp)
@@ -594,10 +721,15 @@ type FenxiaoDiscountUpdateResponseResult struct {
 	Response *FenxiaoDiscountUpdateResponse `json:"fenxiao_discount_update_response"`
 }
 
+
+
+
+
 /* 查询折扣信息 */
 type FenxiaoDiscountsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 折扣ID */
 func (r *FenxiaoDiscountsGetRequest) SetDiscountId(value string) {
@@ -609,6 +741,7 @@ func (r *FenxiaoDiscountsGetRequest) SetExtFields(value string) {
 	r.SetValue("ext_fields", value)
 }
 
+
 func (r *FenxiaoDiscountsGetRequest) GetResponse(accessToken string) (*FenxiaoDiscountsGetResponse, []byte, error) {
 	var resp FenxiaoDiscountsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.discounts.get", &resp)
@@ -619,27 +752,33 @@ func (r *FenxiaoDiscountsGetRequest) GetResponse(accessToken string) (*FenxiaoDi
 }
 
 type FenxiaoDiscountsGetResponse struct {
-	Discounts    []*Discount `json:"discounts"`
-	TotalResults int         `json:"total_results"`
+	Discounts []*Discount `json:"discounts"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoDiscountsGetResponseResult struct {
 	Response *FenxiaoDiscountsGetResponse `json:"fenxiao_discounts_get_response"`
 }
 
-/* 获取当前供应商授权分销商的产品的下载率，计算逻辑同后台页面。downLoadRatio
-获取当前供应商授权分销商的产品的上架率，计算逻辑同后台页面。获取upSelfRatio
-获取当前供应商在分销商店铺中的上架商品占比。upShopRatio
-获取当前供应商在分销商店铺中的成交（已付款）订单笔数占比。 orderShopRatio
+
+
+
+
+/* 获取当前供应商授权分销商的产品的下载率，计算逻辑同后台页面。downLoadRatio 
+获取当前供应商授权分销商的产品的上架率，计算逻辑同后台页面。获取upSelfRatio 
+获取当前供应商在分销商店铺中的上架商品占比。upShopRatio 
+获取当前供应商在分销商店铺中的成交（已付款）订单笔数占比。 orderShopRatio 
 获取当前供应商在分销商店铺中铺货商品UV占店铺商品总UV的比。uvShopRatio */
 type FenxiaoDistributorArchivesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 分销商淘宝店主nick */
 func (r *FenxiaoDistributorArchivesGetRequest) SetDistributorUserNick(value string) {
 	r.SetValue("distributor_user_nick", value)
 }
+
 
 func (r *FenxiaoDistributorArchivesGetRequest) GetResponse(accessToken string) (*FenxiaoDistributorArchivesGetResponse, []byte, error) {
 	var resp FenxiaoDistributorArchivesGetResponseResult
@@ -652,17 +791,22 @@ func (r *FenxiaoDistributorArchivesGetRequest) GetResponse(accessToken string) (
 
 type FenxiaoDistributorArchivesGetResponse struct {
 	DistributorArchive *DistributorArchive `json:"distributor_archive"`
-	IsSuccess          bool                `json:"is_success"`
+	IsSuccess bool `json:"is_success"`
 }
 
 type FenxiaoDistributorArchivesGetResponseResult struct {
 	Response *FenxiaoDistributorArchivesGetResponse `json:"fenxiao_distributor_archives_get_response"`
 }
 
+
+
+
+
 /* 供应商查询分销商商品下载记录。 */
 type FenxiaoDistributorItemsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分销商ID 。 */
 func (r *FenxiaoDistributorItemsGetRequest) SetDistributorId(value string) {
@@ -694,6 +838,7 @@ func (r *FenxiaoDistributorItemsGetRequest) SetStartModified(value string) {
 	r.SetValue("start_modified", value)
 }
 
+
 func (r *FenxiaoDistributorItemsGetRequest) GetResponse(accessToken string) (*FenxiaoDistributorItemsGetResponse, []byte, error) {
 	var resp FenxiaoDistributorItemsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.distributor.items.get", &resp)
@@ -704,29 +849,35 @@ func (r *FenxiaoDistributorItemsGetRequest) GetResponse(accessToken string) (*Fe
 }
 
 type FenxiaoDistributorItemsGetResponse struct {
-	Records      []*FenxiaoItemRecord `json:"records"`
-	TotalResults int                  `json:"total_results"`
+	Records []*FenxiaoItemRecord `json:"records"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoDistributorItemsGetResponseResult struct {
 	Response *FenxiaoDistributorItemsGetResponse `json:"fenxiao_distributor_items_get_response"`
 }
 
+
+
+
+
 /* 获取分销商品流量，以天为单位统计分销商品的PV，UV */
 type FenxiaoDistributorProcuctStaticGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分销商淘宝店主nick */
 func (r *FenxiaoDistributorProcuctStaticGetRequest) SetDistributorUserNick(value string) {
 	r.SetValue("distributor_user_nick", value)
 }
 
-/* 供应商商品id，一次可以传多个，每次最多40个。
+/* 供应商商品id，一次可以传多个，每次最多40个。 
 以,(英文)作为分隔符。 */
 func (r *FenxiaoDistributorProcuctStaticGetRequest) SetProductIdArray(value string) {
 	r.SetValue("product_id_array", value)
 }
+
 
 func (r *FenxiaoDistributorProcuctStaticGetRequest) GetResponse(accessToken string) (*FenxiaoDistributorProcuctStaticGetResponse, []byte, error) {
 	var resp FenxiaoDistributorProcuctStaticGetResponseResult
@@ -739,17 +890,22 @@ func (r *FenxiaoDistributorProcuctStaticGetRequest) GetResponse(accessToken stri
 
 type FenxiaoDistributorProcuctStaticGetResponse struct {
 	DistributorItemFlows []*DistributorItemFlow `json:"distributor_item_flows"`
-	IsSuccess            bool                   `json:"is_success"`
+	IsSuccess bool `json:"is_success"`
 }
 
 type FenxiaoDistributorProcuctStaticGetResponseResult struct {
 	Response *FenxiaoDistributorProcuctStaticGetResponse `json:"fenxiao_distributor_procuct_static_get_response"`
 }
 
+
+
+
+
 /* 分销商查询供应商产品信息 */
 type FenxiaoDistributorProductsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 下载状态，默认未下载。UNDOWNLOAD：未下载，DOWNLOADED：已下载。 */
 func (r *FenxiaoDistributorProductsGetRequest) SetDownloadStatus(value string) {
@@ -816,6 +972,7 @@ func (r *FenxiaoDistributorProductsGetRequest) SetTradeType(value string) {
 	r.SetValue("trade_type", value)
 }
 
+
 func (r *FenxiaoDistributorProductsGetRequest) GetResponse(accessToken string) (*FenxiaoDistributorProductsGetResponse, []byte, error) {
 	var resp FenxiaoDistributorProductsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.distributor.products.get", &resp)
@@ -826,7 +983,7 @@ func (r *FenxiaoDistributorProductsGetRequest) GetResponse(accessToken string) (
 }
 
 type FenxiaoDistributorProductsGetResponse struct {
-	HasNext  bool              `json:"has_next"`
+	HasNext bool `json:"has_next"`
 	Products []*FenxiaoProduct `json:"products"`
 }
 
@@ -834,15 +991,21 @@ type FenxiaoDistributorProductsGetResponseResult struct {
 	Response *FenxiaoDistributorProductsGetResponse `json:"fenxiao_distributor_products_get_response"`
 }
 
+
+
+
+
 /* 查询和当前登录供应商有合作关系的分销商的信息 */
 type FenxiaoDistributorsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 分销商用户名列表。多个之间以“,”分隔;最多支持50个分销商用户名。 */
 func (r *FenxiaoDistributorsGetRequest) SetNicks(value string) {
 	r.SetValue("nicks", value)
 }
+
 
 func (r *FenxiaoDistributorsGetRequest) GetResponse(accessToken string) (*FenxiaoDistributorsGetResponse, []byte, error) {
 	var resp FenxiaoDistributorsGetResponseResult
@@ -861,15 +1024,21 @@ type FenxiaoDistributorsGetResponseResult struct {
 	Response *FenxiaoDistributorsGetResponse `json:"fenxiao_distributors_get_response"`
 }
 
+
+
+
+
 /* 新建等级 */
 type FenxiaoGradeAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 等级名称，等级名称不可重复 */
 func (r *FenxiaoGradeAddRequest) SetName(value string) {
 	r.SetValue("name", value)
 }
+
 
 func (r *FenxiaoGradeAddRequest) GetResponse(accessToken string) (*FenxiaoGradeAddResponse, []byte, error) {
 	var resp FenxiaoGradeAddResponseResult
@@ -881,7 +1050,7 @@ func (r *FenxiaoGradeAddRequest) GetResponse(accessToken string) (*FenxiaoGradeA
 }
 
 type FenxiaoGradeAddResponse struct {
-	GradeId   int  `json:"grade_id"`
+	GradeId int `json:"grade_id"`
 	IsSuccess bool `json:"is_success"`
 }
 
@@ -889,15 +1058,21 @@ type FenxiaoGradeAddResponseResult struct {
 	Response *FenxiaoGradeAddResponse `json:"fenxiao_grade_add_response"`
 }
 
+
+
+
+
 /* 删除等级 */
 type FenxiaoGradeDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 等级ID */
 func (r *FenxiaoGradeDeleteRequest) SetGradeId(value string) {
 	r.SetValue("grade_id", value)
 }
+
 
 func (r *FenxiaoGradeDeleteRequest) GetResponse(accessToken string) (*FenxiaoGradeDeleteResponse, []byte, error) {
 	var resp FenxiaoGradeDeleteResponseResult
@@ -916,10 +1091,15 @@ type FenxiaoGradeDeleteResponseResult struct {
 	Response *FenxiaoGradeDeleteResponse `json:"fenxiao_grade_delete_response"`
 }
 
+
+
+
+
 /* 修改等级 */
 type FenxiaoGradeUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 等级ID */
 func (r *FenxiaoGradeUpdateRequest) SetGradeId(value string) {
@@ -930,6 +1110,7 @@ func (r *FenxiaoGradeUpdateRequest) SetGradeId(value string) {
 func (r *FenxiaoGradeUpdateRequest) SetName(value string) {
 	r.SetValue("name", value)
 }
+
 
 func (r *FenxiaoGradeUpdateRequest) GetResponse(accessToken string) (*FenxiaoGradeUpdateResponse, []byte, error) {
 	var resp FenxiaoGradeUpdateResponseResult
@@ -948,10 +1129,16 @@ type FenxiaoGradeUpdateResponseResult struct {
 	Response *FenxiaoGradeUpdateResponse `json:"fenxiao_grade_update_response"`
 }
 
+
+
+
+
 /* 根据供应商ID，查询他的分销商等级信息 */
 type FenxiaoGradesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *FenxiaoGradesGetRequest) GetResponse(accessToken string) (*FenxiaoGradesGetResponse, []byte, error) {
 	var resp FenxiaoGradesGetResponseResult
@@ -964,17 +1151,23 @@ func (r *FenxiaoGradesGetRequest) GetResponse(accessToken string) (*FenxiaoGrade
 
 type FenxiaoGradesGetResponse struct {
 	FenxiaoGrades []*FenxiaoGrade `json:"fenxiao_grades"`
-	TotalResults  int             `json:"total_results"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoGradesGetResponseResult struct {
 	Response *FenxiaoGradesGetResponse `json:"fenxiao_grades_get_response"`
 }
 
+
+
+
+
 /* 获取用户登录信息 */
 type FenxiaoLoginUserGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *FenxiaoLoginUserGetRequest) GetResponse(accessToken string) (*FenxiaoLoginUserGetResponse, []byte, error) {
 	var resp FenxiaoLoginUserGetResponseResult
@@ -993,10 +1186,15 @@ type FenxiaoLoginUserGetResponseResult struct {
 	Response *FenxiaoLoginUserGetResponse `json:"fenxiao_login_user_get_response"`
 }
 
+
+
+
+
 /* 供应商关闭未付款采购单.可传入一个主单号或是多个子单号，多个子单号之间以‘，’隔开 */
 type FenxiaoOrderCloseRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 关闭理由,特殊字符会被转义，会改变长度，有特殊字符是请注意 */
 func (r *FenxiaoOrderCloseRequest) SetMessage(value string) {
@@ -1012,6 +1210,7 @@ func (r *FenxiaoOrderCloseRequest) SetPurchaseOrderId(value string) {
 func (r *FenxiaoOrderCloseRequest) SetSubOrderIds(value string) {
 	r.SetValue("sub_order_ids", value)
 }
+
 
 func (r *FenxiaoOrderCloseRequest) GetResponse(accessToken string) (*FenxiaoOrderCloseResponse, []byte, error) {
 	var resp FenxiaoOrderCloseResponseResult
@@ -1030,10 +1229,15 @@ type FenxiaoOrderCloseResponseResult struct {
 	Response *FenxiaoOrderCloseResponse `json:"fenxiao_order_close_response"`
 }
 
+
+
+
+
 /* 供应商确认收款（非支付宝交易）。 */
 type FenxiaoOrderConfirmPaidRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 确认支付信息（字数小于100） */
 func (r *FenxiaoOrderConfirmPaidRequest) SetConfirmRemark(value string) {
@@ -1044,6 +1248,7 @@ func (r *FenxiaoOrderConfirmPaidRequest) SetConfirmRemark(value string) {
 func (r *FenxiaoOrderConfirmPaidRequest) SetPurchaseOrderId(value string) {
 	r.SetValue("purchase_order_id", value)
 }
+
 
 func (r *FenxiaoOrderConfirmPaidRequest) GetResponse(accessToken string) (*FenxiaoOrderConfirmPaidResponse, []byte, error) {
 	var resp FenxiaoOrderConfirmPaidResponseResult
@@ -1062,10 +1267,15 @@ type FenxiaoOrderConfirmPaidResponseResult struct {
 	Response *FenxiaoOrderConfirmPaidResponse `json:"fenxiao_order_confirm_paid_response"`
 }
 
+
+
+
+
 /* 分销商创建经销采购单. */
 type FenxiaoOrderCreateDealerRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 街道 */
 func (r *FenxiaoOrderCreateDealerRequest) SetAddr(value string) {
@@ -1127,8 +1337,8 @@ func (r *FenxiaoOrderCreateDealerRequest) SetProvince(value string) {
 	r.SetValue("province", value)
 }
 
-/* 子单信息,子单内部以‘,’隔开，多个子单以‘;’隔开.
-例(分销产品id,skuid,购买数量,单价;分销产品id:,skuid,购买数量,单价)
+/* 子单信息,子单内部以‘,’隔开，多个子单以‘;’隔开. 
+例(分销产品id,skuid,购买数量,单价;分销产品id:,skuid,购买数量,单价) 
 单价的单位位分 */
 func (r *FenxiaoOrderCreateDealerRequest) SetSubOrderDetail(value string) {
 	r.SetValue("sub_order_detail", value)
@@ -1138,6 +1348,7 @@ func (r *FenxiaoOrderCreateDealerRequest) SetSubOrderDetail(value string) {
 func (r *FenxiaoOrderCreateDealerRequest) SetZipCode(value string) {
 	r.SetValue("zip_code", value)
 }
+
 
 func (r *FenxiaoOrderCreateDealerRequest) GetResponse(accessToken string) (*FenxiaoOrderCreateDealerResponse, []byte, error) {
 	var resp FenxiaoOrderCreateDealerResponseResult
@@ -1156,10 +1367,15 @@ type FenxiaoOrderCreateDealerResponseResult struct {
 	Response *FenxiaoOrderCreateDealerResponse `json:"fenxiao_order_create_dealer_response"`
 }
 
+
+
+
+
 /* 采购单自定义字段 */
 type FenxiaoOrderCustomfieldUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 自定义key */
 func (r *FenxiaoOrderCustomfieldUpdateRequest) SetIsvCustomKey(value string) {
@@ -1175,6 +1391,7 @@ func (r *FenxiaoOrderCustomfieldUpdateRequest) SetIsvCustomValue(value string) {
 func (r *FenxiaoOrderCustomfieldUpdateRequest) SetPurchaseOrderId(value string) {
 	r.SetValue("purchase_order_id", value)
 }
+
 
 func (r *FenxiaoOrderCustomfieldUpdateRequest) GetResponse(accessToken string) (*FenxiaoOrderCustomfieldUpdateResponse, []byte, error) {
 	var resp FenxiaoOrderCustomfieldUpdateResponseResult
@@ -1193,10 +1410,15 @@ type FenxiaoOrderCustomfieldUpdateResponseResult struct {
 	Response *FenxiaoOrderCustomfieldUpdateResponse `json:"fenxiao_order_customfield_update_response"`
 }
 
+
+
+
+
 /* 添加采购单留言，最多20条（供应商分销商都可添加） */
 type FenxiaoOrderMessageAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 留言内容 */
 func (r *FenxiaoOrderMessageAddRequest) SetMessage(value string) {
@@ -1207,6 +1429,7 @@ func (r *FenxiaoOrderMessageAddRequest) SetMessage(value string) {
 func (r *FenxiaoOrderMessageAddRequest) SetPurchaseOrderId(value string) {
 	r.SetValue("purchase_order_id", value)
 }
+
 
 func (r *FenxiaoOrderMessageAddRequest) GetResponse(accessToken string) (*FenxiaoOrderMessageAddResponse, []byte, error) {
 	var resp FenxiaoOrderMessageAddResponseResult
@@ -1225,10 +1448,15 @@ type FenxiaoOrderMessageAddResponseResult struct {
 	Response *FenxiaoOrderMessageAddResponse `json:"fenxiao_order_message_add_response"`
 }
 
+
+
+
+
 /* 供应商修改采购单备注 */
 type FenxiaoOrderRemarkUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 采购单编号 */
 func (r *FenxiaoOrderRemarkUpdateRequest) SetPurchaseOrderId(value string) {
@@ -1240,15 +1468,16 @@ func (r *FenxiaoOrderRemarkUpdateRequest) SetSupplierMemo(value string) {
 	r.SetValue("supplier_memo", value)
 }
 
-/* 旗子的标记，1-5之间的数字。非1-5之间，都采用1作为默认。
-1:红色
-2:黄色
-3:绿色
-4:蓝色
+/* 旗子的标记，1-5之间的数字。非1-5之间，都采用1作为默认。 
+1:红色 
+2:黄色 
+3:绿色 
+4:蓝色 
 5:粉红色 */
 func (r *FenxiaoOrderRemarkUpdateRequest) SetSupplierMemoFlag(value string) {
 	r.SetValue("supplier_memo_flag", value)
 }
+
 
 func (r *FenxiaoOrderRemarkUpdateRequest) GetResponse(accessToken string) (*FenxiaoOrderRemarkUpdateResponse, []byte, error) {
 	var resp FenxiaoOrderRemarkUpdateResponseResult
@@ -1267,25 +1496,30 @@ type FenxiaoOrderRemarkUpdateResponseResult struct {
 	Response *FenxiaoOrderRemarkUpdateResponse `json:"fenxiao_order_remark_update_response"`
 }
 
+
+
+
+
 /* 分销商或供应商均可用此接口查询采购单信息. (发货处理请调用物流API中的发货接口) */
 type FenxiaoOrdersGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 结束时间 格式 yyyy-MM-dd HH:mm:ss.支持到秒的查询。若不传时分秒，默认为0时0分0秒。若purchase_order_id没传，则此参数必传。 */
 func (r *FenxiaoOrdersGetRequest) SetEndCreated(value string) {
 	r.SetValue("end_created", value)
 }
 
-/* 多个字段用","分隔。
-
-fields
-如果为空：返回所有采购单对象(purchase_orders)字段。
-如果不为空：返回指定采购单对象(purchase_orders)字段。
-
-例1：
-sub_purchase_orders.tc_order_id 表示只返回tc_order_id
-例2：
+/* 多个字段用","分隔。 
+ 
+fields 
+如果为空：返回所有采购单对象(purchase_orders)字段。 
+如果不为空：返回指定采购单对象(purchase_orders)字段。 
+ 
+例1： 
+sub_purchase_orders.tc_order_id 表示只返回tc_order_id  
+例2： 
 sub_purchase_orders表示只返回子采购单列表 */
 func (r *FenxiaoOrdersGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
@@ -1326,6 +1560,7 @@ func (r *FenxiaoOrdersGetRequest) SetTimeType(value string) {
 	r.SetValue("time_type", value)
 }
 
+
 func (r *FenxiaoOrdersGetRequest) GetResponse(accessToken string) (*FenxiaoOrdersGetResponse, []byte, error) {
 	var resp FenxiaoOrdersGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.orders.get", &resp)
@@ -1337,20 +1572,25 @@ func (r *FenxiaoOrdersGetRequest) GetResponse(accessToken string) (*FenxiaoOrder
 
 type FenxiaoOrdersGetResponse struct {
 	PurchaseOrders []*PurchaseOrder `json:"purchase_orders"`
-	TotalResults   int              `json:"total_results"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoOrdersGetResponseResult struct {
 	Response *FenxiaoOrdersGetResponse `json:"fenxiao_orders_get_response"`
 }
 
-/* 添加分销平台产品数据。业务逻辑与分销系统前台页面一致。
 
- * 产品图片默认为空
- * 产品发布后默认为下架状态 */
+
+
+
+/* 添加分销平台产品数据。业务逻辑与分销系统前台页面一致。 
+ 
+    * 产品图片默认为空 
+    * 产品发布后默认为下架状态 */
 type FenxiaoProductAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 警戒库存必须是0到29999。 */
 func (r *FenxiaoProductAddRequest) SetAlarmNumber(value string) {
@@ -1407,9 +1647,9 @@ func (r *FenxiaoProductAddRequest) SetInputProperties(value string) {
 	r.SetValue("input_properties", value)
 }
 
-/* 添加产品时，添加入参isAuthz:yes|no
-yes:需要授权
-no:不需要授权
+/* 添加产品时，添加入参isAuthz:yes|no  
+yes:需要授权  
+no:不需要授权  
 默认是需要授权 */
 func (r *FenxiaoProductAddRequest) SetIsAuthz(value string) {
 	r.SetValue("is_authz", value)
@@ -1540,6 +1780,7 @@ func (r *FenxiaoProductAddRequest) SetTradeType(value string) {
 	r.SetValue("trade_type", value)
 }
 
+
 func (r *FenxiaoProductAddRequest) GetResponse(accessToken string) (*FenxiaoProductAddResponse, []byte, error) {
 	var resp FenxiaoProductAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.add", &resp)
@@ -1551,17 +1792,22 @@ func (r *FenxiaoProductAddRequest) GetResponse(accessToken string) (*FenxiaoProd
 
 type FenxiaoProductAddResponse struct {
 	Created string `json:"created"`
-	Pid     int    `json:"pid"`
+	Pid int `json:"pid"`
 }
 
 type FenxiaoProductAddResponseResult struct {
 	Response *FenxiaoProductAddResponse `json:"fenxiao_product_add_response"`
 }
 
+
+
+
+
 /* 等级折扣查询 */
 type FenxiaoProductGradepriceGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 产品id */
 func (r *FenxiaoProductGradepriceGetRequest) SetProductId(value string) {
@@ -1578,6 +1824,7 @@ func (r *FenxiaoProductGradepriceGetRequest) SetTradeType(value string) {
 	r.SetValue("trade_type", value)
 }
 
+
 func (r *FenxiaoProductGradepriceGetRequest) GetResponse(accessToken string) (*FenxiaoProductGradepriceGetResponse, []byte, error) {
 	var resp FenxiaoProductGradepriceGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.gradeprice.get", &resp)
@@ -1589,17 +1836,22 @@ func (r *FenxiaoProductGradepriceGetRequest) GetResponse(accessToken string) (*F
 
 type FenxiaoProductGradepriceGetResponse struct {
 	GradeDiscounts []*GradeDiscount `json:"grade_discounts"`
-	IsSuccess      bool             `json:"is_success"`
+	IsSuccess bool `json:"is_success"`
 }
 
 type FenxiaoProductGradepriceGetResponseResult struct {
 	Response *FenxiaoProductGradepriceGetResponse `json:"fenxiao_product_gradeprice_get_response"`
 }
 
+
+
+
+
 /* 供应商可以针对产品不同的sku，指定对应交易类型（代销or经销）方式下，设定折扣方式（按等级or指定分销商）以及对应优惠后的采购价格 */
 type FenxiaoProductGradepriceUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 会员等级的id或者分销商id，例如：”1001,2001,1002” */
 func (r *FenxiaoProductGradepriceUpdateRequest) SetIds(value string) {
@@ -1631,6 +1883,7 @@ func (r *FenxiaoProductGradepriceUpdateRequest) SetTradeType(value string) {
 	r.SetValue("trade_type", value)
 }
 
+
 func (r *FenxiaoProductGradepriceUpdateRequest) GetResponse(accessToken string) (*FenxiaoProductGradepriceUpdateResponse, []byte, error) {
 	var resp FenxiaoProductGradepriceUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.gradeprice.update", &resp)
@@ -1648,10 +1901,15 @@ type FenxiaoProductGradepriceUpdateResponseResult struct {
 	Response *FenxiaoProductGradepriceUpdateResponse `json:"fenxiao_product_gradeprice_update_response"`
 }
 
+
+
+
+
 /* 产品图片删除，只删除图片信息，不真正删除图片 */
 type FenxiaoProductImageDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 图片位置 */
 func (r *FenxiaoProductImageDeleteRequest) SetPosition(value string) {
@@ -1668,6 +1926,7 @@ func (r *FenxiaoProductImageDeleteRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
 }
 
+
 func (r *FenxiaoProductImageDeleteRequest) GetResponse(accessToken string) (*FenxiaoProductImageDeleteResponse, []byte, error) {
 	var resp FenxiaoProductImageDeleteResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.image.delete", &resp)
@@ -1679,17 +1938,22 @@ func (r *FenxiaoProductImageDeleteRequest) GetResponse(accessToken string) (*Fen
 
 type FenxiaoProductImageDeleteResponse struct {
 	Created string `json:"created"`
-	Result  bool   `json:"result"`
+	Result bool `json:"result"`
 }
 
 type FenxiaoProductImageDeleteResponseResult struct {
 	Response *FenxiaoProductImageDeleteResponse `json:"fenxiao_product_image_delete_response"`
 }
 
+
+
+
+
 /* 产品主图图片空间相对路径或绝对路径添加或更新，或者是图片上传。如果指定位置的图片已存在，则覆盖原有信息。如果位置为1,自动设为主图；如果位置为0，表示属性图片 */
 type FenxiaoProductImageUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 产品图片 */
 func (r *FenxiaoProductImageUploadRequest) SetImage(value string) {
@@ -1716,6 +1980,7 @@ func (r *FenxiaoProductImageUploadRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
 }
 
+
 func (r *FenxiaoProductImageUploadRequest) GetResponse(accessToken string) (*FenxiaoProductImageUploadResponse, []byte, error) {
 	var resp FenxiaoProductImageUploadResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.image.upload", &resp)
@@ -1727,17 +1992,22 @@ func (r *FenxiaoProductImageUploadRequest) GetResponse(accessToken string) (*Fen
 
 type FenxiaoProductImageUploadResponse struct {
 	Created string `json:"created"`
-	Result  bool   `json:"result"`
+	Result bool `json:"result"`
 }
 
 type FenxiaoProductImageUploadResponseResult struct {
 	Response *FenxiaoProductImageUploadResponse `json:"fenxiao_product_image_upload_response"`
 }
 
+
+
+
+
 /* 创建分销和供应链商品映射关系。 */
 type FenxiaoProductMapAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否需要校验商家编码，true不校验，false校验。 */
 func (r *FenxiaoProductMapAddRequest) SetNotCheckOuterCode(value string) {
@@ -1764,6 +2034,7 @@ func (r *FenxiaoProductMapAddRequest) SetSkuIds(value string) {
 	r.SetValue("sku_ids", value)
 }
 
+
 func (r *FenxiaoProductMapAddRequest) GetResponse(accessToken string) (*FenxiaoProductMapAddResponse, []byte, error) {
 	var resp FenxiaoProductMapAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.map.add", &resp)
@@ -1781,10 +2052,15 @@ type FenxiaoProductMapAddResponseResult struct {
 	Response *FenxiaoProductMapAddResponse `json:"fenxiao_product_map_add_response"`
 }
 
+
+
+
+
 /* 删除分销和供应链商品映射关系。 */
 type FenxiaoProductMapDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分销产品id。 */
 func (r *FenxiaoProductMapDeleteRequest) SetProductId(value string) {
@@ -1795,6 +2071,7 @@ func (r *FenxiaoProductMapDeleteRequest) SetProductId(value string) {
 func (r *FenxiaoProductMapDeleteRequest) SetSkuIds(value string) {
 	r.SetValue("sku_ids", value)
 }
+
 
 func (r *FenxiaoProductMapDeleteRequest) GetResponse(accessToken string) (*FenxiaoProductMapDeleteResponse, []byte, error) {
 	var resp FenxiaoProductMapDeleteResponseResult
@@ -1813,10 +2090,15 @@ type FenxiaoProductMapDeleteResponseResult struct {
 	Response *FenxiaoProductMapDeleteResponse `json:"fenxiao_product_map_delete_response"`
 }
 
+
+
+
+
 /* 添加产品SKU信息 */
 type FenxiaoProductSkuAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 代销采购价 */
 func (r *FenxiaoProductSkuAddRequest) SetAgentCostPrice(value string) {
@@ -1853,6 +2135,7 @@ func (r *FenxiaoProductSkuAddRequest) SetStandardPrice(value string) {
 	r.SetValue("standard_price", value)
 }
 
+
 func (r *FenxiaoProductSkuAddRequest) GetResponse(accessToken string) (*FenxiaoProductSkuAddResponse, []byte, error) {
 	var resp FenxiaoProductSkuAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.sku.add", &resp)
@@ -1864,17 +2147,22 @@ func (r *FenxiaoProductSkuAddRequest) GetResponse(accessToken string) (*FenxiaoP
 
 type FenxiaoProductSkuAddResponse struct {
 	Created string `json:"created"`
-	Result  bool   `json:"result"`
+	Result bool `json:"result"`
 }
 
 type FenxiaoProductSkuAddResponseResult struct {
 	Response *FenxiaoProductSkuAddResponse `json:"fenxiao_product_sku_add_response"`
 }
 
+
+
+
+
 /* 根据sku properties删除sku数据 */
 type FenxiaoProductSkuDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 产品id */
 func (r *FenxiaoProductSkuDeleteRequest) SetProductId(value string) {
@@ -1885,6 +2173,7 @@ func (r *FenxiaoProductSkuDeleteRequest) SetProductId(value string) {
 func (r *FenxiaoProductSkuDeleteRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
 }
+
 
 func (r *FenxiaoProductSkuDeleteRequest) GetResponse(accessToken string) (*FenxiaoProductSkuDeleteResponse, []byte, error) {
 	var resp FenxiaoProductSkuDeleteResponseResult
@@ -1897,17 +2186,22 @@ func (r *FenxiaoProductSkuDeleteRequest) GetResponse(accessToken string) (*Fenxi
 
 type FenxiaoProductSkuDeleteResponse struct {
 	Created string `json:"created"`
-	Result  bool   `json:"result"`
+	Result bool `json:"result"`
 }
 
 type FenxiaoProductSkuDeleteResponseResult struct {
 	Response *FenxiaoProductSkuDeleteResponse `json:"fenxiao_product_sku_delete_response"`
 }
 
+
+
+
+
 /* 产品SKU信息更新 */
 type FenxiaoProductSkuUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 代销采购价 */
 func (r *FenxiaoProductSkuUpdateRequest) SetAgentCostPrice(value string) {
@@ -1944,6 +2238,7 @@ func (r *FenxiaoProductSkuUpdateRequest) SetStandardPrice(value string) {
 	r.SetValue("standard_price", value)
 }
 
+
 func (r *FenxiaoProductSkuUpdateRequest) GetResponse(accessToken string) (*FenxiaoProductSkuUpdateResponse, []byte, error) {
 	var resp FenxiaoProductSkuUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.sku.update", &resp)
@@ -1955,22 +2250,28 @@ func (r *FenxiaoProductSkuUpdateRequest) GetResponse(accessToken string) (*Fenxi
 
 type FenxiaoProductSkuUpdateResponse struct {
 	Created string `json:"created"`
-	Result  bool   `json:"result"`
+	Result bool `json:"result"`
 }
 
 type FenxiaoProductSkuUpdateResponseResult struct {
 	Response *FenxiaoProductSkuUpdateResponse `json:"fenxiao_product_sku_update_response"`
 }
 
+
+
+
+
 /* 产品sku查询 */
 type FenxiaoProductSkusGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 产品ID */
 func (r *FenxiaoProductSkusGetRequest) SetProductId(value string) {
 	r.SetValue("product_id", value)
 }
+
 
 func (r *FenxiaoProductSkusGetRequest) GetResponse(accessToken string) (*FenxiaoProductSkusGetResponse, []byte, error) {
 	var resp FenxiaoProductSkusGetResponseResult
@@ -1982,19 +2283,24 @@ func (r *FenxiaoProductSkusGetRequest) GetResponse(accessToken string) (*Fenxiao
 }
 
 type FenxiaoProductSkusGetResponse struct {
-	Skus         []*FenxiaoSku `json:"skus"`
-	TotalResults int           `json:"total_results"`
+	Skus []*FenxiaoSku `json:"skus"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoProductSkusGetResponseResult struct {
 	Response *FenxiaoProductSkusGetResponse `json:"fenxiao_product_skus_get_response"`
 }
 
-/* 更新分销平台产品数据，不传更新数据返回失败<br>
+
+
+
+
+/* 更新分销平台产品数据，不传更新数据返回失败<br> 
 1. 对sku进行增、删操作时，原有的sku_ids字段会被忽略，请使用sku_properties和sku_properties_del。<br> */
 type FenxiaoProductUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 警戒库存必须是0到29999。 */
 func (r *FenxiaoProductUpdateRequest) SetAlarmNumber(value string) {
@@ -2051,8 +2357,8 @@ func (r *FenxiaoProductUpdateRequest) SetInputProperties(value string) {
 	r.SetValue("input_properties", value)
 }
 
-/* 产品是否需要授权isAuthz:yes|no
-yes:需要授权
+/* 产品是否需要授权isAuthz:yes|no  
+yes:需要授权  
 no:不需要授权 */
 func (r *FenxiaoProductUpdateRequest) SetIsAuthz(value string) {
 	r.SetValue("is_authz", value)
@@ -2153,7 +2459,7 @@ func (r *FenxiaoProductUpdateRequest) SetSkuOuterIds(value string) {
 	r.SetValue("sku_outer_ids", value)
 }
 
-/* sku属性。格式:pid:vid;pid:vid,表示一组属性如:1627207:3232483;1630696:3284570,表示一组:机身颜色:军绿色;手机套餐:一电一充。多组之间用逗号“,”区分。(属性的pid调用taobao.itemprops.get取得，属性值的vid用taobao.itempropvalues.get取得vid)
+/* sku属性。格式:pid:vid;pid:vid,表示一组属性如:1627207:3232483;1630696:3284570,表示一组:机身颜色:军绿色;手机套餐:一电一充。多组之间用逗号“,”区分。(属性的pid调用taobao.itemprops.get取得，属性值的vid用taobao.itempropvalues.get取得vid) 
 通过此字段可新增和更新sku。若传入此值将忽略sku_ids字段。sku其他字段与此值保持一致。 */
 func (r *FenxiaoProductUpdateRequest) SetSkuProperties(value string) {
 	r.SetValue("sku_properties", value)
@@ -2189,6 +2495,7 @@ func (r *FenxiaoProductUpdateRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
 
+
 func (r *FenxiaoProductUpdateRequest) GetResponse(accessToken string) (*FenxiaoProductUpdateResponse, []byte, error) {
 	var resp FenxiaoProductUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.product.update", &resp)
@@ -2200,17 +2507,22 @@ func (r *FenxiaoProductUpdateRequest) GetResponse(accessToken string) (*FenxiaoP
 
 type FenxiaoProductUpdateResponse struct {
 	Modified string `json:"modified"`
-	Pid      int    `json:"pid"`
+	Pid int `json:"pid"`
 }
 
 type FenxiaoProductUpdateResponseResult struct {
 	Response *FenxiaoProductUpdateResponse `json:"fenxiao_product_update_response"`
 }
 
+
+
+
+
 /* 新增产品线 */
 type FenxiaoProductcatAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 代销默认采购价比例，注意：100.00%，则输入为10000 */
 func (r *FenxiaoProductcatAddRequest) SetAgentCostPercent(value string) {
@@ -2237,6 +2549,7 @@ func (r *FenxiaoProductcatAddRequest) SetRetailLowPercent(value string) {
 	r.SetValue("retail_low_percent", value)
 }
 
+
 func (r *FenxiaoProductcatAddRequest) GetResponse(accessToken string) (*FenxiaoProductcatAddResponse, []byte, error) {
 	var resp FenxiaoProductcatAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.productcat.add", &resp)
@@ -2247,23 +2560,29 @@ func (r *FenxiaoProductcatAddRequest) GetResponse(accessToken string) (*FenxiaoP
 }
 
 type FenxiaoProductcatAddResponse struct {
-	IsSuccess     bool `json:"is_success"`
-	ProductLineId int  `json:"product_line_id"`
+	IsSuccess bool `json:"is_success"`
+	ProductLineId int `json:"product_line_id"`
 }
 
 type FenxiaoProductcatAddResponseResult struct {
 	Response *FenxiaoProductcatAddResponse `json:"fenxiao_productcat_add_response"`
 }
 
+
+
+
+
 /* 删除产品线 */
 type FenxiaoProductcatDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 产品线ID */
 func (r *FenxiaoProductcatDeleteRequest) SetProductLineId(value string) {
 	r.SetValue("product_line_id", value)
 }
+
 
 func (r *FenxiaoProductcatDeleteRequest) GetResponse(accessToken string) (*FenxiaoProductcatDeleteResponse, []byte, error) {
 	var resp FenxiaoProductcatDeleteResponseResult
@@ -2282,10 +2601,15 @@ type FenxiaoProductcatDeleteResponseResult struct {
 	Response *FenxiaoProductcatDeleteResponse `json:"fenxiao_productcat_delete_response"`
 }
 
+
+
+
+
 /* 修改产品线 */
 type FenxiaoProductcatUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 代销默认采购价比例，注意：100.00%，则输入为10000 */
 func (r *FenxiaoProductcatUpdateRequest) SetAgentCostPercent(value string) {
@@ -2317,6 +2641,7 @@ func (r *FenxiaoProductcatUpdateRequest) SetRetailLowPercent(value string) {
 	r.SetValue("retail_low_percent", value)
 }
 
+
 func (r *FenxiaoProductcatUpdateRequest) GetResponse(accessToken string) (*FenxiaoProductcatUpdateResponse, []byte, error) {
 	var resp FenxiaoProductcatUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.productcat.update", &resp)
@@ -2334,15 +2659,21 @@ type FenxiaoProductcatUpdateResponseResult struct {
 	Response *FenxiaoProductcatUpdateResponse `json:"fenxiao_productcat_update_response"`
 }
 
+
+
+
+
 /* 查询供应商的所有产品线数据。根据登陆用户来查询，不需要其他入参 */
 type FenxiaoProductcatsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 返回字段列表 */
 func (r *FenxiaoProductcatsGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
+
 
 func (r *FenxiaoProductcatsGetRequest) GetResponse(accessToken string) (*FenxiaoProductcatsGetResponse, []byte, error) {
 	var resp FenxiaoProductcatsGetResponseResult
@@ -2354,25 +2685,30 @@ func (r *FenxiaoProductcatsGetRequest) GetResponse(accessToken string) (*Fenxiao
 }
 
 type FenxiaoProductcatsGetResponse struct {
-	Productcats  []*ProductCat `json:"productcats"`
-	TotalResults int           `json:"total_results"`
+	Productcats []*ProductCat `json:"productcats"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoProductcatsGetResponseResult struct {
 	Response *FenxiaoProductcatsGetResponse `json:"fenxiao_productcats_get_response"`
 }
 
-/* 查询供应商的产品数据。
 
- * 入参传入pids将优先查询，即只按这个条件查询。
- *入参传入sku_number将优先查询(没有传入pids)，即只按这个条件查询(最多显示50条)
- * 入参fields传skus将查询sku的数据，不传该参数默认不查询，返回产品的其它信息。
- * 入参fields传入images将查询多图数据，不传只返回主图数据。
- * 入参fields仅对传入pids生效（只有按ID查询时，才能查询额外的数据）
- * 查询结果按照产品发布时间倒序，即时间近的数据在前。 */
+
+
+
+/* 查询供应商的产品数据。 
+ 
+    * 入参传入pids将优先查询，即只按这个条件查询。 
+    *入参传入sku_number将优先查询(没有传入pids)，即只按这个条件查询(最多显示50条) 
+    * 入参fields传skus将查询sku的数据，不传该参数默认不查询，返回产品的其它信息。 
+    * 入参fields传入images将查询多图数据，不传只返回主图数据。 
+    * 入参fields仅对传入pids生效（只有按ID查询时，才能查询额外的数据） 
+    * 查询结果按照产品发布时间倒序，即时间近的数据在前。 */
 type FenxiaoProductsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 结束修改时间 */
 func (r *FenxiaoProductsGetRequest) SetEndModified(value string) {
@@ -2384,8 +2720,8 @@ func (r *FenxiaoProductsGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
 
-/* 查询产品列表时，查询入参“是否需要授权”
-yes:需要授权
+/* 查询产品列表时，查询入参“是否需要授权” 
+yes:需要授权  
 no:不需要授权 */
 func (r *FenxiaoProductsGetRequest) SetIsAuthz(value string) {
 	r.SetValue("is_authz", value)
@@ -2436,6 +2772,7 @@ func (r *FenxiaoProductsGetRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
 
+
 func (r *FenxiaoProductsGetRequest) GetResponse(accessToken string) (*FenxiaoProductsGetResponse, []byte, error) {
 	var resp FenxiaoProductsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.products.get", &resp)
@@ -2446,18 +2783,23 @@ func (r *FenxiaoProductsGetRequest) GetResponse(accessToken string) (*FenxiaoPro
 }
 
 type FenxiaoProductsGetResponse struct {
-	Products     []*FenxiaoProduct `json:"products"`
-	TotalResults int               `json:"total_results"`
+	Products []*FenxiaoProduct `json:"products"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoProductsGetResponseResult struct {
 	Response *FenxiaoProductsGetResponse `json:"fenxiao_products_get_response"`
 }
 
+
+
+
+
 /* 用于对分销的子采购单创建退款 */
 type FenxiaoRefundCreateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否退货，只有子采购单发货后，才能申请退货 */
 func (r *FenxiaoRefundCreateRequest) SetIsReturnGoods(value string) {
@@ -2474,12 +2816,12 @@ func (r *FenxiaoRefundCreateRequest) SetRefundDesc(value string) {
 	r.SetValue("refund_desc", value)
 }
 
-/* 发货前：
-1、缺货，2、拍错商品，3、商品缺少所需样式，4、协商一致退款，5、未及时发货，0、其它
-发货后：
-经销：
-1、商品质量问题，2、收到的商品不符，3、协商一致退款，4、一直未收到货，5、退还多付邮费，6、折扣、赠品、发票等问题，0、其它
-代销：
+/* 发货前： 
+1、缺货，2、拍错商品，3、商品缺少所需样式，4、协商一致退款，5、未及时发货，0、其它 
+发货后： 
+经销： 
+1、商品质量问题，2、收到的商品不符，3、协商一致退款，4、一直未收到货，5、退还多付邮费，6、折扣、赠品、发票等问题，0、其它 
+代销： 
 1、商品质量问题，2、收到的商品不符，3、协商一致退款，4、买家一直未收到货，5、退还多付邮费，6、折扣、赠品、发票等问题，0、其它 */
 func (r *FenxiaoRefundCreateRequest) SetRefundReasonId(value string) {
 	r.SetValue("refund_reason_id", value)
@@ -2494,6 +2836,7 @@ func (r *FenxiaoRefundCreateRequest) SetReturnFee(value string) {
 func (r *FenxiaoRefundCreateRequest) SetSubOrderId(value string) {
 	r.SetValue("sub_order_id", value)
 }
+
 
 func (r *FenxiaoRefundCreateRequest) GetResponse(accessToken string) (*FenxiaoRefundCreateResponse, []byte, error) {
 	var resp FenxiaoRefundCreateResponseResult
@@ -2512,10 +2855,15 @@ type FenxiaoRefundCreateResponseResult struct {
 	Response *FenxiaoRefundCreateResponse `json:"fenxiao_refund_create_response"`
 }
 
+
+
+
+
 /* 分销商或供应商可以查询某子单的退款信息，以及下游订单的退款信息 */
 type FenxiaoRefundGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否查询下游买家的退款信息 */
 func (r *FenxiaoRefundGetRequest) SetQuerySellerRefund(value string) {
@@ -2526,6 +2874,7 @@ func (r *FenxiaoRefundGetRequest) SetQuerySellerRefund(value string) {
 func (r *FenxiaoRefundGetRequest) SetSubOrderId(value string) {
 	r.SetValue("sub_order_id", value)
 }
+
 
 func (r *FenxiaoRefundGetRequest) GetResponse(accessToken string) (*FenxiaoRefundGetResponse, []byte, error) {
 	var resp FenxiaoRefundGetResponseResult
@@ -2544,10 +2893,15 @@ type FenxiaoRefundGetResponseResult struct {
 	Response *FenxiaoRefundGetResponse `json:"fenxiao_refund_get_response"`
 }
 
+
+
+
+
 /* 添加退款留言 */
 type FenxiaoRefundMessageAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 留言凭证 */
 func (r *FenxiaoRefundMessageAddRequest) SetImage(value string) {
@@ -2563,6 +2917,7 @@ func (r *FenxiaoRefundMessageAddRequest) SetMessageContent(value string) {
 func (r *FenxiaoRefundMessageAddRequest) SetSubOrderId(value string) {
 	r.SetValue("sub_order_id", value)
 }
+
 
 func (r *FenxiaoRefundMessageAddRequest) GetResponse(accessToken string) (*FenxiaoRefundMessageAddResponse, []byte, error) {
 	var resp FenxiaoRefundMessageAddResponseResult
@@ -2581,10 +2936,15 @@ type FenxiaoRefundMessageAddResponseResult struct {
 	Response *FenxiaoRefundMessageAddResponse `json:"fenxiao_refund_message_add_response"`
 }
 
+
+
+
+
 /* 根据子采购单id，查询对应子单的退款留言信息 */
 type FenxiaoRefundMessageGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 页码。（大于0的整数。默认为1） */
 func (r *FenxiaoRefundMessageGetRequest) SetPageNo(value string) {
@@ -2601,6 +2961,7 @@ func (r *FenxiaoRefundMessageGetRequest) SetSubOrderId(value string) {
 	r.SetValue("sub_order_id", value)
 }
 
+
 func (r *FenxiaoRefundMessageGetRequest) GetResponse(accessToken string) (*FenxiaoRefundMessageGetResponse, []byte, error) {
 	var resp FenxiaoRefundMessageGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.refund.message.get", &resp)
@@ -2612,17 +2973,22 @@ func (r *FenxiaoRefundMessageGetRequest) GetResponse(accessToken string) (*Fenxi
 
 type FenxiaoRefundMessageGetResponse struct {
 	OrderMessages []*OrderMessage `json:"order_messages"`
-	TotalResults  int             `json:"total_results"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoRefundMessageGetResponseResult struct {
 	Response *FenxiaoRefundMessageGetResponse `json:"fenxiao_refund_message_get_response"`
 }
 
+
+
+
+
 /* 修改退款协议 */
 type FenxiaoRefundUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否退货，只有子采购单发货后，才能申请退货 */
 func (r *FenxiaoRefundUpdateRequest) SetIsReturnGoods(value string) {
@@ -2634,12 +3000,12 @@ func (r *FenxiaoRefundUpdateRequest) SetRefundDesc(value string) {
 	r.SetValue("refund_desc", value)
 }
 
-/* 发货前：
-1、缺货，2、拍错商品，3、商品缺少所需样式，4、协商一致退款，5、未及时发货，0、其它
-发货后：
-经销：
-1、商品质量问题，2、收到的商品不符，3、协商一致退款，4、一直未收到货，5、退还多付邮费，6、折扣、赠品、发票等问题，0、其它
-代销：
+/* 发货前： 
+1、缺货，2、拍错商品，3、商品缺少所需样式，4、协商一致退款，5、未及时发货，0、其它 
+发货后： 
+经销： 
+1、商品质量问题，2、收到的商品不符，3、协商一致退款，4、一直未收到货，5、退还多付邮费，6、折扣、赠品、发票等问题，0、其它 
+代销： 
 1、商品质量问题，2、收到的商品不符，3、协商一致退款，4、买家一直未收到货，5、退还多付邮费，6、折扣、赠品、发票等问题，0、其它 */
 func (r *FenxiaoRefundUpdateRequest) SetRefundReasonId(value string) {
 	r.SetValue("refund_reason_id", value)
@@ -2654,6 +3020,7 @@ func (r *FenxiaoRefundUpdateRequest) SetReturnFee(value string) {
 func (r *FenxiaoRefundUpdateRequest) SetSubOrderId(value string) {
 	r.SetValue("sub_order_id", value)
 }
+
 
 func (r *FenxiaoRefundUpdateRequest) GetResponse(accessToken string) (*FenxiaoRefundUpdateResponse, []byte, error) {
 	var resp FenxiaoRefundUpdateResponseResult
@@ -2672,10 +3039,15 @@ type FenxiaoRefundUpdateResponseResult struct {
 	Response *FenxiaoRefundUpdateResponse `json:"fenxiao_refund_update_response"`
 }
 
+
+
+
+
 /* 合作申请查询 */
 type FenxiaoRequisitionsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 申请结束时间yyyy-MM-dd */
 func (r *FenxiaoRequisitionsGetRequest) SetApplyEnd(value string) {
@@ -2702,6 +3074,7 @@ func (r *FenxiaoRequisitionsGetRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
 
+
 func (r *FenxiaoRequisitionsGetRequest) GetResponse(accessToken string) (*FenxiaoRequisitionsGetResponse, []byte, error) {
 	var resp FenxiaoRequisitionsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.requisitions.get", &resp)
@@ -2712,19 +3085,24 @@ func (r *FenxiaoRequisitionsGetRequest) GetResponse(accessToken string) (*Fenxia
 }
 
 type FenxiaoRequisitionsGetResponse struct {
-	IsSuccess    bool           `json:"is_success"`
+	IsSuccess bool `json:"is_success"`
 	Requisitions []*Requisition `json:"requisitions"`
-	TotalResults int            `json:"total_results"`
+	TotalResults int `json:"total_results"`
 }
 
 type FenxiaoRequisitionsGetResponseResult struct {
 	Response *FenxiaoRequisitionsGetResponse `json:"fenxiao_requisitions_get_response"`
 }
 
+
+
+
+
 /* 仅限供应商调用此接口查询经销商品监控信息 */
 type FenxiaoTrademonitorGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 经销商的淘宝账号 */
 func (r *FenxiaoTrademonitorGetRequest) SetDistributorNick(value string) {
@@ -2761,6 +3139,7 @@ func (r *FenxiaoTrademonitorGetRequest) SetStartCreated(value string) {
 	r.SetValue("start_created", value)
 }
 
+
 func (r *FenxiaoTrademonitorGetRequest) GetResponse(accessToken string) (*FenxiaoTrademonitorGetResponse, []byte, error) {
 	var resp FenxiaoTrademonitorGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.fenxiao.trademonitor.get", &resp)
@@ -2771,7 +3150,7 @@ func (r *FenxiaoTrademonitorGetRequest) GetResponse(accessToken string) (*Fenxia
 }
 
 type FenxiaoTrademonitorGetResponse struct {
-	TotalResults  int             `json:"total_results"`
+	TotalResults int `json:"total_results"`
 	TradeMonitors []*TradeMonitor `json:"trade_monitors"`
 }
 
@@ -2779,10 +3158,15 @@ type FenxiaoTrademonitorGetResponseResult struct {
 	Response *FenxiaoTrademonitorGetResponse `json:"fenxiao_trademonitor_get_response"`
 }
 
+
+
+
+
 /* 商家非交易调整库存，调拨出库、盘点等时调用 */
 type InventoryAdjustExternalRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 外部订单类型：ALLOCATE:调拨、 RETURN:退货、PURCHACE：采购、BALANCE:盘点、NON_TAOBAO_TRADE：非淘宝交易、OTHERS：其他 */
 func (r *InventoryAdjustExternalRequest) SetBizType(value string) {
@@ -2814,7 +3198,7 @@ func (r *InventoryAdjustExternalRequest) SetOperateType(value string) {
 	r.SetValue("operate_type", value)
 }
 
-/* 出库时库存扣减类型，operate_type为OUTBOUND时有效。
+/* 出库时库存扣减类型，operate_type为OUTBOUND时有效。  
 AUTO_CALCULATE:自动计算可供扣减，如果库存不够返回失败 ClIENT_FORCE：强制要求最大化扣减，有多少扣多少 */
 func (r *InventoryAdjustExternalRequest) SetReduceType(value string) {
 	r.SetValue("reduce_type", value)
@@ -2824,6 +3208,7 @@ func (r *InventoryAdjustExternalRequest) SetReduceType(value string) {
 func (r *InventoryAdjustExternalRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
+
 
 func (r *InventoryAdjustExternalRequest) GetResponse(accessToken string) (*InventoryAdjustExternalResponse, []byte, error) {
 	var resp InventoryAdjustExternalResponseResult
@@ -2835,18 +3220,23 @@ func (r *InventoryAdjustExternalRequest) GetResponse(accessToken string) (*Inven
 }
 
 type InventoryAdjustExternalResponse struct {
-	OperateCode string     `json:"operate_code"`
-	TipInfos    []*TipInfo `json:"tip_infos"`
+	OperateCode string `json:"operate_code"`
+	TipInfos []*TipInfo `json:"tip_infos"`
 }
 
 type InventoryAdjustExternalResponseResult struct {
 	Response *InventoryAdjustExternalResponse `json:"inventory_adjust_external_response"`
 }
 
+
+
+
+
 /* 商家交易调整库存，淘宝交易、B2B经销等 */
 type InventoryAdjustTradeRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商家外部定单号 */
 func (r *InventoryAdjustTradeRequest) SetBizUniqueCode(value string) {
@@ -2868,6 +3258,7 @@ func (r *InventoryAdjustTradeRequest) SetTbOrderType(value string) {
 	r.SetValue("tb_order_type", value)
 }
 
+
 func (r *InventoryAdjustTradeRequest) GetResponse(accessToken string) (*InventoryAdjustTradeResponse, []byte, error) {
 	var resp InventoryAdjustTradeResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.adjust.trade", &resp)
@@ -2878,18 +3269,23 @@ func (r *InventoryAdjustTradeRequest) GetResponse(accessToken string) (*Inventor
 }
 
 type InventoryAdjustTradeResponse struct {
-	OperateCode string     `json:"operate_code"`
-	TipInfos    []*TipInfo `json:"tip_infos"`
+	OperateCode string `json:"operate_code"`
+	TipInfos []*TipInfo `json:"tip_infos"`
 }
 
 type InventoryAdjustTradeResponseResult struct {
 	Response *InventoryAdjustTradeResponse `json:"inventory_adjust_trade_response"`
 }
 
+
+
+
+
 /* 根据授权结果码获取授权状况 */
 type InventoryAuthorizeGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 库存分配授权结果码 */
 func (r *InventoryAuthorizeGetRequest) SetAuthorizeCode(value string) {
@@ -2905,6 +3301,7 @@ func (r *InventoryAuthorizeGetRequest) SetScItemId(value string) {
 func (r *InventoryAuthorizeGetRequest) SetUserNickList(value string) {
 	r.SetValue("user_nick_list", value)
 }
+
 
 func (r *InventoryAuthorizeGetRequest) GetResponse(accessToken string) (*InventoryAuthorizeGetResponse, []byte, error) {
 	var resp InventoryAuthorizeGetResponseResult
@@ -2923,10 +3320,15 @@ type InventoryAuthorizeGetResponseResult struct {
 	Response *InventoryAuthorizeGetResponse `json:"inventory_authorize_get_response"`
 }
 
+
+
+
+
 /* 货主根据多个商品列表获取每个商品的授权明细 */
 type InventoryAuthorizeGetallRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品编码列表，使用”,”分割多个号码，最大50个 */
 func (r *InventoryAuthorizeGetallRequest) SetScItemIdList(value string) {
@@ -2937,6 +3339,7 @@ func (r *InventoryAuthorizeGetallRequest) SetScItemIdList(value string) {
 func (r *InventoryAuthorizeGetallRequest) SetStoreCodeList(value string) {
 	r.SetValue("store_code_list", value)
 }
+
 
 func (r *InventoryAuthorizeGetallRequest) GetResponse(accessToken string) (*InventoryAuthorizeGetallResponse, []byte, error) {
 	var resp InventoryAuthorizeGetallResponseResult
@@ -2955,10 +3358,15 @@ type InventoryAuthorizeGetallResponseResult struct {
 	Response *InventoryAuthorizeGetallResponse `json:"inventory_authorize_getall_response"`
 }
 
+
+
+
+
 /* 根据库存授权结果码移除该授权下的用户库存授权 */
 type InventoryAuthorizeRemoveRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 库存授权结果码 */
 func (r *InventoryAuthorizeRemoveRequest) SetAuthorizeCode(value string) {
@@ -2974,6 +3382,7 @@ func (r *InventoryAuthorizeRemoveRequest) SetScItemId(value string) {
 func (r *InventoryAuthorizeRemoveRequest) SetUserNickList(value string) {
 	r.SetValue("user_nick_list", value)
 }
+
 
 func (r *InventoryAuthorizeRemoveRequest) GetResponse(accessToken string) (*InventoryAuthorizeRemoveResponse, []byte, error) {
 	var resp InventoryAuthorizeRemoveResponseResult
@@ -2992,10 +3401,15 @@ type InventoryAuthorizeRemoveResponseResult struct {
 	Response *InventoryAuthorizeRemoveResponse `json:"inventory_authorize_remove_response"`
 }
 
+
+
+
+
 /* 移除该授权下的用户库存授权 */
 type InventoryAuthorizeRemoveallRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 后端商品id */
 func (r *InventoryAuthorizeRemoveallRequest) SetScItemId(value string) {
@@ -3006,6 +3420,7 @@ func (r *InventoryAuthorizeRemoveallRequest) SetScItemId(value string) {
 func (r *InventoryAuthorizeRemoveallRequest) SetUserNickList(value string) {
 	r.SetValue("user_nick_list", value)
 }
+
 
 func (r *InventoryAuthorizeRemoveallRequest) GetResponse(accessToken string) (*InventoryAuthorizeRemoveallResponse, []byte, error) {
 	var resp InventoryAuthorizeRemoveallResponseResult
@@ -3024,24 +3439,30 @@ type InventoryAuthorizeRemoveallResponseResult struct {
 	Response *InventoryAuthorizeRemoveallResponse `json:"inventory_authorize_removeall_response"`
 }
 
+
+
+
+
 /* 商家向其他用户设置配额库存的共享或者独享，支持到渠道，商家自定义库存类别 */
 type InventoryAuthorizeSetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 配额授权方式
-PUBLIC: 全共享
+
+/* 配额授权方式  
+PUBLIC: 全共享 
 PRIVATE:独享 */
 func (r *InventoryAuthorizeSetRequest) SetAuthorizeType(value string) {
 	r.SetValue("authorize_type", value)
 }
 
-/* 授权明细
-[{“index”:0,“scItemId”:232323,”scItemCode”:”A232”,”storeCode”:”Kj11”,”inventoryType”:1,”channelFlag”:0,”quotaQuantity”:1000,”nickNameList”:”s108,TY000”，“nickName":"ca11"}]
+/* 授权明细 
+[{“index”:0,“scItemId”:232323,”scItemCode”:”A232”,”storeCode”:”Kj11”,”inventoryType”:1,”channelFlag”:0,”quotaQuantity”:1000,”nickNameList”:”s108,TY000”，“nickName":"ca11"}] 
 每次请求的列表数据量是1条，如果authorize_type是PUBLIC,使用nickNameList，否则请用nickName */
 func (r *InventoryAuthorizeSetRequest) SetItems(value string) {
 	r.SetValue("items", value)
 }
+
 
 func (r *InventoryAuthorizeSetRequest) GetResponse(accessToken string) (*InventoryAuthorizeSetResponse, []byte, error) {
 	var resp InventoryAuthorizeSetResponseResult
@@ -3054,17 +3475,65 @@ func (r *InventoryAuthorizeSetRequest) GetResponse(accessToken string) (*Invento
 
 type InventoryAuthorizeSetResponse struct {
 	AuthorizeResults []*InventoryAuthorizeInfo `json:"authorize_results"`
-	TipInfos         []*TipInfo                `json:"tip_infos"`
+	TipInfos []*TipInfo `json:"tip_infos"`
 }
 
 type InventoryAuthorizeSetResponseResult struct {
 	Response *InventoryAuthorizeSetResponse `json:"inventory_authorize_set_response"`
 }
 
+
+
+
+
+/* 对已经授权的配额账户进行配额数量的更改； */
+type InventoryAuthorizeUpdateRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 库存授权配额编码 */
+func (r *InventoryAuthorizeUpdateRequest) SetAuthorizeCode(value string) {
+	r.SetValue("authorize_code", value)
+}
+
+/* 期望更新后的配额账户库存数(全量覆盖) */
+func (r *InventoryAuthorizeUpdateRequest) SetQuantity(value string) {
+	r.SetValue("quantity", value)
+}
+
+/* 后端商品id */
+func (r *InventoryAuthorizeUpdateRequest) SetScItemId(value string) {
+	r.SetValue("sc_item_id", value)
+}
+
+
+func (r *InventoryAuthorizeUpdateRequest) GetResponse(accessToken string) (*InventoryAuthorizeUpdateResponse, []byte, error) {
+	var resp InventoryAuthorizeUpdateResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.authorize.update", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type InventoryAuthorizeUpdateResponse struct {
+	TipInfos []*TipInfo `json:"tip_infos"`
+}
+
+type InventoryAuthorizeUpdateResponseResult struct {
+	Response *InventoryAuthorizeUpdateResponse `json:"inventory_authorize_update_response"`
+}
+
+
+
+
+
 /* 商家仓库存初始化接口，直接按照商家指定的商品库存数进行填充，没有单据核对，不参与库存对账 */
 type InventoryInitialRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品初始库存信息： [{"scItemId":"商品后端ID，如果有传scItemCode,参数可以为0","scItemCode":"商品商家编码","inventoryType":"库存类型  1：正常,2：损坏,3：冻结,10：质押,11-20:用户自定义","quantity":"数量"}] */
 func (r *InventoryInitialRequest) SetItems(value string) {
@@ -3075,6 +3544,7 @@ func (r *InventoryInitialRequest) SetItems(value string) {
 func (r *InventoryInitialRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
+
 
 func (r *InventoryInitialRequest) GetResponse(accessToken string) (*InventoryInitialResponse, []byte, error) {
 	var resp InventoryInitialResponseResult
@@ -3093,10 +3563,15 @@ type InventoryInitialResponseResult struct {
 	Response *InventoryInitialResponse `json:"inventory_initial_response"`
 }
 
+
+
+
+
 /* 商家仓商品初始化在各个仓中库存 */
 type InventoryInitialItemRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 后端商品id */
 func (r *InventoryInitialItemRequest) SetScItemId(value string) {
@@ -3107,6 +3582,7 @@ func (r *InventoryInitialItemRequest) SetScItemId(value string) {
 func (r *InventoryInitialItemRequest) SetStoreInventorys(value string) {
 	r.SetValue("store_inventorys", value)
 }
+
 
 func (r *InventoryInitialItemRequest) GetResponse(accessToken string) (*InventoryInitialItemResponse, []byte, error) {
 	var resp InventoryInitialItemResponseResult
@@ -3125,107 +3601,64 @@ type InventoryInitialItemResponseResult struct {
 	Response *InventoryInitialItemResponse `json:"inventory_initial_item_response"`
 }
 
-/* 商家申请预留库存 */
-type InventoryOccupyApplyRequest struct {
+
+
+
+
+/* 库存占用调整 */
+type InventoryOccupyAdjustRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 外部订单类型, BALANCE:盘点、NON_TAOBAO_TRADE:非淘宝交易、ALLOCATE:调拨、OTHERS:其他 */
-func (r *InventoryOccupyApplyRequest) SetBizType(value string) {
-	r.SetValue("biz_type", value)
-}
 
-/* 商家外部定单号 */
-func (r *InventoryOccupyApplyRequest) SetBizUniqueCode(value string) {
+/* 商家外部订单号 */
+func (r *InventoryOccupyAdjustRequest) SetBizUniqueCode(value string) {
 	r.SetValue("biz_unique_code", value)
 }
 
-/* 渠道编号 */
-func (r *InventoryOccupyApplyRequest) SetChannelFlags(value string) {
-	r.SetValue("channel_flags", value)
-}
-
-/* 商品库存预留信息： [{"scItemId":"商品后端ID，如果有传scItemCode,参数可以为0","scItemCode":"商品商家编码","inventoryType":"库存类型  1：正常,2：损坏,3：冻结,10：质押",11-20:商家自定义,”inventoryTypeName”:”库存类型名称,可选”,"occupyQuantity":"数量"}] */
-func (r *InventoryOccupyApplyRequest) SetItems(value string) {
+/* 商品初始库存信息： [{ "TBOrderCode":"淘宝交易号","TBSubOrderCode ":"淘宝子交易单号","originalStoreCode":"交易下单的仓库编码","storeCode":"要切换占用到的商家仓库编码"," scItemId ":"商品后端ID","scItemCode":"商品商家编码","inventoryType":"仓储类型","quantity":"新仓库的占用数量，如果不传，则取用原先的占用数"}] */
+func (r *InventoryOccupyAdjustRequest) SetItems(value string) {
 	r.SetValue("items", value)
 }
 
-/* 天数，默认5天，最大15天 */
-func (r *InventoryOccupyApplyRequest) SetOccupyTime(value string) {
-	r.SetValue("occupy_time", value)
+/* 业务操作时间 */
+func (r *InventoryOccupyAdjustRequest) SetOperateTime(value string) {
+	r.SetValue("operate_time", value)
 }
 
-/* 占用类型
-参数定义
-AUTO_CALCULATE:自动计算可供占用，如果库存不够返回失败 ClIENT_FORCE：强制要求最大化占用，有多少占用多少 */
-func (r *InventoryOccupyApplyRequest) SetOccupyType(value string) {
-	r.SetValue("occupy_type", value)
+/* 订单类型：B2C、B2B */
+func (r *InventoryOccupyAdjustRequest) SetTbOrderType(value string) {
+	r.SetValue("tb_order_type", value)
 }
 
-/* 商家仓库编码 */
-func (r *InventoryOccupyApplyRequest) SetStoreCode(value string) {
-	r.SetValue("store_code", value)
-}
 
-func (r *InventoryOccupyApplyRequest) GetResponse(accessToken string) (*InventoryOccupyApplyResponse, []byte, error) {
-	var resp InventoryOccupyApplyResponseResult
-	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.occupy.apply", &resp)
+func (r *InventoryOccupyAdjustRequest) GetResponse(accessToken string) (*InventoryOccupyAdjustResponse, []byte, error) {
+	var resp InventoryOccupyAdjustResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.occupy.adjust", &resp)
 	if err != nil {
 		return nil, data, err
 	}
 	return resp.Response, data, err
 }
 
-type InventoryOccupyApplyResponse struct {
-	OperateCode string     `json:"operate_code"`
-	TipInfos    []*TipInfo `json:"tip_infos"`
+type InventoryOccupyAdjustResponse struct {
+	OperateCode string `json:"operate_code"`
+	TipInfos []*TipInfo `json:"tip_infos"`
 }
 
-type InventoryOccupyApplyResponseResult struct {
-	Response *InventoryOccupyApplyResponse `json:"inventory_occupy_apply_response"`
+type InventoryOccupyAdjustResponseResult struct {
+	Response *InventoryOccupyAdjustResponse `json:"inventory_occupy_adjust_response"`
 }
 
-/* 商家取消预留库存 */
-type InventoryOccupyCancelRequest struct {
-	open_taobao.TaobaoMethodRequest
-}
 
-/* 商家外部定单号 */
-func (r *InventoryOccupyCancelRequest) SetBizUniqueCode(value string) {
-	r.SetValue("biz_unique_code", value)
-}
 
-/* 申请预留时的操作返回码 */
-func (r *InventoryOccupyCancelRequest) SetOperateCode(value string) {
-	r.SetValue("operate_code", value)
-}
 
-/* 商家仓库编码 */
-func (r *InventoryOccupyCancelRequest) SetStoreCode(value string) {
-	r.SetValue("store_code", value)
-}
-
-func (r *InventoryOccupyCancelRequest) GetResponse(accessToken string) (*InventoryOccupyCancelResponse, []byte, error) {
-	var resp InventoryOccupyCancelResponseResult
-	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.occupy.cancel", &resp)
-	if err != nil {
-		return nil, data, err
-	}
-	return resp.Response, data, err
-}
-
-type InventoryOccupyCancelResponse struct {
-	IsSuccess bool `json:"is_success"`
-}
-
-type InventoryOccupyCancelResponseResult struct {
-	Response *InventoryOccupyCancelResponse `json:"inventory_occupy_cancel_response"`
-}
 
 /* 商家查询商品总体库存信息 */
 type InventoryQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 后端商品的商家编码列表，控制到50个 */
 func (r *InventoryQueryRequest) SetScItemCodes(value string) {
@@ -3247,6 +3680,7 @@ func (r *InventoryQueryRequest) SetStoreCodes(value string) {
 	r.SetValue("store_codes", value)
 }
 
+
 func (r *InventoryQueryRequest) GetResponse(accessToken string) (*InventoryQueryResponse, []byte, error) {
 	var resp InventoryQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.query", &resp)
@@ -3258,17 +3692,22 @@ func (r *InventoryQueryRequest) GetResponse(accessToken string) (*InventoryQuery
 
 type InventoryQueryResponse struct {
 	ItemInventorys []*InventorySum `json:"item_inventorys"`
-	TipInfos       []*TipInfo      `json:"tip_infos"`
+	TipInfos []*TipInfo `json:"tip_infos"`
 }
 
 type InventoryQueryResponseResult struct {
 	Response *InventoryQueryResponse `json:"inventory_query_response"`
 }
 
+
+
+
+
 /* 创建商家仓或者更新商家仓信息 */
 type InventoryStoreManageRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 仓库的物理地址，可更新 */
 func (r *InventoryStoreManageRequest) SetAddress(value string) {
@@ -3320,6 +3759,7 @@ func (r *InventoryStoreManageRequest) SetStoreType(value string) {
 	r.SetValue("store_type", value)
 }
 
+
 func (r *InventoryStoreManageRequest) GetResponse(accessToken string) (*InventoryStoreManageResponse, []byte, error) {
 	var resp InventoryStoreManageResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.store.manage", &resp)
@@ -3337,15 +3777,21 @@ type InventoryStoreManageResponseResult struct {
 	Response *InventoryStoreManageResponse `json:"inventory_store_manage_response"`
 }
 
+
+
+
+
 /* 查询商家仓信息 */
 type InventoryStoreQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 商家的仓库编码 */
 func (r *InventoryStoreQueryRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
+
 
 func (r *InventoryStoreQueryRequest) GetResponse(accessToken string) (*InventoryStoreQueryResponse, []byte, error) {
 	var resp InventoryStoreQueryResponseResult
@@ -3364,10 +3810,15 @@ type InventoryStoreQueryResponseResult struct {
 	Response *InventoryStoreQueryResponse `json:"inventory_store_query_response"`
 }
 
+
+
+
+
 /* 发布后端商品 */
 type ScitemAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 条形码 */
 func (r *ScitemAddRequest) SetBarCode(value string) {
@@ -3479,6 +3930,7 @@ func (r *ScitemAddRequest) SetWmsCode(value string) {
 	r.SetValue("wms_code", value)
 }
 
+
 func (r *ScitemAddRequest) GetResponse(accessToken string) (*ScitemAddResponse, []byte, error) {
 	var resp ScitemAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.scitem.add", &resp)
@@ -3496,15 +3948,21 @@ type ScitemAddResponseResult struct {
 	Response *ScitemAddResponse `json:"scitem_add_response"`
 }
 
+
+
+
+
 /* 根据id查询商品 */
 type ScitemGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 商品id */
 func (r *ScitemGetRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
+
 
 func (r *ScitemGetRequest) GetResponse(accessToken string) (*ScitemGetResponse, []byte, error) {
 	var resp ScitemGetResponseResult
@@ -3523,18 +3981,23 @@ type ScitemGetResponseResult struct {
 	Response *ScitemGetResponse `json:"scitem_get_response"`
 }
 
+
+
+
+
 /* 创建IC商品或分销商品与后端商品的映射关系 */
 type ScitemMapAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 前台ic商品id */
 func (r *ScitemMapAddRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
 
-/* 默认值为false
-true:进行高级校验,前端商品或SKU的商家编码必须与后端商品的商家编码一致，否则会拒绝关联
+/* 默认值为false 
+true:进行高级校验,前端商品或SKU的商家编码必须与后端商品的商家编码一致，否则会拒绝关联 
 false:不进行高级校验 */
 func (r *ScitemMapAddRequest) SetNeedCheck(value string) {
 	r.SetValue("need_check", value)
@@ -3555,6 +4018,7 @@ func (r *ScitemMapAddRequest) SetSkuId(value string) {
 	r.SetValue("sku_id", value)
 }
 
+
 func (r *ScitemMapAddRequest) GetResponse(accessToken string) (*ScitemMapAddResponse, []byte, error) {
 	var resp ScitemMapAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.scitem.map.add", &resp)
@@ -3572,10 +4036,15 @@ type ScitemMapAddResponseResult struct {
 	Response *ScitemMapAddResponse `json:"scitem_map_add_response"`
 }
 
+
+
+
+
 /* 批量分页查询后端商品对应的前端商品 */
 type ScitemMapBatchQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 后端商品的商家编码 */
 func (r *ScitemMapBatchQueryRequest) SetOuterCode(value string) {
@@ -3597,6 +4066,7 @@ func (r *ScitemMapBatchQueryRequest) SetScItemId(value string) {
 	r.SetValue("sc_item_id", value)
 }
 
+
 func (r *ScitemMapBatchQueryRequest) GetResponse(accessToken string) (*ScitemMapBatchQueryResponse, []byte, error) {
 	var resp ScitemMapBatchQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.scitem.map.batch.query", &resp)
@@ -3614,10 +4084,15 @@ type ScitemMapBatchQueryResponseResult struct {
 	Response *ScitemMapBatchQueryResponse `json:"scitem_map_batch_query_response"`
 }
 
+
+
+
+
 /* 根据后端商品Id，失效指定用户的商品与后端商品的映射关系 */
 type ScitemMapDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 后台商品ID */
 func (r *ScitemMapDeleteRequest) SetScItemId(value string) {
@@ -3628,6 +4103,7 @@ func (r *ScitemMapDeleteRequest) SetScItemId(value string) {
 func (r *ScitemMapDeleteRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *ScitemMapDeleteRequest) GetResponse(accessToken string) (*ScitemMapDeleteResponse, []byte, error) {
 	var resp ScitemMapDeleteResponseResult
@@ -3646,22 +4122,28 @@ type ScitemMapDeleteResponseResult struct {
 	Response *ScitemMapDeleteResponse `json:"scitem_map_delete_response"`
 }
 
+
+
+
+
 /* 查找IC商品或分销商品与后端商品的关联信息。skuId如果不传就查找该itemId下所有的sku */
 type ScitemMapQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* map_type为1：前台ic商品id
+
+/* map_type为1：前台ic商品id 
 map_type为2：分销productid */
 func (r *ScitemMapQueryRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
 
-/* map_type为1：前台ic商品skuid
+/* map_type为1：前台ic商品skuid  
 map_type为2：分销商品的skuid */
 func (r *ScitemMapQueryRequest) SetSkuId(value string) {
 	r.SetValue("sku_id", value)
 }
+
 
 func (r *ScitemMapQueryRequest) GetResponse(accessToken string) (*ScitemMapQueryResponse, []byte, error) {
 	var resp ScitemMapQueryResponseResult
@@ -3680,15 +4162,21 @@ type ScitemMapQueryResponseResult struct {
 	Response *ScitemMapQueryResponse `json:"scitem_map_query_response"`
 }
 
+
+
+
+
 /* 根据outerCode查询商品 */
 type ScitemOutercodeGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 商品编码 */
 func (r *ScitemOutercodeGetRequest) SetOuterCode(value string) {
 	r.SetValue("outer_code", value)
 }
+
 
 func (r *ScitemOutercodeGetRequest) GetResponse(accessToken string) (*ScitemOutercodeGetResponse, []byte, error) {
 	var resp ScitemOutercodeGetResponseResult
@@ -3707,10 +4195,15 @@ type ScitemOutercodeGetResponseResult struct {
 	Response *ScitemOutercodeGetResponse `json:"scitem_outercode_get_response"`
 }
 
+
+
+
+
 /* 查询后端商品 */
 type ScitemQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 条形码 */
 func (r *ScitemQueryRequest) SetBarCode(value string) {
@@ -3747,6 +4240,7 @@ func (r *ScitemQueryRequest) SetWmsCode(value string) {
 	r.SetValue("wms_code", value)
 }
 
+
 func (r *ScitemQueryRequest) GetResponse(accessToken string) (*ScitemQueryResponse, []byte, error) {
 	var resp ScitemQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.scitem.query", &resp)
@@ -3757,21 +4251,26 @@ func (r *ScitemQueryRequest) GetResponse(accessToken string) (*ScitemQueryRespon
 }
 
 type ScitemQueryResponse struct {
-	PageIndex       int              `json:"page_index"`
-	PageSize        int              `json:"page_size"`
+	PageIndex int `json:"page_index"`
+	PageSize int `json:"page_size"`
 	QueryPagination *QueryPagination `json:"query_pagination"`
-	ScItemList      []*ScItem        `json:"sc_item_list"`
-	TotalPage       int              `json:"total_page"`
+	ScItemList []*ScItem `json:"sc_item_list"`
+	TotalPage int `json:"total_page"`
 }
 
 type ScitemQueryResponseResult struct {
 	Response *ScitemQueryResponse `json:"scitem_query_response"`
 }
 
+
+
+
+
 /* 根据商品ID或商家编码修改后端商品 */
 type ScitemUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 条形码 */
 func (r *ScitemUpdateRequest) SetBarCode(value string) {
@@ -3893,6 +4392,7 @@ func (r *ScitemUpdateRequest) SetWmsCode(value string) {
 	r.SetValue("wms_code", value)
 }
 
+
 func (r *ScitemUpdateRequest) GetResponse(accessToken string) (*ScitemUpdateResponse, []byte, error) {
 	var resp ScitemUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.scitem.update", &resp)
@@ -3910,25 +4410,30 @@ type ScitemUpdateResponseResult struct {
 	Response *ScitemUpdateResponse `json:"scitem_update_response"`
 }
 
+
+
+
+
 /* 异步获取历史分销订单, 查询从昨天到3个月内的分销订单数据。所有数据根据gmt_create 降序排序 */
 type TopatsFenxiaoOrdersGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 结束时间 格式 yyyyMMdd表示yyyy-MM-dd 00:00:00.开始与结束时间不能超过90天。 */
 func (r *TopatsFenxiaoOrdersGetRequest) SetEndCreated(value string) {
 	r.SetValue("end_created", value)
 }
 
-/* 多个字段用","分隔。
-
-fields
-如果为空：返回所有采购单对象(purchase_orders)字段。
-如果不为空：返回指定采购单对象(purchase_orders)字段。
-
-例1：
-sub_purchase_orders.tc_order_id 表示只返回tc_order_id
-例2：
+/* 多个字段用","分隔。 
+ 
+fields 
+如果为空：返回所有采购单对象(purchase_orders)字段。 
+如果不为空：返回指定采购单对象(purchase_orders)字段。 
+ 
+例1： 
+sub_purchase_orders.tc_order_id 表示只返回tc_order_id  
+例2： 
 sub_purchase_orders表示只返回子采购单列表 */
 func (r *TopatsFenxiaoOrdersGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
@@ -3943,6 +4448,7 @@ func (r *TopatsFenxiaoOrdersGetRequest) SetStartCreated(value string) {
 func (r *TopatsFenxiaoOrdersGetRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
+
 
 func (r *TopatsFenxiaoOrdersGetRequest) GetResponse(accessToken string) (*TopatsFenxiaoOrdersGetResponse, []byte, error) {
 	var resp TopatsFenxiaoOrdersGetResponseResult
@@ -3961,10 +4467,15 @@ type TopatsFenxiaoOrdersGetResponseResult struct {
 	Response *TopatsFenxiaoOrdersGetResponse `json:"topats_fenxiao_orders_get_response"`
 }
 
+
+
+
+
 /* 查询库存明细 */
 type InventoryIpcInventorydetailGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 主订单号，可选 */
 func (r *InventoryIpcInventorydetailGetRequest) SetBizOrderId(value string) {
@@ -3996,6 +4507,7 @@ func (r *InventoryIpcInventorydetailGetRequest) SetStatusQuery(value string) {
 	r.SetValue("status_query", value)
 }
 
+
 func (r *InventoryIpcInventorydetailGetRequest) GetResponse(accessToken string) (*InventoryIpcInventorydetailGetResponse, []byte, error) {
 	var resp InventoryIpcInventorydetailGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.ipc.inventorydetail.get", &resp)
@@ -4012,3 +4524,6 @@ type InventoryIpcInventorydetailGetResponse struct {
 type InventoryIpcInventorydetailGetResponseResult struct {
 	Response *InventoryIpcInventorydetailGetResponse `json:"inventory_ipc_inventorydetail_get_response"`
 }
+
+
+

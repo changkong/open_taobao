@@ -8,10 +8,15 @@ import (
 	"github.com/changkong/open_taobao"
 )
 
+
+
+
+
 /* 商品指标查询 */
 type UdpItemGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 地区ID */
 func (r *UdpItemGetRequest) SetArea(value string) {
@@ -73,6 +78,7 @@ func (r *UdpItemGetRequest) SetSource(value string) {
 	r.SetValue("source", value)
 }
 
+
 func (r *UdpItemGetRequest) GetResponse(accessToken string) (*UdpItemGetResponse, []byte, error) {
 	var resp UdpItemGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.udp.item.get", &resp)
@@ -90,10 +96,15 @@ type UdpItemGetResponseResult struct {
 	Response *UdpItemGetResponse `json:"udp_item_get_response"`
 }
 
+
+
+
+
 /* 聚划算指标查询 */
 type UdpJuhuasuanGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 开始时间 */
 func (r *UdpJuhuasuanGetRequest) SetBeginTime(value string) {
@@ -125,6 +136,7 @@ func (r *UdpJuhuasuanGetRequest) SetParameters(value string) {
 	r.SetValue("parameters", value)
 }
 
+
 func (r *UdpJuhuasuanGetRequest) GetResponse(accessToken string) (*UdpJuhuasuanGetResponse, []byte, error) {
 	var resp UdpJuhuasuanGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.udp.juhuasuan.get", &resp)
@@ -142,10 +154,15 @@ type UdpJuhuasuanGetResponseResult struct {
 	Response *UdpJuhuasuanGetResponse `json:"udp_juhuasuan_get_response"`
 }
 
+
+
+
+
 /* 店铺指标查询 */
 type UdpShopGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 地区ID(参阅地区编号) */
 func (r *UdpShopGetRequest) SetArea(value string) {
@@ -172,6 +189,7 @@ func (r *UdpShopGetRequest) SetParameters(value string) {
 	r.SetValue("parameters", value)
 }
 
+
 func (r *UdpShopGetRequest) GetResponse(accessToken string) (*UdpShopGetResponse, []byte, error) {
 	var resp UdpShopGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.udp.shop.get", &resp)
@@ -188,3 +206,6 @@ type UdpShopGetResponse struct {
 type UdpShopGetResponseResult struct {
 	Response *UdpShopGetResponse `json:"udp_shop_get_response"`
 }
+
+
+

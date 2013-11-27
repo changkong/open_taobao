@@ -8,11 +8,16 @@ import (
 	"github.com/changkong/open_taobao"
 )
 
-/* 服务商通过使用该接口来产生营销链接，通过把这种链接发送给商家来做自定义人群的服务营销<br>
+
+
+
+
+/* 服务商通过使用该接口来产生营销链接，通过把这种链接发送给商家来做自定义人群的服务营销<br> 
 注：session是param_str这个参数串创建者生成的session，这个创建者与入参中的nick是不一致的。例如：A开发者创建了一个param_str的字符串，要为B商家生成一个营销链接，session必须是A开发者创建的session。 */
 type FuwuSaleLinkGenRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 用户需要营销的目标人群中的用户nick */
 func (r *FuwuSaleLinkGenRequest) SetNick(value string) {
@@ -23,6 +28,7 @@ func (r *FuwuSaleLinkGenRequest) SetNick(value string) {
 func (r *FuwuSaleLinkGenRequest) SetParamStr(value string) {
 	r.SetValue("param_str", value)
 }
+
 
 func (r *FuwuSaleLinkGenRequest) GetResponse(accessToken string) (*FuwuSaleLinkGenResponse, []byte, error) {
 	var resp FuwuSaleLinkGenResponseResult
@@ -41,12 +47,18 @@ type FuwuSaleLinkGenResponseResult struct {
 	Response *FuwuSaleLinkGenResponse `json:"fuwu_sale_link_gen_response"`
 }
 
-/* 用于ISV查询自己名下的应用及收费项目的订单记录（已付款订单）。
-建议用于查询前一日的历史记录，不适合用作实时数据查询。
+
+
+
+
+/* 用于ISV查询自己名下的应用及收费项目的订单记录（已付款订单）。 
+建议用于查询前一日的历史记录，不适合用作实时数据查询。 
+现在只能查询90天以内的数据 
 该接口限制每分钟所有appkey调用总和只能有800次。 */
 type VasOrderSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 应用收费代码，从合作伙伴后台（my.open.taobao.com）-收费管理-收费项目列表 能够获得该应用的收费代码 */
 func (r *VasOrderSearchRequest) SetArticleCode(value string) {
@@ -98,6 +110,7 @@ func (r *VasOrderSearchRequest) SetStartCreated(value string) {
 	r.SetValue("start_created", value)
 }
 
+
 func (r *VasOrderSearchRequest) GetResponse(accessToken string) (*VasOrderSearchResponse, []byte, error) {
 	var resp VasOrderSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.vas.order.search", &resp)
@@ -109,17 +122,22 @@ func (r *VasOrderSearchRequest) GetResponse(accessToken string) (*VasOrderSearch
 
 type VasOrderSearchResponse struct {
 	ArticleBizOrders []*ArticleBizOrder `json:"article_biz_orders"`
-	TotalItem        int                `json:"total_item"`
+	TotalItem int `json:"total_item"`
 }
 
 type VasOrderSearchResponseResult struct {
 	Response *VasOrderSearchResponse `json:"vas_order_search_response"`
 }
 
+
+
+
+
 /* 用于ISV查询自己名下的应用及收费项目的订购记录 */
 type VasSubscSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 应用收费代码，从合作伙伴后台（my.open.taobao.com）-收费管理-收费项目列表 能够获得该应用的收费代码 */
 func (r *VasSubscSearchRequest) SetArticleCode(value string) {
@@ -171,6 +189,7 @@ func (r *VasSubscSearchRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
 
+
 func (r *VasSubscSearchRequest) GetResponse(accessToken string) (*VasSubscSearchResponse, []byte, error) {
 	var resp VasSubscSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.vas.subsc.search", &resp)
@@ -182,17 +201,22 @@ func (r *VasSubscSearchRequest) GetResponse(accessToken string) (*VasSubscSearch
 
 type VasSubscSearchResponse struct {
 	ArticleSubs []*ArticleSub `json:"article_subs"`
-	TotalItem   int           `json:"total_item"`
+	TotalItem int `json:"total_item"`
 }
 
 type VasSubscSearchResponseResult struct {
 	Response *VasSubscSearchResponse `json:"vas_subsc_search_response"`
 }
 
+
+
+
+
 /* 用于ISV根据登录进来的淘宝会员名查询该为该会员开通哪些收费项目，ISV只能查询自己名下的应用及收费项目的订购情况 */
 type VasSubscribeGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 应用收费代码，从合作伙伴后台（my.open.taobao.com）-收费管理-收费项目列表 能够获得该应用的收费代码 */
 func (r *VasSubscribeGetRequest) SetArticleCode(value string) {
@@ -203,6 +227,7 @@ func (r *VasSubscribeGetRequest) SetArticleCode(value string) {
 func (r *VasSubscribeGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
+
 
 func (r *VasSubscribeGetRequest) GetResponse(accessToken string) (*VasSubscribeGetResponse, []byte, error) {
 	var resp VasSubscribeGetResponseResult
@@ -220,3 +245,6 @@ type VasSubscribeGetResponse struct {
 type VasSubscribeGetResponseResult struct {
 	Response *VasSubscribeGetResponse `json:"vas_subscribe_get_response"`
 }
+
+
+

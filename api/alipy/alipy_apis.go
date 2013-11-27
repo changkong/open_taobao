@@ -8,10 +8,15 @@ import (
 	"github.com/changkong/open_taobao"
 )
 
+
+
+
+
 /* 创建生活账单 */
 type AlipayEbppBillAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 如果传入调用api有淘宝授权的session可以不传这个字段 */
 func (r *AlipayEbppBillAddRequest) SetAuthToken(value string) {
@@ -78,6 +83,7 @@ func (r *AlipayEbppBillAddRequest) SetTrafficRegulations(value string) {
 	r.SetValue("traffic_regulations", value)
 }
 
+
 func (r *AlipayEbppBillAddRequest) GetResponse(accessToken string) (*AlipayEbppBillAddResponse, []byte, error) {
 	var resp AlipayEbppBillAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.ebpp.bill.add", &resp)
@@ -88,27 +94,32 @@ func (r *AlipayEbppBillAddRequest) GetResponse(accessToken string) (*AlipayEbppB
 }
 
 type AlipayEbppBillAddResponse struct {
-	AlipayOrderNo   string `json:"alipay_order_no"`
-	BillDate        string `json:"bill_date"`
-	BillKey         string `json:"bill_key"`
-	ChargeInst      string `json:"charge_inst"`
-	ChargeInstName  string `json:"charge_inst_name"`
+	AlipayOrderNo string `json:"alipay_order_no"`
+	BillDate string `json:"bill_date"`
+	BillKey string `json:"bill_key"`
+	ChargeInst string `json:"charge_inst"`
+	ChargeInstName string `json:"charge_inst_name"`
 	MerchantOrderNo string `json:"merchant_order_no"`
-	OrderType       string `json:"order_type"`
-	OwnerName       string `json:"owner_name"`
-	PayAmount       string `json:"pay_amount"`
-	ServiceAmount   string `json:"service_amount"`
-	SubOrderType    string `json:"sub_order_type"`
+	OrderType string `json:"order_type"`
+	OwnerName string `json:"owner_name"`
+	PayAmount string `json:"pay_amount"`
+	ServiceAmount string `json:"service_amount"`
+	SubOrderType string `json:"sub_order_type"`
 }
 
 type AlipayEbppBillAddResponseResult struct {
 	Response *AlipayEbppBillAddResponse `json:"alipay_ebpp_bill_add_response"`
 }
 
+
+
+
+
 /* 查询生活账单信息 */
 type AlipayEbppBillGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝授权凭证，如果有淘宝的session可以不传 */
 func (r *AlipayEbppBillGetRequest) SetAuthToken(value string) {
@@ -125,6 +136,7 @@ func (r *AlipayEbppBillGetRequest) SetOrderType(value string) {
 	r.SetValue("order_type", value)
 }
 
+
 func (r *AlipayEbppBillGetRequest) GetResponse(accessToken string) (*AlipayEbppBillGetResponse, []byte, error) {
 	var resp AlipayEbppBillGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.ebpp.bill.get", &resp)
@@ -135,30 +147,35 @@ func (r *AlipayEbppBillGetRequest) GetResponse(accessToken string) (*AlipayEbppB
 }
 
 type AlipayEbppBillGetResponse struct {
-	AlipayOrderNo      string  `json:"alipay_order_no"`
-	BillDate           string  `json:"bill_date"`
-	BillKey            string  `json:"bill_key"`
-	ChargeInst         string  `json:"charge_inst"`
-	ChargeInstName     string  `json:"charge_inst_name"`
-	MerchantOrderNo    string  `json:"merchant_order_no"`
-	OrderStatus        string  `json:"order_status"`
-	OrderType          string  `json:"order_type"`
-	OwnerName          string  `json:"owner_name"`
-	PayAmount          float64 `json:"pay_amount"`
-	ServiceAmount      float64 `json:"service_amount"`
-	SubOrderType       string  `json:"sub_order_type"`
-	TrafficLocation    string  `json:"traffic_location"`
-	TrafficRegulations string  `json:"traffic_regulations"`
+	AlipayOrderNo string `json:"alipay_order_no"`
+	BillDate string `json:"bill_date"`
+	BillKey string `json:"bill_key"`
+	ChargeInst string `json:"charge_inst"`
+	ChargeInstName string `json:"charge_inst_name"`
+	MerchantOrderNo string `json:"merchant_order_no"`
+	OrderStatus string `json:"order_status"`
+	OrderType string `json:"order_type"`
+	OwnerName string `json:"owner_name"`
+	PayAmount float64 `json:"pay_amount"`
+	ServiceAmount float64 `json:"service_amount"`
+	SubOrderType string `json:"sub_order_type"`
+	TrafficLocation string `json:"traffic_location"`
+	TrafficRegulations string `json:"traffic_regulations"`
 }
 
 type AlipayEbppBillGetResponseResult struct {
 	Response *AlipayEbppBillGetResponse `json:"alipay_ebpp_bill_get_response"`
 }
 
+
+
+
+
 /* 对生活账单进行支付接口 */
 type AlipayEbppBillPayRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝的业务订单号，具有唯一性。 */
 func (r *AlipayEbppBillPayRequest) SetAlipayOrderNo(value string) {
@@ -180,6 +197,7 @@ func (r *AlipayEbppBillPayRequest) SetOrderType(value string) {
 	r.SetValue("order_type", value)
 }
 
+
 func (r *AlipayEbppBillPayRequest) GetResponse(accessToken string) (*AlipayEbppBillPayResponse, []byte, error) {
 	var resp AlipayEbppBillPayResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.ebpp.bill.pay", &resp)
@@ -190,19 +208,24 @@ func (r *AlipayEbppBillPayRequest) GetResponse(accessToken string) (*AlipayEbppB
 }
 
 type AlipayEbppBillPayResponse struct {
-	AlipayOrderNo   string `json:"alipay_order_no"`
+	AlipayOrderNo string `json:"alipay_order_no"`
 	MerchantOrderNo string `json:"merchant_order_no"`
-	OrderType       string `json:"order_type"`
+	OrderType string `json:"order_type"`
 }
 
 type AlipayEbppBillPayResponseResult struct {
 	Response *AlipayEbppBillPayResponse `json:"alipay_ebpp_bill_pay_response"`
 }
 
+
+
+
+
 /* 创建账单之后，调用此API返回一个用户自己去收银台付款的URL，用户去收银台页面完成付款操作。 */
 type AlipayEbppBillPayurlGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝的业务订单号，具有唯一性。 */
 func (r *AlipayEbppBillPayurlGetRequest) SetAlipayOrderNo(value string) {
@@ -224,6 +247,7 @@ func (r *AlipayEbppBillPayurlGetRequest) SetOrderType(value string) {
 	r.SetValue("order_type", value)
 }
 
+
 func (r *AlipayEbppBillPayurlGetRequest) GetResponse(accessToken string) (*AlipayEbppBillPayurlGetResponse, []byte, error) {
 	var resp AlipayEbppBillPayurlGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.ebpp.bill.payurl.get", &resp)
@@ -241,11 +265,16 @@ type AlipayEbppBillPayurlGetResponseResult struct {
 	Response *AlipayEbppBillPayurlGetResponse `json:"alipay_ebpp_bill_payurl_get_response"`
 }
 
-/* 创建并支付冻结单之后，使用此接口获取有密支付的url
+
+
+
+
+/* 创建并支付冻结单之后，使用此接口获取有密支付的url 
 这个接口调用的前提是创建冻结金的参数信息pay_confirm=PAY_PASSWORD */
 type AlipayMicropayOrderConfirmpayurlGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝订单号，冻结流水号.这个是创建冻结订单支付宝返回的 */
 func (r *AlipayMicropayOrderConfirmpayurlGetRequest) SetAlipayOrderNo(value string) {
@@ -277,6 +306,7 @@ func (r *AlipayMicropayOrderConfirmpayurlGetRequest) SetTransferOutOrderNo(value
 	r.SetValue("transfer_out_order_no", value)
 }
 
+
 func (r *AlipayMicropayOrderConfirmpayurlGetRequest) GetResponse(accessToken string) (*AlipayMicropayOrderConfirmpayurlGetResponse, []byte, error) {
 	var resp AlipayMicropayOrderConfirmpayurlGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.micropay.order.confirmpayurl.get", &resp)
@@ -294,11 +324,16 @@ type AlipayMicropayOrderConfirmpayurlGetResponseResult struct {
 	Response *AlipayMicropayOrderConfirmpayurlGetResponse `json:"alipay_micropay_order_confirmpayurl_get_response"`
 }
 
-/* 1.	创建并支付一笔冻结金后，调用此接口
+
+
+
+
+/* 1.	创建并支付一笔冻结金后，调用此接口 
 2.	这个接口调用的前提是创建冻结金的参数信息pay_confirm=NO_CONFIRM */
 type AlipayMicropayOrderDirectPayRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝订单号，冻结流水号.这个是创建冻结订单支付宝返回的 */
 func (r *AlipayMicropayOrderDirectPayRequest) SetAlipayOrderNo(value string) {
@@ -330,6 +365,7 @@ func (r *AlipayMicropayOrderDirectPayRequest) SetTransferOutOrderNo(value string
 	r.SetValue("transfer_out_order_no", value)
 }
 
+
 func (r *AlipayMicropayOrderDirectPayRequest) GetResponse(accessToken string) (*AlipayMicropayOrderDirectPayResponse, []byte, error) {
 	var resp AlipayMicropayOrderDirectPayResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.micropay.order.direct.pay", &resp)
@@ -347,10 +383,15 @@ type AlipayMicropayOrderDirectPayResponseResult struct {
 	Response *AlipayMicropayOrderDirectPayResponse `json:"alipay_micropay_order_direct_pay_response"`
 }
 
+
+
+
+
 /* 该接口是支付宝提成冻结支付宝资金的操作 */
 type AlipayMicropayOrderFreezeRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需要冻结金额，[0.01,2000]，必须是正数，最多只能保留小数点两位,单位是元 */
 func (r *AlipayMicropayOrderFreezeRequest) SetAmount(value string) {
@@ -377,13 +418,14 @@ func (r *AlipayMicropayOrderFreezeRequest) SetMerchantOrderNo(value string) {
 	r.SetValue("merchant_order_no", value)
 }
 
-/* 在解冻转账的时候的支付方式:
-NO_CONFIRM：不需要付款确认，调用接口直接扣款
-PAY_PASSWORD:
+/* 在解冻转账的时候的支付方式: 
+NO_CONFIRM：不需要付款确认，调用接口直接扣款 
+PAY_PASSWORD: 
 在转账需要付款方用支付密码确认，才可以转账成功 */
 func (r *AlipayMicropayOrderFreezeRequest) SetPayConfirm(value string) {
 	r.SetValue("pay_confirm", value)
 }
+
 
 func (r *AlipayMicropayOrderFreezeRequest) GetResponse(accessToken string) (*AlipayMicropayOrderFreezeResponse, []byte, error) {
 	var resp AlipayMicropayOrderFreezeResponseResult
@@ -402,10 +444,15 @@ type AlipayMicropayOrderFreezeResponseResult struct {
 	Response *AlipayMicropayOrderFreezeResponse `json:"alipay_micropay_order_freeze_response"`
 }
 
+
+
+
+
 /* 用户创建一笔支付订单之后,使用此接口获取支付冻结金的url来支付冻结金 */
 type AlipayMicropayOrderFreezepayurlGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 冻结订单号,创建冻结订单时支付宝返回的 */
 func (r *AlipayMicropayOrderFreezepayurlGetRequest) SetAlipayOrderNo(value string) {
@@ -416,6 +463,7 @@ func (r *AlipayMicropayOrderFreezepayurlGetRequest) SetAlipayOrderNo(value strin
 func (r *AlipayMicropayOrderFreezepayurlGetRequest) SetAuthToken(value string) {
 	r.SetValue("auth_token", value)
 }
+
 
 func (r *AlipayMicropayOrderFreezepayurlGetRequest) GetResponse(accessToken string) (*AlipayMicropayOrderFreezepayurlGetResponse, []byte, error) {
 	var resp AlipayMicropayOrderFreezepayurlGetResponseResult
@@ -434,10 +482,15 @@ type AlipayMicropayOrderFreezepayurlGetResponseResult struct {
 	Response *AlipayMicropayOrderFreezepayurlGetResponse `json:"alipay_micropay_order_freezepayurl_get_response"`
 }
 
+
+
+
+
 /* 用户对已经冻结的订单可以调用此接口查询明细 */
 type AlipayMicropayOrderGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝订单号，冻结流水号(创建冻结订单返回) */
 func (r *AlipayMicropayOrderGetRequest) SetAlipayOrderNo(value string) {
@@ -448,6 +501,7 @@ func (r *AlipayMicropayOrderGetRequest) SetAlipayOrderNo(value string) {
 func (r *AlipayMicropayOrderGetRequest) SetAuthToken(value string) {
 	r.SetValue("auth_token", value)
 }
+
 
 func (r *AlipayMicropayOrderGetRequest) GetResponse(accessToken string) (*AlipayMicropayOrderGetResponse, []byte, error) {
 	var resp AlipayMicropayOrderGetResponseResult
@@ -466,10 +520,15 @@ type AlipayMicropayOrderGetResponseResult struct {
 	Response *AlipayMicropayOrderGetResponse `json:"alipay_micropay_order_get_response"`
 }
 
+
+
+
+
 /* 解冻冻结单API */
 type AlipayMicropayOrderUnfreezeRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 冻结资金流水号,在创建资金订单时支付宝返回的流水号 */
 func (r *AlipayMicropayOrderUnfreezeRequest) SetAlipayOrderNo(value string) {
@@ -485,6 +544,7 @@ func (r *AlipayMicropayOrderUnfreezeRequest) SetAuthToken(value string) {
 func (r *AlipayMicropayOrderUnfreezeRequest) SetMemo(value string) {
 	r.SetValue("memo", value)
 }
+
 
 func (r *AlipayMicropayOrderUnfreezeRequest) GetResponse(accessToken string) (*AlipayMicropayOrderUnfreezeResponse, []byte, error) {
 	var resp AlipayMicropayOrderUnfreezeResponseResult
@@ -503,21 +563,27 @@ type AlipayMicropayOrderUnfreezeResponseResult struct {
 	Response *AlipayMicropayOrderUnfreezeResponse `json:"alipay_micropay_order_unfreeze_response"`
 }
 
-/* 查询已采购的集分宝余额，操作流程如下：
-1、申请支付宝增值包。
-2、申请支付宝应用上线时选择集分宝API。
-3、引导商家签约支付宝集分宝服务，地址为https://openapi.alipay.com/subscribe.htm?id=应用ID。
-4、引导商家对授予支付宝集分宝发放权限，地址为https://openauth.alipay.com/oauth2/authorize.htm?scope=p&client_id=应用ID
-5、引导授权的商家采购集分宝，地址为https://jf.alipay.com/aop/purchase.htm，进行集分宝采购。
+
+
+
+
+/* 查询已采购的集分宝余额，操作流程如下： 
+1、申请支付宝增值包。 
+2、申请支付宝应用上线时选择集分宝API。 
+3、引导商家签约支付宝集分宝服务，地址为https://openapi.alipay.com/subscribe.htm?id=应用ID。 
+4、引导商家对授予支付宝集分宝发放权限，地址为https://openauth.alipay.com/oauth2/authorize.htm?scope=p&client_id=应用ID 
+5、引导授权的商家采购集分宝，地址为https://jf.alipay.com/aop/purchase.htm，进行集分宝采购。 
 6、商家采购之后可以通过集分宝余额API（alipay.point.budget.get）查询商家的集分宝数量。 */
 type AlipayPointBudgetGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 支付宝给用户的授权。如果没有top的授权，这个字段是必填项 */
 func (r *AlipayPointBudgetGetRequest) SetAuthToken(value string) {
 	r.SetValue("auth_token", value)
 }
+
 
 func (r *AlipayPointBudgetGetRequest) GetResponse(accessToken string) (*AlipayPointBudgetGetResponse, []byte, error) {
 	var resp AlipayPointBudgetGetResponseResult
@@ -536,17 +602,22 @@ type AlipayPointBudgetGetResponseResult struct {
 	Response *AlipayPointBudgetGetResponse `json:"alipay_point_budget_get_response"`
 }
 
-/* 向用户发送集分宝，发放集分宝之前，操作流程如下：
-1、申请支付宝增值包。
-2、申请支付宝应用上线时选择集分宝API。
-3、引导商家签约支付宝集分宝服务，地址为https://openapi.alipay.com/subscribe.htm?id=应用ID。
-4、引导商家对授予支付宝集分宝发放权限，地址为https://openauth.alipay.com/oauth2/authorize.htm?scope=p&client_id=应用ID
-5、引导授权的商家采购集分宝，地址为https://jf.alipay.com/aop/purchase.htm，进行集分宝采购。
-6、商家采购之后可以通过集分宝余额API（alipay.point.budget.get）查询商家的集分宝数量。
+
+
+
+
+/* 向用户发送集分宝，发放集分宝之前，操作流程如下： 
+1、申请支付宝增值包。 
+2、申请支付宝应用上线时选择集分宝API。 
+3、引导商家签约支付宝集分宝服务，地址为https://openapi.alipay.com/subscribe.htm?id=应用ID。 
+4、引导商家对授予支付宝集分宝发放权限，地址为https://openauth.alipay.com/oauth2/authorize.htm?scope=p&client_id=应用ID 
+5、引导授权的商家采购集分宝，地址为https://jf.alipay.com/aop/purchase.htm，进行集分宝采购。 
+6、商家采购之后可以通过集分宝余额API（alipay.point.budget.get）查询商家的集分宝数量。 
 7、调用发放API（alipay.point.order.add）发放集分宝。 */
 type AlipayPointOrderAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝用户给应用发放集分宝的授权。 */
 func (r *AlipayPointOrderAddRequest) SetAuthToken(value string) {
@@ -583,6 +654,7 @@ func (r *AlipayPointOrderAddRequest) SetUserSymbolType(value string) {
 	r.SetValue("user_symbol_type", value)
 }
 
+
 func (r *AlipayPointOrderAddRequest) GetResponse(accessToken string) (*AlipayPointOrderAddResponse, []byte, error) {
 	var resp AlipayPointOrderAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.point.order.add", &resp)
@@ -594,17 +666,22 @@ func (r *AlipayPointOrderAddRequest) GetResponse(accessToken string) (*AlipayPoi
 
 type AlipayPointOrderAddResponse struct {
 	AlipayOrderNo string `json:"alipay_order_no"`
-	ResultCode    bool   `json:"result_code"`
+	ResultCode bool `json:"result_code"`
 }
 
 type AlipayPointOrderAddResponseResult struct {
 	Response *AlipayPointOrderAddResponse `json:"alipay_point_order_add_response"`
 }
 
+
+
+
+
 /* 查询集分宝发放详情，发放API是alipay.point.order.add。请先熟悉发放API的流程。 */
 type AlipayPointOrderGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝用户给应用的授权。 */
 func (r *AlipayPointOrderGetRequest) SetAuthToken(value string) {
@@ -626,6 +703,7 @@ func (r *AlipayPointOrderGetRequest) SetUserSymbolType(value string) {
 	r.SetValue("user_symbol_type", value)
 }
 
+
 func (r *AlipayPointOrderGetRequest) GetResponse(accessToken string) (*AlipayPointOrderGetResponse, []byte, error) {
 	var resp AlipayPointOrderGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.point.order.get", &resp)
@@ -636,24 +714,29 @@ func (r *AlipayPointOrderGetRequest) GetResponse(accessToken string) (*AlipayPoi
 }
 
 type AlipayPointOrderGetResponse struct {
-	AlipayOrderNo   string `json:"alipay_order_no"`
-	CreateTime      string `json:"create_time"`
-	DispatchUserId  string `json:"dispatch_user_id"`
-	Memo            string `json:"memo"`
+	AlipayOrderNo string `json:"alipay_order_no"`
+	CreateTime string `json:"create_time"`
+	DispatchUserId string `json:"dispatch_user_id"`
+	Memo string `json:"memo"`
 	MerchantOrderNo string `json:"merchant_order_no"`
-	OrderStatus     string `json:"order_status"`
-	PointCount      int    `json:"point_count"`
-	ReceiveUserId   string `json:"receive_user_id"`
+	OrderStatus string `json:"order_status"`
+	PointCount int `json:"point_count"`
+	ReceiveUserId string `json:"receive_user_id"`
 }
 
 type AlipayPointOrderGetResponseResult struct {
 	Response *AlipayPointOrderGetResponse `json:"alipay_point_order_get_response"`
 }
 
+
+
+
+
 /* OAuth2.0 授权的第二步，换取访问令牌。 */
 type AlipaySystemOauthTokenRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 授权码，用户对应用授权后得到。 */
 func (r *AlipaySystemOauthTokenRequest) SetCode(value string) {
@@ -670,6 +753,7 @@ func (r *AlipaySystemOauthTokenRequest) SetRefreshToken(value string) {
 	r.SetValue("refresh_token", value)
 }
 
+
 func (r *AlipaySystemOauthTokenRequest) GetResponse(accessToken string) (*AlipaySystemOauthTokenResponse, []byte, error) {
 	var resp AlipaySystemOauthTokenResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.system.oauth.token", &resp)
@@ -680,10 +764,10 @@ func (r *AlipaySystemOauthTokenRequest) GetResponse(accessToken string) (*Alipay
 }
 
 type AlipaySystemOauthTokenResponse struct {
-	AccessToken  string `json:"access_token"`
+	AccessToken string `json:"access_token"`
 	AlipayUserId string `json:"alipay_user_id"`
-	ExpiresIn    string `json:"expires_in"`
-	ReExpiresIn  string `json:"re_expires_in"`
+	ExpiresIn string `json:"expires_in"`
+	ReExpiresIn string `json:"re_expires_in"`
 	RefreshToken string `json:"refresh_token"`
 }
 
@@ -691,16 +775,21 @@ type AlipaySystemOauthTokenResponseResult struct {
 	Response *AlipaySystemOauthTokenResponse `json:"alipay_system_oauth_token_response"`
 }
 
-/* 查询用户支付宝账务明细接口。<br/>
-异步API使用方法，请查看：<a href="http://open.taobao.com/doc/detail.htm?id=30">异步API使用说明</a><br/>
-1. 使用之前必须首先申请支付宝API，参考http://open.taobao.com//doc/detail.htm?id=101181#s2<br/>
-2. 只对通过商家认证的、先行赔付卖家以及B2C商家开放<br/>
-3. 提交任务后，通过taobao.topats.result.get来查看任务执行状态，如果任务已完成，则返回下载URL<br/>
-4. 如果订阅了主动通知服务，任务完成后TOP会通过HTTP长连接推送消息，通知的消息格式请参考异步API使用文档<br/>
+
+
+
+
+/* 查询用户支付宝账务明细接口。<br/> 
+异步API使用方法，请查看：<a href="http://open.taobao.com/doc/detail.htm?id=30">异步API使用说明</a><br/> 
+1. 使用之前必须首先申请支付宝API，参考http://open.taobao.com//doc/detail.htm?id=101181#s2<br/> 
+2. 只对通过商家认证的、先行赔付卖家以及B2C商家开放<br/> 
+3. 提交任务后，通过taobao.topats.result.get来查看任务执行状态，如果任务已完成，则返回下载URL<br/> 
+4. 如果订阅了主动通知服务，任务完成后TOP会通过HTTP长连接推送消息，通知的消息格式请参考异步API使用文档<br/> 
 5. 下载到的结果是CSV格式的文本文件，默认采用UTF-8编码<br/> */
 type AlipayTopatsUserAccountreportGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 返回下载结果文件的数据格式，只支持utf-8和gbk编码，默认是utf-8 */
 func (r *AlipayTopatsUserAccountreportGetRequest) SetCharset(value string) {
@@ -727,6 +816,7 @@ func (r *AlipayTopatsUserAccountreportGetRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *AlipayTopatsUserAccountreportGetRequest) GetResponse(accessToken string) (*AlipayTopatsUserAccountreportGetResponse, []byte, error) {
 	var resp AlipayTopatsUserAccountreportGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.topats.user.accountreport.get", &resp)
@@ -744,23 +834,29 @@ type AlipayTopatsUserAccountreportGetResponseResult struct {
 	Response *AlipayTopatsUserAccountreportGetResponse `json:"alipay_topats_user_accountreport_get_response"`
 }
 
+
+
+
+
 /* 查询支付宝账户冻结类型的冻结金额。 */
 type AlipayUserAccountFreezeGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 冻结类型，多个用,分隔。不传返回所有类型的冻结金额。
-DEPOSIT_FREEZE,充值冻结
-WITHDRAW_FREEZE,提现冻结
-PAYMENT_FREEZE,支付冻结
-BAIL_FREEZE,保证金冻结
-CHARGE_FREEZE,收费冻结
-PRE_DEPOSIT_FREEZE,预存款冻结
-LOAN_FREEZE,贷款冻结
+
+/* 冻结类型，多个用,分隔。不传返回所有类型的冻结金额。 
+DEPOSIT_FREEZE,充值冻结 
+WITHDRAW_FREEZE,提现冻结 
+PAYMENT_FREEZE,支付冻结 
+BAIL_FREEZE,保证金冻结 
+CHARGE_FREEZE,收费冻结 
+PRE_DEPOSIT_FREEZE,预存款冻结 
+LOAN_FREEZE,贷款冻结 
 OTHER_FREEZE,其它 */
 func (r *AlipayUserAccountFreezeGetRequest) SetFreezeType(value string) {
 	r.SetValue("freeze_type", value)
 }
+
 
 func (r *AlipayUserAccountFreezeGetRequest) GetResponse(accessToken string) (*AlipayUserAccountFreezeGetResponse, []byte, error) {
 	var resp AlipayUserAccountFreezeGetResponseResult
@@ -772,18 +868,24 @@ func (r *AlipayUserAccountFreezeGetRequest) GetResponse(accessToken string) (*Al
 }
 
 type AlipayUserAccountFreezeGetResponse struct {
-	FreezeItems  []*AccountFreeze `json:"freeze_items"`
-	TotalResults string           `json:"total_results"`
+	FreezeItems []*AccountFreeze `json:"freeze_items"`
+	TotalResults string `json:"total_results"`
 }
 
 type AlipayUserAccountFreezeGetResponseResult struct {
 	Response *AlipayUserAccountFreezeGetResponse `json:"alipay_user_account_freeze_get_response"`
 }
 
+
+
+
+
 /* 查询支付宝账户余额 */
 type AlipayUserAccountGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *AlipayUserAccountGetRequest) GetResponse(accessToken string) (*AlipayUserAccountGetResponse, []byte, error) {
 	var resp AlipayUserAccountGetResponseResult
@@ -802,15 +904,21 @@ type AlipayUserAccountGetResponseResult struct {
 	Response *AlipayUserAccountGetResponse `json:"alipay_user_account_get_response"`
 }
 
+
+
+
+
 /* 获取支付宝用户订购信息。在不确认用户对应用是否订购的时候，可以调用此API查询。 */
 type AlipayUserContractGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 订购者支付宝ID。session与subscriber_user_id二选一即可。 */
 func (r *AlipayUserContractGetRequest) SetSubscriberUserId(value string) {
 	r.SetValue("subscriber_user_id", value)
 }
+
 
 func (r *AlipayUserContractGetRequest) GetResponse(accessToken string) (*AlipayUserContractGetResponse, []byte, error) {
 	var resp AlipayUserContractGetResponseResult
@@ -829,10 +937,15 @@ type AlipayUserContractGetResponseResult struct {
 	Response *AlipayUserContractGetResponse `json:"alipay_user_contract_get_response"`
 }
 
+
+
+
+
 /* 查询支付宝用户信息 */
 type AlipayUserGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝给用户的授权。如果没有top的授权，这个字段是必填项 */
 func (r *AlipayUserGetRequest) SetAuthToken(value string) {
@@ -843,6 +956,7 @@ func (r *AlipayUserGetRequest) SetAuthToken(value string) {
 func (r *AlipayUserGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
+
 
 func (r *AlipayUserGetRequest) GetResponse(accessToken string) (*AlipayUserGetResponse, []byte, error) {
 	var resp AlipayUserGetResponseResult
@@ -861,10 +975,15 @@ type AlipayUserGetResponseResult struct {
 	Response *AlipayUserGetResponse `json:"alipay_user_get_response"`
 }
 
+
+
+
+
 /* 查询支付宝账户交易记录 */
 type AlipayUserTradeSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝订单号，为空查询所有记录 */
 func (r *AlipayUserTradeSearchRequest) SetAlipayOrderNo(value string) {
@@ -911,6 +1030,7 @@ func (r *AlipayUserTradeSearchRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
+
 func (r *AlipayUserTradeSearchRequest) GetResponse(accessToken string) (*AlipayUserTradeSearchResponse, []byte, error) {
 	var resp AlipayUserTradeSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "alipay.user.trade.search", &resp)
@@ -921,11 +1041,14 @@ func (r *AlipayUserTradeSearchRequest) GetResponse(accessToken string) (*AlipayU
 }
 
 type AlipayUserTradeSearchResponse struct {
-	TotalPages   string         `json:"total_pages"`
-	TotalResults string         `json:"total_results"`
+	TotalPages string `json:"total_pages"`
+	TotalResults string `json:"total_results"`
 	TradeRecords []*TradeRecord `json:"trade_records"`
 }
 
 type AlipayUserTradeSearchResponseResult struct {
 	Response *AlipayUserTradeSearchResponse `json:"alipay_user_trade_search_response"`
 }
+
+
+

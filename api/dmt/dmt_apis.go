@@ -8,10 +8,15 @@ import (
 	"github.com/changkong/open_taobao"
 )
 
+
+
+
+
 /* 同一卖家最多添加500个图片分类，图片分类名称长度最大为20个字符 */
 type PictureCategoryAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 图片分类的父分类,一级分类的parent_id为0,二级分类的则为其父分类的picture_category_id */
 func (r *PictureCategoryAddRequest) SetParentId(value string) {
@@ -22,6 +27,7 @@ func (r *PictureCategoryAddRequest) SetParentId(value string) {
 func (r *PictureCategoryAddRequest) SetPictureCategoryName(value string) {
 	r.SetValue("picture_category_name", value)
 }
+
 
 func (r *PictureCategoryAddRequest) GetResponse(accessToken string) (*PictureCategoryAddResponse, []byte, error) {
 	var resp PictureCategoryAddResponseResult
@@ -40,18 +46,23 @@ type PictureCategoryAddResponseResult struct {
 	Response *PictureCategoryAddResponse `json:"picture_category_add_response"`
 }
 
+
+
+
+
 /* 获取图片分类信息 */
 type PictureCategoryGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 图片分类的修改时间点，格式:yyyy-MM-dd HH:mm:ss。查询此修改时间点之后到目前的图片分类。 */
 func (r *PictureCategoryGetRequest) SetModifiedTime(value string) {
 	r.SetValue("modified_time", value)
 }
 
-/* 取二级分类时设置为对应父分类id
-取一级分类时父分类id设为0
+/* 取二级分类时设置为对应父分类id 
+取一级分类时父分类id设为0 
 取全部分类的时候不设或设为-1 */
 func (r *PictureCategoryGetRequest) SetParentId(value string) {
 	r.SetValue("parent_id", value)
@@ -72,6 +83,7 @@ func (r *PictureCategoryGetRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *PictureCategoryGetRequest) GetResponse(accessToken string) (*PictureCategoryGetResponse, []byte, error) {
 	var resp PictureCategoryGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.picture.category.get", &resp)
@@ -89,10 +101,15 @@ type PictureCategoryGetResponseResult struct {
 	Response *PictureCategoryGetResponse `json:"picture_category_get_response"`
 }
 
+
+
+
+
 /* 更新图片分类的名字，或者更新图片分类的父分类（即分类移动）。只能移动2级分类到非2级分类，默认分类和1级分类不可移动。 */
 type PictureCategoryUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 要更新的图片分类的id */
 func (r *PictureCategoryUpdateRequest) SetCategoryId(value string) {
@@ -108,6 +125,7 @@ func (r *PictureCategoryUpdateRequest) SetCategoryName(value string) {
 func (r *PictureCategoryUpdateRequest) SetParentId(value string) {
 	r.SetValue("parent_id", value)
 }
+
 
 func (r *PictureCategoryUpdateRequest) GetResponse(accessToken string) (*PictureCategoryUpdateResponse, []byte, error) {
 	var resp PictureCategoryUpdateResponseResult
@@ -126,15 +144,21 @@ type PictureCategoryUpdateResponseResult struct {
 	Response *PictureCategoryUpdateResponse `json:"picture_category_update_response"`
 }
 
+
+
+
+
 /* 删除图片空间图片 */
 type PictureDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 图片ID字符串,可以一个也可以一组,用英文逗号间隔,如450,120,155 */
 func (r *PictureDeleteRequest) SetPictureIds(value string) {
 	r.SetValue("picture_ids", value)
 }
+
 
 func (r *PictureDeleteRequest) GetResponse(accessToken string) (*PictureDeleteResponse, []byte, error) {
 	var resp PictureDeleteResponseResult
@@ -153,10 +177,15 @@ type PictureDeleteResponseResult struct {
 	Response *PictureDeleteResponse `json:"picture_delete_response"`
 }
 
+
+
+
+
 /* 获取图片信息 */
 type PictureGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否删除,unfroze代表没有删除 */
 func (r *PictureGetRequest) SetDeleted(value string) {
@@ -208,6 +237,7 @@ func (r *PictureGetRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
+
 func (r *PictureGetRequest) GetResponse(accessToken string) (*PictureGetResponse, []byte, error) {
 	var resp PictureGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.picture.get", &resp)
@@ -218,23 +248,29 @@ func (r *PictureGetRequest) GetResponse(accessToken string) (*PictureGetResponse
 }
 
 type PictureGetResponse struct {
-	Pictures     []*Picture `json:"pictures"`
-	TotalResults int        `json:"totalResults"`
+	Pictures []*Picture `json:"pictures"`
+	TotalResults int `json:"totalResults"`
 }
 
 type PictureGetResponseResult struct {
 	Response *PictureGetResponse `json:"picture_get_response"`
 }
 
+
+
+
+
 /* 查询图片是否被引用，被引用返回true，未被引用返回false */
 type PictureIsreferencedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 图片id */
 func (r *PictureIsreferencedGetRequest) SetPictureId(value string) {
 	r.SetValue("picture_id", value)
 }
+
 
 func (r *PictureIsreferencedGetRequest) GetResponse(accessToken string) (*PictureIsreferencedGetResponse, []byte, error) {
 	var resp PictureIsreferencedGetResponseResult
@@ -253,10 +289,15 @@ type PictureIsreferencedGetResponseResult struct {
 	Response *PictureIsreferencedGetResponse `json:"picture_isreferenced_get_response"`
 }
 
+
+
+
+
 /* 替换一张图片，只替换图片数据，图片名称，图片分类等保持不变。 */
 type PictureReplaceRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 图片二进制文件流,不能为空,允许png、jpg、gif图片格式 */
 func (r *PictureReplaceRequest) SetImageData(value string) {
@@ -267,6 +308,7 @@ func (r *PictureReplaceRequest) SetImageData(value string) {
 func (r *PictureReplaceRequest) SetPictureId(value string) {
 	r.SetValue("picture_id", value)
 }
+
 
 func (r *PictureReplaceRequest) GetResponse(accessToken string) (*PictureReplaceResponse, []byte, error) {
 	var resp PictureReplaceResponseResult
@@ -285,10 +327,15 @@ type PictureReplaceResponseResult struct {
 	Response *PictureReplaceResponse `json:"picture_replace_response"`
 }
 
+
+
+
+
 /* 修改指定图片的图片名 */
 type PictureUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 新的图片名，最大长度50字符，不能为空 */
 func (r *PictureUpdateRequest) SetNewName(value string) {
@@ -299,6 +346,7 @@ func (r *PictureUpdateRequest) SetNewName(value string) {
 func (r *PictureUpdateRequest) SetPictureId(value string) {
 	r.SetValue("picture_id", value)
 }
+
 
 func (r *PictureUpdateRequest) GetResponse(accessToken string) (*PictureUpdateResponse, []byte, error) {
 	var resp PictureUpdateResponseResult
@@ -317,10 +365,15 @@ type PictureUpdateResponseResult struct {
 	Response *PictureUpdateResponse `json:"picture_update_response"`
 }
 
+
+
+
+
 /* 上传单张图片 */
 type PictureUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 包括后缀名的图片标题,不能为空，如Bule.jpg,有些卖家希望图片上传后取图片文件的默认名 */
 func (r *PictureUploadRequest) SetImageInputTitle(value string) {
@@ -342,6 +395,7 @@ func (r *PictureUploadRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
+
 func (r *PictureUploadRequest) GetResponse(accessToken string) (*PictureUploadResponse, []byte, error) {
 	var resp PictureUploadResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.picture.upload", &resp)
@@ -359,10 +413,16 @@ type PictureUploadResponseResult struct {
 	Response *PictureUploadResponse `json:"picture_upload_response"`
 }
 
+
+
+
+
 /* 查询用户的图片空间使用信息，包括：订购量，已使用容量，免费容量，总的可使用容量，订购有效期，剩余容量 */
 type PictureUserinfoGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *PictureUserinfoGetRequest) GetResponse(accessToken string) (*PictureUserinfoGetResponse, []byte, error) {
 	var resp PictureUserinfoGetResponseResult
@@ -381,10 +441,15 @@ type PictureUserinfoGetResponseResult struct {
 	Response *PictureUserinfoGetResponse `json:"picture_userinfo_get_response"`
 }
 
+
+
+
+
 /* 此api添加一个视频，视频发布后需要转码，审核等操作步骤，表示添加完成之后并不是立马能播放该视频，需要等后台转码成功，审核通过之后。线上视频转码审核过程比较快 */
 type VideoAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 视频封面url,不能为空且不能超过512个英文字母 */
 func (r *VideoAddRequest) SetCoverUrl(value string) {
@@ -421,6 +486,7 @@ func (r *VideoAddRequest) SetVideoAppKey(value string) {
 	r.SetValue("video_app_key", value)
 }
 
+
 func (r *VideoAddRequest) GetResponse(accessToken string) (*VideoAddResponse, []byte, error) {
 	var resp VideoAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.video.add", &resp)
@@ -438,10 +504,15 @@ type VideoAddResponseResult struct {
 	Response *VideoAddResponse `json:"video_add_response"`
 }
 
+
+
+
+
 /* 此api用于更新一个视频的基本信息，包括视频标题，标签，描述，封面等，不包括是否允许他人观看，更新是否允许他人观看详见taobao.videos.open */
 type VideoUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 视频封面url,不能超过512个英文字母 */
 func (r *VideoUpdateRequest) SetCoverUrl(value string) {
@@ -473,6 +544,7 @@ func (r *VideoUpdateRequest) SetVideoId(value string) {
 	r.SetValue("video_id", value)
 }
 
+
 func (r *VideoUpdateRequest) GetResponse(accessToken string) (*VideoUpdateResponse, []byte, error) {
 	var resp VideoUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.video.update", &resp)
@@ -490,10 +562,15 @@ type VideoUpdateResponseResult struct {
 	Response *VideoUpdateResponse `json:"video_update_response"`
 }
 
+
+
+
+
 /* 此api用于搜索应用上传的所有视频，应用由appKey 唯一识别，搜索条件包含视频标题，标签，状态，关键字（标题or标签，不能同时设置），上传者数字id */
 type VideosSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 页码。默认返回的数据是从第一页开始 */
 func (r *VideosSearchRequest) SetCurrentPage(value string) {
@@ -540,6 +617,7 @@ func (r *VideosSearchRequest) SetVideoAppKey(value string) {
 	r.SetValue("video_app_key", value)
 }
 
+
 func (r *VideosSearchRequest) GetResponse(accessToken string) (*VideosSearchResponse, []byte, error) {
 	var resp VideosSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.videos.search", &resp)
@@ -556,3 +634,6 @@ type VideosSearchResponse struct {
 type VideosSearchResponseResult struct {
 	Response *VideosSearchResponse `json:"videos_search_response"`
 }
+
+
+
