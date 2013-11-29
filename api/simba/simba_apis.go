@@ -8,21 +8,15 @@ import (
 	"github.com/yaofangou/open_taobao"
 )
 
-
-
-
-
 /* 获取实时余额，”元”为单位 */
 type SimbaAccountBalanceGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-
 /* 主人昵称 */
 func (r *SimbaAccountBalanceGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaAccountBalanceGetRequest) GetResponse(accessToken string) (*SimbaAccountBalanceGetResponse, []byte, error) {
 	var resp SimbaAccountBalanceGetResponseResult
@@ -41,15 +35,10 @@ type SimbaAccountBalanceGetResponseResult struct {
 	Response *SimbaAccountBalanceGetResponse `json:"simba_account_balance_get_response"`
 }
 
-
-
-
-
 /* 创建一个推广组 */
 type SimbaAdgroupAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaAdgroupAddRequest) SetCampaignId(value string) {
@@ -81,7 +70,6 @@ func (r *SimbaAdgroupAddRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
-
 func (r *SimbaAdgroupAddRequest) GetResponse(accessToken string) (*SimbaAdgroupAddResponse, []byte, error) {
 	var resp SimbaAdgroupAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroup.add", &resp)
@@ -99,15 +87,10 @@ type SimbaAdgroupAddResponseResult struct {
 	Response *SimbaAdgroupAddResponse `json:"simba_adgroup_add_response"`
 }
 
-
-
-
-
 /* 根据一组推广组id获取推广组类目出价列表, */
 type SimbaAdgroupAdgroupcatmatchsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id列表 */
 func (r *SimbaAdgroupAdgroupcatmatchsGetRequest) SetAdgroupIds(value string) {
@@ -118,7 +101,6 @@ func (r *SimbaAdgroupAdgroupcatmatchsGetRequest) SetAdgroupIds(value string) {
 func (r *SimbaAdgroupAdgroupcatmatchsGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaAdgroupAdgroupcatmatchsGetRequest) GetResponse(accessToken string) (*SimbaAdgroupAdgroupcatmatchsGetResponse, []byte, error) {
 	var resp SimbaAdgroupAdgroupcatmatchsGetResponseResult
@@ -137,15 +119,10 @@ type SimbaAdgroupAdgroupcatmatchsGetResponseResult struct {
 	Response *SimbaAdgroupAdgroupcatmatchsGetResponse `json:"simba_adgroup_adgroupcatmatchs_get_response"`
 }
 
-
-
-
-
 /* 根据一个推广计划的id获取一页推广组类目出价列表 */
 type SimbaAdgroupCampcatmatchsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaAdgroupCampcatmatchsGetRequest) SetCampaignId(value string) {
@@ -167,7 +144,6 @@ func (r *SimbaAdgroupCampcatmatchsGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-
 func (r *SimbaAdgroupCampcatmatchsGetRequest) GetResponse(accessToken string) (*SimbaAdgroupCampcatmatchsGetResponse, []byte, error) {
 	var resp SimbaAdgroupCampcatmatchsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroup.campcatmatchs.get", &resp)
@@ -185,15 +161,10 @@ type SimbaAdgroupCampcatmatchsGetResponseResult struct {
 	Response *SimbaAdgroupCampcatmatchsGetResponse `json:"simba_adgroup_campcatmatchs_get_response"`
 }
 
-
-
-
-
 /* 取得一个推广组的类目出价 */
 type SimbaAdgroupCatmatchGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaAdgroupCatmatchGetRequest) SetAdgroupId(value string) {
@@ -204,7 +175,6 @@ func (r *SimbaAdgroupCatmatchGetRequest) SetAdgroupId(value string) {
 func (r *SimbaAdgroupCatmatchGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaAdgroupCatmatchGetRequest) GetResponse(accessToken string) (*SimbaAdgroupCatmatchGetResponse, []byte, error) {
 	var resp SimbaAdgroupCatmatchGetResponseResult
@@ -223,15 +193,10 @@ type SimbaAdgroupCatmatchGetResponseResult struct {
 	Response *SimbaAdgroupCatmatchGetResponse `json:"simba_adgroup_catmatch_get_response"`
 }
 
-
-
-
-
 /* 更新一个推广组的类目出价，可以设置类目出价、是否使用默认出价、是否打开类目出价 */
 type SimbaAdgroupCatmatchUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaAdgroupCatmatchUpdateRequest) SetAdgroupId(value string) {
@@ -263,7 +228,6 @@ func (r *SimbaAdgroupCatmatchUpdateRequest) SetUseDefaultPrice(value string) {
 	r.SetValue("use_default_price", value)
 }
 
-
 func (r *SimbaAdgroupCatmatchUpdateRequest) GetResponse(accessToken string) (*SimbaAdgroupCatmatchUpdateResponse, []byte, error) {
 	var resp SimbaAdgroupCatmatchUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroup.catmatch.update", &resp)
@@ -281,15 +245,10 @@ type SimbaAdgroupCatmatchUpdateResponseResult struct {
 	Response *SimbaAdgroupCatmatchUpdateResponse `json:"simba_adgroup_catmatch_update_response"`
 }
 
-
-
-
-
 /* 获取指定推广组下给定出价的类目出价预估信息; */
 type SimbaAdgroupCatmatchforecastGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组ID */
 func (r *SimbaAdgroupCatmatchforecastGetRequest) SetAdgroupId(value string) {
@@ -305,7 +264,6 @@ func (r *SimbaAdgroupCatmatchforecastGetRequest) SetCatmatchPrice(value string) 
 func (r *SimbaAdgroupCatmatchforecastGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaAdgroupCatmatchforecastGetRequest) GetResponse(accessToken string) (*SimbaAdgroupCatmatchforecastGetResponse, []byte, error) {
 	var resp SimbaAdgroupCatmatchforecastGetResponseResult
@@ -324,15 +282,10 @@ type SimbaAdgroupCatmatchforecastGetResponseResult struct {
 	Response *SimbaAdgroupCatmatchforecastGetResponse `json:"simba_adgroup_catmatchforecast_get_response"`
 }
 
-
-
-
-
 /* 分页获取修改过的推广组类目出价ID , 推广组ID，修改时间 */
 type SimbaAdgroupChangedcatmatchsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaAdgroupChangedcatmatchsGetRequest) SetNick(value string) {
@@ -354,7 +307,6 @@ func (r *SimbaAdgroupChangedcatmatchsGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaAdgroupChangedcatmatchsGetRequest) GetResponse(accessToken string) (*SimbaAdgroupChangedcatmatchsGetResponse, []byte, error) {
 	var resp SimbaAdgroupChangedcatmatchsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroup.changedcatmatchs.get", &resp)
@@ -372,15 +324,10 @@ type SimbaAdgroupChangedcatmatchsGetResponseResult struct {
 	Response *SimbaAdgroupChangedcatmatchsGetResponse `json:"simba_adgroup_changedcatmatchs_get_response"`
 }
 
-
-
-
-
 /* 删除一个推广组 */
 type SimbaAdgroupDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaAdgroupDeleteRequest) SetAdgroupId(value string) {
@@ -391,7 +338,6 @@ func (r *SimbaAdgroupDeleteRequest) SetAdgroupId(value string) {
 func (r *SimbaAdgroupDeleteRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaAdgroupDeleteRequest) GetResponse(accessToken string) (*SimbaAdgroupDeleteResponse, []byte, error) {
 	var resp SimbaAdgroupDeleteResponseResult
@@ -410,15 +356,10 @@ type SimbaAdgroupDeleteResponseResult struct {
 	Response *SimbaAdgroupDeleteResponse `json:"simba_adgroup_delete_response"`
 }
 
-
-
-
-
 /* 获取删除的类目出价列表（只存类目出价ID和推广组ID） */
 type SimbaAdgroupDeletedcatmatchsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaAdgroupDeletedcatmatchsGetRequest) SetNick(value string) {
@@ -440,7 +381,6 @@ func (r *SimbaAdgroupDeletedcatmatchsGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaAdgroupDeletedcatmatchsGetRequest) GetResponse(accessToken string) (*SimbaAdgroupDeletedcatmatchsGetResponse, []byte, error) {
 	var resp SimbaAdgroupDeletedcatmatchsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroup.deletedcatmatchs.get", &resp)
@@ -458,18 +398,13 @@ type SimbaAdgroupDeletedcatmatchsGetResponseResult struct {
 	Response *SimbaAdgroupDeletedcatmatchsGetResponse `json:"simba_adgroup_deletedcatmatchs_get_response"`
 }
 
-
-
-
-
 /* 修改通投出价 */
 type SimbaAdgroupNonsearchpricesUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-
-/* 推广组id，通投位置价格，是否使用默认出价json 数组字符串，数组个数最多200个. 
-json数组中的key必须和对应实体ADGroup中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值， 
+/* 推广组id，通投位置价格，是否使用默认出价json 数组字符串，数组个数最多200个.
+json数组中的key必须和对应实体ADGroup中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值，
 adgroupId,isNonsearchDefaultPrice不能为空。nonsearchMaxPrice是整数，以“分”为单位，不能小于5，不能大于日限额,不能大于9999分。 启用非搜索默认出价时nonsearchMaxPrice为0 */
 func (r *SimbaAdgroupNonsearchpricesUpdateRequest) SetAdgroupidPriceJson(value string) {
 	r.SetValue("adgroupid_price_json", value)
@@ -484,7 +419,6 @@ func (r *SimbaAdgroupNonsearchpricesUpdateRequest) SetCampaignId(value string) {
 func (r *SimbaAdgroupNonsearchpricesUpdateRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaAdgroupNonsearchpricesUpdateRequest) GetResponse(accessToken string) (*SimbaAdgroupNonsearchpricesUpdateResponse, []byte, error) {
 	var resp SimbaAdgroupNonsearchpricesUpdateResponseResult
@@ -503,15 +437,10 @@ type SimbaAdgroupNonsearchpricesUpdateResponseResult struct {
 	Response *SimbaAdgroupNonsearchpricesUpdateResponse `json:"simba_adgroup_nonsearchprices_update_response"`
 }
 
-
-
-
-
 /* 更改通投状态（暂停或启动） */
 type SimbaAdgroupNonsearchstatesUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组ID通投状态json数组字符串，数组个数最多200个。json数组中的key必须和对应实体ADGroup 中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值推广组ID,通投状态不传默认为1 */
 func (r *SimbaAdgroupNonsearchstatesUpdateRequest) SetAdgroupidNonsearchstateJson(value string) {
@@ -527,7 +456,6 @@ func (r *SimbaAdgroupNonsearchstatesUpdateRequest) SetCampaignId(value string) {
 func (r *SimbaAdgroupNonsearchstatesUpdateRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaAdgroupNonsearchstatesUpdateRequest) GetResponse(accessToken string) (*SimbaAdgroupNonsearchstatesUpdateResponse, []byte, error) {
 	var resp SimbaAdgroupNonsearchstatesUpdateResponseResult
@@ -546,15 +474,10 @@ type SimbaAdgroupNonsearchstatesUpdateResponseResult struct {
 	Response *SimbaAdgroupNonsearchstatesUpdateResponse `json:"simba_adgroup_nonsearchstates_update_response"`
 }
 
-
-
-
-
 /* 获取用户上架在线销售的全部宝贝 */
 type SimbaAdgroupOnlineitemsvonGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaAdgroupOnlineitemsvonGetRequest) SetNick(value string) {
@@ -581,7 +504,6 @@ func (r *SimbaAdgroupOnlineitemsvonGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-
 func (r *SimbaAdgroupOnlineitemsvonGetRequest) GetResponse(accessToken string) (*SimbaAdgroupOnlineitemsvonGetResponse, []byte, error) {
 	var resp SimbaAdgroupOnlineitemsvonGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroup.onlineitemsvon.get", &resp)
@@ -599,15 +521,10 @@ type SimbaAdgroupOnlineitemsvonGetResponseResult struct {
 	Response *SimbaAdgroupOnlineitemsvonGetResponse `json:"simba_adgroup_onlineitemsvon_get_response"`
 }
 
-
-
-
-
 /* 更新一个推广组的信息，可以设置默认出价、是否上线、非搜索出价、非搜索是否使用默认出价 */
 type SimbaAdgroupUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaAdgroupUpdateRequest) SetAdgroupId(value string) {
@@ -639,7 +556,6 @@ func (r *SimbaAdgroupUpdateRequest) SetUseNonsearchDefaultPrice(value string) {
 	r.SetValue("use_nonsearch_default_price", value)
 }
 
-
 func (r *SimbaAdgroupUpdateRequest) GetResponse(accessToken string) (*SimbaAdgroupUpdateResponse, []byte, error) {
 	var resp SimbaAdgroupUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroup.update", &resp)
@@ -657,15 +573,10 @@ type SimbaAdgroupUpdateResponseResult struct {
 	Response *SimbaAdgroupUpdateResponse `json:"simba_adgroup_update_response"`
 }
 
-
-
-
-
 /* 获取修改的推广组ID */
 type SimbaAdgroupidsChangedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaAdgroupidsChangedGetRequest) SetNick(value string) {
@@ -687,7 +598,6 @@ func (r *SimbaAdgroupidsChangedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaAdgroupidsChangedGetRequest) GetResponse(accessToken string) (*SimbaAdgroupidsChangedGetResponse, []byte, error) {
 	var resp SimbaAdgroupidsChangedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroupids.changed.get", &resp)
@@ -705,15 +615,10 @@ type SimbaAdgroupidsChangedGetResponseResult struct {
 	Response *SimbaAdgroupidsChangedGetResponse `json:"simba_adgroupids_changed_get_response"`
 }
 
-
-
-
-
 /* 获取删除的推广组ID */
 type SimbaAdgroupidsDeletedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaAdgroupidsDeletedGetRequest) SetNick(value string) {
@@ -735,7 +640,6 @@ func (r *SimbaAdgroupidsDeletedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaAdgroupidsDeletedGetRequest) GetResponse(accessToken string) (*SimbaAdgroupidsDeletedGetResponse, []byte, error) {
 	var resp SimbaAdgroupidsDeletedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroupids.deleted.get", &resp)
@@ -753,15 +657,10 @@ type SimbaAdgroupidsDeletedGetResponseResult struct {
 	Response *SimbaAdgroupidsDeletedGetResponse `json:"simba_adgroupids_deleted_get_response"`
 }
 
-
-
-
-
 /* 分页获取修改的推广组ID和修改时间 */
 type SimbaAdgroupsChangedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaAdgroupsChangedGetRequest) SetNick(value string) {
@@ -783,7 +682,6 @@ func (r *SimbaAdgroupsChangedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaAdgroupsChangedGetRequest) GetResponse(accessToken string) (*SimbaAdgroupsChangedGetResponse, []byte, error) {
 	var resp SimbaAdgroupsChangedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroups.changed.get", &resp)
@@ -801,15 +699,10 @@ type SimbaAdgroupsChangedGetResponseResult struct {
 	Response *SimbaAdgroupsChangedGetResponse `json:"simba_adgroups_changed_get_response"`
 }
 
-
-
-
-
 /* 判断在一个推广计划中是否已经推广了一个商品 */
 type SimbaAdgroupsItemExistRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaAdgroupsItemExistRequest) SetCampaignId(value string) {
@@ -825,7 +718,6 @@ func (r *SimbaAdgroupsItemExistRequest) SetItemId(value string) {
 func (r *SimbaAdgroupsItemExistRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaAdgroupsItemExistRequest) GetResponse(accessToken string) (*SimbaAdgroupsItemExistResponse, []byte, error) {
 	var resp SimbaAdgroupsItemExistResponseResult
@@ -844,15 +736,10 @@ type SimbaAdgroupsItemExistResponseResult struct {
 	Response *SimbaAdgroupsItemExistResponse `json:"simba_adgroups_item_exist_response"`
 }
 
-
-
-
-
 /* 批量得到推广组 */
 type SimbaAdgroupsbyadgroupidsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id列表 */
 func (r *SimbaAdgroupsbyadgroupidsGetRequest) SetAdgroupIds(value string) {
@@ -874,7 +761,6 @@ func (r *SimbaAdgroupsbyadgroupidsGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-
 func (r *SimbaAdgroupsbyadgroupidsGetRequest) GetResponse(accessToken string) (*SimbaAdgroupsbyadgroupidsGetResponse, []byte, error) {
 	var resp SimbaAdgroupsbyadgroupidsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroupsbyadgroupids.get", &resp)
@@ -892,15 +778,10 @@ type SimbaAdgroupsbyadgroupidsGetResponseResult struct {
 	Response *SimbaAdgroupsbyadgroupidsGetResponse `json:"simba_adgroupsbyadgroupids_get_response"`
 }
 
-
-
-
-
 /* 批量得到推广计划下的推广组 */
 type SimbaAdgroupsbycampaignidGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaAdgroupsbycampaignidGetRequest) SetCampaignId(value string) {
@@ -922,7 +803,6 @@ func (r *SimbaAdgroupsbycampaignidGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-
 func (r *SimbaAdgroupsbycampaignidGetRequest) GetResponse(accessToken string) (*SimbaAdgroupsbycampaignidGetResponse, []byte, error) {
 	var resp SimbaAdgroupsbycampaignidGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.adgroupsbycampaignid.get", &resp)
@@ -940,15 +820,10 @@ type SimbaAdgroupsbycampaignidGetResponseResult struct {
 	Response *SimbaAdgroupsbycampaignidGetResponse `json:"simba_adgroupsbycampaignid_get_response"`
 }
 
-
-
-
-
 /* 创建一个推广计划 */
 type SimbaCampaignAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaCampaignAddRequest) SetNick(value string) {
@@ -959,7 +834,6 @@ func (r *SimbaCampaignAddRequest) SetNick(value string) {
 func (r *SimbaCampaignAddRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
-
 
 func (r *SimbaCampaignAddRequest) GetResponse(accessToken string) (*SimbaCampaignAddResponse, []byte, error) {
 	var resp SimbaCampaignAddResponseResult
@@ -978,15 +852,10 @@ type SimbaCampaignAddResponseResult struct {
 	Response *SimbaCampaignAddResponse `json:"simba_campaign_add_response"`
 }
 
-
-
-
-
 /* 取得一个推广计划的投放地域设置 */
 type SimbaCampaignAreaGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaCampaignAreaGetRequest) SetCampaignId(value string) {
@@ -997,7 +866,6 @@ func (r *SimbaCampaignAreaGetRequest) SetCampaignId(value string) {
 func (r *SimbaCampaignAreaGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCampaignAreaGetRequest) GetResponse(accessToken string) (*SimbaCampaignAreaGetResponse, []byte, error) {
 	var resp SimbaCampaignAreaGetResponseResult
@@ -1016,15 +884,10 @@ type SimbaCampaignAreaGetResponseResult struct {
 	Response *SimbaCampaignAreaGetResponse `json:"simba_campaign_area_get_response"`
 }
 
-
-
-
-
 /* 更新一个推广计划的投放地域 */
 type SimbaCampaignAreaUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 值为：“all”；或者用“,”分割的数字，数字必须是直通车全国省市列表的AreaID； */
 func (r *SimbaCampaignAreaUpdateRequest) SetArea(value string) {
@@ -1040,7 +903,6 @@ func (r *SimbaCampaignAreaUpdateRequest) SetCampaignId(value string) {
 func (r *SimbaCampaignAreaUpdateRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCampaignAreaUpdateRequest) GetResponse(accessToken string) (*SimbaCampaignAreaUpdateResponse, []byte, error) {
 	var resp SimbaCampaignAreaUpdateResponseResult
@@ -1059,16 +921,10 @@ type SimbaCampaignAreaUpdateResponseResult struct {
 	Response *SimbaCampaignAreaUpdateResponse `json:"simba_campaign_area_update_response"`
 }
 
-
-
-
-
 /* 取得推广计划的可设置投放地域列表 */
 type SimbaCampaignAreaoptionsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
-
 
 func (r *SimbaCampaignAreaoptionsGetRequest) GetResponse(accessToken string) (*SimbaCampaignAreaoptionsGetResponse, []byte, error) {
 	var resp SimbaCampaignAreaoptionsGetResponseResult
@@ -1087,15 +943,10 @@ type SimbaCampaignAreaoptionsGetResponseResult struct {
 	Response *SimbaCampaignAreaoptionsGetResponse `json:"simba_campaign_areaoptions_get_response"`
 }
 
-
-
-
-
 /* 取得一个推广计划的日限额 */
 type SimbaCampaignBudgetGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaCampaignBudgetGetRequest) SetCampaignId(value string) {
@@ -1106,7 +957,6 @@ func (r *SimbaCampaignBudgetGetRequest) SetCampaignId(value string) {
 func (r *SimbaCampaignBudgetGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCampaignBudgetGetRequest) GetResponse(accessToken string) (*SimbaCampaignBudgetGetResponse, []byte, error) {
 	var resp SimbaCampaignBudgetGetResponseResult
@@ -1125,15 +975,10 @@ type SimbaCampaignBudgetGetResponseResult struct {
 	Response *SimbaCampaignBudgetGetResponse `json:"simba_campaign_budget_get_response"`
 }
 
-
-
-
-
 /* 更新一个推广计划的日限额 */
 type SimbaCampaignBudgetUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 如果为空则取消限额；否则必须为整数，单位是元，不得小于30； */
 func (r *SimbaCampaignBudgetUpdateRequest) SetBudget(value string) {
@@ -1155,7 +1000,6 @@ func (r *SimbaCampaignBudgetUpdateRequest) SetUseSmooth(value string) {
 	r.SetValue("use_smooth", value)
 }
 
-
 func (r *SimbaCampaignBudgetUpdateRequest) GetResponse(accessToken string) (*SimbaCampaignBudgetUpdateResponse, []byte, error) {
 	var resp SimbaCampaignBudgetUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.campaign.budget.update", &resp)
@@ -1173,16 +1017,10 @@ type SimbaCampaignBudgetUpdateResponseResult struct {
 	Response *SimbaCampaignBudgetUpdateResponse `json:"simba_campaign_budget_update_response"`
 }
 
-
-
-
-
 /* 取得推广计划的可设置投放频道列表 */
 type SimbaCampaignChanneloptionsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
-
 
 func (r *SimbaCampaignChanneloptionsGetRequest) GetResponse(accessToken string) (*SimbaCampaignChanneloptionsGetResponse, []byte, error) {
 	var resp SimbaCampaignChanneloptionsGetResponseResult
@@ -1201,15 +1039,10 @@ type SimbaCampaignChanneloptionsGetResponseResult struct {
 	Response *SimbaCampaignChanneloptionsGetResponse `json:"simba_campaign_channeloptions_get_response"`
 }
 
-
-
-
-
 /* 取得一个推广计划的投放平台设置 */
 type SimbaCampaignPlatformGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaCampaignPlatformGetRequest) SetCampaignId(value string) {
@@ -1220,7 +1053,6 @@ func (r *SimbaCampaignPlatformGetRequest) SetCampaignId(value string) {
 func (r *SimbaCampaignPlatformGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCampaignPlatformGetRequest) GetResponse(accessToken string) (*SimbaCampaignPlatformGetResponse, []byte, error) {
 	var resp SimbaCampaignPlatformGetResponseResult
@@ -1239,15 +1071,10 @@ type SimbaCampaignPlatformGetResponseResult struct {
 	Response *SimbaCampaignPlatformGetResponse `json:"simba_campaign_platform_get_response"`
 }
 
-
-
-
-
 /* 更新一个推广计划的平台设置 */
 type SimbaCampaignPlatformUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaCampaignPlatformUpdateRequest) SetCampaignId(value string) {
@@ -1274,7 +1101,6 @@ func (r *SimbaCampaignPlatformUpdateRequest) SetSearchChannels(value string) {
 	r.SetValue("search_channels", value)
 }
 
-
 func (r *SimbaCampaignPlatformUpdateRequest) GetResponse(accessToken string) (*SimbaCampaignPlatformUpdateResponse, []byte, error) {
 	var resp SimbaCampaignPlatformUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.campaign.platform.update", &resp)
@@ -1292,15 +1118,10 @@ type SimbaCampaignPlatformUpdateResponseResult struct {
 	Response *SimbaCampaignPlatformUpdateResponse `json:"simba_campaign_platform_update_response"`
 }
 
-
-
-
-
 /* 取得一个推广计划的分时折扣设置 */
 type SimbaCampaignScheduleGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaCampaignScheduleGetRequest) SetCampaignId(value string) {
@@ -1311,7 +1132,6 @@ func (r *SimbaCampaignScheduleGetRequest) SetCampaignId(value string) {
 func (r *SimbaCampaignScheduleGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCampaignScheduleGetRequest) GetResponse(accessToken string) (*SimbaCampaignScheduleGetResponse, []byte, error) {
 	var resp SimbaCampaignScheduleGetResponseResult
@@ -1330,15 +1150,10 @@ type SimbaCampaignScheduleGetResponseResult struct {
 	Response *SimbaCampaignScheduleGetResponse `json:"simba_campaign_schedule_get_response"`
 }
 
-
-
-
-
 /* 更新一个推广计划的分时折扣设置 */
 type SimbaCampaignScheduleUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaCampaignScheduleUpdateRequest) SetCampaignId(value string) {
@@ -1354,7 +1169,6 @@ func (r *SimbaCampaignScheduleUpdateRequest) SetNick(value string) {
 func (r *SimbaCampaignScheduleUpdateRequest) SetSchedule(value string) {
 	r.SetValue("schedule", value)
 }
-
 
 func (r *SimbaCampaignScheduleUpdateRequest) GetResponse(accessToken string) (*SimbaCampaignScheduleUpdateResponse, []byte, error) {
 	var resp SimbaCampaignScheduleUpdateResponseResult
@@ -1373,15 +1187,10 @@ type SimbaCampaignScheduleUpdateResponseResult struct {
 	Response *SimbaCampaignScheduleUpdateResponse `json:"simba_campaign_schedule_update_response"`
 }
 
-
-
-
-
 /* 更新一个推广计划，可以设置推广计划名字，修改推广计划上下线状态。 */
 type SimbaCampaignUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaCampaignUpdateRequest) SetCampaignId(value string) {
@@ -1403,7 +1212,6 @@ func (r *SimbaCampaignUpdateRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
-
 func (r *SimbaCampaignUpdateRequest) GetResponse(accessToken string) (*SimbaCampaignUpdateResponse, []byte, error) {
 	var resp SimbaCampaignUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.campaign.update", &resp)
@@ -1421,21 +1229,15 @@ type SimbaCampaignUpdateResponseResult struct {
 	Response *SimbaCampaignUpdateResponse `json:"simba_campaign_update_response"`
 }
 
-
-
-
-
 /* 取得一个客户的推广计划； */
 type SimbaCampaignsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-
 /* 主人昵称 */
 func (r *SimbaCampaignsGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCampaignsGetRequest) GetResponse(accessToken string) (*SimbaCampaignsGetResponse, []byte, error) {
 	var resp SimbaCampaignsGetResponseResult
@@ -1454,15 +1256,10 @@ type SimbaCampaignsGetResponseResult struct {
 	Response *SimbaCampaignsGetResponse `json:"simba_campaigns_get_response"`
 }
 
-
-
-
-
 /* 获取更改过的类目出价ID */
 type SimbaCatmatchidsChangedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaCatmatchidsChangedGetRequest) SetNick(value string) {
@@ -1484,7 +1281,6 @@ func (r *SimbaCatmatchidsChangedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaCatmatchidsChangedGetRequest) GetResponse(accessToken string) (*SimbaCatmatchidsChangedGetResponse, []byte, error) {
 	var resp SimbaCatmatchidsChangedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.catmatchids.changed.get", &resp)
@@ -1502,15 +1298,10 @@ type SimbaCatmatchidsChangedGetResponseResult struct {
 	Response *SimbaCatmatchidsChangedGetResponse `json:"simba_catmatchids_changed_get_response"`
 }
 
-
-
-
-
 /* 获取删除的类目出价ID */
 type SimbaCatmatchidsDeletedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaCatmatchidsDeletedGetRequest) SetNick(value string) {
@@ -1532,7 +1323,6 @@ func (r *SimbaCatmatchidsDeletedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaCatmatchidsDeletedGetRequest) GetResponse(accessToken string) (*SimbaCatmatchidsDeletedGetResponse, []byte, error) {
 	var resp SimbaCatmatchidsDeletedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.catmatchids.deleted.get", &resp)
@@ -1550,15 +1340,10 @@ type SimbaCatmatchidsDeletedGetResponseResult struct {
 	Response *SimbaCatmatchidsDeletedGetResponse `json:"simba_catmatchids_deleted_get_response"`
 }
 
-
-
-
-
 /* 创建一个创意 */
 type SimbaCreativeAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaCreativeAddRequest) SetAdgroupId(value string) {
@@ -1580,7 +1365,6 @@ func (r *SimbaCreativeAddRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
-
 func (r *SimbaCreativeAddRequest) GetResponse(accessToken string) (*SimbaCreativeAddResponse, []byte, error) {
 	var resp SimbaCreativeAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.creative.add", &resp)
@@ -1598,15 +1382,10 @@ type SimbaCreativeAddResponseResult struct {
 	Response *SimbaCreativeAddResponse `json:"simba_creative_add_response"`
 }
 
-
-
-
-
 /* 删除一个创意 */
 type SimbaCreativeDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 创意Id */
 func (r *SimbaCreativeDeleteRequest) SetCreativeId(value string) {
@@ -1617,7 +1396,6 @@ func (r *SimbaCreativeDeleteRequest) SetCreativeId(value string) {
 func (r *SimbaCreativeDeleteRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCreativeDeleteRequest) GetResponse(accessToken string) (*SimbaCreativeDeleteResponse, []byte, error) {
 	var resp SimbaCreativeDeleteResponseResult
@@ -1636,15 +1414,10 @@ type SimbaCreativeDeleteResponseResult struct {
 	Response *SimbaCreativeDeleteResponse `json:"simba_creative_delete_response"`
 }
 
-
-
-
-
 /* 更新一个创意的信息，可以设置创意标题、创意图片 */
 type SimbaCreativeUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaCreativeUpdateRequest) SetAdgroupId(value string) {
@@ -1671,7 +1444,6 @@ func (r *SimbaCreativeUpdateRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
-
 func (r *SimbaCreativeUpdateRequest) GetResponse(accessToken string) (*SimbaCreativeUpdateResponse, []byte, error) {
 	var resp SimbaCreativeUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.creative.update", &resp)
@@ -1689,15 +1461,10 @@ type SimbaCreativeUpdateResponseResult struct {
 	Response *SimbaCreativeUpdateResponse `json:"simba_creative_update_response"`
 }
 
-
-
-
-
 /* 获取修改的创意ID */
 type SimbaCreativeidsChangedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaCreativeidsChangedGetRequest) SetNick(value string) {
@@ -1719,7 +1486,6 @@ func (r *SimbaCreativeidsChangedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaCreativeidsChangedGetRequest) GetResponse(accessToken string) (*SimbaCreativeidsChangedGetResponse, []byte, error) {
 	var resp SimbaCreativeidsChangedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.creativeids.changed.get", &resp)
@@ -1737,15 +1503,10 @@ type SimbaCreativeidsChangedGetResponseResult struct {
 	Response *SimbaCreativeidsChangedGetResponse `json:"simba_creativeids_changed_get_response"`
 }
 
-
-
-
-
 /* 获取删除的创意ID */
 type SimbaCreativeidsDeletedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaCreativeidsDeletedGetRequest) SetNick(value string) {
@@ -1767,7 +1528,6 @@ func (r *SimbaCreativeidsDeletedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaCreativeidsDeletedGetRequest) GetResponse(accessToken string) (*SimbaCreativeidsDeletedGetResponse, []byte, error) {
 	var resp SimbaCreativeidsDeletedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.creativeids.deleted.get", &resp)
@@ -1785,15 +1545,10 @@ type SimbaCreativeidsDeletedGetResponseResult struct {
 	Response *SimbaCreativeidsDeletedGetResponse `json:"simba_creativeids_deleted_get_response"`
 }
 
-
-
-
-
 /* 分页获取修改过的广告创意ID和修改时间 */
 type SimbaCreativesChangedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaCreativesChangedGetRequest) SetNick(value string) {
@@ -1815,7 +1570,6 @@ func (r *SimbaCreativesChangedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaCreativesChangedGetRequest) GetResponse(accessToken string) (*SimbaCreativesChangedGetResponse, []byte, error) {
 	var resp SimbaCreativesChangedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.creatives.changed.get", &resp)
@@ -1833,16 +1587,11 @@ type SimbaCreativesChangedGetResponseResult struct {
 	Response *SimbaCreativesChangedGetResponse `json:"simba_creatives_changed_get_response"`
 }
 
-
-
-
-
-/* 取得一个推广组的所有创意或者根据一个创意Id列表取得一组创意； 
+/* 取得一个推广组的所有创意或者根据一个创意Id列表取得一组创意；
 如果同时提供了推广组Id和创意id列表，则优先使用推广组Id； */
 type SimbaCreativesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaCreativesGetRequest) SetAdgroupId(value string) {
@@ -1858,7 +1607,6 @@ func (r *SimbaCreativesGetRequest) SetCreativeIds(value string) {
 func (r *SimbaCreativesGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCreativesGetRequest) GetResponse(accessToken string) (*SimbaCreativesGetResponse, []byte, error) {
 	var resp SimbaCreativesGetResponseResult
@@ -1877,15 +1625,10 @@ type SimbaCreativesGetResponseResult struct {
 	Response *SimbaCreativesGetResponse `json:"simba_creatives_get_response"`
 }
 
-
-
-
-
 /* 根据一个创意Id列表取得创意对应的修改记录 */
 type SimbaCreativesRecordGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 创意Id数组，最多200个 */
 func (r *SimbaCreativesRecordGetRequest) SetCreativeIds(value string) {
@@ -1896,7 +1639,6 @@ func (r *SimbaCreativesRecordGetRequest) SetCreativeIds(value string) {
 func (r *SimbaCreativesRecordGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaCreativesRecordGetRequest) GetResponse(accessToken string) (*SimbaCreativesRecordGetResponse, []byte, error) {
 	var resp SimbaCreativesRecordGetResponseResult
@@ -1915,16 +1657,10 @@ type SimbaCreativesRecordGetResponseResult struct {
 	Response *SimbaCreativesRecordGetResponse `json:"simba_creatives_record_get_response"`
 }
 
-
-
-
-
 /* 取得当前登录用户的授权账户列表 */
 type SimbaCustomersAuthorizedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
-
 
 func (r *SimbaCustomersAuthorizedGetRequest) GetResponse(accessToken string) (*SimbaCustomersAuthorizedGetResponse, []byte, error) {
 	var resp SimbaCustomersAuthorizedGetResponseResult
@@ -1943,15 +1679,10 @@ type SimbaCustomersAuthorizedGetResponseResult struct {
 	Response *SimbaCustomersAuthorizedGetResponse `json:"simba_customers_authorized_get_response"`
 }
 
-
-
-
-
 /* 获取类目信息 */
 type SimbaInsightCatsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 查询类目id数组，最大长度200 */
 func (r *SimbaInsightCatsGetRequest) SetCategoryIds(value string) {
@@ -1962,7 +1693,6 @@ func (r *SimbaInsightCatsGetRequest) SetCategoryIds(value string) {
 func (r *SimbaInsightCatsGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaInsightCatsGetRequest) GetResponse(accessToken string) (*SimbaInsightCatsGetResponse, []byte, error) {
 	var resp SimbaInsightCatsGetResponseResult
@@ -1981,15 +1711,10 @@ type SimbaInsightCatsGetResponseResult struct {
 	Response *SimbaInsightCatsGetResponse `json:"simba_insight_cats_get_response"`
 }
 
-
-
-
-
 /* 类目分析数据查询 */
 type SimbaInsightCatsanalysisGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 查询类目id数组，最大长度200 */
 func (r *SimbaInsightCatsanalysisGetRequest) SetCategoryIds(value string) {
@@ -2001,15 +1726,14 @@ func (r *SimbaInsightCatsanalysisGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
 
-/* 结果过滤。 
-AREA：返回地域占比； 
-SOURCE：返回来源占比； 
-HPRICE：返回竞价分布。 
+/* 结果过滤。
+AREA：返回地域占比；
+SOURCE：返回来源占比；
+HPRICE：返回竞价分布。
 stu只能是AREA、SOURCE或HPRICE中的一个 */
 func (r *SimbaInsightCatsanalysisGetRequest) SetStu(value string) {
 	r.SetValue("stu", value)
 }
-
 
 func (r *SimbaInsightCatsanalysisGetRequest) GetResponse(accessToken string) (*SimbaInsightCatsanalysisGetResponse, []byte, error) {
 	var resp SimbaInsightCatsanalysisGetResponseResult
@@ -2028,15 +1752,10 @@ type SimbaInsightCatsanalysisGetResponseResult struct {
 	Response *SimbaInsightCatsanalysisGetResponse `json:"simba_insight_catsanalysis_get_response"`
 }
 
-
-
-
-
 /* 类目基础数据查询 */
 type SimbaInsightCatsbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 查询类目id数组，最大长度200 */
 func (r *SimbaInsightCatsbaseGetRequest) SetCategoryIds(value string) {
@@ -2058,7 +1777,6 @@ func (r *SimbaInsightCatsbaseGetRequest) SetTime(value string) {
 	r.SetValue("time", value)
 }
 
-
 func (r *SimbaInsightCatsbaseGetRequest) GetResponse(accessToken string) (*SimbaInsightCatsbaseGetResponse, []byte, error) {
 	var resp SimbaInsightCatsbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.insight.catsbase.get", &resp)
@@ -2076,15 +1794,10 @@ type SimbaInsightCatsbaseGetResponseResult struct {
 	Response *SimbaInsightCatsbaseGetResponse `json:"simba_insight_catsbase_get_response"`
 }
 
-
-
-
-
 /* 类目属性预测 */
 type SimbaInsightCatsforecastGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaInsightCatsforecastGetRequest) SetNick(value string) {
@@ -2095,7 +1808,6 @@ func (r *SimbaInsightCatsforecastGetRequest) SetNick(value string) {
 func (r *SimbaInsightCatsforecastGetRequest) SetWords(value string) {
 	r.SetValue("words", value)
 }
-
 
 func (r *SimbaInsightCatsforecastGetRequest) GetResponse(accessToken string) (*SimbaInsightCatsforecastGetResponse, []byte, error) {
 	var resp SimbaInsightCatsforecastGetResponseResult
@@ -2114,15 +1826,10 @@ type SimbaInsightCatsforecastGetResponseResult struct {
 	Response *SimbaInsightCatsforecastGetResponse `json:"simba_insight_catsforecast_get_response"`
 }
 
-
-
-
-
 /* 类目相关词查询 */
 type SimbaInsightCatsrelatedwordGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaInsightCatsrelatedwordGetRequest) SetNick(value string) {
@@ -2138,7 +1845,6 @@ func (r *SimbaInsightCatsrelatedwordGetRequest) SetResultNum(value string) {
 func (r *SimbaInsightCatsrelatedwordGetRequest) SetWords(value string) {
 	r.SetValue("words", value)
 }
-
 
 func (r *SimbaInsightCatsrelatedwordGetRequest) GetResponse(accessToken string) (*SimbaInsightCatsrelatedwordGetResponse, []byte, error) {
 	var resp SimbaInsightCatsrelatedwordGetResponseResult
@@ -2157,15 +1863,10 @@ type SimbaInsightCatsrelatedwordGetResponseResult struct {
 	Response *SimbaInsightCatsrelatedwordGetResponse `json:"simba_insight_catsrelatedword_get_response"`
 }
 
-
-
-
-
 /* 类目TOP词查询 */
 type SimbaInsightCatstopwordGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 类目id数组，最大长度200 */
 func (r *SimbaInsightCatstopwordGetRequest) SetCategoryIds(value string) {
@@ -2181,7 +1882,6 @@ func (r *SimbaInsightCatstopwordGetRequest) SetNick(value string) {
 func (r *SimbaInsightCatstopwordGetRequest) SetResultNum(value string) {
 	r.SetValue("result_num", value)
 }
-
 
 func (r *SimbaInsightCatstopwordGetRequest) GetResponse(accessToken string) (*SimbaInsightCatstopwordGetResponse, []byte, error) {
 	var resp SimbaInsightCatstopwordGetResponseResult
@@ -2200,21 +1900,15 @@ type SimbaInsightCatstopwordGetResponseResult struct {
 	Response *SimbaInsightCatstopwordGetResponse `json:"simba_insight_catstopword_get_response"`
 }
 
-
-
-
-
 /* 获取一级类目 */
 type SimbaInsightToplevelcatsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-
 /* 主人昵称 */
 func (r *SimbaInsightToplevelcatsGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaInsightToplevelcatsGetRequest) GetResponse(accessToken string) (*SimbaInsightToplevelcatsGetResponse, []byte, error) {
 	var resp SimbaInsightToplevelcatsGetResponseResult
@@ -2233,25 +1927,20 @@ type SimbaInsightToplevelcatsGetResponseResult struct {
 	Response *SimbaInsightToplevelcatsGetResponse `json:"simba_insight_toplevelcats_get_response"`
 }
 
-
-
-
-
 /* 词分析数据查询 */
 type SimbaInsightWordsanalysisGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaInsightWordsanalysisGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
 
-/* 结果过滤。 
-AREA：  返回地域占比； 
-SOURCE：返回来源占比； 
-HPRICE：返回竞价分布。 
+/* 结果过滤。
+AREA：  返回地域占比；
+SOURCE：返回来源占比；
+HPRICE：返回竞价分布。
 stu只能是AREA、SOURCE或HPRICE中的一个 */
 func (r *SimbaInsightWordsanalysisGetRequest) SetStu(value string) {
 	r.SetValue("stu", value)
@@ -2261,7 +1950,6 @@ func (r *SimbaInsightWordsanalysisGetRequest) SetStu(value string) {
 func (r *SimbaInsightWordsanalysisGetRequest) SetWords(value string) {
 	r.SetValue("words", value)
 }
-
 
 func (r *SimbaInsightWordsanalysisGetRequest) GetResponse(accessToken string) (*SimbaInsightWordsanalysisGetResponse, []byte, error) {
 	var resp SimbaInsightWordsanalysisGetResponseResult
@@ -2280,15 +1968,10 @@ type SimbaInsightWordsanalysisGetResponseResult struct {
 	Response *SimbaInsightWordsanalysisGetResponse `json:"simba_insight_wordsanalysis_get_response"`
 }
 
-
-
-
-
 /* 词基础数据查询 */
 type SimbaInsightWordsbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 结果过滤。PV：返回展现量；CLICK：返回点击量；AVGCPC：返回平均出价；COMPETITION ：返回竞争宝贝数;CTR 点击率。filter可由,组合 */
 func (r *SimbaInsightWordsbaseGetRequest) SetFilter(value string) {
@@ -2310,7 +1993,6 @@ func (r *SimbaInsightWordsbaseGetRequest) SetWords(value string) {
 	r.SetValue("words", value)
 }
 
-
 func (r *SimbaInsightWordsbaseGetRequest) GetResponse(accessToken string) (*SimbaInsightWordsbaseGetResponse, []byte, error) {
 	var resp SimbaInsightWordsbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.insight.wordsbase.get", &resp)
@@ -2328,15 +2010,10 @@ type SimbaInsightWordsbaseGetResponseResult struct {
 	Response *SimbaInsightWordsbaseGetResponse `json:"simba_insight_wordsbase_get_response"`
 }
 
-
-
-
-
 /* 词和类目查询 */
 type SimbaInsightWordscatsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 结果过滤。PV：返回展现量；CLICK：返回点击量；AVGCPC：返回平均出价；COMPETITION ：返回竞争宝贝数;CTR 点击率。filter可由,组合 */
 func (r *SimbaInsightWordscatsGetRequest) SetFilter(value string) {
@@ -2348,12 +2025,11 @@ func (r *SimbaInsightWordscatsGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
 
-/* 查询词和类目数组，最大长度200，每一个数组元素都是词+类目，以”^^”分割如下： 
+/* 查询词和类目数组，最大长度200，每一个数组元素都是词+类目，以”^^”分割如下：
 词^^类目 */
 func (r *SimbaInsightWordscatsGetRequest) SetWordCategories(value string) {
 	r.SetValue("word_categories", value)
 }
-
 
 func (r *SimbaInsightWordscatsGetRequest) GetResponse(accessToken string) (*SimbaInsightWordscatsGetResponse, []byte, error) {
 	var resp SimbaInsightWordscatsGetResponseResult
@@ -2372,15 +2048,10 @@ type SimbaInsightWordscatsGetResponseResult struct {
 	Response *SimbaInsightWordscatsGetResponse `json:"simba_insight_wordscats_get_response"`
 }
 
-
-
-
-
 /* 根据词ID和给定的出价获取词的预估信息 */
 type SimbaKeywordKeywordforecastGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 词的出价,范围在5-9999之间,单位分 */
 func (r *SimbaKeywordKeywordforecastGetRequest) SetBidwordPrice(value string) {
@@ -2396,7 +2067,6 @@ func (r *SimbaKeywordKeywordforecastGetRequest) SetKeywordId(value string) {
 func (r *SimbaKeywordKeywordforecastGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaKeywordKeywordforecastGetRequest) GetResponse(accessToken string) (*SimbaKeywordKeywordforecastGetResponse, []byte, error) {
 	var resp SimbaKeywordKeywordforecastGetResponseResult
@@ -2415,15 +2085,10 @@ type SimbaKeywordKeywordforecastGetResponseResult struct {
 	Response *SimbaKeywordKeywordforecastGetResponse `json:"simba_keyword_keywordforecast_get_response"`
 }
 
-
-
-
-
 /* 获取修改的词ID */
 type SimbaKeywordidsChangedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaKeywordidsChangedGetRequest) SetNick(value string) {
@@ -2445,7 +2110,6 @@ func (r *SimbaKeywordidsChangedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaKeywordidsChangedGetRequest) GetResponse(accessToken string) (*SimbaKeywordidsChangedGetResponse, []byte, error) {
 	var resp SimbaKeywordidsChangedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.keywordids.changed.get", &resp)
@@ -2463,15 +2127,10 @@ type SimbaKeywordidsChangedGetResponseResult struct {
 	Response *SimbaKeywordidsChangedGetResponse `json:"simba_keywordids_changed_get_response"`
 }
 
-
-
-
-
 /* 获取删除的词ID */
 type SimbaKeywordidsDeletedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaKeywordidsDeletedGetRequest) SetNick(value string) {
@@ -2493,7 +2152,6 @@ func (r *SimbaKeywordidsDeletedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaKeywordidsDeletedGetRequest) GetResponse(accessToken string) (*SimbaKeywordidsDeletedGetResponse, []byte, error) {
 	var resp SimbaKeywordidsDeletedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.keywordids.deleted.get", &resp)
@@ -2511,15 +2169,10 @@ type SimbaKeywordidsDeletedGetResponseResult struct {
 	Response *SimbaKeywordidsDeletedGetResponse `json:"simba_keywordids_deleted_get_response"`
 }
 
-
-
-
-
 /* 分页获取修改过的关键词ID、宝贝id、修改时间 */
 type SimbaKeywordsChangedGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 主人昵称 */
 func (r *SimbaKeywordsChangedGetRequest) SetNick(value string) {
@@ -2541,7 +2194,6 @@ func (r *SimbaKeywordsChangedGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
-
 func (r *SimbaKeywordsChangedGetRequest) GetResponse(accessToken string) (*SimbaKeywordsChangedGetResponse, []byte, error) {
 	var resp SimbaKeywordsChangedGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.keywords.changed.get", &resp)
@@ -2559,15 +2211,10 @@ type SimbaKeywordsChangedGetResponseResult struct {
 	Response *SimbaKeywordsChangedGetResponse `json:"simba_keywords_changed_get_response"`
 }
 
-
-
-
-
 /* 删除一批关键词 */
 type SimbaKeywordsDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划Id */
 func (r *SimbaKeywordsDeleteRequest) SetCampaignId(value string) {
@@ -2583,7 +2230,6 @@ func (r *SimbaKeywordsDeleteRequest) SetKeywordIds(value string) {
 func (r *SimbaKeywordsDeleteRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaKeywordsDeleteRequest) GetResponse(accessToken string) (*SimbaKeywordsDeleteResponse, []byte, error) {
 	var resp SimbaKeywordsDeleteResponseResult
@@ -2602,15 +2248,10 @@ type SimbaKeywordsDeleteResponseResult struct {
 	Response *SimbaKeywordsDeleteResponse `json:"simba_keywords_delete_response"`
 }
 
-
-
-
-
 /* 设置一批关键词的出价 */
 type SimbaKeywordsPricevonSetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 关键词ID，出价和匹配方式json字符串，keywordId:词ID，整数。maxPrice：价格，是整数，以“分”为单位，不能小于5，不能大于日限额,当使用默认出价时必须将这个值设置为0。; isDefaultPrice：是否使用默认出价，只能是0，1(0代表不使用，1代表使用)。matchscope只能是1,2,4（1代表精确匹配，2代表子串匹配，4代表广泛匹配） */
 func (r *SimbaKeywordsPricevonSetRequest) SetKeywordidPrices(value string) {
@@ -2622,7 +2263,6 @@ func (r *SimbaKeywordsPricevonSetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
 
-
 func (r *SimbaKeywordsPricevonSetRequest) GetResponse(accessToken string) (*SimbaKeywordsPricevonSetResponse, []byte, error) {
 	var resp SimbaKeywordsPricevonSetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.keywords.pricevon.set", &resp)
@@ -2633,22 +2273,17 @@ func (r *SimbaKeywordsPricevonSetRequest) GetResponse(accessToken string) (*Simb
 }
 
 type SimbaKeywordsPricevonSetResponse struct {
-	Keywords []*Keyword `json:"keywords"`
+	Keywords []*Keyword `json:"keyword"`
 }
 
 type SimbaKeywordsPricevonSetResponseResult struct {
 	Response *SimbaKeywordsPricevonSetResponse `json:"simba_keywords_pricevon_set_response"`
 }
 
-
-
-
-
 /* 取得一个推广组的所有关键词的质量得分列表 */
 type SimbaKeywordsQscoreGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaKeywordsQscoreGetRequest) SetAdgroupId(value string) {
@@ -2659,7 +2294,6 @@ func (r *SimbaKeywordsQscoreGetRequest) SetAdgroupId(value string) {
 func (r *SimbaKeywordsQscoreGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaKeywordsQscoreGetRequest) GetResponse(accessToken string) (*SimbaKeywordsQscoreGetResponse, []byte, error) {
 	var resp SimbaKeywordsQscoreGetResponseResult
@@ -2678,15 +2312,10 @@ type SimbaKeywordsQscoreGetResponseResult struct {
 	Response *SimbaKeywordsQscoreGetResponse `json:"simba_keywords_qscore_get_response"`
 }
 
-
-
-
-
 /* 取得一个推广组的推荐关键词列表 */
 type SimbaKeywordsRecommendGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组ID */
 func (r *SimbaKeywordsRecommendGetRequest) SetAdgroupId(value string) {
@@ -2698,11 +2327,11 @@ func (r *SimbaKeywordsRecommendGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
 
-/* 排序方式:  
-搜索量 search_volume  
-市场平均价格 average_price  
-相关度 relevance  
-不排序 non  
+/* 排序方式:
+搜索量 search_volume
+市场平均价格 average_price
+相关度 relevance
+不排序 non
 默认为 non */
 func (r *SimbaKeywordsRecommendGetRequest) SetOrderBy(value string) {
 	r.SetValue("order_by", value)
@@ -2728,7 +2357,6 @@ func (r *SimbaKeywordsRecommendGetRequest) SetSearch(value string) {
 	r.SetValue("search", value)
 }
 
-
 func (r *SimbaKeywordsRecommendGetRequest) GetResponse(accessToken string) (*SimbaKeywordsRecommendGetResponse, []byte, error) {
 	var resp SimbaKeywordsRecommendGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.keywords.recommend.get", &resp)
@@ -2746,15 +2374,10 @@ type SimbaKeywordsRecommendGetResponseResult struct {
 	Response *SimbaKeywordsRecommendGetResponse `json:"simba_keywords_recommend_get_response"`
 }
 
-
-
-
-
 /* 取得一个推广组的所有关键词 */
 type SimbaKeywordsbyadgroupidGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaKeywordsbyadgroupidGetRequest) SetAdgroupId(value string) {
@@ -2765,7 +2388,6 @@ func (r *SimbaKeywordsbyadgroupidGetRequest) SetAdgroupId(value string) {
 func (r *SimbaKeywordsbyadgroupidGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaKeywordsbyadgroupidGetRequest) GetResponse(accessToken string) (*SimbaKeywordsbyadgroupidGetResponse, []byte, error) {
 	var resp SimbaKeywordsbyadgroupidGetResponseResult
@@ -2784,15 +2406,10 @@ type SimbaKeywordsbyadgroupidGetResponseResult struct {
 	Response *SimbaKeywordsbyadgroupidGetResponse `json:"simba_keywordsbyadgroupid_get_response"`
 }
 
-
-
-
-
 /* 根据一个关键词Id列表取得一组关键词 */
 type SimbaKeywordsbykeywordidsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 关键词Id数组，最多200个； */
 func (r *SimbaKeywordsbykeywordidsGetRequest) SetKeywordIds(value string) {
@@ -2803,7 +2420,6 @@ func (r *SimbaKeywordsbykeywordidsGetRequest) SetKeywordIds(value string) {
 func (r *SimbaKeywordsbykeywordidsGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaKeywordsbykeywordidsGetRequest) GetResponse(accessToken string) (*SimbaKeywordsbykeywordidsGetResponse, []byte, error) {
 	var resp SimbaKeywordsbykeywordidsGetResponseResult
@@ -2822,15 +2438,10 @@ type SimbaKeywordsbykeywordidsGetResponseResult struct {
 	Response *SimbaKeywordsbykeywordidsGetResponse `json:"simba_keywordsbykeywordids_get_response"`
 }
 
-
-
-
-
 /* 取得一个推广组的所有关键词和类目出价的质量得分列表 */
 type SimbaKeywordscatQscoreGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组Id */
 func (r *SimbaKeywordscatQscoreGetRequest) SetAdgroupId(value string) {
@@ -2841,7 +2452,6 @@ func (r *SimbaKeywordscatQscoreGetRequest) SetAdgroupId(value string) {
 func (r *SimbaKeywordscatQscoreGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaKeywordscatQscoreGetRequest) GetResponse(accessToken string) (*SimbaKeywordscatQscoreGetResponse, []byte, error) {
 	var resp SimbaKeywordscatQscoreGetResponseResult
@@ -2860,15 +2470,10 @@ type SimbaKeywordscatQscoreGetResponseResult struct {
 	Response *SimbaKeywordscatQscoreGetResponse `json:"simba_keywordscat_qscore_get_response"`
 }
 
-
-
-
-
 /* 创建一批关键词 */
 type SimbaKeywordsvonAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组id */
 func (r *SimbaKeywordsvonAddRequest) SetAdgroupId(value string) {
@@ -2884,7 +2489,6 @@ func (r *SimbaKeywordsvonAddRequest) SetKeywordPrices(value string) {
 func (r *SimbaKeywordsvonAddRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaKeywordsvonAddRequest) GetResponse(accessToken string) (*SimbaKeywordsvonAddResponse, []byte, error) {
 	var resp SimbaKeywordsvonAddResponseResult
@@ -2903,21 +2507,15 @@ type SimbaKeywordsvonAddResponseResult struct {
 	Response *SimbaKeywordsvonAddResponse `json:"simba_keywordsvon_add_response"`
 }
 
-
-
-
-
 /* 获取登陆权限签名 */
 type SimbaLoginAuthsignGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-
 /* 主人昵称 */
 func (r *SimbaLoginAuthsignGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaLoginAuthsignGetRequest) GetResponse(accessToken string) (*SimbaLoginAuthsignGetResponse, []byte, error) {
 	var resp SimbaLoginAuthsignGetResponseResult
@@ -2936,15 +2534,10 @@ type SimbaLoginAuthsignGetResponseResult struct {
 	Response *SimbaLoginAuthsignGetResponse `json:"simba_login_authsign_get_response"`
 }
 
-
-
-
-
 /* 批量推广组添加定向推广投放位置，出价使用默认出价 */
 type SimbaNonsearchAdgroupplacesAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 宝贝id投放位置id json数组字符串，数组个数最多200个。其中json数组中的key必须和对应实体AdGroupPlace中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值 */
 func (r *SimbaNonsearchAdgroupplacesAddRequest) SetAdgroupPlacesJson(value string) {
@@ -2960,7 +2553,6 @@ func (r *SimbaNonsearchAdgroupplacesAddRequest) SetCampaignId(value string) {
 func (r *SimbaNonsearchAdgroupplacesAddRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaNonsearchAdgroupplacesAddRequest) GetResponse(accessToken string) (*SimbaNonsearchAdgroupplacesAddResponse, []byte, error) {
 	var resp SimbaNonsearchAdgroupplacesAddResponseResult
@@ -2979,15 +2571,10 @@ type SimbaNonsearchAdgroupplacesAddResponseResult struct {
 	Response *SimbaNonsearchAdgroupplacesAddResponse `json:"simba_nonsearch_adgroupplaces_add_response"`
 }
 
-
-
-
-
 /* 批量删除推广组定向推广投放位置 */
 type SimbaNonsearchAdgroupplacesDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组id，投放位置id  json数组字符串，数组个数最多200个。其中json数组中的key必须和对应实体AdGroupPlace中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值 */
 func (r *SimbaNonsearchAdgroupplacesDeleteRequest) SetAdgroupPlacesJson(value string) {
@@ -3003,7 +2590,6 @@ func (r *SimbaNonsearchAdgroupplacesDeleteRequest) SetCampaignId(value string) {
 func (r *SimbaNonsearchAdgroupplacesDeleteRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaNonsearchAdgroupplacesDeleteRequest) GetResponse(accessToken string) (*SimbaNonsearchAdgroupplacesDeleteResponse, []byte, error) {
 	var resp SimbaNonsearchAdgroupplacesDeleteResponseResult
@@ -3022,15 +2608,10 @@ type SimbaNonsearchAdgroupplacesDeleteResponseResult struct {
 	Response *SimbaNonsearchAdgroupplacesDeleteResponse `json:"simba_nonsearch_adgroupplaces_delete_response"`
 }
 
-
-
-
-
 /* 根据指定推广计划下推广组列表获取相应推广组投放位置包括通投位置和单独出价位置 */
 type SimbaNonsearchAdgroupplacesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组ID数组 */
 func (r *SimbaNonsearchAdgroupplacesGetRequest) SetAdgroupIds(value string) {
@@ -3046,7 +2627,6 @@ func (r *SimbaNonsearchAdgroupplacesGetRequest) SetCampaignId(value string) {
 func (r *SimbaNonsearchAdgroupplacesGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaNonsearchAdgroupplacesGetRequest) GetResponse(accessToken string) (*SimbaNonsearchAdgroupplacesGetResponse, []byte, error) {
 	var resp SimbaNonsearchAdgroupplacesGetResponseResult
@@ -3065,17 +2645,12 @@ type SimbaNonsearchAdgroupplacesGetResponseResult struct {
 	Response *SimbaNonsearchAdgroupplacesGetResponse `json:"simba_nonsearch_adgroupplaces_get_response"`
 }
 
-
-
-
-
 /* 批量修改推广组定向推广投放位置价格 */
 type SimbaNonsearchAdgroupplacesUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-
-/* 推广组id，投放位置id，出价，是否默认出价 json数组字符串，数组个数最多200个。是否默认出价不能为空, 出价以“分”为单位，不能小于5分，不能大于最高日限额，不能大于9999分。 
+/* 推广组id，投放位置id，出价，是否默认出价 json数组字符串，数组个数最多200个。是否默认出价不能为空, 出价以“分”为单位，不能小于5分，不能大于最高日限额，不能大于9999分。
 json数组中的key必须和对应实体AdGroupPlace中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值 */
 func (r *SimbaNonsearchAdgroupplacesUpdateRequest) SetAdgroupPlacesJson(value string) {
 	r.SetValue("adgroup_places_json", value)
@@ -3090,7 +2665,6 @@ func (r *SimbaNonsearchAdgroupplacesUpdateRequest) SetCampaignId(value string) {
 func (r *SimbaNonsearchAdgroupplacesUpdateRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaNonsearchAdgroupplacesUpdateRequest) GetResponse(accessToken string) (*SimbaNonsearchAdgroupplacesUpdateResponse, []byte, error) {
 	var resp SimbaNonsearchAdgroupplacesUpdateResponseResult
@@ -3109,16 +2683,10 @@ type SimbaNonsearchAdgroupplacesUpdateResponseResult struct {
 	Response *SimbaNonsearchAdgroupplacesUpdateResponse `json:"simba_nonsearch_adgroupplaces_update_response"`
 }
 
-
-
-
-
 /* 获取定向投放人群维度列表 */
 type SimbaNonsearchAlldemographicsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
-
 
 func (r *SimbaNonsearchAlldemographicsGetRequest) GetResponse(accessToken string) (*SimbaNonsearchAlldemographicsGetResponse, []byte, error) {
 	var resp SimbaNonsearchAlldemographicsGetResponseResult
@@ -3137,16 +2705,10 @@ type SimbaNonsearchAlldemographicsGetResponseResult struct {
 	Response *SimbaNonsearchAlldemographicsGetResponse `json:"simba_nonsearch_alldemographics_get_response"`
 }
 
-
-
-
-
 /* 获取单独出价投放位置列表 */
 type SimbaNonsearchAllplacesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
-
 
 func (r *SimbaNonsearchAllplacesGetRequest) GetResponse(accessToken string) (*SimbaNonsearchAllplacesGetResponse, []byte, error) {
 	var resp SimbaNonsearchAllplacesGetResponseResult
@@ -3165,15 +2727,10 @@ type SimbaNonsearchAllplacesGetResponseResult struct {
 	Response *SimbaNonsearchAllplacesGetResponse `json:"simba_nonsearch_allplaces_get_response"`
 }
 
-
-
-
-
 /* 获取给定campaign设置的投放人群维度列表 */
 type SimbaNonsearchDemographicsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划ID */
 func (r *SimbaNonsearchDemographicsGetRequest) SetCampaignId(value string) {
@@ -3184,7 +2741,6 @@ func (r *SimbaNonsearchDemographicsGetRequest) SetCampaignId(value string) {
 func (r *SimbaNonsearchDemographicsGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaNonsearchDemographicsGetRequest) GetResponse(accessToken string) (*SimbaNonsearchDemographicsGetResponse, []byte, error) {
 	var resp SimbaNonsearchDemographicsGetResponseResult
@@ -3203,22 +2759,17 @@ type SimbaNonsearchDemographicsGetResponseResult struct {
 	Response *SimbaNonsearchDemographicsGetResponse `json:"simba_nonsearch_demographics_get_response"`
 }
 
-
-
-
-
 /* 设置投放人群维度加价，如果给定的campagin没有设置给定的人群维度则添加给定的人群维度，如果给定的campaign已存在给定的人群维度则修改加价 */
 type SimbaNonsearchDemographicsUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划ID */
 func (r *SimbaNonsearchDemographicsUpdateRequest) SetCampaignId(value string) {
 	r.SetValue("campaign_id", value)
 }
 
-/* 投放人群维度Id，加价json数组字符串。数组长度不能超过15，json数组中的key必须和相应实体DemographicSetting中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值 
+/* 投放人群维度Id，加价json数组字符串。数组长度不能超过15，json数组中的key必须和相应实体DemographicSetting中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值
 incrementalPrice是整数，以“分”为单位，不能小于1，不能大于日限额,不能大于9999分; 可以为0表示不加价；投放人群维度ID必须有效 */
 func (r *SimbaNonsearchDemographicsUpdateRequest) SetDemographicIdPriceJson(value string) {
 	r.SetValue("demographic_id_price_json", value)
@@ -3228,7 +2779,6 @@ func (r *SimbaNonsearchDemographicsUpdateRequest) SetDemographicIdPriceJson(valu
 func (r *SimbaNonsearchDemographicsUpdateRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaNonsearchDemographicsUpdateRequest) GetResponse(accessToken string) (*SimbaNonsearchDemographicsUpdateResponse, []byte, error) {
 	var resp SimbaNonsearchDemographicsUpdateResponseResult
@@ -3247,15 +2797,10 @@ type SimbaNonsearchDemographicsUpdateResponseResult struct {
 	Response *SimbaNonsearchDemographicsUpdateResponse `json:"simba_nonsearch_demographics_update_response"`
 }
 
-
-
-
-
 /* 推广组基础报表数据对象 */
 type SimbaRptAdgroupbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组id */
 func (r *SimbaRptAdgroupbaseGetRequest) SetAdgroupId(value string) {
@@ -3287,7 +2832,7 @@ func (r *SimbaRptAdgroupbaseGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-/* 报表类型（搜索：SEARCH,类目出价：CAT, 
+/* 报表类型（搜索：SEARCH,类目出价：CAT,
 定向投放：NOSEARCH）可以一次取多个例如：SEARCH,CAT */
 func (r *SimbaRptAdgroupbaseGetRequest) SetSearchType(value string) {
 	r.SetValue("search_type", value)
@@ -3308,7 +2853,6 @@ func (r *SimbaRptAdgroupbaseGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptAdgroupbaseGetRequest) GetResponse(accessToken string) (*SimbaRptAdgroupbaseGetResponse, []byte, error) {
 	var resp SimbaRptAdgroupbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.adgroupbase.get", &resp)
@@ -3326,15 +2870,10 @@ type SimbaRptAdgroupbaseGetResponseResult struct {
 	Response *SimbaRptAdgroupbaseGetResponse `json:"simba_rpt_adgroupbase_get_response"`
 }
 
-
-
-
-
 /* 推广组下创意报表基础数据查询(汇总数据，不分类型) */
 type SimbaRptAdgroupcreativebaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组id */
 func (r *SimbaRptAdgroupcreativebaseGetRequest) SetAdgroupId(value string) {
@@ -3386,7 +2925,6 @@ func (r *SimbaRptAdgroupcreativebaseGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptAdgroupcreativebaseGetRequest) GetResponse(accessToken string) (*SimbaRptAdgroupcreativebaseGetResponse, []byte, error) {
 	var resp SimbaRptAdgroupcreativebaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.adgroupcreativebase.get", &resp)
@@ -3404,15 +2942,10 @@ type SimbaRptAdgroupcreativebaseGetResponseResult struct {
 	Response *SimbaRptAdgroupcreativebaseGetResponse `json:"simba_rpt_adgroupcreativebase_get_response"`
 }
 
-
-
-
-
 /* 推广组下的创意报表效果数据查询(汇总数据，不分类型) */
 type SimbaRptAdgroupcreativeeffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组id */
 func (r *SimbaRptAdgroupcreativeeffectGetRequest) SetAdgroupId(value string) {
@@ -3464,7 +2997,6 @@ func (r *SimbaRptAdgroupcreativeeffectGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptAdgroupcreativeeffectGetRequest) GetResponse(accessToken string) (*SimbaRptAdgroupcreativeeffectGetResponse, []byte, error) {
 	var resp SimbaRptAdgroupcreativeeffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.adgroupcreativeeffect.get", &resp)
@@ -3482,15 +3014,10 @@ type SimbaRptAdgroupcreativeeffectGetResponseResult struct {
 	Response *SimbaRptAdgroupcreativeeffectGetResponse `json:"simba_rpt_adgroupcreativeeffect_get_response"`
 }
 
-
-
-
-
 /* 推广组效果报表数据对象 */
 type SimbaRptAdgroupeffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组id */
 func (r *SimbaRptAdgroupeffectGetRequest) SetAdgroupId(value string) {
@@ -3522,7 +3049,7 @@ func (r *SimbaRptAdgroupeffectGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-/* 报表类型（搜索：SEARCH,类目出价：CAT, 
+/* 报表类型（搜索：SEARCH,类目出价：CAT,
 定向投放：NOSEARCH ）可以一次取多个例如：SEARCH,CAT */
 func (r *SimbaRptAdgroupeffectGetRequest) SetSearchType(value string) {
 	r.SetValue("search_type", value)
@@ -3543,7 +3070,6 @@ func (r *SimbaRptAdgroupeffectGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptAdgroupeffectGetRequest) GetResponse(accessToken string) (*SimbaRptAdgroupeffectGetResponse, []byte, error) {
 	var resp SimbaRptAdgroupeffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.adgroupeffect.get", &resp)
@@ -3561,15 +3087,10 @@ type SimbaRptAdgroupeffectGetResponseResult struct {
 	Response *SimbaRptAdgroupeffectGetResponse `json:"simba_rpt_adgroupeffect_get_response"`
 }
 
-
-
-
-
 /* 推广组下的词基础报表数据查询(明细数据不分类型查询) */
 type SimbaRptAdgroupkeywordbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组ID */
 func (r *SimbaRptAdgroupkeywordbaseGetRequest) SetAdgroupId(value string) {
@@ -3621,7 +3142,6 @@ func (r *SimbaRptAdgroupkeywordbaseGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptAdgroupkeywordbaseGetRequest) GetResponse(accessToken string) (*SimbaRptAdgroupkeywordbaseGetResponse, []byte, error) {
 	var resp SimbaRptAdgroupkeywordbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.adgroupkeywordbase.get", &resp)
@@ -3639,15 +3159,10 @@ type SimbaRptAdgroupkeywordbaseGetResponseResult struct {
 	Response *SimbaRptAdgroupkeywordbaseGetResponse `json:"simba_rpt_adgroupkeywordbase_get_response"`
 }
 
-
-
-
-
 /* 推广组下的词效果报表数据查询(明细数据不分类型查询) */
 type SimbaRptAdgroupkeywordeffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组ID */
 func (r *SimbaRptAdgroupkeywordeffectGetRequest) SetAdgroupId(value string) {
@@ -3699,7 +3214,6 @@ func (r *SimbaRptAdgroupkeywordeffectGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptAdgroupkeywordeffectGetRequest) GetResponse(accessToken string) (*SimbaRptAdgroupkeywordeffectGetResponse, []byte, error) {
 	var resp SimbaRptAdgroupkeywordeffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.adgroupkeywordeffect.get", &resp)
@@ -3717,15 +3231,10 @@ type SimbaRptAdgroupkeywordeffectGetResponseResult struct {
 	Response *SimbaRptAdgroupkeywordeffectGetResponse `json:"simba_rpt_adgroupkeywordeffect_get_response"`
 }
 
-
-
-
-
 /* 推广组下的定向推广基础数据查询 */
 type SimbaRptAdgroupnonsearchbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组id */
 func (r *SimbaRptAdgroupnonsearchbaseGetRequest) SetAdgroupId(value string) {
@@ -3767,7 +3276,6 @@ func (r *SimbaRptAdgroupnonsearchbaseGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptAdgroupnonsearchbaseGetRequest) GetResponse(accessToken string) (*SimbaRptAdgroupnonsearchbaseGetResponse, []byte, error) {
 	var resp SimbaRptAdgroupnonsearchbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.adgroupnonsearchbase.get", &resp)
@@ -3785,15 +3293,10 @@ type SimbaRptAdgroupnonsearchbaseGetResponseResult struct {
 	Response *SimbaRptAdgroupnonsearchbaseGetResponse `json:"simba_rpt_adgroupnonsearchbase_get_response"`
 }
 
-
-
-
-
 /* 推广组下的定向推广效果数据查询 */
 type SimbaRptAdgroupnonsearcheffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广组id */
 func (r *SimbaRptAdgroupnonsearcheffectGetRequest) SetAdgroupId(value string) {
@@ -3835,7 +3338,6 @@ func (r *SimbaRptAdgroupnonsearcheffectGetRequest) SetSubwayToken(value string) 
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptAdgroupnonsearcheffectGetRequest) GetResponse(accessToken string) (*SimbaRptAdgroupnonsearcheffectGetResponse, []byte, error) {
 	var resp SimbaRptAdgroupnonsearcheffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.adgroupnonsearcheffect.get", &resp)
@@ -3853,15 +3355,10 @@ type SimbaRptAdgroupnonsearcheffectGetResponseResult struct {
 	Response *SimbaRptAdgroupnonsearcheffectGetResponse `json:"simba_rpt_adgroupnonsearcheffect_get_response"`
 }
 
-
-
-
-
 /* 推广计划下的推广组报表基础数据查询(只有汇总数据，无分类类型) */
 type SimbaRptCampadgroupbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 查询推广计划id */
 func (r *SimbaRptCampadgroupbaseGetRequest) SetCampaignId(value string) {
@@ -3908,7 +3405,6 @@ func (r *SimbaRptCampadgroupbaseGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptCampadgroupbaseGetRequest) GetResponse(accessToken string) (*SimbaRptCampadgroupbaseGetResponse, []byte, error) {
 	var resp SimbaRptCampadgroupbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.campadgroupbase.get", &resp)
@@ -3926,15 +3422,10 @@ type SimbaRptCampadgroupbaseGetResponseResult struct {
 	Response *SimbaRptCampadgroupbaseGetResponse `json:"simba_rpt_campadgroupbase_get_response"`
 }
 
-
-
-
-
 /* 推广计划下的推广组报表效果数据查询(只有汇总数据，无分类类型) */
 type SimbaRptCampadgroupeffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 查询推广计划id */
 func (r *SimbaRptCampadgroupeffectGetRequest) SetCampaignId(value string) {
@@ -3981,7 +3472,6 @@ func (r *SimbaRptCampadgroupeffectGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptCampadgroupeffectGetRequest) GetResponse(accessToken string) (*SimbaRptCampadgroupeffectGetResponse, []byte, error) {
 	var resp SimbaRptCampadgroupeffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.campadgroupeffect.get", &resp)
@@ -3999,15 +3489,10 @@ type SimbaRptCampadgroupeffectGetResponseResult struct {
 	Response *SimbaRptCampadgroupeffectGetResponse `json:"simba_rpt_campadgroupeffect_get_response"`
 }
 
-
-
-
-
 /* 推广计划报表基础数据对象 */
 type SimbaRptCampaignbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划id */
 func (r *SimbaRptCampaignbaseGetRequest) SetCampaignId(value string) {
@@ -4054,7 +3539,6 @@ func (r *SimbaRptCampaignbaseGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptCampaignbaseGetRequest) GetResponse(accessToken string) (*SimbaRptCampaignbaseGetResponse, []byte, error) {
 	var resp SimbaRptCampaignbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.campaignbase.get", &resp)
@@ -4072,15 +3556,10 @@ type SimbaRptCampaignbaseGetResponseResult struct {
 	Response *SimbaRptCampaignbaseGetResponse `json:"simba_rpt_campaignbase_get_response"`
 }
 
-
-
-
-
 /* 推广计划效果报表数据对象 */
 type SimbaRptCampaigneffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划id */
 func (r *SimbaRptCampaigneffectGetRequest) SetCampaignId(value string) {
@@ -4107,7 +3586,7 @@ func (r *SimbaRptCampaigneffectGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-/* 报表类型（搜索：SEARCH,类目出价：CAT, 
+/* 报表类型（搜索：SEARCH,类目出价：CAT,
 定向投放：NOSEARCH 全部：ALL）可以一次取多个例如：SEARCH,CAT */
 func (r *SimbaRptCampaigneffectGetRequest) SetSearchType(value string) {
 	r.SetValue("search_type", value)
@@ -4128,7 +3607,6 @@ func (r *SimbaRptCampaigneffectGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptCampaigneffectGetRequest) GetResponse(accessToken string) (*SimbaRptCampaigneffectGetResponse, []byte, error) {
 	var resp SimbaRptCampaigneffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.campaigneffect.get", &resp)
@@ -4146,15 +3624,10 @@ type SimbaRptCampaigneffectGetResponseResult struct {
 	Response *SimbaRptCampaigneffectGetResponse `json:"simba_rpt_campaigneffect_get_response"`
 }
 
-
-
-
-
 /* 客户账户报表基础数据对象 */
 type SimbaRptCustbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 结束日期，格式yyyy-mm-dd */
 func (r *SimbaRptCustbaseGetRequest) SetEndTime(value string) {
@@ -4191,7 +3664,6 @@ func (r *SimbaRptCustbaseGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptCustbaseGetRequest) GetResponse(accessToken string) (*SimbaRptCustbaseGetResponse, []byte, error) {
 	var resp SimbaRptCustbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.custbase.get", &resp)
@@ -4209,15 +3681,10 @@ type SimbaRptCustbaseGetResponseResult struct {
 	Response *SimbaRptCustbaseGetResponse `json:"simba_rpt_custbase_get_response"`
 }
 
-
-
-
-
 /* 用户账户报表效果数据查询（只有汇总数据，无分类数据） */
 type SimbaRptCusteffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 结束时间，格式yyyy-mm-dd */
 func (r *SimbaRptCusteffectGetRequest) SetEndTime(value string) {
@@ -4254,7 +3721,6 @@ func (r *SimbaRptCusteffectGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptCusteffectGetRequest) GetResponse(accessToken string) (*SimbaRptCusteffectGetResponse, []byte, error) {
 	var resp SimbaRptCusteffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.custeffect.get", &resp)
@@ -4272,15 +3738,10 @@ type SimbaRptCusteffectGetResponseResult struct {
 	Response *SimbaRptCusteffectGetResponse `json:"simba_rpt_custeffect_get_response"`
 }
 
-
-
-
-
 /* 推广计划下的人群基础数据查询 */
 type SimbaRptDemographicbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划id */
 func (r *SimbaRptDemographicbaseGetRequest) SetCampaignId(value string) {
@@ -4317,7 +3778,6 @@ func (r *SimbaRptDemographicbaseGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptDemographicbaseGetRequest) GetResponse(accessToken string) (*SimbaRptDemographicbaseGetResponse, []byte, error) {
 	var resp SimbaRptDemographicbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.demographicbase.get", &resp)
@@ -4335,15 +3795,10 @@ type SimbaRptDemographicbaseGetResponseResult struct {
 	Response *SimbaRptDemographicbaseGetResponse `json:"simba_rpt_demographicbase_get_response"`
 }
 
-
-
-
-
 /* 推广计划下的人群维度效果数据查询 */
 type SimbaRptDemographiceffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 推广计划id */
 func (r *SimbaRptDemographiceffectGetRequest) SetCampaignId(value string) {
@@ -4380,7 +3835,6 @@ func (r *SimbaRptDemographiceffectGetRequest) SetSubwayToken(value string) {
 	r.SetValue("subway_token", value)
 }
 
-
 func (r *SimbaRptDemographiceffectGetRequest) GetResponse(accessToken string) (*SimbaRptDemographiceffectGetResponse, []byte, error) {
 	var resp SimbaRptDemographiceffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.simba.rpt.demographiceffect.get", &resp)
@@ -4398,15 +3852,10 @@ type SimbaRptDemographiceffectGetResponseResult struct {
 	Response *SimbaRptDemographiceffectGetResponse `json:"simba_rpt_demographiceffect_get_response"`
 }
 
-
-
-
-
 /* 取得一个关键词的推广组排名列表 */
 type SimbaToolsItemsTopGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 输入的必须是一个符合ipv4或者ipv6格式的IP地址 */
 func (r *SimbaToolsItemsTopGetRequest) SetIp(value string) {
@@ -4422,7 +3871,6 @@ func (r *SimbaToolsItemsTopGetRequest) SetKeyword(value string) {
 func (r *SimbaToolsItemsTopGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
-
 
 func (r *SimbaToolsItemsTopGetRequest) GetResponse(accessToken string) (*SimbaToolsItemsTopGetResponse, []byte, error) {
 	var resp SimbaToolsItemsTopGetResponseResult
@@ -4441,16 +3889,11 @@ type SimbaToolsItemsTopGetResponseResult struct {
 	Response *SimbaToolsItemsTopGetResponse `json:"simba_tools_items_top_get_response"`
 }
 
-
-
-
-
-/* 直通车推广计划下的词报表基础数据查询<br/> 
+/* 直通车推广计划下的词报表基础数据查询<br/>
 异步API使用方法，请查看：<a href="http://open.taobao.com/doc/detail.htm?id=30">异步API使用说明</a><br/> */
 type TopatsSimbaCampkeywordbaseGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 查询推广计划ID */
 func (r *TopatsSimbaCampkeywordbaseGetRequest) SetCampaignId(value string) {
@@ -4477,7 +3920,6 @@ func (r *TopatsSimbaCampkeywordbaseGetRequest) SetTimeSlot(value string) {
 	r.SetValue("time_slot", value)
 }
 
-
 func (r *TopatsSimbaCampkeywordbaseGetRequest) GetResponse(accessToken string) (*TopatsSimbaCampkeywordbaseGetResponse, []byte, error) {
 	var resp TopatsSimbaCampkeywordbaseGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.topats.simba.campkeywordbase.get", &resp)
@@ -4495,16 +3937,11 @@ type TopatsSimbaCampkeywordbaseGetResponseResult struct {
 	Response *TopatsSimbaCampkeywordbaseGetResponse `json:"topats_simba_campkeywordbase_get_response"`
 }
 
-
-
-
-
-/* 推广计划下的词报表效果数据查询<br/> 
+/* 推广计划下的词报表效果数据查询<br/>
 异步API使用方法，请查看：<a href="http://open.taobao.com/doc/detail.htm?id=30">异步API使用说明</a><br/> */
 type TopatsSimbaCampkeywordeffectGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
-
 
 /* 查询推广计划ID */
 func (r *TopatsSimbaCampkeywordeffectGetRequest) SetCampaignId(value string) {
@@ -4531,7 +3968,6 @@ func (r *TopatsSimbaCampkeywordeffectGetRequest) SetTimeSlot(value string) {
 	r.SetValue("time_slot", value)
 }
 
-
 func (r *TopatsSimbaCampkeywordeffectGetRequest) GetResponse(accessToken string) (*TopatsSimbaCampkeywordeffectGetResponse, []byte, error) {
 	var resp TopatsSimbaCampkeywordeffectGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.topats.simba.campkeywordeffect.get", &resp)
@@ -4548,6 +3984,3 @@ type TopatsSimbaCampkeywordeffectGetResponse struct {
 type TopatsSimbaCampkeywordeffectGetResponseResult struct {
 	Response *TopatsSimbaCampkeywordeffectGetResponse `json:"topats_simba_campkeywordeffect_get_response"`
 }
-
-
-

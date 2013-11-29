@@ -28,6 +28,10 @@ func (t *TaobaoMethodRequest) GetResponse(accessToken, apiMethodName string, res
 		t.SetValue("app_key", taobaoConfig.appKey)
 		t.SetValue("sign_method", "md5")
 		t.SetReqUrl("http://gw.api.taobao.com/router/rest")
+
+		if taobaoConfig.requestUrl != "" {
+			t.SetReqUrl(taobaoConfig.requestUrl)
+		}
 	}
 
 	return executeRequest(t, resp, InsecureSkipVerify, DisableCompression)

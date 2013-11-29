@@ -22,17 +22,22 @@ const VersionNo = "0.0.1"
 var (
 	InsecureSkipVerify = true  // 相信淘宝服务器，跳过对其检查，减少客户端配置问题
 	DisableCompression = false // 默认压缩数据
-	taobaoConfig       *TaobaoConfig
+	taobaoConfig       = &TaobaoConfig{}
 )
 
 type TaobaoConfig struct {
-	appKey string
-	secret string
-	isTop  bool
+	appKey     string
+	secret     string
+	requestUrl string
+	isTop      bool
 }
 
 func Init(key string, secret string, isTop bool) {
-	taobaoConfig = &TaobaoConfig{key, secret, isTop}
+	taobaoConfig = &TaobaoConfig{appKey: key, secret: secret, isTop: isTop}
+}
+
+func SetRequestUrl(requestUrl string) {
+	taobaoConfig.requestUrl = requestUrl
 }
 
 type keyValue struct{ key, value string }
@@ -42,11 +47,7 @@ type byKeyValue []keyValue
 func (p byKeyValue) Len() int      { return len(p) }
 func (p byKeyValue) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 func (p byKeyValue) Less(i, j int) bool {
-	if p[i].key == p[j].key {
-		return p[i].value < p[j].value
-	} else {
-		return p[i].key < p[j].value
-	}
+	return p[i].key < p[j].key
 }
 
 func (p byKeyValue) appendValues(values url.Values) byKeyValue {
@@ -62,11 +63,10 @@ func executeRequest(req TaobaoRequestI, resp interface{}, insecureSkipVerify, di
 
 	if taobaoConfig.isTop {
 		params := make(byKeyValue, 0)
-		params.appendValues(req.GetValues())
+		params = params.appendValues(req.GetValues())
 		sort.Sort(params)
 
 		str := ""
-
 		for _, keyValue := range params {
 			str += keyValue.key + keyValue.value
 		}
@@ -76,7 +76,7 @@ func executeRequest(req TaobaoRequestI, resp interface{}, insecureSkipVerify, di
 		md5Util.Write([]byte(str))
 		sign := hex.EncodeToString(md5Util.Sum(nil))
 
-		req.GetValues().Add("sign", sign)
+		req.GetValues().Add("sign", strings.ToUpper(sign))
 	}
 
 	body := strings.NewReader(req.GetValues().Encode())
