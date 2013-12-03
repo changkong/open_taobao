@@ -4,7 +4,7 @@
 
 package notice
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 用户丢失消息的数据结构 */
@@ -25,9 +25,15 @@ type AppCustomer struct {
 	Modified string `json:"modified"`
 	Nick string `json:"nick"`
 	Status string `json:"status"`
-	Subscriptions []*Subscription `json:"subscriptions"`
+	Subscriptions *SubscriptionObject `json:"subscriptions"`
 	Type []string `json:"type"`
 	UserId int `json:"user_id"`
+
+}
+
+/* 开通增量消息服务的应用用户 */
+type SubscriptionObject struct {
+	Subscriptions []*Subscription `json:"subscription"`
 
 }
 
@@ -95,8 +101,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks []*Subtask `json:"subtasks"`
+	Subtasks *SubtaskObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
+
+}
+
+/* 批量异步任务结果 */
+type SubtaskObject struct {
+	Subtasks []*Subtask `json:"subtask"`
 
 }
 

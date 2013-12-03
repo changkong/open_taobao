@@ -4,13 +4,19 @@
 
 package marketing
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 优惠信息对象 */
 type PromotionDisplayTop struct {
-	PromotionInItem []*PromotionInItem `json:"promotion_in_item"`
-	PromotionInShop []*PromotionInShop `json:"promotion_in_shop"`
+	PromotionInItem *PromotionInItemObject `json:"promotion_in_item"`
+	PromotionInShop *PromotionInShopObject `json:"promotion_in_shop"`
+
+}
+
+/* Widget获取到的商品信息 */
+type PromotionInItemObject struct {
+	PromotionInItems []*PromotionInItem `json:"promotion_in_item"`
 
 }
 
@@ -26,6 +32,12 @@ type PromotionInItem struct {
 	SkuIdList []string `json:"sku_id_list"`
 	SkuPriceList []float64 `json:"sku_price_list"`
 	StartTime string `json:"start_time"`
+
+}
+
+/* Widget获取到的商品信息 */
+type PromotionInShopObject struct {
+	PromotionInShops []*PromotionInShop `json:"promotion_in_shop"`
 
 }
 

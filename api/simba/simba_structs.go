@@ -4,7 +4,7 @@
 
 package simba
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 推广组 */
@@ -43,10 +43,16 @@ type ADGroupCatmatch struct {
 
 /* 一页ADGroupCatMatch列表 */
 type ADGroupCatMatchPage struct {
-	AdgroupCatmatchList []*ADGroupCatmatch `json:"adgroup_catmatch_list"`
+	AdgroupCatmatchList *ADGroupCatmatchObject `json:"adgroup_catmatch_list"`
 	PageNo int `json:"page_no"`
 	PageSize int `json:"page_size"`
 	TotalItem int `json:"total_item"`
+
+}
+
+/* 一页ADGroupCatMatch列表 */
+type ADGroupCatmatchObject struct {
+	ADGroupCatmatchs []*ADGroupCatmatch `json:"a_d_group_catmatch"`
 
 }
 
@@ -63,12 +69,18 @@ type ADGroupCatMatchForecast struct {
 
 /* 直通车商品分页对象 */
 type SubwayItemPartition struct {
-	ItemList []*SubwayItem `json:"item_list"`
+	ItemList *SubwayItemObject `json:"item_list"`
 	OrderBy bool `json:"order_by"`
 	OrderField string `json:"order_field"`
 	PageNo int `json:"page_no"`
 	PageSize int `json:"page_size"`
 	TotalItem int `json:"total_item"`
+
+}
+
+/* 直通车商品分页对象 */
+type SubwayItemObject struct {
+	SubwayItems []*SubwayItem `json:"subway_item"`
 
 }
 
@@ -91,10 +103,16 @@ type ExtraAttributes struct {
 
 /* 一页ADGroup列表 */
 type ADGroupPage struct {
-	AdgroupList []*ADGroup `json:"adgroup_list"`
+	AdgroupList *ADGroupObject `json:"adgroup_list"`
 	PageNo int `json:"page_no"`
 	PageSize int `json:"page_size"`
 	TotalItem int `json:"total_item"`
+
+}
+
+/* 一页ADGroup列表 */
+type ADGroupObject struct {
+	ADGroups []*ADGroup `json:"a_d_group"`
 
 }
 
@@ -207,21 +225,33 @@ type CreativeRecord struct {
 
 /* 广告创意分页对象 */
 type CreativePage struct {
-	CreativeList []*Creative `json:"creative_list"`
+	CreativeList *CreativeObject `json:"creative_list"`
 	PageNo int `json:"page_no"`
 	PageSize int `json:"page_size"`
 	TotalItem int `json:"total_item"`
 
 }
 
+/* 广告创意分页对象 */
+type CreativeObject struct {
+	Creatives []*Creative `json:"creative"`
+
+}
+
 /* 类目对象 */
 type INCategoryTop struct {
-	CategoryChildTopList []*INCategoryChildTop `json:"category_child_top_list"`
+	CategoryChildTopList *INCategoryChildTopObject `json:"category_child_top_list"`
 	CategoryDesc string `json:"category_desc"`
 	CategoryId int `json:"category_id"`
 	CategoryName string `json:"category_name"`
-	CategoryPropertiesList []*INCategoryProperties `json:"category_properties_list"`
+	CategoryPropertiesList *INCategoryPropertiesObject `json:"category_properties_list"`
 	CategroyWord string `json:"categroy_word"`
+
+}
+
+/* 类目对象 */
+type INCategoryChildTopObject struct {
+	INCategoryChildTops []*INCategoryChildTop `json:"i_n_category_child_top"`
 
 }
 
@@ -230,7 +260,13 @@ type INCategoryChildTop struct {
 	CategoryDesc string `json:"category_desc"`
 	CategoryId int `json:"category_id"`
 	CategoryName string `json:"category_name"`
-	CategoryPropertiesList []*INCategoryProperties `json:"category_properties_list"`
+	CategoryPropertiesList *INCategoryPropertiesObject `json:"category_properties_list"`
+
+}
+
+/* 类目对象 */
+type INCategoryPropertiesObject struct {
+	INCategoryPropertiess []*INCategoryProperties `json:"i_n_category_properties"`
 
 }
 
@@ -257,7 +293,13 @@ type INCategoryBase struct {
 	CategoryId int `json:"category_id"`
 	CategoryName string `json:"category_name"`
 	CategoryPv int `json:"category_pv"`
-	InRecordBaseList []*INRecordBase `json:"in_record_base_list"`
+	InRecordBaseList *INRecordBaseObject `json:"in_record_base_list"`
+
+}
+
+/* 类目基础数据对象 */
+type INRecordBaseObject struct {
+	INRecordBases []*INRecordBase `json:"i_n_record_base"`
 
 }
 
@@ -283,7 +325,7 @@ type INWordAnalysis struct {
 
 /* 词基础数据对象 */
 type INWordBase struct {
-	InRecordBaseList []*INRecordBase `json:"in_record_base_list"`
+	InRecordBaseList *INRecordBaseObject `json:"in_record_base_list"`
 	Word string `json:"word"`
 
 }
@@ -314,10 +356,16 @@ type KeywordForecast struct {
 
 /* 关键词分页对象 */
 type KeywordPage struct {
-	KeywordList []*Keyword `json:"keyword_list"`
+	KeywordList *KeywordObject `json:"keyword_list"`
 	PageNo int `json:"page_no"`
 	PageSize int `json:"page_size"`
 	TotalItem int `json:"total_item"`
+
+}
+
+/* 关键词分页对象 */
+type KeywordObject struct {
+	Keywords []*Keyword `json:"keyword"`
 
 }
 
@@ -355,8 +403,14 @@ type KeywordQscore struct {
 type RecommendWordPage struct {
 	PageNo int `json:"page_no"`
 	PageSize int `json:"page_size"`
-	RecommendWordList []*RecommendWord `json:"recommend_word_list"`
+	RecommendWordList *RecommendWordObject `json:"recommend_word_list"`
 	TotalItem int `json:"total_item"`
+
+}
+
+/* 一页推荐词列表 */
+type RecommendWordObject struct {
+	RecommendWords []*RecommendWord `json:"recommend_word"`
 
 }
 
@@ -372,7 +426,13 @@ type RecommendWord struct {
 /* 质量得分类 */
 type Qscore struct {
 	CatmatchQscore string `json:"catmatch_qscore"`
-	KeywordQscoreList []*KeywordQscore `json:"keyword_qscore_list"`
+	KeywordQscoreList *KeywordQscoreObject `json:"keyword_qscore_list"`
+
+}
+
+/* 质量得分类 */
+type KeywordQscoreObject struct {
+	KeywordQscores []*KeywordQscore `json:"keyword_qscore"`
 
 }
 
@@ -440,8 +500,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks []*Subtask `json:"subtasks"`
+	Subtasks *SubtaskObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
+
+}
+
+/* 批量异步任务结果 */
+type SubtaskObject struct {
+	Subtasks []*Subtask `json:"subtask"`
 
 }
 

@@ -4,7 +4,7 @@
 
 package wangwang
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 关键词列表 */
@@ -20,14 +20,26 @@ type MsgList struct {
 	Length int `json:"length"`
 	Time string `json:"time"`
 	Type int `json:"type"`
-	UrlLists []*UrlList `json:"url_lists"`
-	WordLists []*WordCountList `json:"word_lists"`
+	UrlLists *UrlListObject `json:"url_lists"`
+	WordLists *WordCountListObject `json:"word_lists"`
+
+}
+
+/* 聊天记录列表 */
+type UrlListObject struct {
+	UrlLists []*UrlList `json:"url_list"`
 
 }
 
 /* url列表 */
 type UrlList struct {
 	Url string `json:"url"`
+
+}
+
+/* 聊天记录列表 */
+type WordCountListObject struct {
+	WordCountLists []*WordCountList `json:"word_count_list"`
 
 }
 
@@ -41,7 +53,13 @@ type WordCountList struct {
 /* 客户等待（客服）平均时长列表 */
 type WaitingTimesOnDay struct {
 	WaitingDate string `json:"waiting_date"`
-	WaitingTimeByIds []*WaitingTimeById `json:"waiting_time_by_ids"`
+	WaitingTimeByIds *WaitingTimeByIdObject `json:"waiting_time_by_ids"`
+
+}
+
+/* 客户等待（客服）平均时长列表 */
+type WaitingTimeByIdObject struct {
+	WaitingTimeByIds []*WaitingTimeById `json:"waiting_time_by_id"`
 
 }
 
@@ -72,14 +90,26 @@ type EvalDetail struct {
 /* 客服评价统计列表(按天) */
 type StaffEvalStatOnDay struct {
 	EvalDate string `json:"eval_date"`
-	StaffEvalStatByIds []*StaffEvalStatById `json:"staff_eval_stat_by_ids"`
+	StaffEvalStatByIds *StaffEvalStatByIdObject `json:"staff_eval_stat_by_ids"`
+
+}
+
+/* 客服评价统计列表(按天) */
+type StaffEvalStatByIdObject struct {
+	StaffEvalStatByIds []*StaffEvalStatById `json:"staff_eval_stat_by_id"`
 
 }
 
 /* 客服评价统计 */
 type StaffEvalStatById struct {
-	Evaluations []*Evaluation `json:"evaluations"`
+	Evaluations *EvaluationObject `json:"evaluations"`
 	ServiceStaffId string `json:"service_staff_id"`
+
+}
+
+/* 客服评价统计 */
+type EvaluationObject struct {
+	Evaluations []*Evaluation `json:"evaluation"`
 
 }
 
@@ -108,7 +138,13 @@ type LoginLog struct {
 /* 未回复统计列表(按天) */
 type NonReplyStatOnDay struct {
 	NonreplyDate string `json:"nonreply_date"`
-	NonreplyStatByIds []*NonreplyStatById `json:"nonreply_stat_by_ids"`
+	NonreplyStatByIds *NonreplyStatByIdObject `json:"nonreply_stat_by_ids"`
+
+}
+
+/* 未回复统计列表(按天) */
+type NonreplyStatByIdObject struct {
+	NonreplyStatByIds []*NonreplyStatById `json:"nonreply_stat_by_id"`
 
 }
 
@@ -123,7 +159,13 @@ type NonreplyStatById struct {
 /* 某天的客服在线时长列表 */
 type OnlineTimesOnDay struct {
 	OnlineDate string `json:"online_date"`
-	OnlineTimeByIds []*OnlineTimeById `json:"online_time_by_ids"`
+	OnlineTimeByIds *OnlineTimeByIdObject `json:"online_time_by_ids"`
+
+}
+
+/* 某天的客服在线时长列表 */
+type OnlineTimeByIdObject struct {
+	OnlineTimeByIds []*OnlineTimeById `json:"online_time_by_id"`
 
 }
 
@@ -137,7 +179,13 @@ type OnlineTimeById struct {
 /* (某天)回复统计列表 */
 type ReplyStatOnDay struct {
 	ReplyDate string `json:"reply_date"`
-	ReplyStatByIds []*ReplyStatById `json:"reply_stat_by_ids"`
+	ReplyStatByIds *ReplyStatByIdObject `json:"reply_stat_by_ids"`
+
+}
+
+/* (某天)回复统计列表 */
+type ReplyStatByIdObject struct {
+	ReplyStatByIds []*ReplyStatById `json:"reply_stat_by_id"`
 
 }
 

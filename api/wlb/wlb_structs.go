@@ -4,7 +4,7 @@
 
 package wlb
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 库存明细 */
@@ -67,10 +67,16 @@ type WlbAuthorization struct {
 
 /* 商品的库存信息和批次信息 */
 type WlbItemBatchInventory struct {
-	ItemBatch []*WlbItemBatch `json:"item_batch"`
+	ItemBatch *WlbItemBatchObject `json:"item_batch"`
 	ItemId int `json:"item_id"`
-	ItemInventorys []*WlbItemInventory `json:"item_inventorys"`
+	ItemInventorys *WlbItemInventoryObject `json:"item_inventorys"`
 	TotalQuantity int `json:"total_quantity"`
+
+}
+
+/* 商品的库存信息和批次信息 */
+type WlbItemBatchObject struct {
+	WlbItemBatchs []*WlbItemBatch `json:"wlb_item_batch"`
 
 }
 
@@ -98,6 +104,12 @@ type WlbItemBatch struct {
 	StoreCode string `json:"store_code"`
 	UserId int `json:"user_id"`
 	Version int `json:"version"`
+
+}
+
+/* 商品的库存信息和批次信息 */
+type WlbItemInventoryObject struct {
+	WlbItemInventorys []*WlbItemInventory `json:"wlb_item_inventory"`
 
 }
 
@@ -240,7 +252,7 @@ type WlbOrderDetail struct {
 	ModifyTime string `json:"modify_time"`
 	OperateType string `json:"operate_type"`
 	OrderCode string `json:"order_code"`
-	OrderItemList []*WlbOrderItem `json:"order_item_list"`
+	OrderItemList *WlbOrderItemObject `json:"order_item_list"`
 	OrderSource string `json:"order_source"`
 	OrderSourceCode string `json:"order_source_code"`
 	OrderStatus string `json:"order_status"`
@@ -250,6 +262,12 @@ type WlbOrderDetail struct {
 	StoreCode string `json:"store_code"`
 	UserId int `json:"user_id"`
 	UserNick string `json:"user_nick"`
+
+}
+
+/* 物流宝订单，并且包含订单详情 */
+type WlbOrderItemObject struct {
+	WlbOrderItems []*WlbOrderItem `json:"wlb_order_item"`
 
 }
 

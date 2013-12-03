@@ -4,7 +4,7 @@
 
 package pinjia
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 评价列表 */
@@ -36,9 +36,15 @@ type ImprItemDO struct {
 
 /* 单条交易子订单语义标签对象 */
 type ImprFeedIdDO struct {
-	FeedInfoList []*ImprFeedInfoDO `json:"feed_info_list"`
+	FeedInfoList *ImprFeedInfoDOObject `json:"feed_info_list"`
 	Nick string `json:"nick"`
 	Rate int `json:"rate"`
+
+}
+
+/* 单条交易子订单语义标签对象 */
+type ImprFeedInfoDOObject struct {
+	ImprFeedInfoDOs []*ImprFeedInfoDO `json:"impr_feed_info_d_o"`
 
 }
 

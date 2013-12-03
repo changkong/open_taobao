@@ -4,16 +4,22 @@
 
 package jp
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* Appkey的站点导购数据 */
 type SpmResult struct {
 	AppKey string `json:"app_key"`
 	Date string `json:"date"`
-	SpmModules []*TopSpm `json:"spm_modules"`
-	SpmPages []*TopSpm `json:"spm_pages"`
+	SpmModules *TopSpmObject `json:"spm_modules"`
+	SpmPages *TopSpmObject `json:"spm_pages"`
 	SpmSite *TopSpm `json:"spm_site"`
+
+}
+
+/* Appkey的站点导购数据 */
+type TopSpmObject struct {
+	TopSpms []*TopSpm `json:"top_spm"`
 
 }
 

@@ -4,7 +4,7 @@
 
 package fuwu
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 应用订单信息 */

@@ -248,7 +248,7 @@ type HotelImageUploadResponseResult struct {
 
 
 
-/* 用于回传hotel匹配结果 */
+/* 用于回传hotel匹配结果(该接口即将废除请勿使用) */
 type HotelMatchFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
@@ -353,7 +353,7 @@ type HotelNameGetResponseResult struct {
 
 
 
-/* 下单结果回传 */
+/* 下单结果回传(该接口即将废除请勿使用) */
 type HotelOrderBookingFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
@@ -563,7 +563,7 @@ type HotelOrderGetResponseResult struct {
 
 
 
-/* 支付确认结果回传 */
+/* 支付确认结果回传(该接口即将废除请勿使用) */
 type HotelOrderPayFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
@@ -623,7 +623,7 @@ type HotelOrderPayFeedbackResponseResult struct {
 
 
 
-/* 退订处理结果回传 */
+/* 退订处理结果回传(该接口即将废除请勿使用) */
 type HotelOrderRefundFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
@@ -1104,7 +1104,7 @@ type HotelRoomImgUploadResponseResult struct {
 
 
 
-/* 接入方房态查询结果返回 */
+/* 接入方房态查询结果返回(该接口即将废除请勿使用) */
 type HotelRoomQuotasQueryFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }

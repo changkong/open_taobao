@@ -4,7 +4,7 @@
 
 package dmt
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 图片分类 */
@@ -21,6 +21,7 @@ type PictureCategory struct {
 
 /* 图片 */
 type Picture struct {
+	ClientType string `json:"client_type"`
 	Created string `json:"created"`
 	Deleted string `json:"deleted"`
 	Md5 string `json:"md5"`
@@ -52,7 +53,7 @@ type UserInfo struct {
 /* 搜索返回的结果类 */
 type TOPSearchResult struct {
 	Paginator *TOPPaginator `json:"paginator"`
-	VideoItems []*VideoItem `json:"video_items"`
+	VideoItems *VideoItemObject `json:"video_items"`
 
 }
 
@@ -62,6 +63,12 @@ type TOPPaginator struct {
 	IsLastPage bool `json:"is_last_page"`
 	PageSize int `json:"page_size"`
 	TotalResults int `json:"total_results"`
+
+}
+
+/* 搜索返回的结果类 */
+type VideoItemObject struct {
+	VideoItems []*VideoItem `json:"video_item"`
 
 }
 

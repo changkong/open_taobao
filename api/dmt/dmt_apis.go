@@ -187,6 +187,12 @@ type PictureGetRequest struct {
 }
 
 
+/* 图片使用，如果是pc宝贝detail使用，设置为client:computer，查询出来的图片是符合pc的宝贝detail显示的 
+如果是手机宝贝detail使用，设置为client:phone，查询出来的图片是符合手机的宝贝detail显示的 */
+func (r *PictureGetRequest) SetClientType(value string) {
+	r.SetValue("client_type", value)
+}
+
 /* 是否删除,unfroze代表没有删除 */
 func (r *PictureGetRequest) SetDeleted(value string) {
 	r.SetValue("deleted", value)
@@ -235,6 +241,11 @@ func (r *PictureGetRequest) SetStartDate(value string) {
 /* 图片标题,最大长度50字符,中英文都算一字符 */
 func (r *PictureGetRequest) SetTitle(value string) {
 	r.SetValue("title", value)
+}
+
+/* 图片url查询接口 */
+func (r *PictureGetRequest) SetUrls(value string) {
+	r.SetValue("urls", value)
 }
 
 
@@ -374,6 +385,13 @@ type PictureUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
+/* 图片上传的来源，有电脑版本宝贝发布，手机版本宝贝发布 
+client:computer电脑版本宝贝使用 
+client:phone手机版本宝贝使用 */
+func (r *PictureUploadRequest) SetClientType(value string) {
+	r.SetValue("client_type", value)
+}
 
 /* 包括后缀名的图片标题,不能为空，如Bule.jpg,有些卖家希望图片上传后取图片文件的默认名 */
 func (r *PictureUploadRequest) SetImageInputTitle(value string) {

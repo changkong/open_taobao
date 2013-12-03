@@ -4,7 +4,7 @@
 
 package alipy
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 小额支付单笔支付 */
@@ -58,8 +58,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks []*Subtask `json:"subtasks"`
+	Subtasks *SubtaskObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
+
+}
+
+/* 批量异步任务结果 */
+type SubtaskObject struct {
+	Subtasks []*Subtask `json:"subtask"`
 
 }
 

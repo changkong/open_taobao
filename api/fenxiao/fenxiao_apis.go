@@ -1765,6 +1765,11 @@ func (r *FenxiaoProductAddRequest) SetSkuStandardPrices(value string) {
 	r.SetValue("sku_standard_prices", value)
 }
 
+/* 产品spuID，达尔文产品必须要传spuID，否则不能发布。其他非达尔文产品，看情况传 */
+func (r *FenxiaoProductAddRequest) SetSpuId(value string) {
+	r.SetValue("spu_id", value)
+}
+
 /* 采购基准价格，单位：元。例：“10.56”。必须在0.01元到10000000元之间。 */
 func (r *FenxiaoProductAddRequest) SetStandardPrice(value string) {
 	r.SetValue("standard_price", value)

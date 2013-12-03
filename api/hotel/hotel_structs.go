@@ -4,7 +4,7 @@
 
 package hotel
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* Hotel（酒店）结构。各字段详细说明可参考接口定义，如：酒店发布接口。 */
@@ -30,12 +30,18 @@ type Hotel struct {
 	PicUrl string `json:"pic_url"`
 	Province int `json:"province"`
 	ProvinceStr string `json:"province_str"`
-	RoomTypes []*RoomType `json:"room_types"`
+	RoomTypes *RoomTypeObject `json:"room_types"`
 	Rooms int `json:"rooms"`
 	Service string `json:"service"`
 	Status int `json:"status"`
 	Storeys int `json:"storeys"`
 	Tel string `json:"tel"`
+
+}
+
+/* Hotel（酒店）结构。各字段详细说明可参考接口定义，如：酒店发布接口。 */
+type RoomTypeObject struct {
+	RoomTypes []*RoomType `json:"room_type"`
 
 }
 
@@ -74,7 +80,7 @@ type HotelOrder struct {
 	Created string `json:"created"`
 	EndTime string `json:"end_time"`
 	Gid int `json:"gid"`
-	Guests []*OrderGuest `json:"guests"`
+	Guests *OrderGuestObject `json:"guests"`
 	Hid int `json:"hid"`
 	LogisticsStatus string `json:"logistics_status"`
 	Message string `json:"message"`
@@ -93,6 +99,12 @@ type HotelOrder struct {
 	TotalRoomPrice int `json:"total_room_price"`
 	TradeStatus string `json:"trade_status"`
 	Type string `json:"type"`
+
+}
+
+/* HotelOrder（酒店订单）结构。各字段详细说明可参考接口定义。注意：trade_status，refund_status，logistics_status不是严格准确的，请以交易API，物流API等得到的订单状态、物流状态为准确依据。 */
+type OrderGuestObject struct {
+	OrderGuests []*OrderGuest `json:"order_guest"`
 
 }
 

@@ -4,7 +4,7 @@
 
 package refund
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 退款结构 */
@@ -61,8 +61,14 @@ type RefundMessage struct {
 	OwnerId int `json:"owner_id"`
 	OwnerNick string `json:"owner_nick"`
 	OwnerRole string `json:"owner_role"`
-	PicUrls []*PicUrl `json:"pic_urls"`
+	PicUrls *PicUrlObject `json:"pic_urls"`
 	RefundId int `json:"refund_id"`
+
+}
+
+/* 留言/凭证数据结构 */
+type PicUrlObject struct {
+	PicUrls []*PicUrl `json:"pic_url"`
 
 }
 
@@ -80,8 +86,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks []*Subtask `json:"subtasks"`
+	Subtasks *SubtaskObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
+
+}
+
+/* 批量异步任务结果 */
+type SubtaskObject struct {
+	Subtasks []*Subtask `json:"subtask"`
 
 }
 

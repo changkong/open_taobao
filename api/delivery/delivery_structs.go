@@ -4,7 +4,7 @@
 
 package delivery
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 地址区域结构 */
@@ -23,12 +23,18 @@ type DeliveryTemplate struct {
 	Assumer int `json:"assumer"`
 	ConsignAreaId int `json:"consign_area_id"`
 	Created string `json:"created"`
-	FeeList []*TopFee `json:"fee_list"`
+	FeeList *TopFeeObject `json:"fee_list"`
 	Modified string `json:"modified"`
 	Name string `json:"name"`
 	Supports string `json:"supports"`
 	TemplateId int `json:"template_id"`
 	Valuation int `json:"valuation"`
+
+}
+
+/* 运费模板对象 */
+type TopFeeObject struct {
+	TopFees []*TopFee `json:"top_fee"`
 
 }
 
@@ -154,6 +160,15 @@ type TransitStepInfo struct {
 	StatusDesc string `json:"status_desc"`
 	StatusTime string `json:"status_time"`
 	Time string `json:"time"`
+
+}
+
+/* 判定服务是否可达的返回结果 */
+type AddressReachableResult struct {
+	ErrorCode string `json:"error_code"`
+	PartnerId int `json:"partner_id"`
+	Reachable int `json:"reachable"`
+	ServiceType int `json:"service_type"`
 
 }
 

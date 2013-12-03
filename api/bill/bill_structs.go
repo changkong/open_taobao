@@ -4,7 +4,7 @@
 
 package bill
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 费用科目 */

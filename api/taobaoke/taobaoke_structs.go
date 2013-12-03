@@ -4,7 +4,7 @@
 
 package taobaoke
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 淘宝客返利授权 */

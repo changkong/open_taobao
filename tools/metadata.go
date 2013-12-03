@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
+	"unicode"
 )
 
 type PropsT struct {
@@ -23,6 +24,9 @@ type PropT struct {
 }
 
 func (p *PropT) GoName() string {
+	if p.Level == "Object Array" {
+		return GetGoName(p.Name) + "s"
+	}
 	return GetGoName(p.Name)
 }
 
@@ -132,6 +136,22 @@ func NewMetadata(filename string, confPackage *ConfPackageT) (*DataT, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	struts := make([]*StructT, 0)
+	for _, value := range metadata.Structs.Struct {
+		for j, p := range value.Props.Prop {
+			if p.Level == "Object Array" {
+				props := PropsT{Prop: []*PropT{&PropT{Name: GetTaobaoName(p.Type), Type: p.Type, Level: "Object Array"}}}
+				value.Props.Prop[j].Level = "Object"
+				s := &StructT{Name: p.Type + "Object", Desc: value.Desc, Props: props}
+				struts = append(struts, s)
+				value.Props.Prop[j].Type = p.Type + "Object"
+			}
+		}
+		struts = append(struts, value)
+	}
+
+	metadata.Structs.Struct = struts
 
 	var d DataT
 	d.MetaVersionNo = metadata.VersionNo
@@ -245,6 +265,22 @@ func GetGoName(jsonName string) string {
 			needUpper = true
 		} else {
 			result += jsonName[i : i+1]
+		}
+	}
+	return result
+}
+
+func GetTaobaoName(goName string) string {
+	result := ""
+	for i, c := range goName {
+		if unicode.IsUpper(c) {
+			if i == 0 {
+				result += strings.ToLower(goName[i : i+1])
+			} else {
+				result += "_" + strings.ToLower(goName[i:i+1])
+			}
+		} else {
+			result += goName[i : i+1]
 		}
 	}
 	return result

@@ -4,7 +4,7 @@
 
 package favorite
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 商品或店铺的信息 */

@@ -4,7 +4,7 @@
 
 package recommend
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 推荐的关联商品 */

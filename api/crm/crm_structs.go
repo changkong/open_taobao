@@ -4,7 +4,7 @@
 
 package crm
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 卖家设置的等级优惠信息 */
@@ -98,11 +98,17 @@ type AttributeVO struct {
 	Description string `json:"description"`
 	DocumentId int `json:"document_id"`
 	Id int `json:"id"`
-	ParamKeys []*ParamKeyVO `json:"param_keys"`
+	ParamKeys *ParamKeyVOObject `json:"param_keys"`
 	Title string `json:"title"`
 	TopAccess int `json:"top_access"`
 	TypeId int `json:"type_id"`
 	Unit string `json:"unit"`
+
+}
+
+/* 属性（指标）信息 */
+type ParamKeyVOObject struct {
+	ParamKeyVOs []*ParamKeyVO `json:"param_key_v_o"`
 
 }
 

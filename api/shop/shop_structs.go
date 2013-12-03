@@ -4,7 +4,7 @@
 
 package shop
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 店铺内卖家自定义类目 */

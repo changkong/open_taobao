@@ -4,7 +4,7 @@
 
 package caipiao
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 卖家商品信息 */

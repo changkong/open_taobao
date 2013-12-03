@@ -4,7 +4,7 @@
 
 package user
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 用户 */

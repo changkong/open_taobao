@@ -4,7 +4,7 @@
 
 package eai
 
-const VersionNo = "20131127"
+const VersionNo = "20131202"
 
 
 /* 退款单 */
@@ -18,7 +18,7 @@ type RefundBill struct {
 	CsStatus string `json:"cs_status"`
 	CurrentPhaseTimeout string `json:"current_phase_timeout"`
 	Desc string `json:"desc"`
-	ItemList []*RefundItem `json:"item_list"`
+	ItemList *RefundItemObject `json:"item_list"`
 	Modified string `json:"modified"`
 	Oid int `json:"oid"`
 	OperationConstraint string `json:"operation_constraint"`
@@ -30,9 +30,15 @@ type RefundBill struct {
 	RefundVersion int `json:"refund_version"`
 	SellerNick string `json:"seller_nick"`
 	Status string `json:"status"`
-	TagList []*Tag `json:"tag_list"`
+	TagList *TagObject `json:"tag_list"`
 	Tid int `json:"tid"`
 	TradeStatus string `json:"trade_status"`
+
+}
+
+/* 退款单 */
+type RefundItemObject struct {
+	RefundItems []*RefundItem `json:"refund_item"`
 
 }
 
@@ -43,6 +49,12 @@ type RefundItem struct {
 	OuterId string `json:"outer_id"`
 	Price int `json:"price"`
 	Sku string `json:"sku"`
+
+}
+
+/* 退款单 */
+type TagObject struct {
+	Tags []*Tag `json:"tag"`
 
 }
 
@@ -60,7 +72,7 @@ type ReturnBill struct {
 	CompanyName string `json:"company_name"`
 	Created string `json:"created"`
 	Desc string `json:"desc"`
-	ItemList []*RefundItem `json:"item_list"`
+	ItemList *RefundItemObject `json:"item_list"`
 	Modified string `json:"modified"`
 	Oid int `json:"oid"`
 	OperationLog string `json:"operation_log"`
@@ -70,7 +82,7 @@ type ReturnBill struct {
 	RefundVersion int `json:"refund_version"`
 	Sid string `json:"sid"`
 	Status string `json:"status"`
-	TagList []*Tag `json:"tag_list"`
+	TagList *TagObject `json:"tag_list"`
 	Tid int `json:"tid"`
 
 }

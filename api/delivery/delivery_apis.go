@@ -1729,3 +1729,56 @@ type LogisticsTraceSearchResponseResult struct {
 
 
 
+
+
+/* 根据输入的目标地址，判断服务是否可达 */
+type LogisticsAddressReachableRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 详细地址 */
+func (r *LogisticsAddressReachableRequest) SetAddress(value string) {
+	r.SetValue("address", value)
+}
+
+/* 标准区域编码(三级行政区编码或是四级行政区)，可以通过taobao.areas.get获取，如北京市朝阳区为110105 */
+func (r *LogisticsAddressReachableRequest) SetAreaCode(value string) {
+	r.SetValue("area_code", value)
+}
+
+/* 物流公司编码ID，可以从这个接口获取所有物流公司的标准编码taobao.logistics.companies.get，可以传入多个值，以英文逗号分隔，如“1000000952,1000000953” */
+func (r *LogisticsAddressReachableRequest) SetPartnerIds(value string) {
+	r.SetValue("partner_ids", value)
+}
+
+/* 服务对应的数字编码，如揽派范围对应88 */
+func (r *LogisticsAddressReachableRequest) SetServiceType(value string) {
+	r.SetValue("service_type", value)
+}
+
+/* 发货地，标准区域编码(四级行政)，可以通过taobao.areas.get获取，如浙江省杭州市余杭区闲林街道为 330110011 */
+func (r *LogisticsAddressReachableRequest) SetSourceAreaCode(value string) {
+	r.SetValue("source_area_code", value)
+}
+
+
+func (r *LogisticsAddressReachableRequest) GetResponse(accessToken string) (*LogisticsAddressReachableResponse, []byte, error) {
+	var resp LogisticsAddressReachableResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.logistics.address.reachable", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type LogisticsAddressReachableResponse struct {
+	ReachableResultList []*AddressReachableResult `json:"reachable_result_list"`
+}
+
+type LogisticsAddressReachableResponseResult struct {
+	Response *LogisticsAddressReachableResponse `json:"logistics_address_reachable_response"`
+}
+
+
+

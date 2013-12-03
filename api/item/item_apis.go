@@ -54,8 +54,7 @@ type ItemcatsAuthorizeGetResponseResult struct {
 
 
 /* 获取后台供卖家发布商品的标准商品类目。 
-<br/>1. 增量获取类目数据可用<a href="http://api.taobao.com/apidoc/api.htm?path=cid:3-apiId:11072">taobao.itemcats.increment.get</a>接口。 
-<br/>2. 全量获取类目数据可用<a href="http://api.taobao.com/apidoc/api.htm?path=cid:3-apiId:11078">taobao.topats.itemcats.get</a>接口。 */
+<br/>全量获取类目数据可用<a href="http://api.taobao.com/apidoc/api.htm?path=cid:3-apiId:11078">taobao.topats.itemcats.get</a>接口。 */
 type ItemcatsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
