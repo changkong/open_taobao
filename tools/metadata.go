@@ -24,9 +24,6 @@ type PropT struct {
 }
 
 func (p *PropT) GoName() string {
-	if p.Level == "Object Array" {
-		return GetGoName(p.Name) + "s"
-	}
 	return GetGoName(p.Name)
 }
 
@@ -136,22 +133,6 @@ func NewMetadata(filename string, confPackage *ConfPackageT) (*DataT, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	struts := make([]*StructT, 0)
-	for _, value := range metadata.Structs.Struct {
-		for j, p := range value.Props.Prop {
-			if p.Level == "Object Array" {
-				props := PropsT{Prop: []*PropT{&PropT{Name: GetTaobaoName(p.Type), Type: p.Type, Level: "Object Array"}}}
-				value.Props.Prop[j].Level = "Object"
-				s := &StructT{Name: p.Type + "Object", Desc: value.Desc, Props: props}
-				struts = append(struts, s)
-				value.Props.Prop[j].Type = p.Type + "Object"
-			}
-		}
-		struts = append(struts, value)
-	}
-
-	metadata.Structs.Struct = struts
 
 	var d DataT
 	d.MetaVersionNo = metadata.VersionNo
