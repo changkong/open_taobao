@@ -41,7 +41,7 @@ func NewConfPackage(confFile string) (*ConfPackageT, error) {
 	}
 
 	for _, v := range mx {
-		v.FullName = "github.com/changkong/open_taobao/api/" + v.Name
+		v.FullName = "github.com/yaofangou/open_taobao/api/" + v.Name
 		v.PkgChoose = true
 	}
 

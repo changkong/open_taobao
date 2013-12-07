@@ -5,13 +5,18 @@
 package wlb
 
 import (
-	"github.com/changkong/open_taobao"
+	"github.com/yaofangou/open_taobao"
 )
+
+
+
+
 
 /* 查询库存明细 */
 type InventoryIpcInventorydetailGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 主订单号，可选 */
 func (r *InventoryIpcInventorydetailGetRequest) SetBizOrderId(value string) {
@@ -43,6 +48,7 @@ func (r *InventoryIpcInventorydetailGetRequest) SetStatusQuery(value string) {
 	r.SetValue("status_query", value)
 }
 
+
 func (r *InventoryIpcInventorydetailGetRequest) GetResponse(accessToken string) (*InventoryIpcInventorydetailGetResponse, []byte, error) {
 	var resp InventoryIpcInventorydetailGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.inventory.ipc.inventorydetail.get", &resp)
@@ -53,25 +59,30 @@ func (r *InventoryIpcInventorydetailGetRequest) GetResponse(accessToken string) 
 }
 
 type InventoryIpcInventorydetailGetResponse struct {
-	InventoryDetails []*IpcInventoryDetailDo `json:"inventory_details"`
+	InventoryDetails *IpcInventoryDetailDoListObject `json:"inventory_details"`
 }
 
 type InventoryIpcInventorydetailGetResponseResult struct {
 	Response *InventoryIpcInventorydetailGetResponse `json:"inventory_ipc_inventorydetail_get_response"`
 }
 
+
+
+
+
 /* 查询库存详情，通过商品ID获取发送请求的卖家的库存详情 */
 type WlbInventoryDetailGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 库存类型列表，值包括：
-VENDIBLE--可销售库存
-FREEZE--冻结库存
-ONWAY--在途库存
-DEFECT--残次品库存
-ENGINE_DAMAGE--机损
-BOX_DAMAGE--箱损
+
+/* 库存类型列表，值包括： 
+VENDIBLE--可销售库存 
+FREEZE--冻结库存 
+ONWAY--在途库存 
+DEFECT--残次品库存 
+ENGINE_DAMAGE--机损 
+BOX_DAMAGE--箱损 
 EXPIRATION--过保 */
 func (r *WlbInventoryDetailGetRequest) SetInventoryTypeList(value string) {
 	r.SetValue("inventory_type_list", value)
@@ -87,6 +98,7 @@ func (r *WlbInventoryDetailGetRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
 
+
 func (r *WlbInventoryDetailGetRequest) GetResponse(accessToken string) (*WlbInventoryDetailGetResponse, []byte, error) {
 	var resp WlbInventoryDetailGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.inventory.detail.get", &resp)
@@ -97,28 +109,33 @@ func (r *WlbInventoryDetailGetRequest) GetResponse(accessToken string) (*WlbInve
 }
 
 type WlbInventoryDetailGetResponse struct {
-	InventoryList []*WlbInventory `json:"inventory_list"`
-	ItemId        int             `json:"item_id"`
+	InventoryList *WlbInventoryListObject `json:"inventory_list"`
+	ItemId int `json:"item_id"`
 }
 
 type WlbInventoryDetailGetResponseResult struct {
 	Response *WlbInventoryDetailGetResponse `json:"wlb_inventory_detail_get_response"`
 }
 
+
+
+
+
 /* 将库存同步至IC */
 type WlbInventorySyncRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品ID */
 func (r *WlbInventorySyncRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
 
-/* 外部实体类型.存如下值
-IC_ITEM --表示IC商品;
-IC_SKU --表示IC最小单位商品;
-WLB_ITEM  --表示WLB商品.
+/* 外部实体类型.存如下值  
+IC_ITEM --表示IC商品;  
+IC_SKU --表示IC最小单位商品; 
+WLB_ITEM  --表示WLB商品. 
 若值不在范围内，则按WLB_ITEM处理 */
 func (r *WlbInventorySyncRequest) SetItemType(value string) {
 	r.SetValue("item_type", value)
@@ -128,6 +145,7 @@ func (r *WlbInventorySyncRequest) SetItemType(value string) {
 func (r *WlbInventorySyncRequest) SetQuantity(value string) {
 	r.SetValue("quantity", value)
 }
+
 
 func (r *WlbInventorySyncRequest) GetResponse(accessToken string) (*WlbInventorySyncResponse, []byte, error) {
 	var resp WlbInventorySyncResponseResult
@@ -146,10 +164,15 @@ type WlbInventorySyncResponseResult struct {
 	Response *WlbInventorySyncResponse `json:"wlb_inventory_sync_response"`
 }
 
+
+
+
+
 /* 通过商品ID等几个条件来分页查询库存变更记录 */
 type WlbInventorylogQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 结束修改时间,小于等于该时间 */
 func (r *WlbInventorylogQueryRequest) SetGmtEnd(value string) {
@@ -166,13 +189,13 @@ func (r *WlbInventorylogQueryRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
 
-/* 库存操作作类型(可以为空)
-CHU_KU 1-出库
-RU_KU 2-入库
-FREEZE 3-冻结
-THAW 4-解冻
-CHECK_FREEZE 5-冻结确认
-CHANGE_KU 6-库存类型变更
+/* 库存操作作类型(可以为空) 
+CHU_KU 1-出库 
+RU_KU 2-入库 
+FREEZE 3-冻结 
+THAW 4-解冻 
+CHECK_FREEZE 5-冻结确认 
+CHANGE_KU 6-库存类型变更 
 若值不在范围内，则按CHU_KU处理 */
 func (r *WlbInventorylogQueryRequest) SetOpType(value string) {
 	r.SetValue("op_type", value)
@@ -203,6 +226,7 @@ func (r *WlbInventorylogQueryRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
 
+
 func (r *WlbInventorylogQueryRequest) GetResponse(accessToken string) (*WlbInventorylogQueryResponse, []byte, error) {
 	var resp WlbInventorylogQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.inventorylog.query", &resp)
@@ -213,18 +237,23 @@ func (r *WlbInventorylogQueryRequest) GetResponse(accessToken string) (*WlbInven
 }
 
 type WlbInventorylogQueryResponse struct {
-	InventoryLogList []*WlbItemInventoryLog `json:"inventory_log_list"`
-	TotalCount       int                    `json:"total_count"`
+	InventoryLogList *WlbItemInventoryLogListObject `json:"inventory_log_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbInventorylogQueryResponseResult struct {
 	Response *WlbInventorylogQueryResponse `json:"wlb_inventorylog_query_response"`
 }
 
+
+
+
+
 /* 添加物流宝商品，支持物流宝子商品和属性添加 */
 type WlbItemAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品颜色 */
 func (r *WlbItemAddRequest) SetColor(value string) {
@@ -286,20 +315,20 @@ func (r *WlbItemAddRequest) SetPricingCat(value string) {
 	r.SetValue("pricing_cat", value)
 }
 
-/* 属性名列表,目前支持的属性：
-毛重:GWeight
-净重:Nweight
-皮重: Tweight
-自定义属性：
-paramkey1
-paramkey2
-paramkey3
+/* 属性名列表,目前支持的属性： 
+毛重:GWeight	 
+净重:Nweight 
+皮重: Tweight 
+自定义属性： 
+paramkey1 
+paramkey2 
+paramkey3 
 paramkey4 */
 func (r *WlbItemAddRequest) SetProNameList(value string) {
 	r.SetValue("pro_name_list", value)
 }
 
-/* 属性值列表：
+/* 属性值列表： 
 10,8 */
 func (r *WlbItemAddRequest) SetProValueList(value string) {
 	r.SetValue("pro_value_list", value)
@@ -320,8 +349,8 @@ func (r *WlbItemAddRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
-/* NORMAL--普通商品
-COMBINE--组合商品
+/* NORMAL--普通商品 
+COMBINE--组合商品 
 DISTRIBUTION--分销 */
 func (r *WlbItemAddRequest) SetType(value string) {
 	r.SetValue("type", value)
@@ -342,6 +371,7 @@ func (r *WlbItemAddRequest) SetWidth(value string) {
 	r.SetValue("width", value)
 }
 
+
 func (r *WlbItemAddRequest) GetResponse(accessToken string) (*WlbItemAddResponse, []byte, error) {
 	var resp WlbItemAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.item.add", &resp)
@@ -359,12 +389,17 @@ type WlbItemAddResponseResult struct {
 	Response *WlbItemAddResponse `json:"wlb_item_add_response"`
 }
 
+
+
+
+
 /* 添加商品的授权规则：添加规则之后代销商可以增加商品代销关系 */
 type WlbItemAuthorizationAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 授权类型：1=全量授权，0=部分授权
+
+/* 授权类型：1=全量授权，0=部分授权 
 当部分授权时，需要指定授权数量quantity */
 func (r *WlbItemAuthorizationAddRequest) SetAuthType(value string) {
 	r.SetValue("auth_type", value)
@@ -405,6 +440,7 @@ func (r *WlbItemAuthorizationAddRequest) SetRuleCode(value string) {
 	r.SetValue("rule_code", value)
 }
 
+
 func (r *WlbItemAuthorizationAddRequest) GetResponse(accessToken string) (*WlbItemAuthorizationAddResponse, []byte, error) {
 	var resp WlbItemAuthorizationAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.item.authorization.add", &resp)
@@ -422,15 +458,21 @@ type WlbItemAuthorizationAddResponseResult struct {
 	Response *WlbItemAuthorizationAddResponse `json:"wlb_item_authorization_add_response"`
 }
 
+
+
+
+
 /* 删除授权关系.若有建立代销关系，会将其代销关系冻结即将状态置为失效(代销关系)。 */
 type WlbItemAuthorizationDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 授权关系ID */
 func (r *WlbItemAuthorizationDeleteRequest) SetAuthorizeId(value string) {
 	r.SetValue("authorize_id", value)
 }
+
 
 func (r *WlbItemAuthorizationDeleteRequest) GetResponse(accessToken string) (*WlbItemAuthorizationDeleteResponse, []byte, error) {
 	var resp WlbItemAuthorizationDeleteResponseResult
@@ -449,10 +491,15 @@ type WlbItemAuthorizationDeleteResponseResult struct {
 	Response *WlbItemAuthorizationDeleteResponse `json:"wlb_item_authorization_delete_response"`
 }
 
+
+
+
+
 /* 查询授权关系,可由货主或被授权人查询。 */
 type WlbItemAuthorizationQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 授权商品ID */
 func (r *WlbItemAuthorizationQueryRequest) SetItemId(value string) {
@@ -479,18 +526,19 @@ func (r *WlbItemAuthorizationQueryRequest) SetRuleCode(value string) {
 	r.SetValue("rule_code", value)
 }
 
-/* 状态： 只能输入如下值,范围外的默认按VALID处理;不选则查询所有;
+/* 状态： 只能输入如下值,范围外的默认按VALID处理;不选则查询所有;  
 VALID -- 1 有效； INVALIDATION -- 2 失效 */
 func (r *WlbItemAuthorizationQueryRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
 
-/* 类型：可由不同角色来查询，默认值OWNER,
-OWNER -- 授权人,
+/* 类型：可由不同角色来查询，默认值OWNER, 
+OWNER -- 授权人, 
 ON_COMMISSION -- 被授权人 */
 func (r *WlbItemAuthorizationQueryRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
+
 
 func (r *WlbItemAuthorizationQueryRequest) GetResponse(accessToken string) (*WlbItemAuthorizationQueryResponse, []byte, error) {
 	var resp WlbItemAuthorizationQueryResponseResult
@@ -502,18 +550,23 @@ func (r *WlbItemAuthorizationQueryRequest) GetResponse(accessToken string) (*Wlb
 }
 
 type WlbItemAuthorizationQueryResponse struct {
-	AuthorizationList []*WlbAuthorization `json:"authorization_list"`
-	TotalCount        int                 `json:"total_count"`
+	AuthorizationList *WlbAuthorizationListObject `json:"authorization_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbItemAuthorizationQueryResponseResult struct {
 	Response *WlbItemAuthorizationQueryResponse `json:"wlb_item_authorization_query_response"`
 }
 
+
+
+
+
 /* 根据用户id，item id list和store code来查询商品库存信息和批次信息 */
 type WlbItemBatchQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需要查询的商品ID列表，以字符串表示，ID间以;隔开 */
 func (r *WlbItemBatchQueryRequest) SetItemIds(value string) {
@@ -535,6 +588,7 @@ func (r *WlbItemBatchQueryRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
 
+
 func (r *WlbItemBatchQueryRequest) GetResponse(accessToken string) (*WlbItemBatchQueryResponse, []byte, error) {
 	var resp WlbItemBatchQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.item.batch.query", &resp)
@@ -545,18 +599,23 @@ func (r *WlbItemBatchQueryRequest) GetResponse(accessToken string) (*WlbItemBatc
 }
 
 type WlbItemBatchQueryResponse struct {
-	ItemInventoryBatchList []*WlbItemBatchInventory `json:"item_inventory_batch_list"`
-	TotalCount             int                      `json:"total_count"`
+	ItemInventoryBatchList *WlbItemBatchInventoryListObject `json:"item_inventory_batch_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbItemBatchQueryResponseResult struct {
 	Response *WlbItemBatchQueryResponse `json:"wlb_item_batch_query_response"`
 }
 
+
+
+
+
 /* 创建商品组合关系 */
 type WlbItemCombinationCreateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 组合商品的id列表 */
 func (r *WlbItemCombinationCreateRequest) SetDestItemList(value string) {
@@ -572,6 +631,7 @@ func (r *WlbItemCombinationCreateRequest) SetItemId(value string) {
 func (r *WlbItemCombinationCreateRequest) SetProportionList(value string) {
 	r.SetValue("proportion_list", value)
 }
+
 
 func (r *WlbItemCombinationCreateRequest) GetResponse(accessToken string) (*WlbItemCombinationCreateResponse, []byte, error) {
 	var resp WlbItemCombinationCreateResponseResult
@@ -590,10 +650,15 @@ type WlbItemCombinationCreateResponseResult struct {
 	Response *WlbItemCombinationCreateResponse `json:"wlb_item_combination_create_response"`
 }
 
+
+
+
+
 /* 删除商品组合关系 */
 type WlbItemCombinationDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 组合商品的id列表 */
 func (r *WlbItemCombinationDeleteRequest) SetDestItemList(value string) {
@@ -604,6 +669,7 @@ func (r *WlbItemCombinationDeleteRequest) SetDestItemList(value string) {
 func (r *WlbItemCombinationDeleteRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
+
 
 func (r *WlbItemCombinationDeleteRequest) GetResponse(accessToken string) (*WlbItemCombinationDeleteResponse, []byte, error) {
 	var resp WlbItemCombinationDeleteResponseResult
@@ -622,15 +688,21 @@ type WlbItemCombinationDeleteResponseResult struct {
 	Response *WlbItemCombinationDeleteResponse `json:"wlb_item_combination_delete_response"`
 }
 
+
+
+
+
 /* 根据商品id查询商品组合关系 */
 type WlbItemCombinationGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 要查询的组合商品id */
 func (r *WlbItemCombinationGetRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
+
 
 func (r *WlbItemCombinationGetRequest) GetResponse(accessToken string) (*WlbItemCombinationGetResponse, []byte, error) {
 	var resp WlbItemCombinationGetResponseResult
@@ -649,10 +721,15 @@ type WlbItemCombinationGetResponseResult struct {
 	Response *WlbItemCombinationGetResponse `json:"wlb_item_combination_get_response"`
 }
 
+
+
+
+
 /* 代销商创建商品代销关系：货主创建授权规则，获得授权规则后方可创建商品代销关系。 */
 type WlbItemConsignmentCreateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品id */
 func (r *WlbItemConsignmentCreateRequest) SetItemId(value string) {
@@ -679,6 +756,7 @@ func (r *WlbItemConsignmentCreateRequest) SetRuleId(value string) {
 	r.SetValue("rule_id", value)
 }
 
+
 func (r *WlbItemConsignmentCreateRequest) GetResponse(accessToken string) (*WlbItemConsignmentCreateResponse, []byte, error) {
 	var resp WlbItemConsignmentCreateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.item.consignment.create", &resp)
@@ -696,10 +774,15 @@ type WlbItemConsignmentCreateResponseResult struct {
 	Response *WlbItemConsignmentCreateResponse `json:"wlb_item_consignment_create_response"`
 }
 
+
+
+
+
 /* 删除商品的代销关系 */
 type WlbItemConsignmentDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 代销商前台宝贝ID */
 func (r *WlbItemConsignmentDeleteRequest) SetIcItemId(value string) {
@@ -715,6 +798,7 @@ func (r *WlbItemConsignmentDeleteRequest) SetOwnerItemId(value string) {
 func (r *WlbItemConsignmentDeleteRequest) SetRuleId(value string) {
 	r.SetValue("rule_id", value)
 }
+
 
 func (r *WlbItemConsignmentDeleteRequest) GetResponse(accessToken string) (*WlbItemConsignmentDeleteResponse, []byte, error) {
 	var resp WlbItemConsignmentDeleteResponseResult
@@ -733,10 +817,15 @@ type WlbItemConsignmentDeleteResponseResult struct {
 	Response *WlbItemConsignmentDeleteResponse `json:"wlb_item_consignment_delete_response"`
 }
 
+
+
+
+
 /* 代销商角度分页查询物流宝商品的代销关系 */
 type WlbItemConsignmentPageGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 代销商宝贝id */
 func (r *WlbItemConsignmentPageGetRequest) SetIcItemId(value string) {
@@ -753,6 +842,7 @@ func (r *WlbItemConsignmentPageGetRequest) SetOwnerUserNick(value string) {
 	r.SetValue("owner_user_nick", value)
 }
 
+
 func (r *WlbItemConsignmentPageGetRequest) GetResponse(accessToken string) (*WlbItemConsignmentPageGetResponse, []byte, error) {
 	var resp WlbItemConsignmentPageGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.item.consignment.page.get", &resp)
@@ -763,18 +853,23 @@ func (r *WlbItemConsignmentPageGetRequest) GetResponse(accessToken string) (*Wlb
 }
 
 type WlbItemConsignmentPageGetResponse struct {
-	TotalCount      int               `json:"total_count"`
-	WlbConsignMents []*WlbConsignMent `json:"wlb_consign_ments"`
+	TotalCount int `json:"total_count"`
+	WlbConsignMents *WlbConsignMentListObject `json:"wlb_consign_ments"`
 }
 
 type WlbItemConsignmentPageGetResponseResult struct {
 	Response *WlbItemConsignmentPageGetResponse `json:"wlb_item_consignment_page_get_response"`
 }
 
+
+
+
+
 /* 通过ItemId,UserId来删除单个商品 */
 type WlbItemDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品ID */
 func (r *WlbItemDeleteRequest) SetItemId(value string) {
@@ -785,6 +880,7 @@ func (r *WlbItemDeleteRequest) SetItemId(value string) {
 func (r *WlbItemDeleteRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *WlbItemDeleteRequest) GetResponse(accessToken string) (*WlbItemDeleteResponse, []byte, error) {
 	var resp WlbItemDeleteResponseResult
@@ -803,15 +899,21 @@ type WlbItemDeleteResponseResult struct {
 	Response *WlbItemDeleteResponse `json:"wlb_item_delete_response"`
 }
 
+
+
+
+
 /* 根据商品ID获取商品信息,除了获取商品信息外还可获取商品属性信息和库存信息。 */
 type WlbItemGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 商品ID */
 func (r *WlbItemGetRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
+
 
 func (r *WlbItemGetRequest) GetResponse(accessToken string) (*WlbItemGetResponse, []byte, error) {
 	var resp WlbItemGetResponseResult
@@ -830,15 +932,21 @@ type WlbItemGetResponseResult struct {
 	Response *WlbItemGetResponse `json:"wlb_item_get_response"`
 }
 
+
+
+
+
 /* 根据物流宝商品ID查询商品映射关系 */
 type WlbItemMapGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 要查询映射关系的物流宝商品id */
 func (r *WlbItemMapGetRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
+
 
 func (r *WlbItemMapGetRequest) GetResponse(accessToken string) (*WlbItemMapGetResponse, []byte, error) {
 	var resp WlbItemMapGetResponseResult
@@ -850,17 +958,22 @@ func (r *WlbItemMapGetRequest) GetResponse(accessToken string) (*WlbItemMapGetRe
 }
 
 type WlbItemMapGetResponse struct {
-	OutEntityItemList []*OutEntityItem `json:"out_entity_item_list"`
+	OutEntityItemList *OutEntityItemListObject `json:"out_entity_item_list"`
 }
 
 type WlbItemMapGetResponseResult struct {
 	Response *WlbItemMapGetResponse `json:"wlb_item_map_get_response"`
 }
 
+
+
+
+
 /* 根据外部实体类型和实体id查询映射的物流宝商品id */
 type WlbItemMapGetByExtentityRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 外部实体类型对应的商品id */
 func (r *WlbItemMapGetByExtentityRequest) SetExtEntityId(value string) {
@@ -871,6 +984,7 @@ func (r *WlbItemMapGetByExtentityRequest) SetExtEntityId(value string) {
 func (r *WlbItemMapGetByExtentityRequest) SetExtEntityType(value string) {
 	r.SetValue("ext_entity_type", value)
 }
+
 
 func (r *WlbItemMapGetByExtentityRequest) GetResponse(accessToken string) (*WlbItemMapGetByExtentityResponse, []byte, error) {
 	var resp WlbItemMapGetByExtentityResponseResult
@@ -889,12 +1003,17 @@ type WlbItemMapGetByExtentityResponseResult struct {
 	Response *WlbItemMapGetByExtentityResponse `json:"wlb_item_map_get_by_extentity_response"`
 }
 
+
+
+
+
 /* 根据状态、卖家、SKU等信息查询商品列表 */
 type WlbItemQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 是否是最小库存单元，只有最小库存单元的商品才可以有库存,值只能给"true","false"来表示;
+
+/* 是否是最小库存单元，只有最小库存单元的商品才可以有库存,值只能给"true","false"来表示; 
 若值不在范围内，则按true处理 */
 func (r *WlbItemQueryRequest) SetIsSku(value string) {
 	r.SetValue("is_sku", value)
@@ -905,10 +1024,10 @@ func (r *WlbItemQueryRequest) SetItemCode(value string) {
 	r.SetValue("item_code", value)
 }
 
-/* ITEM类型(只允许输入以下英文或空)
-NORMAL  0:普通商品;
-COMBINE  1:是否是组合商品
-DISTRIBUTION  2:是否是分销商品(货主是别人)
+/* ITEM类型(只允许输入以下英文或空) 
+NORMAL  0:普通商品;  
+COMBINE  1:是否是组合商品  
+DISTRIBUTION  2:是否是分销商品(货主是别人) 
 若值不在范围内，则按NORMAL处理 */
 func (r *WlbItemQueryRequest) SetItemType(value string) {
 	r.SetValue("item_type", value)
@@ -934,9 +1053,9 @@ func (r *WlbItemQueryRequest) SetParentId(value string) {
 	r.SetValue("parent_id", value)
 }
 
-/* 只能输入以下值或空：
-ITEM_STATUS_VALID -- 1 表示 有效；
-ITEM_STATUS_LOCK  -- 2 表示锁住。
+/* 只能输入以下值或空： 
+ITEM_STATUS_VALID -- 1 表示 有效； 
+ITEM_STATUS_LOCK  -- 2 表示锁住。 
 若值不在范围内，按ITEM_STATUS_VALID处理 */
 func (r *WlbItemQueryRequest) SetStatus(value string) {
 	r.SetValue("status", value)
@@ -946,6 +1065,7 @@ func (r *WlbItemQueryRequest) SetStatus(value string) {
 func (r *WlbItemQueryRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
+
 
 func (r *WlbItemQueryRequest) GetResponse(accessToken string) (*WlbItemQueryResponse, []byte, error) {
 	var resp WlbItemQueryResponseResult
@@ -957,27 +1077,32 @@ func (r *WlbItemQueryRequest) GetResponse(accessToken string) (*WlbItemQueryResp
 }
 
 type WlbItemQueryResponse struct {
-	ItemList   []*WlbItem `json:"item_list"`
-	TotalCount int        `json:"total_count"`
+	ItemList *WlbItemListObject `json:"item_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbItemQueryResponseResult struct {
 	Response *WlbItemQueryResponse `json:"wlb_item_query_response"`
 }
 
+
+
+
+
 /* 同步仓储商品与前台商品，建立仓储商品与前台商品的关系,并更新IC中的信息到仓储商品Item中 */
 type WlbItemSynchronizeRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 外部实体ID */
 func (r *WlbItemSynchronizeRequest) SetExtEntityId(value string) {
 	r.SetValue("ext_entity_id", value)
 }
 
-/* 外部实体类型.存如下值
-IC_ITEM   --表示IC商品
-IC_SKU    --表示IC最小单位商品
+/* 外部实体类型.存如下值 
+IC_ITEM   --表示IC商品 
+IC_SKU    --表示IC最小单位商品 
 若输入其他值，则按IC_ITEM处理 */
 func (r *WlbItemSynchronizeRequest) SetExtEntityType(value string) {
 	r.SetValue("ext_entity_type", value)
@@ -992,6 +1117,7 @@ func (r *WlbItemSynchronizeRequest) SetItemId(value string) {
 func (r *WlbItemSynchronizeRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *WlbItemSynchronizeRequest) GetResponse(accessToken string) (*WlbItemSynchronizeResponse, []byte, error) {
 	var resp WlbItemSynchronizeResponseResult
@@ -1010,10 +1136,15 @@ type WlbItemSynchronizeResponseResult struct {
 	Response *WlbItemSynchronizeResponse `json:"wlb_item_synchronize_response"`
 }
 
+
+
+
+
 /* 通过物流宝商品ID和IC商品ID删除映射关系。 */
 type WlbItemSynchronizeDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 外部实体ID */
 func (r *WlbItemSynchronizeDeleteRequest) SetExtEntityId(value string) {
@@ -1029,6 +1160,7 @@ func (r *WlbItemSynchronizeDeleteRequest) SetExtEntityType(value string) {
 func (r *WlbItemSynchronizeDeleteRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
+
 
 func (r *WlbItemSynchronizeDeleteRequest) GetResponse(accessToken string) (*WlbItemSynchronizeDeleteResponse, []byte, error) {
 	var resp WlbItemSynchronizeDeleteResponseResult
@@ -1047,10 +1179,15 @@ type WlbItemSynchronizeDeleteResponseResult struct {
 	Response *WlbItemSynchronizeDeleteResponse `json:"wlb_item_synchronize_delete_response"`
 }
 
+
+
+
+
 /* 修改物流宝商品信息 */
 type WlbItemUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品颜色 */
 func (r *WlbItemUpdateRequest) SetColor(value string) {
@@ -1142,6 +1279,7 @@ func (r *WlbItemUpdateRequest) SetWidth(value string) {
 	r.SetValue("width", value)
 }
 
+
 func (r *WlbItemUpdateRequest) GetResponse(accessToken string) (*WlbItemUpdateResponse, []byte, error) {
 	var resp WlbItemUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.item.update", &resp)
@@ -1159,15 +1297,21 @@ type WlbItemUpdateResponseResult struct {
 	Response *WlbItemUpdateResponse `json:"wlb_item_update_response"`
 }
 
+
+
+
+
 /* 确认物流宝可执行消息 */
 type WlbNotifyMessageConfirmRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 物流宝通知消息的id，通过taobao.wlb.notify.message.page.get接口得到的WlbMessage数据结构中的id字段 */
 func (r *WlbNotifyMessageConfirmRequest) SetMessageId(value string) {
 	r.SetValue("message_id", value)
 }
+
 
 func (r *WlbNotifyMessageConfirmRequest) GetResponse(accessToken string) (*WlbNotifyMessageConfirmResponse, []byte, error) {
 	var resp WlbNotifyMessageConfirmResponseResult
@@ -1186,22 +1330,27 @@ type WlbNotifyMessageConfirmResponseResult struct {
 	Response *WlbNotifyMessageConfirmResponse `json:"wlb_notify_message_confirm_response"`
 }
 
+
+
+
+
 /* 物流宝提供的消息通知查询接口，消息内容包括;出入库单不一致消息，取消订单成功消息，盘点单消息 */
 type WlbNotifyMessagePageGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 查询条件：记录截至时间 */
 func (r *WlbNotifyMessagePageGetRequest) SetEndDate(value string) {
 	r.SetValue("end_date", value)
 }
 
-/* 通知消息编码：
-STOCK_IN_NOT_CONSISTENT---入库单不一致
-CANCEL_ORDER_SUCCESS---取消订单成功
-INVENTORY_CHECK---盘点
-CANCEL_ORDER_FAILURE---取消订单失败
-ORDER_REJECT--wms拒单
+/* 通知消息编码： 
+STOCK_IN_NOT_CONSISTENT---入库单不一致 
+CANCEL_ORDER_SUCCESS---取消订单成功 
+INVENTORY_CHECK---盘点 
+CANCEL_ORDER_FAILURE---取消订单失败 
+ORDER_REJECT--wms拒单 
 ORDER_CONFIRMED--订单处理成功 */
 func (r *WlbNotifyMessagePageGetRequest) SetMsgCode(value string) {
 	r.SetValue("msg_code", value)
@@ -1222,13 +1371,14 @@ func (r *WlbNotifyMessagePageGetRequest) SetStartDate(value string) {
 	r.SetValue("start_date", value)
 }
 
-/* 消息状态：
-不需要确认：NO_NEED_CONFIRM
-已确认：CONFIRMED
+/* 消息状态： 
+不需要确认：NO_NEED_CONFIRM 
+已确认：CONFIRMED 
 待确认：TO_BE_CONFIRM */
 func (r *WlbNotifyMessagePageGetRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
+
 
 func (r *WlbNotifyMessagePageGetRequest) GetResponse(accessToken string) (*WlbNotifyMessagePageGetResponse, []byte, error) {
 	var resp WlbNotifyMessagePageGetResponseResult
@@ -1240,23 +1390,29 @@ func (r *WlbNotifyMessagePageGetRequest) GetResponse(accessToken string) (*WlbNo
 }
 
 type WlbNotifyMessagePageGetResponse struct {
-	TotalCount  int           `json:"total_count"`
-	WlbMessages []*WlbMessage `json:"wlb_messages"`
+	TotalCount int `json:"total_count"`
+	WlbMessages *WlbMessageListObject `json:"wlb_messages"`
 }
 
 type WlbNotifyMessagePageGetResponseResult struct {
 	Response *WlbNotifyMessagePageGetResponse `json:"wlb_notify_message_page_get_response"`
 }
 
+
+
+
+
 /* 取消物流宝订单 */
 type WlbOrderCancelRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 物流宝订单编号 */
 func (r *WlbOrderCancelRequest) SetWlbOrderCode(value string) {
 	r.SetValue("wlb_order_code", value)
 }
+
 
 func (r *WlbOrderCancelRequest) GetResponse(accessToken string) (*WlbOrderCancelResponse, []byte, error) {
 	var resp WlbOrderCancelResponseResult
@@ -1269,22 +1425,28 @@ func (r *WlbOrderCancelRequest) GetResponse(accessToken string) (*WlbOrderCancel
 
 type WlbOrderCancelResponse struct {
 	ErrorCodeList string `json:"error_code_list"`
-	ModifyTime    string `json:"modify_time"`
+	ModifyTime string `json:"modify_time"`
 }
 
 type WlbOrderCancelResponseResult struct {
 	Response *WlbOrderCancelResponse `json:"wlb_order_cancel_response"`
 }
 
+
+
+
+
 /* 如果erp导入淘宝交易订单到物流宝，当物流宝订单已发货的时候，erp需要调用该接口来通知物流订单和淘宝交易订单已发货 */
 type WlbOrderConsignRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 物流宝订单编号 */
 func (r *WlbOrderConsignRequest) SetWlbOrderCode(value string) {
 	r.SetValue("wlb_order_code", value)
 }
+
 
 func (r *WlbOrderConsignRequest) GetResponse(accessToken string) (*WlbOrderConsignResponse, []byte, error) {
 	var resp WlbOrderConsignResponseResult
@@ -1303,10 +1465,15 @@ type WlbOrderConsignResponseResult struct {
 	Response *WlbOrderConsignResponse `json:"wlb_order_consign_response"`
 }
 
+
+
+
+
 /* 创建物流宝订单，由外部ISV或者ERP，Elink，淘宝交易产生 */
 type WlbOrderCreateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 支付宝交易号 */
 func (r *WlbOrderCreateRequest) SetAlipayNo(value string) {
@@ -1348,9 +1515,9 @@ func (r *WlbOrderCreateRequest) SetOrderCode(value string) {
 	r.SetValue("order_code", value)
 }
 
-/* 用字符串格式来表示订单标记列表：比如COD^PRESELL^SPLIT^LIMIT 等，中间用“^”来隔开 ---------------------------------------- 订单标记list（所有字母全部大写）： 1: COD –货到付款 2: LIMIT-限时配送 3: PRESELL-预售 5:COMPLAIN-已投诉 7:SPLIT-拆单， 8:EXCHANGE-换货， 9:VISIT-上门 ， 10: MODIFYTRANSPORT-是否可改配送方式，
-: 是否可改配送方式  默认可更改
-11 CONSIGN 物流宝代理发货,自动更改发货状态
+/* 用字符串格式来表示订单标记列表：比如COD^PRESELL^SPLIT^LIMIT 等，中间用“^”来隔开 ---------------------------------------- 订单标记list（所有字母全部大写）： 1: COD –货到付款 2: LIMIT-限时配送 3: PRESELL-预售 5:COMPLAIN-已投诉 7:SPLIT-拆单， 8:EXCHANGE-换货， 9:VISIT-上门 ， 10: MODIFYTRANSPORT-是否可改配送方式， 
+: 是否可改配送方式  默认可更改 
+11 CONSIGN 物流宝代理发货,自动更改发货状态 
 12: SELLER_AFFORD 是否卖家承担运费 默认是，即没 13: SYNC_RETURN_BILL，同时退回发票 */
 func (r *WlbOrderCreateRequest) SetOrderFlag(value string) {
 	r.SetValue("order_flag", value)
@@ -1362,20 +1529,20 @@ func (r *WlbOrderCreateRequest) SetOrderItemList(value string) {
 	r.SetValue("order_item_list", value)
 }
 
-/* 订单子类型：
-（1）OTHER： 其他
-（2）TAOBAO_TRADE： 淘宝交易
-（3）OTHER_TRADE：其他交易
-（4）ALLCOATE： 调拨
+/* 订单子类型： 
+（1）OTHER： 其他 
+（2）TAOBAO_TRADE： 淘宝交易 
+（3）OTHER_TRADE：其他交易 
+（4）ALLCOATE： 调拨 
 （5）PURCHASE:采购 */
 func (r *WlbOrderCreateRequest) SetOrderSubType(value string) {
 	r.SetValue("order_sub_type", value)
 }
 
-/* 订单类型:
-（1）NORMAL_OUT ：正常出库
-（2）NORMAL_IN：正常入库
-（3）RETURN_IN：退货入库
+/* 订单类型: 
+（1）NORMAL_OUT ：正常出库 
+（2）NORMAL_IN：正常入库 
+（3）RETURN_IN：退货入库 
 （4）EXCHANGE_OUT：换货出库 */
 func (r *WlbOrderCreateRequest) SetOrderType(value string) {
 	r.SetValue("order_type", value)
@@ -1401,8 +1568,8 @@ func (r *WlbOrderCreateRequest) SetPrevOrderCode(value string) {
 	r.SetValue("prev_order_code", value)
 }
 
-/* 发收方发货方信息必须传 手机和电话必选其一
-收货方信息
+/* 收货方信息，必须传， 手机和电话必选其一。
+收货方信息：
 邮编^^^省^^^市^^^区^^^具体地址^^^收件方名称^^^手机^^^电话
 
 如果某一个字段的数据为空时，必须传NA */
@@ -1425,17 +1592,17 @@ func (r *WlbOrderCreateRequest) SetScheduleStart(value string) {
 	r.SetValue("schedule_start", value)
 }
 
-/* 投递时延要求:
-（1）INSTANT_ARRIVED： 当日达
-（2）TOMMORROY_MORNING_ARRIVED：次晨达
-（3）TOMMORROY_ARRIVED：次日达
-（4）工作日：WORK_DAY
+/* 投递时延要求:  
+（1）INSTANT_ARRIVED： 当日达  
+（2）TOMMORROY_MORNING_ARRIVED：次晨达 
+（3）TOMMORROY_ARRIVED：次日达 
+（4）工作日：WORK_DAY  
 （5）节假日：WEEKED_DAY */
 func (r *WlbOrderCreateRequest) SetScheduleType(value string) {
 	r.SetValue("schedule_type", value)
 }
 
-/* 发货方信息，发收方发货方信息必须传 手机和电话必选其一
+/* 发货方信息，发货方信息必须传， 手机和电话必选其一。 发货方信息：
 邮编^^^省^^^市^^^区^^^具体地址^^^收件方名称^^^手机^^^电话
 如果某一个字段的数据为空时，必须传NA */
 func (r *WlbOrderCreateRequest) SetSenderInfo(value string) {
@@ -1452,10 +1619,10 @@ func (r *WlbOrderCreateRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
 
-/* 出库单中可能会用到
-运输公司名称^^^运输公司联系人^^^运输公司运单号^^^运输公司电话^^^运输公司联系人身份证号
-
-========================================
+/* 出库单中可能会用到 
+运输公司名称^^^运输公司联系人^^^运输公司运单号^^^运输公司电话^^^运输公司联系人身份证号 
+ 
+======================================== 
 如果某一个字段的数据为空时，必须传NA */
 func (r *WlbOrderCreateRequest) SetTmsInfo(value string) {
 	r.SetValue("tms_info", value)
@@ -1476,6 +1643,7 @@ func (r *WlbOrderCreateRequest) SetTotalAmount(value string) {
 	r.SetValue("total_amount", value)
 }
 
+
 func (r *WlbOrderCreateRequest) GetResponse(accessToken string) (*WlbOrderCreateResponse, []byte, error) {
 	var resp WlbOrderCreateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.order.create", &resp)
@@ -1487,17 +1655,22 @@ func (r *WlbOrderCreateRequest) GetResponse(accessToken string) (*WlbOrderCreate
 
 type WlbOrderCreateResponse struct {
 	CreateTime string `json:"create_time"`
-	OrderCode  string `json:"order_code"`
+	OrderCode string `json:"order_code"`
 }
 
 type WlbOrderCreateResponseResult struct {
 	Response *WlbOrderCreateResponse `json:"wlb_order_create_response"`
 }
 
+
+
+
+
 /* 分页查询物流宝订单 */
 type WlbOrderPageGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 查询截止时间 */
 func (r *WlbOrderPageGetRequest) SetEndTime(value string) {
@@ -1514,21 +1687,21 @@ func (r *WlbOrderPageGetRequest) SetOrderStatus(value string) {
 	r.SetValue("order_status", value)
 }
 
-/* 订单子类型：
-（1）OTHER： 其他
-（2）TAOBAO_TRADE： 淘宝交易
-（3）OTHER_TRADE：其他交易
-（4）ALLCOATE： 调拨
-（5）CHECK:  盘点单
+/* 订单子类型：  
+（1）OTHER： 其他  
+（2）TAOBAO_TRADE： 淘宝交易  
+（3）OTHER_TRADE：其他交易 
+（4）ALLCOATE： 调拨 
+（5）CHECK:  盘点单 
 （6）PURCHASE: 采购单 */
 func (r *WlbOrderPageGetRequest) SetOrderSubType(value string) {
 	r.SetValue("order_sub_type", value)
 }
 
-/* 订单类型:
-（1）NORMAL_OUT ：正常出库
-（2）NORMAL_IN：正常入库
-（3）RETURN_IN：退货入库
+/* 订单类型:  
+（1）NORMAL_OUT ：正常出库  
+（2）NORMAL_IN：正常入库  
+（3）RETURN_IN：退货入库  
 （4）EXCHANGE_OUT：换货出库 */
 func (r *WlbOrderPageGetRequest) SetOrderType(value string) {
 	r.SetValue("order_type", value)
@@ -1549,6 +1722,7 @@ func (r *WlbOrderPageGetRequest) SetStartTime(value string) {
 	r.SetValue("start_time", value)
 }
 
+
 func (r *WlbOrderPageGetRequest) GetResponse(accessToken string) (*WlbOrderPageGetResponse, []byte, error) {
 	var resp WlbOrderPageGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.order.page.get", &resp)
@@ -1559,18 +1733,23 @@ func (r *WlbOrderPageGetRequest) GetResponse(accessToken string) (*WlbOrderPageG
 }
 
 type WlbOrderPageGetResponse struct {
-	OrderList  []*WlbOrder `json:"order_list"`
-	TotalCount int         `json:"total_count"`
+	OrderList *WlbOrderListObject `json:"order_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbOrderPageGetResponseResult struct {
 	Response *WlbOrderPageGetResponse `json:"wlb_order_page_get_response"`
 }
 
+
+
+
+
 /* 为订单的自动流转设置订单调度规则。规则设定之后，可以根据发货地区，精确路由订单至指定仓库处理。 */
 type WlbOrderScheduleRuleAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 备用发货仓库服务id（通过taobao.wlb.subscription.query接口获得service_id） */
 func (r *WlbOrderScheduleRuleAddRequest) SetBackupStoreId(value string) {
@@ -1582,9 +1761,9 @@ func (r *WlbOrderScheduleRuleAddRequest) SetDefaultStoreId(value string) {
 	r.SetValue("default_store_id", value)
 }
 
-/* 发货规则的额外规则设置：
-REMARK_STOP--有订单留言不自动下发
-COD_STOP--货到付款订单不自动下发
+/* 发货规则的额外规则设置： 
+REMARK_STOP--有订单留言不自动下发 
+COD_STOP--货到付款订单不自动下发 
 CHECK_WAREHOUSE_DELIVER--检查仓库的配送范围 */
 func (r *WlbOrderScheduleRuleAddRequest) SetOption(value string) {
 	r.SetValue("option", value)
@@ -1594,6 +1773,7 @@ func (r *WlbOrderScheduleRuleAddRequest) SetOption(value string) {
 func (r *WlbOrderScheduleRuleAddRequest) SetProvAreaIds(value string) {
 	r.SetValue("prov_area_ids", value)
 }
+
 
 func (r *WlbOrderScheduleRuleAddRequest) GetResponse(accessToken string) (*WlbOrderScheduleRuleAddResponse, []byte, error) {
 	var resp WlbOrderScheduleRuleAddResponseResult
@@ -1612,10 +1792,15 @@ type WlbOrderScheduleRuleAddResponseResult struct {
 	Response *WlbOrderScheduleRuleAddResponse `json:"wlb_order_schedule_rule_add_response"`
 }
 
+
+
+
+
 /* 修改物流宝订单调度规则 */
 type WlbOrderScheduleRuleUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 备用发货仓库id */
 func (r *WlbOrderScheduleRuleUpdateRequest) SetBackupStoreId(value string) {
@@ -1642,6 +1827,7 @@ func (r *WlbOrderScheduleRuleUpdateRequest) SetScheduleRuleId(value string) {
 	r.SetValue("schedule_rule_id", value)
 }
 
+
 func (r *WlbOrderScheduleRuleUpdateRequest) GetResponse(accessToken string) (*WlbOrderScheduleRuleUpdateResponse, []byte, error) {
 	var resp WlbOrderScheduleRuleUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.order.schedule.rule.update", &resp)
@@ -1659,10 +1845,64 @@ type WlbOrderScheduleRuleUpdateResponseResult struct {
 	Response *WlbOrderScheduleRuleUpdateResponse `json:"wlb_order_schedule_rule_update_response"`
 }
 
+
+
+
+
+/* 外部ERP可通过该接口查询一段时间内的物流宝订单，以及订单详情 */
+type WlbOrderdetailDateGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 查询条件截止日期 */
+func (r *WlbOrderdetailDateGetRequest) SetEndTime(value string) {
+	r.SetValue("end_time", value)
+}
+
+/* 分页查询参数，指定查询页数，默认为1 */
+func (r *WlbOrderdetailDateGetRequest) SetPageNo(value string) {
+	r.SetValue("page_no", value)
+}
+
+/* 分页查询参数，每页查询数量，默认20，最大值50,大于50时按照50条查询 */
+func (r *WlbOrderdetailDateGetRequest) SetPageSize(value string) {
+	r.SetValue("page_size", value)
+}
+
+/* 查询起始日期 */
+func (r *WlbOrderdetailDateGetRequest) SetStartTime(value string) {
+	r.SetValue("start_time", value)
+}
+
+
+func (r *WlbOrderdetailDateGetRequest) GetResponse(accessToken string) (*WlbOrderdetailDateGetResponse, []byte, error) {
+	var resp WlbOrderdetailDateGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.orderdetail.date.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type WlbOrderdetailDateGetResponse struct {
+	OrderDetailList *WlbOrderDetailListObject `json:"order_detail_list"`
+	TotalCount int `json:"total_count"`
+}
+
+type WlbOrderdetailDateGetResponseResult struct {
+	Response *WlbOrderdetailDateGetResponse `json:"wlb_orderdetail_date_get_response"`
+}
+
+
+
+
+
 /* 分页查询物流宝订单商品详情 */
 type WlbOrderitemPageGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 物流宝订单编码 */
 func (r *WlbOrderitemPageGetRequest) SetOrderCode(value string) {
@@ -1679,6 +1919,7 @@ func (r *WlbOrderitemPageGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *WlbOrderitemPageGetRequest) GetResponse(accessToken string) (*WlbOrderitemPageGetResponse, []byte, error) {
 	var resp WlbOrderitemPageGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.orderitem.page.get", &resp)
@@ -1689,18 +1930,23 @@ func (r *WlbOrderitemPageGetRequest) GetResponse(accessToken string) (*WlbOrderi
 }
 
 type WlbOrderitemPageGetResponse struct {
-	OrderItemList []*WlbOrderItem `json:"order_item_list"`
-	TotalCount    int             `json:"total_count"`
+	OrderItemList *WlbOrderItemListObject `json:"order_item_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbOrderitemPageGetResponseResult struct {
 	Response *WlbOrderitemPageGetResponse `json:"wlb_orderitem_page_get_response"`
 }
 
+
+
+
+
 /* 删除单个订单调度规则 */
 type WlbOrderscheduleruleDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 订单调度规则ID */
 func (r *WlbOrderscheduleruleDeleteRequest) SetId(value string) {
@@ -1711,6 +1957,7 @@ func (r *WlbOrderscheduleruleDeleteRequest) SetId(value string) {
 func (r *WlbOrderscheduleruleDeleteRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *WlbOrderscheduleruleDeleteRequest) GetResponse(accessToken string) (*WlbOrderscheduleruleDeleteResponse, []byte, error) {
 	var resp WlbOrderscheduleruleDeleteResponseResult
@@ -1729,10 +1976,15 @@ type WlbOrderscheduleruleDeleteResponseResult struct {
 	Response *WlbOrderscheduleruleDeleteResponse `json:"wlb_orderschedulerule_delete_response"`
 }
 
+
+
+
+
 /* 查询某个卖家的所有订单调度规则，提供分页查询。 */
 type WlbOrderscheduleruleQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 当前页 */
 func (r *WlbOrderscheduleruleQueryRequest) SetPageNo(value string) {
@@ -1744,6 +1996,7 @@ func (r *WlbOrderscheduleruleQueryRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *WlbOrderscheduleruleQueryRequest) GetResponse(accessToken string) (*WlbOrderscheduleruleQueryResponse, []byte, error) {
 	var resp WlbOrderscheduleruleQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.orderschedulerule.query", &resp)
@@ -1754,23 +2007,29 @@ func (r *WlbOrderscheduleruleQueryRequest) GetResponse(accessToken string) (*Wlb
 }
 
 type WlbOrderscheduleruleQueryResponse struct {
-	OrderScheduleRuleList []*WlbOrderScheduleRule `json:"order_schedule_rule_list"`
-	TotalCount            int                     `json:"total_count"`
+	OrderScheduleRuleList *WlbOrderScheduleRuleListObject `json:"order_schedule_rule_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbOrderscheduleruleQueryResponseResult struct {
 	Response *WlbOrderscheduleruleQueryResponse `json:"wlb_orderschedulerule_query_response"`
 }
 
+
+
+
+
 /* 根据物流宝订单号查询物流宝订单至目前为止的流转状态列表 */
 type WlbOrderstatusGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 物流宝订单编码 */
 func (r *WlbOrderstatusGetRequest) SetOrderCode(value string) {
 	r.SetValue("order_code", value)
 }
+
 
 func (r *WlbOrderstatusGetRequest) GetResponse(accessToken string) (*WlbOrderstatusGetResponse, []byte, error) {
 	var resp WlbOrderstatusGetResponseResult
@@ -1782,17 +2041,22 @@ func (r *WlbOrderstatusGetRequest) GetResponse(accessToken string) (*WlbOrdersta
 }
 
 type WlbOrderstatusGetResponse struct {
-	WlbOrderStatus []*WlbProcessStatus `json:"wlb_order_status"`
+	WlbOrderStatus *WlbProcessStatusListObject `json:"wlb_order_status"`
 }
 
 type WlbOrderstatusGetResponseResult struct {
 	Response *WlbOrderstatusGetResponse `json:"wlb_orderstatus_get_response"`
 }
 
+
+
+
+
 /* 拥有自有仓的企业物流用户通过该接口把自有仓的库存通知到物流宝，由物流宝维护该库存，控制前台显示库存的准确性。 */
 type WlbOutInventoryChangeNotifyRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 库存变化数量 */
 func (r *WlbOutInventoryChangeNotifyRequest) SetChangeCount(value string) {
@@ -1804,7 +2068,7 @@ func (r *WlbOutInventoryChangeNotifyRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
 
-/* OUT--出库
+/* OUT--出库 
 IN--入库 */
 func (r *WlbOutInventoryChangeNotifyRequest) SetOpType(value string) {
 	r.SetValue("op_type", value)
@@ -1825,11 +2089,11 @@ func (r *WlbOutInventoryChangeNotifyRequest) SetResultCount(value string) {
 	r.SetValue("result_count", value)
 }
 
-/* （1）OTHER： 其他
-（2）TAOBAO_TRADE： 淘宝交易
-（3）OTHER_TRADE：其他交易
-（4）ALLCOATE： 调拨
-（5）CHECK:盘点
+/* （1）OTHER： 其他  
+（2）TAOBAO_TRADE： 淘宝交易  
+（3）OTHER_TRADE：其他交易  
+（4）ALLCOATE： 调拨  
+（5）CHECK:盘点 
 （6）PURCHASE:采购 */
 func (r *WlbOutInventoryChangeNotifyRequest) SetSource(value string) {
 	r.SetValue("source", value)
@@ -1840,12 +2104,13 @@ func (r *WlbOutInventoryChangeNotifyRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
 
-/* WLB_ITEM--物流宝商品
-IC_ITEM--淘宝商品
+/* WLB_ITEM--物流宝商品 
+IC_ITEM--淘宝商品 
 IC_SKU--淘宝sku */
 func (r *WlbOutInventoryChangeNotifyRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
+
 
 func (r *WlbOutInventoryChangeNotifyRequest) GetResponse(accessToken string) (*WlbOutInventoryChangeNotifyResponse, []byte, error) {
 	var resp WlbOutInventoryChangeNotifyResponseResult
@@ -1864,10 +2129,15 @@ type WlbOutInventoryChangeNotifyResponseResult struct {
 	Response *WlbOutInventoryChangeNotifyResponse `json:"wlb_out_inventory_change_notify_response"`
 }
 
+
+
+
+
 /* 查询BI的统计的补货统计数据 */
 type WlbReplenishStatisticsRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品编码 */
 func (r *WlbReplenishStatisticsRequest) SetItemCode(value string) {
@@ -1894,6 +2164,7 @@ func (r *WlbReplenishStatisticsRequest) SetStoreCode(value string) {
 	r.SetValue("store_code", value)
 }
 
+
 func (r *WlbReplenishStatisticsRequest) GetResponse(accessToken string) (*WlbReplenishStatisticsResponse, []byte, error) {
 	var resp WlbReplenishStatisticsResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.replenish.statistics", &resp)
@@ -1904,18 +2175,23 @@ func (r *WlbReplenishStatisticsRequest) GetResponse(accessToken string) (*WlbRep
 }
 
 type WlbReplenishStatisticsResponse struct {
-	ReplenishList []*WlbReplenish `json:"replenish_list"`
-	TotalCount    int             `json:"total_count"`
+	ReplenishList *WlbReplenishListObject `json:"replenish_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbReplenishStatisticsResponseResult struct {
 	Response *WlbReplenishStatisticsResponse `json:"wlb_replenish_statistics_response"`
 }
 
+
+
+
+
 /* 查询商家定购的所有服务,可通过入参状态来筛选 */
 type WlbSubscriptionQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 当前页 */
 func (r *WlbSubscriptionQueryRequest) SetPageNo(value string) {
@@ -1927,16 +2203,17 @@ func (r *WlbSubscriptionQueryRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-/* 状态
-AUDITING 1-待审核;
-CANCEL 2-撤销 ;
-CHECKED 3-审核通过 ;
-FAILED 4-审核未通过 ;
-SYNCHRONIZING 5-同步中;
+/* 状态  
+AUDITING 1-待审核;  
+CANCEL 2-撤销 ; 
+CHECKED 3-审核通过 ; 
+FAILED 4-审核未通过 ; 
+SYNCHRONIZING 5-同步中; 
 只允许输入上面指定的值，且可以为空，为空时查询所有状态。若输错了，则按AUDITING处理。 */
 func (r *WlbSubscriptionQueryRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
+
 
 func (r *WlbSubscriptionQueryRequest) GetResponse(accessToken string) (*WlbSubscriptionQueryResponse, []byte, error) {
 	var resp WlbSubscriptionQueryResponseResult
@@ -1948,18 +2225,23 @@ func (r *WlbSubscriptionQueryRequest) GetResponse(accessToken string) (*WlbSubsc
 }
 
 type WlbSubscriptionQueryResponse struct {
-	SellerSubscriptionList []*WlbSellerSubscription `json:"seller_subscription_list"`
-	TotalCount             int                      `json:"total_count"`
+	SellerSubscriptionList *WlbSellerSubscriptionListObject `json:"seller_subscription_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbSubscriptionQueryResponseResult struct {
 	Response *WlbSubscriptionQueryResponse `json:"wlb_subscription_query_response"`
 }
 
+
+
+
+
 /* 通过物流订单编号分页查询物流信息 */
 type WlbTmsorderQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 物流订单编号 */
 func (r *WlbTmsorderQueryRequest) SetOrderCode(value string) {
@@ -1976,6 +2258,7 @@ func (r *WlbTmsorderQueryRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *WlbTmsorderQueryRequest) GetResponse(accessToken string) (*WlbTmsorderQueryResponse, []byte, error) {
 	var resp WlbTmsorderQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.tmsorder.query", &resp)
@@ -1986,31 +2269,37 @@ func (r *WlbTmsorderQueryRequest) GetResponse(accessToken string) (*WlbTmsorderQ
 }
 
 type WlbTmsorderQueryResponse struct {
-	TmsOrderList []*WlbTmsOrder `json:"tms_order_list"`
-	TotalCount   int            `json:"total_count"`
+	TmsOrderList *WlbTmsOrderListObject `json:"tms_order_list"`
+	TotalCount int `json:"total_count"`
 }
 
 type WlbTmsorderQueryResponseResult struct {
 	Response *WlbTmsorderQueryResponse `json:"wlb_tmsorder_query_response"`
 }
 
+
+
+
+
 /* 根据交易类型和交易id查询物流宝订单详情 */
 type WlbTradeorderGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 指定交易类型的交易号 */
 func (r *WlbTradeorderGetRequest) SetTradeId(value string) {
 	r.SetValue("trade_id", value)
 }
 
-/* 交易类型:
-TAOBAO--淘宝交易
-PAIPAI--拍拍交易
+/* 交易类型: 
+TAOBAO--淘宝交易 
+PAIPAI--拍拍交易 
 YOUA--有啊交易 */
 func (r *WlbTradeorderGetRequest) SetTradeType(value string) {
 	r.SetValue("trade_type", value)
 }
+
 
 func (r *WlbTradeorderGetRequest) GetResponse(accessToken string) (*WlbTradeorderGetResponse, []byte, error) {
 	var resp WlbTradeorderGetResponseResult
@@ -2022,17 +2311,22 @@ func (r *WlbTradeorderGetRequest) GetResponse(accessToken string) (*WlbTradeorde
 }
 
 type WlbTradeorderGetResponse struct {
-	WlbOrderList []*WlbOrder `json:"wlb_order_list"`
+	WlbOrderList *WlbOrderListObject `json:"wlb_order_list"`
 }
 
 type WlbTradeorderGetResponseResult struct {
 	Response *WlbTradeorderGetResponse `json:"wlb_tradeorder_get_response"`
 }
 
+
+
+
+
 /* 商家申请电子面单 */
 type WlbWaybillallocationRequestwaybillnumRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 申请号码数量 */
 func (r *WlbWaybillallocationRequestwaybillnumRequest) SetNum(value string) {
@@ -2059,6 +2353,7 @@ func (r *WlbWaybillallocationRequestwaybillnumRequest) SetUserId(value string) {
 	r.SetValue("user_id", value)
 }
 
+
 func (r *WlbWaybillallocationRequestwaybillnumRequest) GetResponse(accessToken string) (*WlbWaybillallocationRequestwaybillnumResponse, []byte, error) {
 	var resp WlbWaybillallocationRequestwaybillnumResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.wlb.waybillallocation.requestwaybillnum", &resp)
@@ -2069,21 +2364,29 @@ func (r *WlbWaybillallocationRequestwaybillnumRequest) GetResponse(accessToken s
 }
 
 type WlbWaybillallocationRequestwaybillnumResponse struct {
+	ServiceCode string `json:"service_code"`
+	TmsWaybillList []string `json:"tms_waybill_list"`
 }
 
 type WlbWaybillallocationRequestwaybillnumResponseResult struct {
 	Response *WlbWaybillallocationRequestwaybillnumResponse `json:"wlb_waybillallocation_requestwaybillnum_response"`
 }
 
+
+
+
+
 /* 根据物流宝订单编号查询物流宝订单概要信息 */
 type WlbWlborderGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 物流宝订单编码 */
 func (r *WlbWlborderGetRequest) SetWlbOrderCode(value string) {
 	r.SetValue("wlb_order_code", value)
 }
+
 
 func (r *WlbWlborderGetRequest) GetResponse(accessToken string) (*WlbWlborderGetResponse, []byte, error) {
 	var resp WlbWlborderGetResponseResult
@@ -2101,3 +2404,6 @@ type WlbWlborderGetResponse struct {
 type WlbWlborderGetResponseResult struct {
 	Response *WlbWlborderGetResponse `json:"wlb_wlborder_get_response"`
 }
+
+
+

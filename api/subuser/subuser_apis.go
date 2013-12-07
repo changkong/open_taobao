@@ -5,26 +5,31 @@
 package subuser
 
 import (
-	"github.com/changkong/open_taobao"
+	"github.com/yaofangou/open_taobao"
 )
 
-/* 给指定的卖家创建新的子账号角色<br/>
-如果需要授权的权限点有下级权限点或上级权限点，把该权限点的父权限点和该权限点的所有子权限都一并做赋权操作，并递归处理<br/>例如：权限点列表如下<br/>
-code=sell 宝贝管理<br/>
----------|code=sm 店铺管理<br/>
----------|---------|code=sm-design 如店铺装修<br/>
----------|---------|---------|code=sm-tbd-visit内店装修入口<br/>
----------|---------|---------|code=sm-tbd-publish内店装修发布<br/>
----------|---------|code=phone 手机淘宝店铺<br/>
-调用改接口给code=sm-design店铺装修赋权时，同时会将下列权限点都赋予默认角色<br/>
-code=sell 宝贝管理<br/>
----------|code=sm 店铺管理<br/>
----------|---------|code=sm-design 如店铺装修<br/>
----------|---------|---------|code=sm-tbd-visit内店装修入口<br/>
+
+
+
+
+/* 给指定的卖家创建新的子账号角色<br/> 
+如果需要授权的权限点有下级权限点或上级权限点，把该权限点的父权限点和该权限点的所有子权限都一并做赋权操作，并递归处理<br/>例如：权限点列表如下<br/> 
+code=sell 宝贝管理<br/> 
+---------|code=sm 店铺管理<br/> 
+---------|---------|code=sm-design 如店铺装修<br/> 
+---------|---------|---------|code=sm-tbd-visit内店装修入口<br/> 
+---------|---------|---------|code=sm-tbd-publish内店装修发布<br/> 
+---------|---------|code=phone 手机淘宝店铺<br/> 
+调用改接口给code=sm-design店铺装修赋权时，同时会将下列权限点都赋予默认角色<br/> 
+code=sell 宝贝管理<br/> 
+---------|code=sm 店铺管理<br/> 
+---------|---------|code=sm-design 如店铺装修<br/> 
+---------|---------|---------|code=sm-tbd-visit内店装修入口<br/> 
 ---------|---------|---------|code=sm-tbd-publish内店装修发布<br/> */
 type SellercenterRoleAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 角色描述 */
 func (r *SellercenterRoleAddRequest) SetDescription(value string) {
@@ -46,6 +51,7 @@ func (r *SellercenterRoleAddRequest) SetPermissionCodes(value string) {
 	r.SetValue("permission_codes", value)
 }
 
+
 func (r *SellercenterRoleAddRequest) GetResponse(accessToken string) (*SellercenterRoleAddResponse, []byte, error) {
 	var resp SellercenterRoleAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.sellercenter.role.add", &resp)
@@ -63,15 +69,21 @@ type SellercenterRoleAddResponseResult struct {
 	Response *SellercenterRoleAddResponse `json:"sellercenter_role_add_response"`
 }
 
+
+
+
+
 /* 获取指定角色的信息。只能查询属于自己的角色信息 (主账号或者某个主账号的子账号登陆，只能查询属于该主账号的角色信息) */
 type SellercenterRoleInfoGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 角色id */
 func (r *SellercenterRoleInfoGetRequest) SetRoleId(value string) {
 	r.SetValue("role_id", value)
 }
+
 
 func (r *SellercenterRoleInfoGetRequest) GetResponse(accessToken string) (*SellercenterRoleInfoGetResponse, []byte, error) {
 	var resp SellercenterRoleInfoGetResponseResult
@@ -90,15 +102,21 @@ type SellercenterRoleInfoGetResponseResult struct {
 	Response *SellercenterRoleInfoGetResponse `json:"sellercenter_role_info_get_response"`
 }
 
+
+
+
+
 /* 获取指定卖家的角色下属员工列表，只能获取属于登陆者自己的信息。 */
 type SellercenterRolemembersGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 角色id */
 func (r *SellercenterRolemembersGetRequest) SetRoleId(value string) {
 	r.SetValue("role_id", value)
 }
+
 
 func (r *SellercenterRolemembersGetRequest) GetResponse(accessToken string) (*SellercenterRolemembersGetResponse, []byte, error) {
 	var resp SellercenterRolemembersGetResponseResult
@@ -110,22 +128,28 @@ func (r *SellercenterRolemembersGetRequest) GetResponse(accessToken string) (*Se
 }
 
 type SellercenterRolemembersGetResponse struct {
-	Subusers []*SubUserInfo `json:"subusers"`
+	Subusers *SubUserInfoListObject `json:"subusers"`
 }
 
 type SellercenterRolemembersGetResponseResult struct {
 	Response *SellercenterRolemembersGetResponse `json:"sellercenter_rolemembers_get_response"`
 }
 
+
+
+
+
 /* 获取指定卖家的角色列表，只能获取属于登陆者自己的信息。 */
 type SellercenterRolesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 卖家昵称(只允许查询自己的信息：当前登陆者) */
 func (r *SellercenterRolesGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
+
 
 func (r *SellercenterRolesGetRequest) GetResponse(accessToken string) (*SellercenterRolesGetResponse, []byte, error) {
 	var resp SellercenterRolesGetResponseResult
@@ -137,22 +161,28 @@ func (r *SellercenterRolesGetRequest) GetResponse(accessToken string) (*Sellerce
 }
 
 type SellercenterRolesGetResponse struct {
-	Roles []*Role `json:"roles"`
+	Roles *RoleListObject `json:"roles"`
 }
 
 type SellercenterRolesGetResponseResult struct {
 	Response *SellercenterRolesGetResponse `json:"sellercenter_roles_get_response"`
 }
 
+
+
+
+
 /* 查询指定的子账号的被直接赋予的权限信息和角色信息。<br/>返回对象中包括直接赋予子账号的权限点信息、被赋予的角色以及角色的对应权限点信息。 */
 type SellercenterSubuserPermissionsRolesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 子账号昵称(子账号标识) */
 func (r *SellercenterSubuserPermissionsRolesGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
+
 
 func (r *SellercenterSubuserPermissionsRolesGetRequest) GetResponse(accessToken string) (*SellercenterSubuserPermissionsRolesGetResponse, []byte, error) {
 	var resp SellercenterSubuserPermissionsRolesGetResponseResult
@@ -171,15 +201,21 @@ type SellercenterSubuserPermissionsRolesGetResponseResult struct {
 	Response *SellercenterSubuserPermissionsRolesGetResponse `json:"sellercenter_subuser_permissions_roles_get_response"`
 }
 
+
+
+
+
 /* 根据主账号nick查询该账号下所有的子账号列表，只能查询属于自己的账号信息 (主账号以及所属子账号) */
 type SellercenterSubusersGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 表示卖家昵称 */
 func (r *SellercenterSubusersGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
+
 
 func (r *SellercenterSubusersGetRequest) GetResponse(accessToken string) (*SellercenterSubusersGetResponse, []byte, error) {
 	var resp SellercenterSubusersGetResponseResult
@@ -191,22 +227,28 @@ func (r *SellercenterSubusersGetRequest) GetResponse(accessToken string) (*Selle
 }
 
 type SellercenterSubusersGetResponse struct {
-	Subusers []*SubUserInfo `json:"subusers"`
+	Subusers *SubUserInfoListObject `json:"subusers"`
 }
 
 type SellercenterSubusersGetResponseResult struct {
 	Response *SellercenterSubusersGetResponse `json:"sellercenter_subusers_get_response"`
 }
 
+
+
+
+
 /* 获取指定用户的权限集合，并不组装成树。如果是主账号，返回所有的权限列表；如果是子账号，返回所有已授权的权限。只能查询属于自己的账号信息 (如果是主账号，则是主账号以及所属子账号，如果是子账号则是对应主账号以及所属子账号) */
 type SellercenterUserPermissionsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 用户标识，次入参必须为子账号比如zhangsan:cool。如果只输入主账号zhangsan，将报错。 */
 func (r *SellercenterUserPermissionsGetRequest) SetNick(value string) {
 	r.SetValue("nick", value)
 }
+
 
 func (r *SellercenterUserPermissionsGetRequest) GetResponse(accessToken string) (*SellercenterUserPermissionsGetResponse, []byte, error) {
 	var resp SellercenterUserPermissionsGetResponseResult
@@ -218,17 +260,22 @@ func (r *SellercenterUserPermissionsGetRequest) GetResponse(accessToken string) 
 }
 
 type SellercenterUserPermissionsGetResponse struct {
-	Permissions []*Permission `json:"permissions"`
+	Permissions *PermissionListObject `json:"permissions"`
 }
 
 type SellercenterUserPermissionsGetResponseResult struct {
 	Response *SellercenterUserPermissionsGetResponse `json:"sellercenter_user_permissions_get_response"`
 }
 
+
+
+
+
 /* 根据主账号ID以及部门名称、父部门ID创建新的部门信息（通过主账号登陆只能新建属于该主账号的部门信息） */
 type SubuserDepartmentAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 部门名称 */
 func (r *SubuserDepartmentAddRequest) SetDepartmentName(value string) {
@@ -244,6 +291,7 @@ func (r *SubuserDepartmentAddRequest) SetParentId(value string) {
 func (r *SubuserDepartmentAddRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *SubuserDepartmentAddRequest) GetResponse(accessToken string) (*SubuserDepartmentAddResponse, []byte, error) {
 	var resp SubuserDepartmentAddResponseResult
@@ -262,10 +310,15 @@ type SubuserDepartmentAddResponseResult struct {
 	Response *SubuserDepartmentAddResponse `json:"subuser_department_add_response"`
 }
 
+
+
+
+
 /* 根据主账号Nick和部门ID删除该主账号下的该部门信息，如果待删除部门下有子账号则无法删除该部门（通过主账号登陆只能删除属于该主账号下的部门信息） */
 type SubuserDepartmentDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 部门ID */
 func (r *SubuserDepartmentDeleteRequest) SetDepartmentId(value string) {
@@ -276,6 +329,7 @@ func (r *SubuserDepartmentDeleteRequest) SetDepartmentId(value string) {
 func (r *SubuserDepartmentDeleteRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *SubuserDepartmentDeleteRequest) GetResponse(accessToken string) (*SubuserDepartmentDeleteResponse, []byte, error) {
 	var resp SubuserDepartmentDeleteResponseResult
@@ -294,10 +348,15 @@ type SubuserDepartmentDeleteResponseResult struct {
 	Response *SubuserDepartmentDeleteResponse `json:"subuser_department_delete_response"`
 }
 
+
+
+
+
 /* 通过指定主账号ID和部门ID来修改该部门的名称或该部门的父部门ID。（通过主账号登陆只能修改属于该主账号的部门信息） */
 type SubuserDepartmentUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 部门ID */
 func (r *SubuserDepartmentUpdateRequest) SetDepartmentId(value string) {
@@ -319,6 +378,7 @@ func (r *SubuserDepartmentUpdateRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
 
+
 func (r *SubuserDepartmentUpdateRequest) GetResponse(accessToken string) (*SubuserDepartmentUpdateResponse, []byte, error) {
 	var resp SubuserDepartmentUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.subuser.department.update", &resp)
@@ -336,15 +396,21 @@ type SubuserDepartmentUpdateResponseResult struct {
 	Response *SubuserDepartmentUpdateResponse `json:"subuser_department_update_response"`
 }
 
+
+
+
+
 /* 获取指定账户的所有部门列表，其实包括有每个部门的ID、父部门ID、部门名称（通过主账号登陆只能查询属于该主账号下的所有部门信息）。 */
 type SubuserDepartmentsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 主账号用户名 */
 func (r *SubuserDepartmentsGetRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *SubuserDepartmentsGetRequest) GetResponse(accessToken string) (*SubuserDepartmentsGetResponse, []byte, error) {
 	var resp SubuserDepartmentsGetResponseResult
@@ -356,17 +422,22 @@ func (r *SubuserDepartmentsGetRequest) GetResponse(accessToken string) (*Subuser
 }
 
 type SubuserDepartmentsGetResponse struct {
-	Departments []*Department `json:"departments"`
+	Departments *DepartmentListObject `json:"departments"`
 }
 
 type SubuserDepartmentsGetResponseResult struct {
 	Response *SubuserDepartmentsGetResponse `json:"subuser_departments_get_response"`
 }
 
+
+
+
+
 /* 通过主账号ID来增加指定账户的职务信息，职务信息中包括职务名称以及职务级别（通过主账号登陆只能新建属于该主账号的职务信息） */
 type SubuserDutyAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 职务级别 */
 func (r *SubuserDutyAddRequest) SetDutyLevel(value string) {
@@ -382,6 +453,7 @@ func (r *SubuserDutyAddRequest) SetDutyName(value string) {
 func (r *SubuserDutyAddRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *SubuserDutyAddRequest) GetResponse(accessToken string) (*SubuserDutyAddResponse, []byte, error) {
 	var resp SubuserDutyAddResponseResult
@@ -400,10 +472,15 @@ type SubuserDutyAddResponseResult struct {
 	Response *SubuserDutyAddResponse `json:"subuser_duty_add_response"`
 }
 
+
+
+
+
 /* 通过主账号ID和职务ID来删除主账号下的该职务信息。使用此职务的员工中职务一栏将变为空（通过主账号登陆只能删除属于该主账号下的职务信息） */
 type SubuserDutyDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 职务ID */
 func (r *SubuserDutyDeleteRequest) SetDutyId(value string) {
@@ -414,6 +491,7 @@ func (r *SubuserDutyDeleteRequest) SetDutyId(value string) {
 func (r *SubuserDutyDeleteRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *SubuserDutyDeleteRequest) GetResponse(accessToken string) (*SubuserDutyDeleteResponse, []byte, error) {
 	var resp SubuserDutyDeleteResponseResult
@@ -432,10 +510,15 @@ type SubuserDutyDeleteResponseResult struct {
 	Response *SubuserDutyDeleteResponse `json:"subuser_duty_delete_response"`
 }
 
+
+
+
+
 /* 通过主账号ID和职务ID来修改该职务信息中的职务名称及职务级别信息（通过主账号登陆只能修改属于该主账号下的职务信息） */
 type SubuserDutyUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 职务ID */
 func (r *SubuserDutyUpdateRequest) SetDutyId(value string) {
@@ -457,6 +540,7 @@ func (r *SubuserDutyUpdateRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
 
+
 func (r *SubuserDutyUpdateRequest) GetResponse(accessToken string) (*SubuserDutyUpdateResponse, []byte, error) {
 	var resp SubuserDutyUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.subuser.duty.update", &resp)
@@ -474,15 +558,21 @@ type SubuserDutyUpdateResponseResult struct {
 	Response *SubuserDutyUpdateResponse `json:"subuser_duty_update_response"`
 }
 
+
+
+
+
 /* 通过主账号Nick获取该账户下的所有职务信息，职务信息中包括职务ID、职务名称以及职务等级（通过主账号登陆只能获取属于该主账号下的职务信息） */
 type SubuserDutysGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 主账号用户名 */
 func (r *SubuserDutysGetRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *SubuserDutysGetRequest) GetResponse(accessToken string) (*SubuserDutysGetResponse, []byte, error) {
 	var resp SubuserDutysGetResponseResult
@@ -494,17 +584,22 @@ func (r *SubuserDutysGetRequest) GetResponse(accessToken string) (*SubuserDutysG
 }
 
 type SubuserDutysGetResponse struct {
-	Dutys []*Duty `json:"dutys"`
+	Dutys *DutyListObject `json:"dutys"`
 }
 
 type SubuserDutysGetResponseResult struct {
 	Response *SubuserDutysGetResponse `json:"subuser_dutys_get_response"`
 }
 
+
+
+
+
 /* 给指定子账号新增一个员工信息（通过主账号登陆只能新建属于该主账号的员工信息） */
 type SubuserEmployeeAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 当前员工所属部门ID */
 func (r *SubuserEmployeeAddRequest) SetDepartmentId(value string) {
@@ -576,6 +671,7 @@ func (r *SubuserEmployeeAddRequest) SetWorkLocation(value string) {
 	r.SetValue("work_location", value)
 }
 
+
 func (r *SubuserEmployeeAddRequest) GetResponse(accessToken string) (*SubuserEmployeeAddResponse, []byte, error) {
 	var resp SubuserEmployeeAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.subuser.employee.add", &resp)
@@ -593,10 +689,15 @@ type SubuserEmployeeAddResponseResult struct {
 	Response *SubuserEmployeeAddResponse `json:"subuser_employee_add_response"`
 }
 
+
+
+
+
 /* 修改指定账户子账号的员工信息（通过主账号登陆只能修改属于该主账号下的员工信息） */
 type SubuserEmployeeUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 当前员工所属部门ID */
 func (r *SubuserEmployeeUpdateRequest) SetDepartmentId(value string) {
@@ -673,6 +774,7 @@ func (r *SubuserEmployeeUpdateRequest) SetWorkLocation(value string) {
 	r.SetValue("work_location", value)
 }
 
+
 func (r *SubuserEmployeeUpdateRequest) GetResponse(accessToken string) (*SubuserEmployeeUpdateResponse, []byte, error) {
 	var resp SubuserEmployeeUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.subuser.employee.update", &resp)
@@ -690,10 +792,15 @@ type SubuserEmployeeUpdateResponseResult struct {
 	Response *SubuserEmployeeUpdateResponse `json:"subuser_employee_update_response"`
 }
 
+
+
+
+
 /* 获取指定账户子账号的详细信息，其中包括子账号的账号信息以及员工、部门、职务信息（只能通过主账号登陆并查询属于该主账号下的某个子账号详细信息） */
 type SubuserFullinfoGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 传入所需要的参数信息（若不需要获取子账号或主账号的企业邮箱地址，则无需传入该参数；若需要获取子账号或主账号的企业邮箱地址，则需要传入fields；可选参数值为subuser_email和user_email，传入其他参数值均无效；两个参数都需要则以逗号隔开传入即可，例如：subuser_email,user_email） */
 func (r *SubuserFullinfoGetRequest) SetFields(value string) {
@@ -709,6 +816,7 @@ func (r *SubuserFullinfoGetRequest) SetSubId(value string) {
 func (r *SubuserFullinfoGetRequest) SetSubNick(value string) {
 	r.SetValue("sub_nick", value)
 }
+
 
 func (r *SubuserFullinfoGetRequest) GetResponse(accessToken string) (*SubuserFullinfoGetResponse, []byte, error) {
 	var resp SubuserFullinfoGetResponseResult
@@ -727,10 +835,15 @@ type SubuserFullinfoGetResponseResult struct {
 	Response *SubuserFullinfoGetResponse `json:"subuser_fullinfo_get_response"`
 }
 
+
+
+
+
 /* 修改指定账户子账号的基本信息（通过主账号登陆只能修改属于该主账号的子账号基本信息） */
 type SubuserInfoUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否停用子账号 true:表示停用该子账号false:表示开启该子账号 */
 func (r *SubuserInfoUpdateRequest) SetIsDisableSubaccount(value string) {
@@ -746,6 +859,7 @@ func (r *SubuserInfoUpdateRequest) SetIsDispatch(value string) {
 func (r *SubuserInfoUpdateRequest) SetSubId(value string) {
 	r.SetValue("sub_id", value)
 }
+
 
 func (r *SubuserInfoUpdateRequest) GetResponse(accessToken string) (*SubuserInfoUpdateResponse, []byte, error) {
 	var resp SubuserInfoUpdateResponseResult
@@ -764,15 +878,21 @@ type SubuserInfoUpdateResponseResult struct {
 	Response *SubuserInfoUpdateResponse `json:"subuser_info_update_response"`
 }
 
+
+
+
+
 /* 获取主账号下的子账号简易账号信息集合。（只能通过主账号登陆并且查询该属于主账号的子账号信息） */
 type SubusersGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 主账号用户名 */
 func (r *SubusersGetRequest) SetUserNick(value string) {
 	r.SetValue("user_nick", value)
 }
+
 
 func (r *SubusersGetRequest) GetResponse(accessToken string) (*SubusersGetResponse, []byte, error) {
 	var resp SubusersGetResponseResult
@@ -784,9 +904,12 @@ func (r *SubusersGetRequest) GetResponse(accessToken string) (*SubusersGetRespon
 }
 
 type SubusersGetResponse struct {
-	Subaccounts []*SubAccountInfo `json:"subaccounts"`
+	Subaccounts *SubAccountInfoListObject `json:"subaccounts"`
 }
 
 type SubusersGetResponseResult struct {
 	Response *SubusersGetResponse `json:"subusers_get_response"`
 }
+
+
+

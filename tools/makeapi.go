@@ -105,7 +105,7 @@ func MakeApis(confPackage *ConfPackageT, data *DataT) *[]string {
 			continue
 		}
 
-		tdata.PkgFullName = "github.com/changkong/open_taobao/api/" + v.Name
+		tdata.PkgFullName = "github.com/yaofangou/open_taobao/api/" + v.Name
 		fmt.Println("  make:", tdata.PkgFullName)
 
 		tdata.PkgDesc = v.Desc
@@ -114,6 +114,7 @@ func MakeApis(confPackage *ConfPackageT, data *DataT) *[]string {
 		tdata.ViewPath = "./template/"
 		tdata.Apis = data.MapPkgApi[v.Name]
 		tdata.Structs = data.MapPkgStruct[v.Name]
+
 		err := MakePkg(tdata)
 		if err != nil {
 			fmt.Println("      [error]", err)

@@ -4,21 +4,69 @@
 
 package pinjia
 
-const VersionNo = "20130808"
+const VersionNo = "20131207"
+
 
 /* 评价列表 */
 type TradeRate struct {
-	Content    string  `json:"content"`
-	Created    string  `json:"created"`
-	ItemPrice  float64 `json:"item_price"`
-	ItemTitle  string  `json:"item_title"`
-	Nick       string  `json:"nick"`
-	NumIid     int     `json:"num_iid"`
-	Oid        int     `json:"oid"`
-	RatedNick  string  `json:"rated_nick"`
-	Reply      string  `json:"reply"`
-	Result     string  `json:"result"`
-	Role       string  `json:"role"`
-	Tid        int     `json:"tid"`
-	ValidScore bool    `json:"valid_score"`
+	Content string `json:"content"`
+	Created string `json:"created"`
+	ItemPrice float64 `json:"item_price"`
+	ItemTitle string `json:"item_title"`
+	Nick string `json:"nick"`
+	NumIid int `json:"num_iid"`
+	Oid int `json:"oid"`
+	RatedNick string `json:"rated_nick"`
+	Reply string `json:"reply"`
+	Result string `json:"result"`
+	Role string `json:"role"`
+	Tid int `json:"tid"`
+	ValidScore bool `json:"valid_score"`
+
 }
+
+/*  */
+type ImprItemDOListObject struct {
+	ImprItemDO []*ImprItemDO `json:"impr_item_d_o"`
+
+}
+
+/* 评价大印象返回的印象词接口 */
+type ImprItemDO struct {
+	AttributeId int `json:"attribute_id"`
+	Count int `json:"count"`
+	Status int `json:"status"`
+	Title string `json:"title"`
+
+}
+
+/* 单条交易子订单语义标签对象 */
+type ImprFeedIdDO struct {
+	FeedInfoList *ImprFeedInfoDOListObject `json:"feed_info_list"`
+	Nick string `json:"nick"`
+	Rate int `json:"rate"`
+
+}
+
+/*  */
+type ImprFeedInfoDOListObject struct {
+	ImprFeedInfoDO []*ImprFeedInfoDO `json:"impr_feed_info_d_o"`
+
+}
+
+/* 大家印象标签对应评价信息对象 */
+type ImprFeedInfoDO struct {
+	BizType int `json:"biz_type"`
+	Feedback string `json:"feedback"`
+	GmtCreate string `json:"gmt_create"`
+	GmtModified string `json:"gmt_modified"`
+	ImprWords []string `json:"impr_words"`
+
+}
+
+/*  */
+type TradeRateListObject struct {
+	TradeRate []*TradeRate `json:"trade_rate"`
+
+}
+

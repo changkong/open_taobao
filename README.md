@@ -8,7 +8,7 @@ open_taobao
 ========
 
 * **主包:** 0.0.1
-* **子包:** 根据淘宝 20130808 的 ApiMetadata.xml 生成
+* **子包:** 根据淘宝 20131127 的 ApiMetadata.xml 生成
 * **工具程序:** 0.0.1
 
 运行环境
@@ -22,47 +22,47 @@ open_taobao
 
 **安装主包**
 
-* go get github.com/changkong/open_taobao
+* go get github.com/yaofangou/open_taobao
 
 **安装子包**
 
-* go get github.com/changkong/open_taobao/api/user
+* go get github.com/yaofangou/open_taobao/api/user
 
 **更多子包**
 
-* **用户API:**  github.com/changkong/open_taobao/api/user
-* **类目API:**  github.com/changkong/open_taobao/api/item
-* **商品API:**  github.com/changkong/open_taobao/api/product
-* **交易API:**  github.com/changkong/open_taobao/api/trade
-* **评价API:**  github.com/changkong/open_taobao/api/pinjia
-* **物流API:**  github.com/changkong/open_taobao/api/delivery
-* **店铺API:**  github.com/changkong/open_taobao/api/shop
-* **分销API:**  github.com/changkong/open_taobao/api/fenxiao
-* **旺旺API:**  github.com/changkong/open_taobao/api/wangwang
-* **淘客API:**  github.com/changkong/open_taobao/api/taobaoke
-* **主动通知业务API:**  github.com/changkong/open_taobao/api/notice
-* **工具类API:**  github.com/changkong/open_taobao/api/tools
-* **物流宝API:**  github.com/changkong/open_taobao/api/wlb
-* **直通车API:**  github.com/changkong/open_taobao/api/simba
-* **收藏夹API:**  github.com/changkong/open_taobao/api/favorite
-* **机票API:**  github.com/changkong/open_taobao/api/jipiao
-* **营销API:**  github.com/changkong/open_taobao/api/marketing
-* **数据API:**  github.com/changkong/open_taobao/api/udp
-* **酒店API:**  github.com/changkong/open_taobao/api/hotel
-* **店铺会员管理API:**  github.com/changkong/open_taobao/api/crm
-* **多媒体平台API:**  github.com/changkong/open_taobao/api/dmt
-* **子账号管理API:**  github.com/changkong/open_taobao/api/subuser
-* **服务平台API:**  github.com/changkong/open_taobao/api/fuwu
-* **退款API:**  github.com/changkong/open_taobao/api/refund
-* **关联推荐API:**  github.com/changkong/open_taobao/api/recommend
-* **组件API:**  github.com/changkong/open_taobao/api/widget
-* **支付宝API:**  github.com/changkong/open_taobao/api/alipy
-* **天猫精品库API:**  github.com/changkong/open_taobao/api/jp
-* **聚石塔API:**  github.com/changkong/open_taobao/api/rds
-* **旅行度假API:**  github.com/changkong/open_taobao/api/trvael
-* **彩票API:**  github.com/changkong/open_taobao/api/caipiao
-* **账务API:**  github.com/changkong/open_taobao/api/bill
-* **天猫退款退货API:**  github.com/changkong/open_taobao/api/eai
+* **用户API:**  github.com/yaofangou/open_taobao/api/user
+* **类目API:**  github.com/yaofangou/open_taobao/api/item
+* **商品API:**  github.com/yaofangou/open_taobao/api/product
+* **交易API:**  github.com/yaofangou/open_taobao/api/trade
+* **评价API:**  github.com/yaofangou/open_taobao/api/pinjia
+* **物流API:**  github.com/yaofangou/open_taobao/api/delivery
+* **店铺API:**  github.com/yaofangou/open_taobao/api/shop
+* **分销API:**  github.com/yaofangou/open_taobao/api/fenxiao
+* **旺旺API:**  github.com/yaofangou/open_taobao/api/wangwang
+* **淘客API:**  github.com/yaofangou/open_taobao/api/taobaoke
+* **主动通知业务API:**  github.com/yaofangou/open_taobao/api/notice
+* **工具类API:**  github.com/yaofangou/open_taobao/api/tools
+* **物流宝API:**  github.com/yaofangou/open_taobao/api/wlb
+* **直通车API:**  github.com/yaofangou/open_taobao/api/simba
+* **收藏夹API:**  github.com/yaofangou/open_taobao/api/favorite
+* **机票API:**  github.com/yaofangou/open_taobao/api/jipiao
+* **营销API:**  github.com/yaofangou/open_taobao/api/marketing
+* **数据API:**  github.com/yaofangou/open_taobao/api/udp
+* **酒店API:**  github.com/yaofangou/open_taobao/api/hotel
+* **店铺会员管理API:**  github.com/yaofangou/open_taobao/api/crm
+* **多媒体平台API:**  github.com/yaofangou/open_taobao/api/dmt
+* **子账号管理API:**  github.com/yaofangou/open_taobao/api/subuser
+* **服务平台API:**  github.com/yaofangou/open_taobao/api/fuwu
+* **退款API:**  github.com/yaofangou/open_taobao/api/refund
+* **关联推荐API:**  github.com/yaofangou/open_taobao/api/recommend
+* **组件API:**  github.com/yaofangou/open_taobao/api/widget
+* **支付宝API:**  github.com/yaofangou/open_taobao/api/alipy
+* **天猫精品库API:**  github.com/yaofangou/open_taobao/api/jp
+* **聚石塔API:**  github.com/yaofangou/open_taobao/api/rds
+* **旅行度假API:**  github.com/yaofangou/open_taobao/api/trvael
+* **彩票API:**  github.com/yaofangou/open_taobao/api/caipiao
+* **账务API:**  github.com/yaofangou/open_taobao/api/bill
+* **天猫退款退货API:**  github.com/yaofangou/open_taobao/api/eai
 
 测试说明
 ========
@@ -121,6 +121,17 @@ resp, data, err := req.GetResponse(AccessToken)
 // 可参考 tools/CtrlTest.go 的 userBuyerGet 或 userSellerGet 方法
 ```
 
+* **使用TOP授权方式调用功能API**
+需要对taobao进行配置初始化，设置appKey和secret，增加以下代码：
+
+```go
+func init() {
+	open_taobao.Init("taobao.appkey", "taobao.secret", true)
+	// 如果没有使用代理可以不设置request url
+	open_taobao.SetRequestUrl("http://api.XXXXXX.com:30005/")
+}
+```
+
 * **其他资源**
 
   * [淘宝API详细列表](http://open.taobao.com/doc/category_list.htm?id=102) 可以API更详细的解释
@@ -129,7 +140,7 @@ resp, data, err := req.GetResponse(AccessToken)
 技术说明
 ========
 
-* **调用方式:** 只支持 https 免签调用方式
+* **调用方式:** 支持 https 免签调用方式和TOP调用方式
 * **业务字段:** 为了调用方便, 都生成相关字段或方法, 而不是 map 或 json 对象, 缺点是代码多, 包大
 * **子包分拆:** 由于生成完整的Go包, 有20多M, 太大了，因此按淘宝官方的分类分拆成子包
 

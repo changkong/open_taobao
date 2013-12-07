@@ -5,13 +5,19 @@
 package crm
 
 import (
-	"github.com/changkong/open_taobao"
+	"github.com/yaofangou/open_taobao"
 )
+
+
+
+
 
 /* 卖家查询等级规则，包括店铺客户、普通会员、高级会员、VIP会员、至尊VIP会员四个等级的信息 */
 type CrmGradeGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *CrmGradeGetRequest) GetResponse(accessToken string) (*CrmGradeGetResponse, []byte, error) {
 	var resp CrmGradeGetResponseResult
@@ -23,32 +29,37 @@ func (r *CrmGradeGetRequest) GetResponse(accessToken string) (*CrmGradeGetRespon
 }
 
 type CrmGradeGetResponse struct {
-	GradePromotions []*GradePromotion `json:"grade_promotions"`
+	GradePromotions *GradePromotionListObject `json:"grade_promotions"`
 }
 
 type CrmGradeGetResponseResult struct {
 	Response *CrmGradeGetResponse `json:"crm_grade_get_response"`
 }
 
+
+
+
+
 /* 设置等级信息，可以设置层级等级，也可以单独设置一个等级。出于安全原因，折扣现最低只能设置到700即7折。 */
 type CrmGradeSetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 只对设置的层级等级有效，必须要在amount和count参数中选择一个<br>
+
+/* 只对设置的层级等级有效，必须要在amount和count参数中选择一个<br> 
 amount参数的填写规范：升级到下一个级别的需要的交易额，单位为分,必须全部填写.例如10000,20000,30000，其中10000表示非会员升级到普通的所需的交易额，20000表示普通升级到高级所需的交易额，层级等级中最高等级的下一个等级默认为0。会员等级越高，所需交易额必须越高。 */
 func (r *CrmGradeSetRequest) SetAmount(value string) {
 	r.SetValue("amount", value)
 }
 
-/* 只对设置的层级等级有效，必须要在amount和count参数中选择一个<br>
-count参数的填写规范：
+/* 只对设置的层级等级有效，必须要在amount和count参数中选择一个<br> 
+count参数的填写规范： 
 升级到下一个级别的需要的交易量,必须全部填写. 以逗号分隔,例如100,200,300，其中100表示非会员升级到普通会员交易量。层级等级中最高等级的下一个等级的交易量默认为0。会员等级越高，交易量必须越高。 */
 func (r *CrmGradeSetRequest) SetCount(value string) {
 	r.SetValue("count", value)
 }
 
-/* 会员级别折扣率。会员等级越高，折扣必须越低。
+/* 会员级别折扣率。会员等级越高，折扣必须越低。 
 950即9.5折，888折即8.88折。出于安全原因，折扣现最低只能设置到700即7折。 */
 func (r *CrmGradeSetRequest) SetDiscount(value string) {
 	r.SetValue("discount", value)
@@ -63,6 +74,7 @@ func (r *CrmGradeSetRequest) SetGrade(value string) {
 func (r *CrmGradeSetRequest) SetHierarchy(value string) {
 	r.SetValue("hierarchy", value)
 }
+
 
 func (r *CrmGradeSetRequest) GetResponse(accessToken string) (*CrmGradeSetResponse, []byte, error) {
 	var resp CrmGradeSetResponseResult
@@ -81,10 +93,15 @@ type CrmGradeSetResponseResult struct {
 	Response *CrmGradeSetResponse `json:"crm_grade_set_response"`
 }
 
+
+
+
+
 /* 商家通过该接口吸纳线上店铺会员。 */
 type CrmGrademktMemberAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 会员nick */
 func (r *CrmGrademktMemberAddRequest) SetBuyerNick(value string) {
@@ -96,11 +113,12 @@ func (r *CrmGrademktMemberAddRequest) SetFeather(value string) {
 	r.SetValue("feather", value)
 }
 
-/* 会员属性-json format
+/* 会员属性-json format 
 生成方法见http://open.taobao.com/doc/detail.htm?id=101281 */
 func (r *CrmGrademktMemberAddRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *CrmGrademktMemberAddRequest) GetResponse(accessToken string) (*CrmGrademktMemberAddResponse, []byte, error) {
 	var resp CrmGrademktMemberAddResponseResult
@@ -119,10 +137,15 @@ type CrmGrademktMemberAddResponseResult struct {
 	Response *CrmGrademktMemberAddResponse `json:"crm_grademkt_member_add_response"`
 }
 
+
+
+
+
 /* 创建商品等级营销明细 */
 type CrmGrademktMemberDetailCreateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 扩展字段 */
 func (r *CrmGrademktMemberDetailCreateRequest) SetFeather(value string) {
@@ -133,6 +156,7 @@ func (r *CrmGrademktMemberDetailCreateRequest) SetFeather(value string) {
 func (r *CrmGrademktMemberDetailCreateRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *CrmGrademktMemberDetailCreateRequest) GetResponse(accessToken string) (*CrmGrademktMemberDetailCreateResponse, []byte, error) {
 	var resp CrmGrademktMemberDetailCreateResponseResult
@@ -151,10 +175,15 @@ type CrmGrademktMemberDetailCreateResponseResult struct {
 	Response *CrmGrademktMemberDetailCreateResponse `json:"crm_grademkt_member_detail_create_response"`
 }
 
+
+
+
+
 /* 删除商品等级营销明细 */
 type CrmGrademktMemberDetailDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 扩展字段 */
 func (r *CrmGrademktMemberDetailDeleteRequest) SetFeather(value string) {
@@ -165,6 +194,7 @@ func (r *CrmGrademktMemberDetailDeleteRequest) SetFeather(value string) {
 func (r *CrmGrademktMemberDetailDeleteRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *CrmGrademktMemberDetailDeleteRequest) GetResponse(accessToken string) (*CrmGrademktMemberDetailDeleteResponse, []byte, error) {
 	var resp CrmGrademktMemberDetailDeleteResponseResult
@@ -183,10 +213,15 @@ type CrmGrademktMemberDetailDeleteResponseResult struct {
 	Response *CrmGrademktMemberDetailDeleteResponse `json:"crm_grademkt_member_detail_delete_response"`
 }
 
+
+
+
+
 /* 商家通过该接口查询等级营销活动 */
 type CrmGrademktMemberDetailQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 扩展字段 */
 func (r *CrmGrademktMemberDetailQueryRequest) SetFeather(value string) {
@@ -197,6 +232,7 @@ func (r *CrmGrademktMemberDetailQueryRequest) SetFeather(value string) {
 func (r *CrmGrademktMemberDetailQueryRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *CrmGrademktMemberDetailQueryRequest) GetResponse(accessToken string) (*CrmGrademktMemberDetailQueryResponse, []byte, error) {
 	var resp CrmGrademktMemberDetailQueryResponseResult
@@ -215,10 +251,15 @@ type CrmGrademktMemberDetailQueryResponseResult struct {
 	Response *CrmGrademktMemberDetailQueryResponse `json:"crm_grademkt_member_detail_query_response"`
 }
 
+
+
+
+
 /* 商家通过该接口设置等级活动 */
 type CrmGrademktMemberGradeactivityInitRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 扩展字段 */
 func (r *CrmGrademktMemberGradeactivityInitRequest) SetFeather(value string) {
@@ -229,6 +270,7 @@ func (r *CrmGrademktMemberGradeactivityInitRequest) SetFeather(value string) {
 func (r *CrmGrademktMemberGradeactivityInitRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *CrmGrademktMemberGradeactivityInitRequest) GetResponse(accessToken string) (*CrmGrademktMemberGradeactivityInitResponse, []byte, error) {
 	var resp CrmGrademktMemberGradeactivityInitResponseResult
@@ -247,10 +289,15 @@ type CrmGrademktMemberGradeactivityInitResponseResult struct {
 	Response *CrmGrademktMemberGradeactivityInitResponse `json:"crm_grademkt_member_gradeactivity_init_response"`
 }
 
+
+
+
+
 /* 商家通过该接口查询线上店铺会员。 */
 type CrmGrademktMemberQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 会员nick */
 func (r *CrmGrademktMemberQueryRequest) SetBuyerNick(value string) {
@@ -262,11 +309,12 @@ func (r *CrmGrademktMemberQueryRequest) SetFeather(value string) {
 	r.SetValue("feather", value)
 }
 
-/* 会员属性-json format
+/* 会员属性-json format 
 生成方法见http://open.taobao.com/doc/detail.htm?id=101281 */
 func (r *CrmGrademktMemberQueryRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *CrmGrademktMemberQueryRequest) GetResponse(accessToken string) (*CrmGrademktMemberQueryResponse, []byte, error) {
 	var resp CrmGrademktMemberQueryResponseResult
@@ -285,15 +333,21 @@ type CrmGrademktMemberQueryResponseResult struct {
 	Response *CrmGrademktMemberQueryResponse `json:"crm_grademkt_member_query_response"`
 }
 
+
+
+
+
 /* 卖家创建一个新的分组，接口返回一个创建成功的分组的id */
 type CrmGroupAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 分组名称，每个卖家最多可以拥有100个分组 */
 func (r *CrmGroupAddRequest) SetGroupName(value string) {
 	r.SetValue("group_name", value)
 }
+
 
 func (r *CrmGroupAddRequest) GetResponse(accessToken string) (*CrmGroupAddResponse, []byte, error) {
 	var resp CrmGroupAddResponseResult
@@ -305,7 +359,7 @@ func (r *CrmGroupAddRequest) GetResponse(accessToken string) (*CrmGroupAddRespon
 }
 
 type CrmGroupAddResponse struct {
-	GroupId   int  `json:"group_id"`
+	GroupId int `json:"group_id"`
 	IsSuccess bool `json:"is_success"`
 }
 
@@ -313,10 +367,15 @@ type CrmGroupAddResponseResult struct {
 	Response *CrmGroupAddResponse `json:"crm_group_add_response"`
 }
 
+
+
+
+
 /* 将某分组下的所有会员添加到另一个分组,注：1.该操作为异步任务，建议先调用taobao.crm.grouptask.check 确保涉及分组上没有任务；2.若分组下某会员分组数超最大限额，则该会员不会被添加到新分组，同时不影响其余会员添加分组，接口调用依然返回成功。 */
 type CrmGroupAppendRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 添加的来源分组 */
 func (r *CrmGroupAppendRequest) SetFromGroupId(value string) {
@@ -327,6 +386,7 @@ func (r *CrmGroupAppendRequest) SetFromGroupId(value string) {
 func (r *CrmGroupAppendRequest) SetToGroupId(value string) {
 	r.SetValue("to_group_id", value)
 }
+
 
 func (r *CrmGroupAppendRequest) GetResponse(accessToken string) (*CrmGroupAppendResponse, []byte, error) {
 	var resp CrmGroupAppendResponseResult
@@ -345,15 +405,21 @@ type CrmGroupAppendResponseResult struct {
 	Response *CrmGroupAppendResponse `json:"crm_group_append_response"`
 }
 
+
+
+
+
 /* 将该分组下的所有会员移除出该组，同时删除该分组。注：删除分组为异步任务，必须先调用taobao.crm.grouptask.check 确保涉及属性上没有任务。 */
 type CrmGroupDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 要删除的分组id */
 func (r *CrmGroupDeleteRequest) SetGroupId(value string) {
 	r.SetValue("group_id", value)
 }
+
 
 func (r *CrmGroupDeleteRequest) GetResponse(accessToken string) (*CrmGroupDeleteResponse, []byte, error) {
 	var resp CrmGroupDeleteResponseResult
@@ -372,11 +438,16 @@ type CrmGroupDeleteResponseResult struct {
 	Response *CrmGroupDeleteResponse `json:"crm_group_delete_response"`
 }
 
-/* 将一个分组下的所有会员移动到另一个分组，会员从原分组中删除
+
+
+
+
+/* 将一个分组下的所有会员移动到另一个分组，会员从原分组中删除 
 注：移动属性为异步任务建议先调用taobao.crm.grouptask.check 确保涉及属性上没有任务。 */
 type CrmGroupMoveRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需要移动的分组 */
 func (r *CrmGroupMoveRequest) SetFromGroupId(value string) {
@@ -387,6 +458,7 @@ func (r *CrmGroupMoveRequest) SetFromGroupId(value string) {
 func (r *CrmGroupMoveRequest) SetToGroupId(value string) {
 	r.SetValue("to_group_id", value)
 }
+
 
 func (r *CrmGroupMoveRequest) GetResponse(accessToken string) (*CrmGroupMoveResponse, []byte, error) {
 	var resp CrmGroupMoveResponseResult
@@ -405,10 +477,15 @@ type CrmGroupMoveResponseResult struct {
 	Response *CrmGroupMoveResponse `json:"crm_group_move_response"`
 }
 
+
+
+
+
 /* 修改一个已经存在的分组，接口返回分组的修改是否成功 */
 type CrmGroupUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分组的id */
 func (r *CrmGroupUpdateRequest) SetGroupId(value string) {
@@ -419,6 +496,7 @@ func (r *CrmGroupUpdateRequest) SetGroupId(value string) {
 func (r *CrmGroupUpdateRequest) SetNewGroupName(value string) {
 	r.SetValue("new_group_name", value)
 }
+
 
 func (r *CrmGroupUpdateRequest) GetResponse(accessToken string) (*CrmGroupUpdateResponse, []byte, error) {
 	var resp CrmGroupUpdateResponseResult
@@ -437,10 +515,15 @@ type CrmGroupUpdateResponseResult struct {
 	Response *CrmGroupUpdateResponse `json:"crm_group_update_response"`
 }
 
+
+
+
+
 /* 查询卖家的分组，返回查询到的分组列表，分页返回分组 */
 type CrmGroupsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 显示第几页的分组，如果输入的页码大于总共的页码数，例如总共10页，但是current_page的值为11，则返回空白页，最小页码为1 */
 func (r *CrmGroupsGetRequest) SetCurrentPage(value string) {
@@ -452,6 +535,7 @@ func (r *CrmGroupsGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *CrmGroupsGetRequest) GetResponse(accessToken string) (*CrmGroupsGetResponse, []byte, error) {
 	var resp CrmGroupsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.crm.groups.get", &resp)
@@ -462,24 +546,30 @@ func (r *CrmGroupsGetRequest) GetResponse(accessToken string) (*CrmGroupsGetResp
 }
 
 type CrmGroupsGetResponse struct {
-	Groups      []*Group `json:"groups"`
-	TotalResult int      `json:"total_result"`
+	Groups *GroupListObject `json:"groups"`
+	TotalResult int `json:"total_result"`
 }
 
 type CrmGroupsGetResponseResult struct {
 	Response *CrmGroupsGetResponse `json:"crm_groups_get_response"`
 }
 
-/* 检查一个分组上是否有异步任务,异步任务包括1.将一个分组下的所有用户添加到另外一个分组2.将一个分组下的所有用户移动到另外一个分组3.删除某个分组
+
+
+
+
+/* 检查一个分组上是否有异步任务,异步任务包括1.将一个分组下的所有用户添加到另外一个分组2.将一个分组下的所有用户移动到另外一个分组3.删除某个分组 
 若分组上有任务则该属性不能被操作。 */
 type CrmGrouptaskCheckRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 分组id */
 func (r *CrmGrouptaskCheckRequest) SetGroupId(value string) {
 	r.SetValue("group_id", value)
 }
+
 
 func (r *CrmGrouptaskCheckRequest) GetResponse(accessToken string) (*CrmGrouptaskCheckResponse, []byte, error) {
 	var resp CrmGrouptaskCheckResponseResult
@@ -498,10 +588,15 @@ type CrmGrouptaskCheckResponseResult struct {
 	Response *CrmGrouptaskCheckResponse `json:"crm_grouptask_check_response"`
 }
 
+
+
+
+
 /* 设置会员等级 */
 type CrmMembergradeSetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 买家昵称 */
 func (r *CrmMembergradeSetRequest) SetBuyerNick(value string) {
@@ -512,6 +607,7 @@ func (r *CrmMembergradeSetRequest) SetBuyerNick(value string) {
 func (r *CrmMembergradeSetRequest) SetGrade(value string) {
 	r.SetValue("grade", value)
 }
+
 
 func (r *CrmMembergradeSetRequest) GetResponse(accessToken string) (*CrmMembergradeSetResponse, []byte, error) {
 	var resp CrmMembergradeSetResponseResult
@@ -530,10 +626,15 @@ type CrmMembergradeSetResponseResult struct {
 	Response *CrmMembergradeSetResponse `json:"crm_membergrade_set_response"`
 }
 
+
+
+
+
 /* 编辑会员的基本资料，接口返回会员信息修改是否成功 */
 type CrmMemberinfoUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 买家昵称 */
 func (r *CrmMemberinfoUpdateRequest) SetBuyerNick(value string) {
@@ -555,8 +656,8 @@ func (r *CrmMemberinfoUpdateRequest) SetCloseTradeCount(value string) {
 	r.SetValue("close_trade_count", value)
 }
 
-/* 会员等级，1：普通客户，2：高级会员，3：高级会员 ，4：至尊vip
-
+/* 会员等级，1：普通客户，2：高级会员，3：高级会员 ，4：至尊vip 
+ 
 只有正常会员才给予升级，对于status 为delete或者blacklist的会员 升级无效 */
 func (r *CrmMemberinfoUpdateRequest) SetGrade(value string) {
 	r.SetValue("grade", value)
@@ -592,6 +693,7 @@ func (r *CrmMemberinfoUpdateRequest) SetTradeCount(value string) {
 	r.SetValue("trade_count", value)
 }
 
+
 func (r *CrmMemberinfoUpdateRequest) GetResponse(accessToken string) (*CrmMemberinfoUpdateResponse, []byte, error) {
 	var resp CrmMemberinfoUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.crm.memberinfo.update", &resp)
@@ -609,10 +711,15 @@ type CrmMemberinfoUpdateResponseResult struct {
 	Response *CrmMemberinfoUpdateResponse `json:"crm_memberinfo_update_response"`
 }
 
+
+
+
+
 /* 查询卖家的会员，进行基本的查询，返回符合条件的会员列表 */
 type CrmMembersGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 买家的昵称 */
 func (r *CrmMembersGetRequest) SetBuyerNick(value string) {
@@ -664,6 +771,7 @@ func (r *CrmMembersGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *CrmMembersGetRequest) GetResponse(accessToken string) (*CrmMembersGetResponse, []byte, error) {
 	var resp CrmMembersGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.crm.members.get", &resp)
@@ -674,18 +782,23 @@ func (r *CrmMembersGetRequest) GetResponse(accessToken string) (*CrmMembersGetRe
 }
 
 type CrmMembersGetResponse struct {
-	Members     []*BasicMember `json:"members"`
-	TotalResult int            `json:"total_result"`
+	Members *BasicMemberListObject `json:"members"`
+	TotalResult int `json:"total_result"`
 }
 
 type CrmMembersGetResponseResult struct {
 	Response *CrmMembersGetResponse `json:"crm_members_get_response"`
 }
 
+
+
+
+
 /* 为一批会员添加分组，接口返回添加是否成功,如至少有一个会员的分组添加成功，接口就返回成功，否则返回失败，如果当前会员已经拥有当前分组，则直接跳过 */
 type CrmMembersGroupBatchaddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 会员的id（一次最多传入10个） */
 func (r *CrmMembersGroupBatchaddRequest) SetBuyerIds(value string) {
@@ -696,6 +809,7 @@ func (r *CrmMembersGroupBatchaddRequest) SetBuyerIds(value string) {
 func (r *CrmMembersGroupBatchaddRequest) SetGroupIds(value string) {
 	r.SetValue("group_ids", value)
 }
+
 
 func (r *CrmMembersGroupBatchaddRequest) GetResponse(accessToken string) (*CrmMembersGroupBatchaddResponse, []byte, error) {
 	var resp CrmMembersGroupBatchaddResponseResult
@@ -714,10 +828,15 @@ type CrmMembersGroupBatchaddResponseResult struct {
 	Response *CrmMembersGroupBatchaddResponse `json:"crm_members_group_batchadd_response"`
 }
 
+
+
+
+
 /* 批量删除多个会员的公共分组，接口返回删除是否成功，该接口只删除多个会员的公共分组，不是公共分组的，不进行删除。如果入参只输入一个会员，则表示删除该会员的某些分组。 */
 type CrmMembersGroupsBatchdeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 买家的Id集合 */
 func (r *CrmMembersGroupsBatchdeleteRequest) SetBuyerIds(value string) {
@@ -728,6 +847,7 @@ func (r *CrmMembersGroupsBatchdeleteRequest) SetBuyerIds(value string) {
 func (r *CrmMembersGroupsBatchdeleteRequest) SetGroupIds(value string) {
 	r.SetValue("group_ids", value)
 }
+
 
 func (r *CrmMembersGroupsBatchdeleteRequest) GetResponse(accessToken string) (*CrmMembersGroupsBatchdeleteResponse, []byte, error) {
 	var resp CrmMembersGroupsBatchdeleteResponseResult
@@ -746,10 +866,15 @@ type CrmMembersGroupsBatchdeleteResponseResult struct {
 	Response *CrmMembersGroupsBatchdeleteResponse `json:"crm_members_groups_batchdelete_response"`
 }
 
+
+
+
+
 /* 增量获取会员列表，接口返回符合查询条件的所有会员。任何状态更改都会返回,最大允许100 */
 type CrmMembersIncrementGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 显示第几页的会员，如果输入的页码大于总共的页码数，例如总共10页，但是current_page的值为11，则返回空白页，最小页数为1 */
 func (r *CrmMembersIncrementGetRequest) SetCurrentPage(value string) {
@@ -776,6 +901,7 @@ func (r *CrmMembersIncrementGetRequest) SetStartModify(value string) {
 	r.SetValue("start_modify", value)
 }
 
+
 func (r *CrmMembersIncrementGetRequest) GetResponse(accessToken string) (*CrmMembersIncrementGetResponse, []byte, error) {
 	var resp CrmMembersIncrementGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.crm.members.increment.get", &resp)
@@ -786,19 +912,24 @@ func (r *CrmMembersIncrementGetRequest) GetResponse(accessToken string) (*CrmMem
 }
 
 type CrmMembersIncrementGetResponse struct {
-	Members     []*BasicMember `json:"members"`
-	TotalResult int            `json:"total_result"`
+	Members *BasicMemberListObject `json:"members"`
+	TotalResult int `json:"total_result"`
 }
 
 type CrmMembersIncrementGetResponseResult struct {
 	Response *CrmMembersIncrementGetResponse `json:"crm_members_increment_get_response"`
 }
 
-/* 会员列表的高级查询，接口返回符合条件的会员列表.<br>
+
+
+
+
+/* 会员列表的高级查询，接口返回符合条件的会员列表.<br> 
 注：建议获取09年以后的数据，09年之前的数据不是很完整 */
 type CrmMembersSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 买家昵称 */
 func (r *CrmMembersSearchRequest) SetBuyerNick(value string) {
@@ -900,6 +1031,7 @@ func (r *CrmMembersSearchRequest) SetRelationSource(value string) {
 	r.SetValue("relation_source", value)
 }
 
+
 func (r *CrmMembersSearchRequest) GetResponse(accessToken string) (*CrmMembersSearchResponse, []byte, error) {
 	var resp CrmMembersSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.crm.members.search", &resp)
@@ -910,18 +1042,24 @@ func (r *CrmMembersSearchRequest) GetResponse(accessToken string) (*CrmMembersSe
 }
 
 type CrmMembersSearchResponse struct {
-	Members     []*CrmMember `json:"members"`
-	TotalResult int          `json:"total_result"`
+	Members *CrmMemberListObject `json:"members"`
+	TotalResult int `json:"total_result"`
 }
 
 type CrmMembersSearchResponseResult struct {
 	Response *CrmMembersSearchResponse `json:"crm_members_search_response"`
 }
 
+
+
+
+
 /* 此接口用于取消VIP优惠 */
 type CrmShopvipCancelRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *CrmShopvipCancelRequest) GetResponse(accessToken string) (*CrmShopvipCancelResponse, []byte, error) {
 	var resp CrmShopvipCancelResponseResult
@@ -940,10 +1078,53 @@ type CrmShopvipCancelResponseResult struct {
 	Response *CrmShopvipCancelResponse `json:"crm_shopvip_cancel_response"`
 }
 
+
+
+
+
+/* 查询是否是指定类型的无线未下单会员 0：所有无线未购买 1：主客登录未购买 */
+type CrmWirelessMemberGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 买家nick */
+func (r *CrmWirelessMemberGetRequest) SetBuyerNick(value string) {
+	r.SetValue("buyer_nick", value)
+}
+
+/* 0：所有无线未下单 1：主客登录未下单 */
+func (r *CrmWirelessMemberGetRequest) SetType(value string) {
+	r.SetValue("type", value)
+}
+
+
+func (r *CrmWirelessMemberGetRequest) GetResponse(accessToken string) (*CrmWirelessMemberGetResponse, []byte, error) {
+	var resp CrmWirelessMemberGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.crm.wireless.member.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type CrmWirelessMemberGetResponse struct {
+	IsMatch bool `json:"is_match"`
+}
+
+type CrmWirelessMemberGetResponseResult struct {
+	Response *CrmWirelessMemberGetResponse `json:"crm_wireless_member_get_response"`
+}
+
+
+
+
+
 /* 根据条件查询action列表 */
 type HanoiActionGetListRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分页查询当前查询的页数； */
 func (r *HanoiActionGetListRequest) SetCurrentPage(value string) {
@@ -955,6 +1136,7 @@ func (r *HanoiActionGetListRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
 
+
 func (r *HanoiActionGetListRequest) GetResponse(accessToken string) (*HanoiActionGetListResponse, []byte, error) {
 	var resp HanoiActionGetListResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.action.get.list", &resp)
@@ -965,18 +1147,23 @@ func (r *HanoiActionGetListRequest) GetResponse(accessToken string) (*HanoiActio
 }
 
 type HanoiActionGetListResponse struct {
-	Hanoiactions []*ActionInfo `json:"hanoiactions"`
-	Total        int           `json:"total"`
+	Hanoiactions *ActionInfoListObject `json:"hanoiactions"`
+	Total int `json:"total"`
 }
 
 type HanoiActionGetListResponseResult struct {
 	Response *HanoiActionGetListResponse `json:"hanoi_action_get_list_response"`
 }
 
+
+
+
+
 /* 查询单个action */
 type HanoiActionGetSingleRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* action的code */
 func (r *HanoiActionGetSingleRequest) SetActionCode(value string) {
@@ -992,6 +1179,7 @@ func (r *HanoiActionGetSingleRequest) SetId(value string) {
 func (r *HanoiActionGetSingleRequest) SetName(value string) {
 	r.SetValue("name", value)
 }
+
 
 func (r *HanoiActionGetSingleRequest) GetResponse(accessToken string) (*HanoiActionGetSingleResponse, []byte, error) {
 	var resp HanoiActionGetSingleResponseResult
@@ -1010,11 +1198,16 @@ type HanoiActionGetSingleResponseResult struct {
 	Response *HanoiActionGetSingleResponse `json:"hanoi_action_get_single_response"`
 }
 
-/* * 1、查询属性时，<b>只能查询Attribute的简单信息</b>，不会级联任何表结构从而得到其他对象，如果需要用到其他对象，请从其他接口获得
- * 2、属性的必填参数分两种，一种是随模板一起传入，这种必填参数创建模板时必须赋值Value */
+
+
+
+
+/* * 1、查询属性时，<b>只能查询Attribute的简单信息</b>，不会级联任何表结构从而得到其他对象，如果需要用到其他对象，请从其他接口获得 
+	 * 2、属性的必填参数分两种，一种是随模板一起传入，这种必填参数创建模板时必须赋值Value */
 type HanoiAttributesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 属性编码 */
 func (r *HanoiAttributesGetRequest) SetCode(value string) {
@@ -1061,6 +1254,7 @@ func (r *HanoiAttributesGetRequest) SetTypeName(value string) {
 	r.SetValue("type_name", value)
 }
 
+
 func (r *HanoiAttributesGetRequest) GetResponse(accessToken string) (*HanoiAttributesGetResponse, []byte, error) {
 	var resp HanoiAttributesGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.attributes.get", &resp)
@@ -1071,18 +1265,23 @@ func (r *HanoiAttributesGetRequest) GetResponse(accessToken string) (*HanoiAttri
 }
 
 type HanoiAttributesGetResponse struct {
-	PageResult *PageResult    `json:"page_result"`
-	Values     []*AttributeVO `json:"values"`
+	PageResult *PageResult `json:"page_result"`
+	Values *AttributeVOListObject `json:"values"`
 }
 
 type HanoiAttributesGetResponseResult struct {
 	Response *HanoiAttributesGetResponse `json:"hanoi_attributes_get_response"`
 }
 
+
+
+
+
 /* 店铺会员数据读取。一次可读取一个用户的多个属性值，但所有属性值的主键必须一致。主键不一致的属性值，请分多次读取。 */
 type HanoiDataserviceReadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分配给调用方的名称信息，内部统计使用 */
 func (r *HanoiDataserviceReadRequest) SetAppName(value string) {
@@ -1098,6 +1297,7 @@ func (r *HanoiDataserviceReadRequest) SetAttrs(value string) {
 func (r *HanoiDataserviceReadRequest) SetPk(value string) {
 	r.SetValue("pk", value)
 }
+
 
 func (r *HanoiDataserviceReadRequest) GetResponse(accessToken string) (*HanoiDataserviceReadResponse, []byte, error) {
 	var resp HanoiDataserviceReadResponseResult
@@ -1116,10 +1316,15 @@ type HanoiDataserviceReadResponseResult struct {
 	Response *HanoiDataserviceReadResponse `json:"hanoi_dataservice_read_response"`
 }
 
+
+
+
+
 /* 数据实时回流 */
 type HanoiDataserviceWriteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分配给调用方的名称信息，内部统计使用 */
 func (r *HanoiDataserviceWriteRequest) SetAppName(value string) {
@@ -1135,6 +1340,7 @@ func (r *HanoiDataserviceWriteRequest) SetData(value string) {
 func (r *HanoiDataserviceWriteRequest) SetParams(value string) {
 	r.SetValue("params", value)
 }
+
 
 func (r *HanoiDataserviceWriteRequest) GetResponse(accessToken string) (*HanoiDataserviceWriteResponse, []byte, error) {
 	var resp HanoiDataserviceWriteResponseResult
@@ -1153,32 +1359,38 @@ type HanoiDataserviceWriteResponseResult struct {
 	Response *HanoiDataserviceWriteResponse `json:"hanoi_dataservice_write_response"`
 }
 
-/* 增加一个数据模板.只增加基本信息，不会增加Detail详情 必填字段：name,owner,opened
-增加数据模板后，数据模板状态:未审核 <br/>
 
-名词解释：<br/>
-<ul>
-<li>
-数据模板：将一系列的指标（AttributeVO）组合在一起，当做指标集合使用。数据模板包含多个数据模板详情，数据模板详情和指标一一对应。
- 数据模板主要应用在，标签匹配以及数据服务时使用。标明此次调用时，我需要哪些指标。</li>
-<li>数据模板详情：1个数据模板包含多个详情，一个详情和指标一一对应，用户对模板添加详情即指明此模板需要哪些指标。指标（AttributeVO）中如果包含参数（ParamKeyVO）时，用户可以选择性的添加参数的Value属性（AttributeVO通过其他服务接口获得，如果ParamKeyVO的value在创建DT时不赋值，后续调用其他服务接口时，也可以动态添加）</li>
-</ul>
-使用方法：<br/>
+
+
+
+/* 增加一个数据模板.只增加基本信息，不会增加Detail详情 必填字段：name,owner,opened 
+增加数据模板后，数据模板状态:未审核 <br/> 
+	   
+名词解释：<br/> 
+<ul> 
+<li> 
+数据模板：将一系列的指标（AttributeVO）组合在一起，当做指标集合使用。数据模板包含多个数据模板详情，数据模板详情和指标一一对应。 
+ 数据模板主要应用在，标签匹配以及数据服务时使用。标明此次调用时，我需要哪些指标。</li> 
+<li>数据模板详情：1个数据模板包含多个详情，一个详情和指标一一对应，用户对模板添加详情即指明此模板需要哪些指标。指标（AttributeVO）中如果包含参数（ParamKeyVO）时，用户可以选择性的添加参数的Value属性（AttributeVO通过其他服务接口获得，如果ParamKeyVO的value在创建DT时不赋值，后续调用其他服务接口时，也可以动态添加）</li> 
+</ul> 
+使用方法：<br/> 
 {"name":"TESTS__","opened":0,"owner":"TEST"} */
 type HanoiDatatemplateAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* appName */
 func (r *HanoiDatatemplateAddRequest) SetAppName(value string) {
 	r.SetValue("app_name", value)
 }
 
-/* name:String类型，数据模板的名称
+/* name:String类型，数据模板的名称 
 opened:int类型，标识此数据模板是否对其他人可见 */
 func (r *HanoiDatatemplateAddRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *HanoiDatatemplateAddRequest) GetResponse(accessToken string) (*HanoiDatatemplateAddResponse, []byte, error) {
 	var resp HanoiDatatemplateAddResponseResult
@@ -1197,13 +1409,18 @@ type HanoiDatatemplateAddResponseResult struct {
 	Response *HanoiDatatemplateAddResponse `json:"hanoi_datatemplate_add_response"`
 }
 
-/* ID必填， Opened必填。<br/>
-现阶段只根据ID删除,只能删除未审核的数据模板，数据模板审核后,不能删除。
-用法：<br/>
+
+
+
+
+/* ID必填， Opened必填。<br/> 
+现阶段只根据ID删除,只能删除未审核的数据模板，数据模板审核后,不能删除。 
+用法：<br/>  
 {"id":888888,"opened":0} */
 type HanoiDatatemplateDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* APPName */
 func (r *HanoiDatatemplateDeleteRequest) SetAppName(value string) {
@@ -1214,6 +1431,7 @@ func (r *HanoiDatatemplateDeleteRequest) SetAppName(value string) {
 func (r *HanoiDatatemplateDeleteRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *HanoiDatatemplateDeleteRequest) GetResponse(accessToken string) (*HanoiDatatemplateDeleteResponse, []byte, error) {
 	var resp HanoiDatatemplateDeleteResponseResult
@@ -1232,28 +1450,33 @@ type HanoiDatatemplateDeleteResponseResult struct {
 	Response *HanoiDatatemplateDeleteResponse `json:"hanoi_datatemplate_delete_response"`
 }
 
-/* 向某个DT批量添加指标关系 注意 不会校验指标关系是否重复 返回的是添加数量
-必填字段： <br />
-DataTemplateVO: <br />
-id <br/>
-opened<br/>
-DataTemplateDetailVO:<br />
-name--用户可以根据这个name来创建模板<br/>
-Attr--需要把查询出来的AttributeVO对象放入到Detail中,如果Attr对应有ParamKey，paramKey的value可填入也可不填入，填入后，查询出来的Detail中ParamMap就会包含此信息<br />
 
-用法<br/>
-DataTemplateVO  {"id":1,"opened":1} <br/>
+
+
+
+/* 向某个DT批量添加指标关系 注意 不会校验指标关系是否重复 返回的是添加数量 
+必填字段： <br /> 
+DataTemplateVO: <br /> 
+id <br/> 
+opened<br/> 
+DataTemplateDetailVO:<br /> 
+name--用户可以根据这个name来创建模板<br/> 
+Attr--需要把查询出来的AttributeVO对象放入到Detail中,如果Attr对应有ParamKey，paramKey的value可填入也可不填入，填入后，查询出来的Detail中ParamMap就会包含此信息<br /> 
+ 
+用法<br/> 
+DataTemplateVO  {"id":1,"opened":1} <br/> 
 DataTemplateDetailVO  [{"attr":{"code":"SEX","description":"按男、女、男+女、无四个维度","documentId":1219,"id":35666,"params":[{"documentId":null,,"id":7757,"key":"buyerID","name":"buyerID","required":0,"sort":0,"type":3,"value":123}],"title":"性别","typeId":23157,"unit":"","valueType":1},"name":"d0c24612-b0f5-4814-9cf8-8eccb20f2017"}] */
 type HanoiDatatemplateDetailAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* appName */
 func (r *HanoiDatatemplateDetailAddRequest) SetAppName(value string) {
 	r.SetValue("app_name", value)
 }
 
-/* attr: 将AttributeVO转换成JSON格式
+/* attr: 将AttributeVO转换成JSON格式 
 name: 详情的名称 */
 func (r *HanoiDatatemplateDetailAddRequest) SetDataTemplateDetails(value string) {
 	r.SetValue("data_template_details", value)
@@ -1263,6 +1486,7 @@ func (r *HanoiDatatemplateDetailAddRequest) SetDataTemplateDetails(value string)
 func (r *HanoiDatatemplateDetailAddRequest) SetDataTemplateVo(value string) {
 	r.SetValue("data_template_vo", value)
 }
+
 
 func (r *HanoiDatatemplateDetailAddRequest) GetResponse(accessToken string) (*HanoiDatatemplateDetailAddResponse, []byte, error) {
 	var resp HanoiDatatemplateDetailAddResponseResult
@@ -1281,10 +1505,15 @@ type HanoiDatatemplateDetailAddResponseResult struct {
 	Response *HanoiDatatemplateDetailAddResponse `json:"hanoi_datatemplate_detail_add_response"`
 }
 
+
+
+
+
 /* 批量删除某个DT下面的关联指标关系。 Opened必填，dataTemplateId必填。 */
 type HanoiDatatemplateDetailDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* appName */
 func (r *HanoiDatatemplateDetailDeleteRequest) SetAppName(value string) {
@@ -1300,6 +1529,7 @@ func (r *HanoiDatatemplateDetailDeleteRequest) SetDataTemplateDetailIds(value st
 func (r *HanoiDatatemplateDetailDeleteRequest) SetDataTemplateVo(value string) {
 	r.SetValue("data_template_vo", value)
 }
+
 
 func (r *HanoiDatatemplateDetailDeleteRequest) GetResponse(accessToken string) (*HanoiDatatemplateDetailDeleteResponse, []byte, error) {
 	var resp HanoiDatatemplateDetailDeleteResponseResult
@@ -1318,40 +1548,46 @@ type HanoiDatatemplateDetailDeleteResponseResult struct {
 	Response *HanoiDatatemplateDetailDeleteResponse `json:"hanoi_datatemplate_detail_delete_response"`
 }
 
-/* 查询Detail详情, 根据DataTemplateDetailCriteriaVO信息查询<br/>
-justQueryParamNotInput 为true时， 则查询出来的Detail详情,只是参数没有填入的列表(（Detail中的Attribute中的ParamKey是调用其他匹配接口必填的值，按照其他接口的规范填入即可）)<br/>
-默认分页查询，每页10条记录。如果查询总条数，needRetPage = true<br/>
-DataTemplateDetailCriteriaVO
-<ul>
-<li>attrId(Long):AttributeVO的唯一标识</li>
-<li>templateId(Long 必填参数):数据模板的唯一标识</li>
-<li>name(String):数据模板详情的名称</li>
-<li>id(Long):根据模板唯一标识去查询</li>
-<li>pageSize:分页大小（最大值30）</li>
-<li>currentPage:当前页码</li>
-<li>needRetPage(Boolean 默认False):是否返回总条数</li>
-<li>justQueryParamNotInput（Boolean 默认False）:是否只查询每天如PK的详情列表</li>
+
+
+
+
+/* 查询Detail详情, 根据DataTemplateDetailCriteriaVO信息查询<br/> 
+justQueryParamNotInput 为true时， 则查询出来的Detail详情,只是参数没有填入的列表(（Detail中的Attribute中的ParamKey是调用其他匹配接口必填的值，按照其他接口的规范填入即可）)<br/> 
+默认分页查询，每页10条记录。如果查询总条数，needRetPage = true<br/> 
+DataTemplateDetailCriteriaVO 
+<ul> 
+<li>attrId(Long):AttributeVO的唯一标识</li> 
+<li>templateId(Long 必填参数):数据模板的唯一标识</li> 
+<li>name(String):数据模板详情的名称</li> 
+<li>id(Long):根据模板唯一标识去查询</li> 
+<li>pageSize:分页大小（最大值30）</li> 
+<li>currentPage:当前页码</li> 
+<li>needRetPage(Boolean 默认False):是否返回总条数</li> 
+<li>justQueryParamNotInput（Boolean 默认False）:是否只查询每天如PK的详情列表</li> 
 </ul> */
 type HanoiDatatemplateDetailQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* appName */
 func (r *HanoiDatatemplateDetailQueryRequest) SetAppName(value string) {
 	r.SetValue("app_name", value)
 }
 
-/* attrId(Long):AttributeVO的唯一标识<br/>
-templateId(Long):数据模板的唯一标识<br/>
-name(String):数据模板详情的名称<br/>
-id(Long):根据模板唯一标识去查询<br/>
-pageSize:分页大小（最大值30）<br/>
-currentPage:当前页码<br/>
-needRetPage(Boolean 默认False):是否返回总条数<br/>
+/* attrId(Long):AttributeVO的唯一标识<br/> 
+templateId(Long):数据模板的唯一标识<br/> 
+name(String):数据模板详情的名称<br/> 
+id(Long):根据模板唯一标识去查询<br/> 
+pageSize:分页大小（最大值30）<br/> 
+currentPage:当前页码<br/> 
+needRetPage(Boolean 默认False):是否返回总条数<br/> 
 justQueryParamNotInput（Boolean 默认False）:是否只查询每天如PK的详情列表<br/> */
 func (r *HanoiDatatemplateDetailQueryRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *HanoiDatatemplateDetailQueryRequest) GetResponse(accessToken string) (*HanoiDatatemplateDetailQueryResponse, []byte, error) {
 	var resp HanoiDatatemplateDetailQueryResponseResult
@@ -1364,35 +1600,41 @@ func (r *HanoiDatatemplateDetailQueryRequest) GetResponse(accessToken string) (*
 
 type HanoiDatatemplateDetailQueryResponse struct {
 	PageResult *PageResult `json:"page_result"`
-	Values     string      `json:"values"`
+	Values string `json:"values"`
 }
 
 type HanoiDatatemplateDetailQueryResponseResult struct {
 	Response *HanoiDatatemplateDetailQueryResponse `json:"hanoi_datatemplate_detail_query_response"`
 }
 
-/* 查询指标模板 默认不返回详情（detail）列表。 如果想要返回detail，只查询正常的detail <br />
-必填参数：opened参数必填（opened表示开放策略：0：只根据sellerId开放，1：全网开放 2：只根据ISV开放） <br />
-选填参数：isNeedDetail(如果needDetail为true时会返回attr列表，效率低)<br />
-此接口分页处理。默认分页 每页10条，返回总条数 请设置快关：needRetPage=true,参数为true是critera对象中totalAmount为符合条件的总条数,否则，不返回总条数。<br />
 
+
+
+
+/* 查询指标模板 默认不返回详情（detail）列表。 如果想要返回detail，只查询正常的detail <br /> 
+必填参数：opened参数必填（opened表示开放策略：0：只根据sellerId开放，1：全网开放 2：只根据ISV开放） <br /> 
+选填参数：isNeedDetail(如果needDetail为true时会返回attr列表，效率低)<br /> 
+此接口分页处理。默认分页 每页10条，返回总条数 请设置快关：needRetPage=true,参数为true是critera对象中totalAmount为符合条件的总条数,否则，不返回总条数。<br /> 
+ 
 {"currentPage":1,"id":123,"isNeedDetail":false,"needRetPage":false,"opened":1,"pageSize":10,"templateName":"xxx"} */
 type HanoiDatatemplateQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* AppName */
 func (r *HanoiDatatemplateQueryRequest) SetAppName(value string) {
 	r.SetValue("app_name", value)
 }
 
-/* templateName:String 根据模板的名字查找
-isNeedDetail：Boolean 是否返回模板详情
-opened:int 开放策略
+/* templateName:String 根据模板的名字查找 
+isNeedDetail：Boolean 是否返回模板详情 
+opened:int 开放策略 
 owner:创建者，填入appkey */
 func (r *HanoiDatatemplateQueryRequest) SetParameter(value string) {
 	r.SetValue("parameter", value)
 }
+
 
 func (r *HanoiDatatemplateQueryRequest) GetResponse(accessToken string) (*HanoiDatatemplateQueryResponse, []byte, error) {
 	var resp HanoiDatatemplateQueryResponseResult
@@ -1405,17 +1647,22 @@ func (r *HanoiDatatemplateQueryRequest) GetResponse(accessToken string) (*HanoiD
 
 type HanoiDatatemplateQueryResponse struct {
 	PageResult *PageResult `json:"page_result"`
-	Values     string      `json:"values"`
+	Values string `json:"values"`
 }
 
 type HanoiDatatemplateQueryResponseResult struct {
 	Response *HanoiDatatemplateQueryResponse `json:"hanoi_datatemplate_query_response"`
 }
 
+
+
+
+
 /* 这里只是简单的查询档案的信息，<b>不会返回档案下面的值域信息</b> <br> */
 type HanoiDocumentsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 档案资源对象的编码信息 */
 func (r *HanoiDocumentsGetRequest) SetCode(value string) {
@@ -1442,6 +1689,7 @@ func (r *HanoiDocumentsGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *HanoiDocumentsGetRequest) GetResponse(accessToken string) (*HanoiDocumentsGetResponse, []byte, error) {
 	var resp HanoiDocumentsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.documents.get", &resp)
@@ -1452,18 +1700,23 @@ func (r *HanoiDocumentsGetRequest) GetResponse(accessToken string) (*HanoiDocume
 }
 
 type HanoiDocumentsGetResponse struct {
-	PageResult *PageResult   `json:"page_result"`
-	Values     []*DocumentVO `json:"values"`
+	PageResult *PageResult `json:"page_result"`
+	Values *DocumentVOListObject `json:"values"`
 }
 
 type HanoiDocumentsGetResponseResult struct {
 	Response *HanoiDocumentsGetResponse `json:"hanoi_documents_get_response"`
 }
 
+
+
+
+
 /* 添加function */
 type HanoiFunctionAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分配给调用方的名称信息，内部统计使用 */
 func (r *HanoiFunctionAddRequest) SetAppName(value string) {
@@ -1490,6 +1743,7 @@ func (r *HanoiFunctionAddRequest) SetStrategy(value string) {
 	r.SetValue("strategy", value)
 }
 
+
 func (r *HanoiFunctionAddRequest) GetResponse(accessToken string) (*HanoiFunctionAddResponse, []byte, error) {
 	var resp HanoiFunctionAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.function.add", &resp)
@@ -1507,10 +1761,15 @@ type HanoiFunctionAddResponseResult struct {
 	Response *HanoiFunctionAddResponse `json:"hanoi_function_add_response"`
 }
 
+
+
+
+
 /* 删除一个function */
 type HanoiFunctionDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分配给调用方的名称信息，内部统计使用 */
 func (r *HanoiFunctionDeleteRequest) SetAppName(value string) {
@@ -1521,6 +1780,7 @@ func (r *HanoiFunctionDeleteRequest) SetAppName(value string) {
 func (r *HanoiFunctionDeleteRequest) SetSdata(value string) {
 	r.SetValue("sdata", value)
 }
+
 
 func (r *HanoiFunctionDeleteRequest) GetResponse(accessToken string) (*HanoiFunctionDeleteResponse, []byte, error) {
 	var resp HanoiFunctionDeleteResponseResult
@@ -1539,10 +1799,15 @@ type HanoiFunctionDeleteResponseResult struct {
 	Response *HanoiFunctionDeleteResponse `json:"hanoi_function_delete_response"`
 }
 
+
+
+
+
 /* 调用function */
 type HanoiFunctionExecuteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分配给调用方的名称信息，内部统计使用 */
 func (r *HanoiFunctionExecuteRequest) SetAppName(value string) {
@@ -1553,6 +1818,7 @@ func (r *HanoiFunctionExecuteRequest) SetAppName(value string) {
 func (r *HanoiFunctionExecuteRequest) SetPara(value string) {
 	r.SetValue("para", value)
 }
+
 
 func (r *HanoiFunctionExecuteRequest) GetResponse(accessToken string) (*HanoiFunctionExecuteResponse, []byte, error) {
 	var resp HanoiFunctionExecuteResponseResult
@@ -1571,10 +1837,15 @@ type HanoiFunctionExecuteResponseResult struct {
 	Response *HanoiFunctionExecuteResponse `json:"hanoi_function_execute_response"`
 }
 
+
+
+
+
 /* 根据function的id查询function */
 type HanoiFunctionGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分配给调用方的名称信息，内部统计使用 */
 func (r *HanoiFunctionGetRequest) SetAppName(value string) {
@@ -1585,6 +1856,7 @@ func (r *HanoiFunctionGetRequest) SetAppName(value string) {
 func (r *HanoiFunctionGetRequest) SetSdata(value string) {
 	r.SetValue("sdata", value)
 }
+
 
 func (r *HanoiFunctionGetRequest) GetResponse(accessToken string) (*HanoiFunctionGetResponse, []byte, error) {
 	var resp HanoiFunctionGetResponseResult
@@ -1603,10 +1875,15 @@ type HanoiFunctionGetResponseResult struct {
 	Response *HanoiFunctionGetResponse `json:"hanoi_function_get_response"`
 }
 
+
+
+
+
 /* 根据条件检索function。current_page:最大100页 page_size:10-30 */
 type HanoiFunctionSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分配给调用方的名称信息，内部统计使用 */
 func (r *HanoiFunctionSearchRequest) SetAppName(value string) {
@@ -1618,6 +1895,7 @@ func (r *HanoiFunctionSearchRequest) SetSdata(value string) {
 	r.SetValue("sdata", value)
 }
 
+
 func (r *HanoiFunctionSearchRequest) GetResponse(accessToken string) (*HanoiFunctionSearchResponse, []byte, error) {
 	var resp HanoiFunctionSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.function.search", &resp)
@@ -1628,18 +1906,23 @@ func (r *HanoiFunctionSearchRequest) GetResponse(accessToken string) (*HanoiFunc
 }
 
 type HanoiFunctionSearchResponse struct {
-	Functions []*Function `json:"functions"`
-	Total     int         `json:"total"`
+	Functions *FunctionListObject `json:"functions"`
+	Total int `json:"total"`
 }
 
 type HanoiFunctionSearchResponseResult struct {
 	Response *HanoiFunctionSearchResponse `json:"hanoi_function_search_response"`
 }
 
+
+
+
+
 /* 更新一个function */
 type HanoiFunctionUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分配给调用方的名称信息，内部统计使用 */
 func (r *HanoiFunctionUpdateRequest) SetAppName(value string) {
@@ -1671,6 +1954,7 @@ func (r *HanoiFunctionUpdateRequest) SetStrategy(value string) {
 	r.SetValue("strategy", value)
 }
 
+
 func (r *HanoiFunctionUpdateRequest) GetResponse(accessToken string) (*HanoiFunctionUpdateResponse, []byte, error) {
 	var resp HanoiFunctionUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.function.update", &resp)
@@ -1688,10 +1972,15 @@ type HanoiFunctionUpdateResponseResult struct {
 	Response *HanoiFunctionUpdateResponse `json:"hanoi_function_update_response"`
 }
 
+
+
+
+
 /* 添加一个分组 */
 type HanoiGroupAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupAddRequest) SetAppName(value string) {
@@ -1728,6 +2017,7 @@ func (r *HanoiGroupAddRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *HanoiGroupAddRequest) GetResponse(accessToken string) (*HanoiGroupAddResponse, []byte, error) {
 	var resp HanoiGroupAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.add", &resp)
@@ -1745,10 +2035,15 @@ type HanoiGroupAddResponseResult struct {
 	Response *HanoiGroupAddResponse `json:"hanoi_group_add_response"`
 }
 
+
+
+
+
 /* 创建一个标签分组，自动审核 */
 type HanoiGroupAddPapRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupAddPapRequest) SetAppName(value string) {
@@ -1785,6 +2080,7 @@ func (r *HanoiGroupAddPapRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *HanoiGroupAddPapRequest) GetResponse(accessToken string) (*HanoiGroupAddPapResponse, []byte, error) {
 	var resp HanoiGroupAddPapResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.add.pap", &resp)
@@ -1802,10 +2098,15 @@ type HanoiGroupAddPapResponseResult struct {
 	Response *HanoiGroupAddPapResponse `json:"hanoi_group_add_pap_response"`
 }
 
+
+
+
+
 /* 删除一个标签分组 */
 type HanoiGroupDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupDeleteRequest) SetAppName(value string) {
@@ -1816,6 +2117,7 @@ func (r *HanoiGroupDeleteRequest) SetAppName(value string) {
 func (r *HanoiGroupDeleteRequest) SetId(value string) {
 	r.SetValue("id", value)
 }
+
 
 func (r *HanoiGroupDeleteRequest) GetResponse(accessToken string) (*HanoiGroupDeleteResponse, []byte, error) {
 	var resp HanoiGroupDeleteResponseResult
@@ -1834,10 +2136,15 @@ type HanoiGroupDeleteResponseResult struct {
 	Response *HanoiGroupDeleteResponse `json:"hanoi_group_delete_response"`
 }
 
+
+
+
+
 /* 分组匹配 */
 type HanoiGroupFilterRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupFilterRequest) SetAppName(value string) {
@@ -1859,6 +2166,7 @@ func (r *HanoiGroupFilterRequest) SetSellerNick(value string) {
 	r.SetValue("seller_nick", value)
 }
 
+
 func (r *HanoiGroupFilterRequest) GetResponse(accessToken string) (*HanoiGroupFilterResponse, []byte, error) {
 	var resp HanoiGroupFilterResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.filter", &resp)
@@ -1876,10 +2184,15 @@ type HanoiGroupFilterResponseResult struct {
 	Response *HanoiGroupFilterResponse `json:"hanoi_group_filter_response"`
 }
 
+
+
+
+
 /* 给一个分组添加标签 */
 type HanoiGroupLabelAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupLabelAddRequest) SetAppName(value string) {
@@ -1901,6 +2214,7 @@ func (r *HanoiGroupLabelAddRequest) SetLevel(value string) {
 	r.SetValue("level", value)
 }
 
+
 func (r *HanoiGroupLabelAddRequest) GetResponse(accessToken string) (*HanoiGroupLabelAddResponse, []byte, error) {
 	var resp HanoiGroupLabelAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.label.add", &resp)
@@ -1918,10 +2232,15 @@ type HanoiGroupLabelAddResponseResult struct {
 	Response *HanoiGroupLabelAddResponse `json:"hanoi_group_label_add_response"`
 }
 
+
+
+
+
 /* 给标签分组添加一个标签，自动审核 */
 type HanoiGroupLabelAddPapRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupLabelAddPapRequest) SetAppName(value string) {
@@ -1943,6 +2262,7 @@ func (r *HanoiGroupLabelAddPapRequest) SetLevel(value string) {
 	r.SetValue("level", value)
 }
 
+
 func (r *HanoiGroupLabelAddPapRequest) GetResponse(accessToken string) (*HanoiGroupLabelAddPapResponse, []byte, error) {
 	var resp HanoiGroupLabelAddPapResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.label.add.pap", &resp)
@@ -1960,10 +2280,15 @@ type HanoiGroupLabelAddPapResponseResult struct {
 	Response *HanoiGroupLabelAddPapResponse `json:"hanoi_group_label_add_pap_response"`
 }
 
+
+
+
+
 /* 删除标签组中的某一个标签 */
 type HanoiGroupLabelDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupLabelDeleteRequest) SetAppName(value string) {
@@ -1979,6 +2304,7 @@ func (r *HanoiGroupLabelDeleteRequest) SetGroupId(value string) {
 func (r *HanoiGroupLabelDeleteRequest) SetLabelId(value string) {
 	r.SetValue("label_id", value)
 }
+
 
 func (r *HanoiGroupLabelDeleteRequest) GetResponse(accessToken string) (*HanoiGroupLabelDeleteResponse, []byte, error) {
 	var resp HanoiGroupLabelDeleteResponseResult
@@ -1997,10 +2323,15 @@ type HanoiGroupLabelDeleteResponseResult struct {
 	Response *HanoiGroupLabelDeleteResponse `json:"hanoi_group_label_delete_response"`
 }
 
+
+
+
+
 /* 删除分组中的一个标签，自动审核 */
 type HanoiGroupLabelDeletePapRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupLabelDeletePapRequest) SetAppName(value string) {
@@ -2016,6 +2347,7 @@ func (r *HanoiGroupLabelDeletePapRequest) SetGroupId(value string) {
 func (r *HanoiGroupLabelDeletePapRequest) SetLabelId(value string) {
 	r.SetValue("label_id", value)
 }
+
 
 func (r *HanoiGroupLabelDeletePapRequest) GetResponse(accessToken string) (*HanoiGroupLabelDeletePapResponse, []byte, error) {
 	var resp HanoiGroupLabelDeletePapResponseResult
@@ -2034,10 +2366,15 @@ type HanoiGroupLabelDeletePapResponseResult struct {
 	Response *HanoiGroupLabelDeletePapResponse `json:"hanoi_group_label_delete_pap_response"`
 }
 
+
+
+
+
 /* 查询分组使用的标签及优先级 */
 type HanoiGroupLabelQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupLabelQueryRequest) SetAppName(value string) {
@@ -2049,6 +2386,7 @@ func (r *HanoiGroupLabelQueryRequest) SetId(value string) {
 	r.SetValue("id", value)
 }
 
+
 func (r *HanoiGroupLabelQueryRequest) GetResponse(accessToken string) (*HanoiGroupLabelQueryResponse, []byte, error) {
 	var resp HanoiGroupLabelQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.label.query", &resp)
@@ -2059,17 +2397,22 @@ func (r *HanoiGroupLabelQueryRequest) GetResponse(accessToken string) (*HanoiGro
 }
 
 type HanoiGroupLabelQueryResponse struct {
-	Values []*InnerLabel `json:"values"`
+	Values *InnerLabelListObject `json:"values"`
 }
 
 type HanoiGroupLabelQueryResponseResult struct {
 	Response *HanoiGroupLabelQueryResponse `json:"hanoi_group_label_query_response"`
 }
 
+
+
+
+
 /* 根据条件检索分组 */
 type HanoiGroupListQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupListQueryRequest) SetAppName(value string) {
@@ -2146,6 +2489,7 @@ func (r *HanoiGroupListQueryRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *HanoiGroupListQueryRequest) GetResponse(accessToken string) (*HanoiGroupListQueryResponse, []byte, error) {
 	var resp HanoiGroupListQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.list.query", &resp)
@@ -2156,18 +2500,23 @@ func (r *HanoiGroupListQueryRequest) GetResponse(accessToken string) (*HanoiGrou
 }
 
 type HanoiGroupListQueryResponse struct {
-	Total  int                `json:"total"`
-	Values []*HanoiLabelGroup `json:"values"`
+	Total int `json:"total"`
+	Values *HanoiLabelGroupListObject `json:"values"`
 }
 
 type HanoiGroupListQueryResponseResult struct {
 	Response *HanoiGroupListQueryResponse `json:"hanoi_group_list_query_response"`
 }
 
+
+
+
+
 /* 更新一个标签的分组 */
 type HanoiGroupUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupUpdateRequest) SetAppName(value string) {
@@ -2214,6 +2563,7 @@ func (r *HanoiGroupUpdateRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *HanoiGroupUpdateRequest) GetResponse(accessToken string) (*HanoiGroupUpdateResponse, []byte, error) {
 	var resp HanoiGroupUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.update", &resp)
@@ -2231,10 +2581,15 @@ type HanoiGroupUpdateResponseResult struct {
 	Response *HanoiGroupUpdateResponse `json:"hanoi_group_update_response"`
 }
 
+
+
+
+
 /* 更新一个标签分组，自动审核 */
 type HanoiGroupUpdatePapRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiGroupUpdatePapRequest) SetAppName(value string) {
@@ -2281,6 +2636,7 @@ func (r *HanoiGroupUpdatePapRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *HanoiGroupUpdatePapRequest) GetResponse(accessToken string) (*HanoiGroupUpdatePapResponse, []byte, error) {
 	var resp HanoiGroupUpdatePapResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.group.update.pap", &resp)
@@ -2298,10 +2654,15 @@ type HanoiGroupUpdatePapResponseResult struct {
 	Response *HanoiGroupUpdatePapResponse `json:"hanoi_group_update_pap_response"`
 }
 
+
+
+
+
 /* 用于创建一个新的标签 */
 type HanoiLabelAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelAddRequest) SetAppName(value string) {
@@ -2343,6 +2704,7 @@ func (r *HanoiLabelAddRequest) SetTemplateId(value string) {
 	r.SetValue("template_id", value)
 }
 
+
 func (r *HanoiLabelAddRequest) GetResponse(accessToken string) (*HanoiLabelAddResponse, []byte, error) {
 	var resp HanoiLabelAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.label.add", &resp)
@@ -2360,10 +2722,15 @@ type HanoiLabelAddResponseResult struct {
 	Response *HanoiLabelAddResponse `json:"hanoi_label_add_response"`
 }
 
+
+
+
+
 /* 和创建标签类似，区别在于自动审核，可立即使用 */
 type HanoiLabelAddPapRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelAddPapRequest) SetAppName(value string) {
@@ -2405,6 +2772,7 @@ func (r *HanoiLabelAddPapRequest) SetTemplateId(value string) {
 	r.SetValue("template_id", value)
 }
 
+
 func (r *HanoiLabelAddPapRequest) GetResponse(accessToken string) (*HanoiLabelAddPapResponse, []byte, error) {
 	var resp HanoiLabelAddPapResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.label.add.pap", &resp)
@@ -2422,10 +2790,15 @@ type HanoiLabelAddPapResponseResult struct {
 	Response *HanoiLabelAddPapResponse `json:"hanoi_label_add_pap_response"`
 }
 
+
+
+
+
 /* 删除某个标签，前提是该标签没有被标签组引用 */
 type HanoiLabelDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelDeleteRequest) SetAppName(value string) {
@@ -2436,6 +2809,7 @@ func (r *HanoiLabelDeleteRequest) SetAppName(value string) {
 func (r *HanoiLabelDeleteRequest) SetId(value string) {
 	r.SetValue("id", value)
 }
+
 
 func (r *HanoiLabelDeleteRequest) GetResponse(accessToken string) (*HanoiLabelDeleteResponse, []byte, error) {
 	var resp HanoiLabelDeleteResponseResult
@@ -2454,10 +2828,15 @@ type HanoiLabelDeleteResponseResult struct {
 	Response *HanoiLabelDeleteResponse `json:"hanoi_label_delete_response"`
 }
 
+
+
+
+
 /* 根据标签id，卖家和买家Nick，匹配标签 */
 type HanoiLabelFilterRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelFilterRequest) SetAppName(value string) {
@@ -2479,6 +2858,7 @@ func (r *HanoiLabelFilterRequest) SetSellerNick(value string) {
 	r.SetValue("seller_nick", value)
 }
 
+
 func (r *HanoiLabelFilterRequest) GetResponse(accessToken string) (*HanoiLabelFilterResponse, []byte, error) {
 	var resp HanoiLabelFilterResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.label.filter", &resp)
@@ -2496,10 +2876,15 @@ type HanoiLabelFilterResponseResult struct {
 	Response *HanoiLabelFilterResponse `json:"hanoi_label_filter_response"`
 }
 
+
+
+
+
 /* 根据条件检索标签 */
 type HanoiLabelListQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelListQueryRequest) SetAppName(value string) {
@@ -2576,6 +2961,7 @@ func (r *HanoiLabelListQueryRequest) SetTemplateId(value string) {
 	r.SetValue("template_id", value)
 }
 
+
 func (r *HanoiLabelListQueryRequest) GetResponse(accessToken string) (*HanoiLabelListQueryResponse, []byte, error) {
 	var resp HanoiLabelListQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.label.list.query", &resp)
@@ -2586,18 +2972,23 @@ func (r *HanoiLabelListQueryRequest) GetResponse(accessToken string) (*HanoiLabe
 }
 
 type HanoiLabelListQueryResponse struct {
-	Total  int      `json:"total"`
-	Values []*Label `json:"values"`
+	Total int `json:"total"`
+	Values *LabelListObject `json:"values"`
 }
 
 type HanoiLabelListQueryResponseResult struct {
 	Response *HanoiLabelListQueryResponse `json:"hanoi_label_list_query_response"`
 }
 
+
+
+
+
 /* 查询指定标签的参数信息 */
 type HanoiLabelParaQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelParaQueryRequest) SetAppName(value string) {
@@ -2609,6 +3000,7 @@ func (r *HanoiLabelParaQueryRequest) SetId(value string) {
 	r.SetValue("id", value)
 }
 
+
 func (r *HanoiLabelParaQueryRequest) GetResponse(accessToken string) (*HanoiLabelParaQueryResponse, []byte, error) {
 	var resp HanoiLabelParaQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.label.para.query", &resp)
@@ -2619,17 +3011,22 @@ func (r *HanoiLabelParaQueryRequest) GetResponse(accessToken string) (*HanoiLabe
 }
 
 type HanoiLabelParaQueryResponse struct {
-	Values []*ParameterVO `json:"values"`
+	Values *ParameterVOListObject `json:"values"`
 }
 
 type HanoiLabelParaQueryResponseResult struct {
 	Response *HanoiLabelParaQueryResponse `json:"hanoi_label_para_query_response"`
 }
 
+
+
+
+
 /* 根据条件，检索标签数目 */
 type HanoiLabelQueryCountRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelQueryCountRequest) SetAppName(value string) {
@@ -2691,6 +3088,7 @@ func (r *HanoiLabelQueryCountRequest) SetTemplateId(value string) {
 	r.SetValue("template_id", value)
 }
 
+
 func (r *HanoiLabelQueryCountRequest) GetResponse(accessToken string) (*HanoiLabelQueryCountResponse, []byte, error) {
 	var resp HanoiLabelQueryCountResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.label.query.count", &resp)
@@ -2702,17 +3100,22 @@ func (r *HanoiLabelQueryCountRequest) GetResponse(accessToken string) (*HanoiLab
 
 type HanoiLabelQueryCountResponse struct {
 	TemplateResult *TemplateResult `json:"template_result"`
-	Value          int             `json:"value"`
+	Value int `json:"value"`
 }
 
 type HanoiLabelQueryCountResponseResult struct {
 	Response *HanoiLabelQueryCountResponse `json:"hanoi_label_query_count_response"`
 }
 
+
+
+
+
 /* 更新一个标签，前提是该标签未审核。 */
 type HanoiLabelUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelUpdateRequest) SetAppName(value string) {
@@ -2764,6 +3167,7 @@ func (r *HanoiLabelUpdateRequest) SetTemplateId(value string) {
 	r.SetValue("template_id", value)
 }
 
+
 func (r *HanoiLabelUpdateRequest) GetResponse(accessToken string) (*HanoiLabelUpdateResponse, []byte, error) {
 	var resp HanoiLabelUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.label.update", &resp)
@@ -2781,10 +3185,15 @@ type HanoiLabelUpdateResponseResult struct {
 	Response *HanoiLabelUpdateResponse `json:"hanoi_label_update_response"`
 }
 
+
+
+
+
 /* 更新标签，标签自动审核，立即可用 */
 type HanoiLabelUpdatePapRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiLabelUpdatePapRequest) SetAppName(value string) {
@@ -2836,6 +3245,7 @@ func (r *HanoiLabelUpdatePapRequest) SetTemplateId(value string) {
 	r.SetValue("template_id", value)
 }
 
+
 func (r *HanoiLabelUpdatePapRequest) GetResponse(accessToken string) (*HanoiLabelUpdatePapResponse, []byte, error) {
 	var resp HanoiLabelUpdatePapResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.label.update.pap", &resp)
@@ -2853,10 +3263,15 @@ type HanoiLabelUpdatePapResponseResult struct {
 	Response *HanoiLabelUpdatePapResponse `json:"hanoi_label_update_pap_response"`
 }
 
+
+
+
+
 /* 通过代理方法获取属性数据，主要是结构化评价和dsr。 */
 type HanoiProxyValueGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* app的密匙 */
 func (r *HanoiProxyValueGetRequest) SetAppName(value string) {
@@ -2867,6 +3282,7 @@ func (r *HanoiProxyValueGetRequest) SetAppName(value string) {
 func (r *HanoiProxyValueGetRequest) SetData(value string) {
 	r.SetValue("data", value)
 }
+
 
 func (r *HanoiProxyValueGetRequest) GetResponse(accessToken string) (*HanoiProxyValueGetResponse, []byte, error) {
 	var resp HanoiProxyValueGetResponseResult
@@ -2885,13 +3301,18 @@ type HanoiProxyValueGetResponseResult struct {
 	Response *HanoiProxyValueGetResponse `json:"hanoi_proxy_value_get_response"`
 }
 
-/* 档案ID必填字段
-1、查询值域信息，根据值域ID查询，最多返回一条记录，不会返回分页信息。<br>
-	 * 2、根据档案ID查询，默认返回10条记录<br>
+
+
+
+
+/* 档案ID必填字段 
+1、查询值域信息，根据值域ID查询，最多返回一条记录，不会返回分页信息。<br> 
+	 * 2、根据档案ID查询，默认返回10条记录<br> 
 	 * 3、值域Key只能配合档案ID来唯一确定一条记录，不会返回分页信息。<br> */
 type HanoiRangesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分页时需要用。默认第一页。 */
 func (r *HanoiRangesGetRequest) SetCurrentPage(value string) {
@@ -2918,6 +3339,7 @@ func (r *HanoiRangesGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *HanoiRangesGetRequest) GetResponse(accessToken string) (*HanoiRangesGetResponse, []byte, error) {
 	var resp HanoiRangesGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.ranges.get", &resp)
@@ -2929,17 +3351,22 @@ func (r *HanoiRangesGetRequest) GetResponse(accessToken string) (*HanoiRangesGet
 
 type HanoiRangesGetResponse struct {
 	PageResult *PageResult `json:"page_result"`
-	Values     []*RangeVO  `json:"values"`
+	Values *RangeVOListObject `json:"values"`
 }
 
 type HanoiRangesGetResponseResult struct {
 	Response *HanoiRangesGetResponse `json:"hanoi_ranges_get_response"`
 }
 
+
+
+
+
 /* 用于创建模板 */
 type HanoiTemplateAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiTemplateAddRequest) SetAppName(value string) {
@@ -2986,6 +3413,7 @@ func (r *HanoiTemplateAddRequest) SetTemplateCode(value string) {
 	r.SetValue("template_code", value)
 }
 
+
 func (r *HanoiTemplateAddRequest) GetResponse(accessToken string) (*HanoiTemplateAddResponse, []byte, error) {
 	var resp HanoiTemplateAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.template.add", &resp)
@@ -3003,10 +3431,15 @@ type HanoiTemplateAddResponseResult struct {
 	Response *HanoiTemplateAddResponse `json:"hanoi_template_add_response"`
 }
 
+
+
+
+
 /* 删除一个模板，只能删除未审核的 */
 type HanoiTemplateDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiTemplateDeleteRequest) SetAppName(value string) {
@@ -3017,6 +3450,7 @@ func (r *HanoiTemplateDeleteRequest) SetAppName(value string) {
 func (r *HanoiTemplateDeleteRequest) SetId(value string) {
 	r.SetValue("id", value)
 }
+
 
 func (r *HanoiTemplateDeleteRequest) GetResponse(accessToken string) (*HanoiTemplateDeleteResponse, []byte, error) {
 	var resp HanoiTemplateDeleteResponseResult
@@ -3035,10 +3469,15 @@ type HanoiTemplateDeleteResponseResult struct {
 	Response *HanoiTemplateDeleteResponse `json:"hanoi_template_delete_response"`
 }
 
+
+
+
+
 /* 检索模板 */
 type HanoiTemplateListQueryRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiTemplateListQueryRequest) SetAppName(value string) {
@@ -3120,6 +3559,7 @@ func (r *HanoiTemplateListQueryRequest) SetTemplateCode(value string) {
 	r.SetValue("template_code", value)
 }
 
+
 func (r *HanoiTemplateListQueryRequest) GetResponse(accessToken string) (*HanoiTemplateListQueryResponse, []byte, error) {
 	var resp HanoiTemplateListQueryResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.template.list.query", &resp)
@@ -3130,18 +3570,23 @@ func (r *HanoiTemplateListQueryRequest) GetResponse(accessToken string) (*HanoiT
 }
 
 type HanoiTemplateListQueryResponse struct {
-	Total  int         `json:"total"`
-	Values []*Template `json:"values"`
+	Total int `json:"total"`
+	Values *TemplateListObject `json:"values"`
 }
 
 type HanoiTemplateListQueryResponseResult struct {
 	Response *HanoiTemplateListQueryResponse `json:"hanoi_template_list_query_response"`
 }
 
+
+
+
+
 /* 根据条件检索模板数目 */
 type HanoiTemplateQueryCountRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiTemplateQueryCountRequest) SetAppName(value string) {
@@ -3208,6 +3653,7 @@ func (r *HanoiTemplateQueryCountRequest) SetTemplateCode(value string) {
 	r.SetValue("template_code", value)
 }
 
+
 func (r *HanoiTemplateQueryCountRequest) GetResponse(accessToken string) (*HanoiTemplateQueryCountResponse, []byte, error) {
 	var resp HanoiTemplateQueryCountResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.template.query.count", &resp)
@@ -3225,10 +3671,15 @@ type HanoiTemplateQueryCountResponseResult struct {
 	Response *HanoiTemplateQueryCountResponse `json:"hanoi_template_query_count_response"`
 }
 
+
+
+
+
 /* 更新一个模板。包括模板的名称、编码、使用的属性和参数 */
 type HanoiTemplateUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 认证信息 */
 func (r *HanoiTemplateUpdateRequest) SetAppName(value string) {
@@ -3285,6 +3736,7 @@ func (r *HanoiTemplateUpdateRequest) SetTemplateCode(value string) {
 	r.SetValue("template_code", value)
 }
 
+
 func (r *HanoiTemplateUpdateRequest) GetResponse(accessToken string) (*HanoiTemplateUpdateResponse, []byte, error) {
 	var resp HanoiTemplateUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.template.update", &resp)
@@ -3302,11 +3754,16 @@ type HanoiTemplateUpdateResponseResult struct {
 	Response *HanoiTemplateUpdateResponse `json:"hanoi_template_update_response"`
 }
 
-/* 只能根据ID或者名称查询类型
-<b>不会返回类型下面关联的属性列表</b>，如果需要得到类型下面的属性列表，需要调用queryAttribute方法<br> */
+
+
+
+
+/* 只能根据ID或者名称查询类型 
+ <b>不会返回类型下面关联的属性列表</b>，如果需要得到类型下面的属性列表，需要调用queryAttribute方法<br> */
 type HanoiTypesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 分页时需要用。默认第一页。 */
 func (r *HanoiTypesGetRequest) SetCurrentPage(value string) {
@@ -3328,6 +3785,7 @@ func (r *HanoiTypesGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *HanoiTypesGetRequest) GetResponse(accessToken string) (*HanoiTypesGetResponse, []byte, error) {
 	var resp HanoiTypesGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hanoi.types.get", &resp)
@@ -3339,17 +3797,23 @@ func (r *HanoiTypesGetRequest) GetResponse(accessToken string) (*HanoiTypesGetRe
 
 type HanoiTypesGetResponse struct {
 	PageResult *PageResult `json:"page_result"`
-	Values     []*TypeVO   `json:"values"`
+	Values *TypeVOListObject `json:"values"`
 }
 
 type HanoiTypesGetResponseResult struct {
 	Response *HanoiTypesGetResponse `json:"hanoi_types_get_response"`
 }
 
+
+
+
+
 /* 获取天猫卖家设置的等级权益 */
 type TmallCrmEquityGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *TmallCrmEquityGetRequest) GetResponse(accessToken string) (*TmallCrmEquityGetResponse, []byte, error) {
 	var resp TmallCrmEquityGetResponseResult
@@ -3361,17 +3825,22 @@ func (r *TmallCrmEquityGetRequest) GetResponse(accessToken string) (*TmallCrmEqu
 }
 
 type TmallCrmEquityGetResponse struct {
-	GradeEquitys []*GradeEquity `json:"grade_equitys"`
+	GradeEquitys *GradeEquityListObject `json:"grade_equitys"`
 }
 
 type TmallCrmEquityGetResponseResult struct {
 	Response *TmallCrmEquityGetResponse `json:"tmall_crm_equity_get_response"`
 }
 
+
+
+
+
 /* 天猫卖家设置权益 */
 type TmallCrmEquitySetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 不免邮区域，只在包邮条件设置的时候生效。要和等级一一对应。包邮条件为false的时候不起作用。 */
 func (r *TmallCrmEquitySetRequest) SetExcludeArea(value string) {
@@ -3393,6 +3862,7 @@ func (r *TmallCrmEquitySetRequest) SetPostage(value string) {
 	r.SetValue("postage", value)
 }
 
+
 func (r *TmallCrmEquitySetRequest) GetResponse(accessToken string) (*TmallCrmEquitySetResponse, []byte, error) {
 	var resp TmallCrmEquitySetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "tmall.crm.equity.set", &resp)
@@ -3409,3 +3879,6 @@ type TmallCrmEquitySetResponse struct {
 type TmallCrmEquitySetResponseResult struct {
 	Response *TmallCrmEquitySetResponse `json:"tmall_crm_equity_set_response"`
 }
+
+
+

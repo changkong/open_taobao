@@ -5,14 +5,19 @@
 package hotel
 
 import (
-	"github.com/changkong/open_taobao"
+	"github.com/yaofangou/open_taobao"
 )
 
-/* 此接口用于新增一个酒店，酒店的发布者是当前会话的用户。
+
+
+
+
+/* 此接口用于新增一个酒店，酒店的发布者是当前会话的用户。 
 该接口发出的是一个酒店申请，需要淘宝小二审核。 */
 type HotelAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店地址。长度不能超过120 */
 func (r *HotelAddRequest) SetAddress(value string) {
@@ -24,7 +29,7 @@ func (r *HotelAddRequest) SetCity(value string) {
 	r.SetValue("city", value)
 }
 
-/* domestic为true时，固定China；
+/* domestic为true时，固定China； 
 domestic为false时，必须传定义的海外国家编码值。参见：http://kezhan.trip.taobao.com/countrys.html */
 func (r *HotelAddRequest) SetCountry(value string) {
 	r.SetValue("country", value)
@@ -85,8 +90,8 @@ func (r *HotelAddRequest) SetRooms(value string) {
 	r.SetValue("rooms", value)
 }
 
-/* 交通距离与设施服务。JSON格式。cityCenterDistance、railwayDistance、airportDistance分别代表距离市中心、距离火车站、距离机场公里数，为不超过3位正整数，默认-1代表无数据。
-其他key值true代表有此服务，false代表没有。
+/* 交通距离与设施服务。JSON格式。cityCenterDistance、railwayDistance、airportDistance分别代表距离市中心、距离火车站、距离机场公里数，为不超过3位正整数，默认-1代表无数据。 
+其他key值true代表有此服务，false代表没有。 
 parking：停车场，airportShuttle：机场接送，rentCar：租车，meetingRoom：会议室，businessCenter：商务中心，swimmingPool：游泳池，fitnessClub：健身中心，laundry：洗衣服务，morningCall：叫早服务，bankCard：接受银行卡，creditCard：接受信用卡，chineseRestaurant：中餐厅，westernRestaurant：西餐厅，cafe：咖啡厅，bar：酒吧，ktv：KTV。 */
 func (r *HotelAddRequest) SetService(value string) {
 	r.SetValue("service", value)
@@ -107,6 +112,7 @@ func (r *HotelAddRequest) SetTel(value string) {
 	r.SetValue("tel", value)
 }
 
+
 func (r *HotelAddRequest) GetResponse(accessToken string) (*HotelAddResponse, []byte, error) {
 	var resp HotelAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.add", &resp)
@@ -124,15 +130,21 @@ type HotelAddResponseResult struct {
 	Response *HotelAddResponse `json:"hotel_add_response"`
 }
 
+
+
+
+
 /* 根据国家编码查询该国家下的城市 */
 type HotelCityGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 国家编码 */
 func (r *HotelCityGetRequest) SetCountry(value string) {
 	r.SetValue("country", value)
 }
+
 
 func (r *HotelCityGetRequest) GetResponse(accessToken string) (*HotelCityGetResponse, []byte, error) {
 	var resp HotelCityGetResponseResult
@@ -151,10 +163,15 @@ type HotelCityGetResponseResult struct {
 	Response *HotelCityGetResponse `json:"hotel_city_get_response"`
 }
 
+
+
+
+
 /* 此接口用于查询一个酒店，根据传入的酒店hid查询酒店信息。 */
 type HotelGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* true表示查询酒店审核状态，false表示查询已审核通过酒店详细信息 */
 func (r *HotelGetRequest) SetCheckAudit(value string) {
@@ -170,6 +187,7 @@ func (r *HotelGetRequest) SetHid(value string) {
 func (r *HotelGetRequest) SetNeedRoomType(value string) {
 	r.SetValue("need_room_type", value)
 }
+
 
 func (r *HotelGetRequest) GetResponse(accessToken string) (*HotelGetResponse, []byte, error) {
 	var resp HotelGetResponseResult
@@ -188,10 +206,15 @@ type HotelGetResponseResult struct {
 	Response *HotelGetResponse `json:"hotel_get_response"`
 }
 
+
+
+
+
 /* 酒店图片上传 */
 type HotelImageUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店id */
 func (r *HotelImageUploadRequest) SetHid(value string) {
@@ -202,6 +225,7 @@ func (r *HotelImageUploadRequest) SetHid(value string) {
 func (r *HotelImageUploadRequest) SetPic(value string) {
 	r.SetValue("pic", value)
 }
+
 
 func (r *HotelImageUploadRequest) GetResponse(accessToken string) (*HotelImageUploadResponse, []byte, error) {
 	var resp HotelImageUploadResponseResult
@@ -220,10 +244,15 @@ type HotelImageUploadResponseResult struct {
 	Response *HotelImageUploadResponse `json:"hotel_image_upload_response"`
 }
 
-/* 用于回传hotel匹配结果 */
+
+
+
+
+/* 用于回传hotel匹配结果(该接口即将废除请勿使用) */
 type HotelMatchFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需进行匹配的酒店id */
 func (r *HotelMatchFeedbackRequest) SetHaid(value string) {
@@ -239,6 +268,7 @@ func (r *HotelMatchFeedbackRequest) SetHid(value string) {
 func (r *HotelMatchFeedbackRequest) SetMatchResult(value string) {
 	r.SetValue("match_result", value)
 }
+
 
 func (r *HotelMatchFeedbackRequest) GetResponse(accessToken string) (*HotelMatchFeedbackResponse, []byte, error) {
 	var resp HotelMatchFeedbackResponseResult
@@ -257,24 +287,29 @@ type HotelMatchFeedbackResponseResult struct {
 	Response *HotelMatchFeedbackResponse `json:"hotel_match_feedback_response"`
 }
 
+
+
+
+
 /* 此接口用于查询一个酒店，根据传入的酒店名称/别名查询酒店信息。 */
 type HotelNameGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 城市编码。参见：http://kezhan.trip.taobao.com/area.html。
+
+/* 城市编码。参见：http://kezhan.trip.taobao.com/area.html。 
 domestic为true时，province,city,district不能同时为空或为0 */
 func (r *HotelNameGetRequest) SetCity(value string) {
 	r.SetValue("city", value)
 }
 
-/* domestic为true时，固定China；
+/* domestic为true时，固定China； 
 domestic为false时，必须传定义的海外国家编码值，是必填项。参见：http://kezhan.trip.taobao.com/countrys.html */
 func (r *HotelNameGetRequest) SetCountry(value string) {
 	r.SetValue("country", value)
 }
 
-/* 区域（县级市）编码。参见：http://kezhan.trip.taobao.com/area.html。
+/* 区域（县级市）编码。参见：http://kezhan.trip.taobao.com/area.html。 
 domestic为true时，province,city,district不能同时为空或为0 */
 func (r *HotelNameGetRequest) SetDistrict(value string) {
 	r.SetValue("district", value)
@@ -290,11 +325,12 @@ func (r *HotelNameGetRequest) SetName(value string) {
 	r.SetValue("name", value)
 }
 
-/* 省份编码。参见：http://kezhan.trip.taobao.com/area.html。
+/* 省份编码。参见：http://kezhan.trip.taobao.com/area.html。 
 domestic为true时，province,city,district不能同时为空或为0 */
 func (r *HotelNameGetRequest) SetProvince(value string) {
 	r.SetValue("province", value)
 }
+
 
 func (r *HotelNameGetRequest) GetResponse(accessToken string) (*HotelNameGetResponse, []byte, error) {
 	var resp HotelNameGetResponseResult
@@ -313,10 +349,15 @@ type HotelNameGetResponseResult struct {
 	Response *HotelNameGetResponse `json:"hotel_name_get_response"`
 }
 
-/* 下单结果回传 */
+
+
+
+
+/* 下单结果回传(该接口即将废除请勿使用) */
 type HotelOrderBookingFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 失败原因,当result为failed时,此项为必填，最长200个字符 */
 func (r *HotelOrderBookingFeedbackRequest) SetFailedReason(value string) {
@@ -343,8 +384,8 @@ func (r *HotelOrderBookingFeedbackRequest) SetRefundCode(value string) {
 	r.SetValue("refund_code", value)
 }
 
-/* 预订结果
-S:成功
+/* 预订结果  
+S:成功 
 F:失败 */
 func (r *HotelOrderBookingFeedbackRequest) SetResult(value string) {
 	r.SetValue("result", value)
@@ -354,6 +395,7 @@ func (r *HotelOrderBookingFeedbackRequest) SetResult(value string) {
 func (r *HotelOrderBookingFeedbackRequest) SetSessionId(value string) {
 	r.SetValue("session_id", value)
 }
+
 
 func (r *HotelOrderBookingFeedbackRequest) GetResponse(accessToken string) (*HotelOrderBookingFeedbackResponse, []byte, error) {
 	var resp HotelOrderBookingFeedbackResponseResult
@@ -372,10 +414,15 @@ type HotelOrderBookingFeedbackResponseResult struct {
 	Response *HotelOrderBookingFeedbackResponse `json:"hotel_order_booking_feedback_response"`
 }
 
+
+
+
+
 /* 此接口用户到店支付（前台面付）卖家处理订单的入住情况，包括核实买家已入住和核实买家未入住 */
 type HotelOrderFaceCheckRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 核实已入住或者未入住，true：已入住，false：未入住 */
 func (r *HotelOrderFaceCheckRequest) SetChecked(value string) {
@@ -397,6 +444,7 @@ func (r *HotelOrderFaceCheckRequest) SetOid(value string) {
 	r.SetValue("oid", value)
 }
 
+
 func (r *HotelOrderFaceCheckRequest) GetResponse(accessToken string) (*HotelOrderFaceCheckResponse, []byte, error) {
 	var resp HotelOrderFaceCheckResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.order.face.check", &resp)
@@ -414,10 +462,15 @@ type HotelOrderFaceCheckResponseResult struct {
 	Response *HotelOrderFaceCheckResponse `json:"hotel_order_face_check_response"`
 }
 
+
+
+
+
 /* 该接口用于卖家确认到店支付订单或者取消订单。 */
 type HotelOrderFaceDealRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店订单oid */
 func (r *HotelOrderFaceDealRequest) SetOid(value string) {
@@ -434,11 +487,12 @@ func (r *HotelOrderFaceDealRequest) SetReasonText(value string) {
 	r.SetValue("reason_text", value)
 }
 
-/* 取消订单时的取消原因，可选值：1,2,3,4；
+/* 取消订单时的取消原因，可选值：1,2,3,4； 
 1：无房，2：价格变动，3：买家原因，4：其它原因 */
 func (r *HotelOrderFaceDealRequest) SetReasonType(value string) {
 	r.SetValue("reason_type", value)
 }
+
 
 func (r *HotelOrderFaceDealRequest) GetResponse(accessToken string) (*HotelOrderFaceDealResponse, []byte, error) {
 	var resp HotelOrderFaceDealResponseResult
@@ -457,10 +511,15 @@ type HotelOrderFaceDealResponseResult struct {
 	Response *HotelOrderFaceDealResponse `json:"hotel_order_face_deal_response"`
 }
 
+
+
+
+
 /* 此接口用于查询一个酒店订单，根据传入的订单号查询订单信息。 */
 type HotelOrderGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否需要返回该订单的入住人列表。可选值：true，false。 */
 func (r *HotelOrderGetRequest) SetNeedGuest(value string) {
@@ -482,6 +541,7 @@ func (r *HotelOrderGetRequest) SetTid(value string) {
 	r.SetValue("tid", value)
 }
 
+
 func (r *HotelOrderGetRequest) GetResponse(accessToken string) (*HotelOrderGetResponse, []byte, error) {
 	var resp HotelOrderGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.order.get", &resp)
@@ -499,10 +559,15 @@ type HotelOrderGetResponseResult struct {
 	Response *HotelOrderGetResponse `json:"hotel_order_get_response"`
 }
 
-/* 支付确认结果回传 */
+
+
+
+
+/* 支付确认结果回传(该接口即将废除请勿使用) */
 type HotelOrderPayFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 失败原因,当result为failed时,此项为必填，最长200个字符 */
 func (r *HotelOrderPayFeedbackRequest) SetFailedReason(value string) {
@@ -524,8 +589,8 @@ func (r *HotelOrderPayFeedbackRequest) SetOutOid(value string) {
 	r.SetValue("out_oid", value)
 }
 
-/* 预订结果
-S:成功
+/* 预订结果  
+S:成功 
 F:失败 */
 func (r *HotelOrderPayFeedbackRequest) SetResult(value string) {
 	r.SetValue("result", value)
@@ -535,6 +600,7 @@ func (r *HotelOrderPayFeedbackRequest) SetResult(value string) {
 func (r *HotelOrderPayFeedbackRequest) SetSessionId(value string) {
 	r.SetValue("session_id", value)
 }
+
 
 func (r *HotelOrderPayFeedbackRequest) GetResponse(accessToken string) (*HotelOrderPayFeedbackResponse, []byte, error) {
 	var resp HotelOrderPayFeedbackResponseResult
@@ -553,10 +619,15 @@ type HotelOrderPayFeedbackResponseResult struct {
 	Response *HotelOrderPayFeedbackResponse `json:"hotel_order_pay_feedback_response"`
 }
 
-/* 退订处理结果回传 */
+
+
+
+
+/* 退订处理结果回传(该接口即将废除请勿使用) */
 type HotelOrderRefundFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 失败原因,当result为F时,此项为必填,最长200个字符 */
 func (r *HotelOrderRefundFeedbackRequest) SetFailedReason(value string) {
@@ -578,8 +649,8 @@ func (r *HotelOrderRefundFeedbackRequest) SetOutOid(value string) {
 	r.SetValue("out_oid", value)
 }
 
-/* 预订结果
-S:成功
+/* 预订结果  
+S:成功 
 F:失败 */
 func (r *HotelOrderRefundFeedbackRequest) SetResult(value string) {
 	r.SetValue("result", value)
@@ -589,6 +660,7 @@ func (r *HotelOrderRefundFeedbackRequest) SetResult(value string) {
 func (r *HotelOrderRefundFeedbackRequest) SetSessionId(value string) {
 	r.SetValue("session_id", value)
 }
+
 
 func (r *HotelOrderRefundFeedbackRequest) GetResponse(accessToken string) (*HotelOrderRefundFeedbackResponse, []byte, error) {
 	var resp HotelOrderRefundFeedbackResponseResult
@@ -607,10 +679,15 @@ type HotelOrderRefundFeedbackResponseResult struct {
 	Response *HotelOrderRefundFeedbackResponse `json:"hotel_order_refund_feedback_response"`
 }
 
+
+
+
+
 /* 此接口用于查询多个酒店订单，根据传入的查询条件查询订单信息。 */
 type HotelOrdersSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 入住时间查询结束时间，格式为：yyyy-MM-dd。不能早于checkin_date_start，间隔不能大于30 */
 func (r *HotelOrdersSearchRequest) SetCheckinDateEnd(value string) {
@@ -662,7 +739,7 @@ func (r *HotelOrdersSearchRequest) SetNeedMessage(value string) {
 	r.SetValue("need_message", value)
 }
 
-/* 酒店订单oids列表，多个oid用英文逗号隔开，一次不超过20个。oids，tids，hids，rids，gids，（checkin_date_start，checkin_date_end），（checkout_date_start，checkout_date_end），（created_start，created_end）必须传入一项，括号表示需同时存在才做为查询条件。
+/* 酒店订单oids列表，多个oid用英文逗号隔开，一次不超过20个。oids，tids，hids，rids，gids，（checkin_date_start，checkin_date_end），（checkout_date_start，checkout_date_end），（created_start，created_end）必须传入一项，括号表示需同时存在才做为查询条件。 
 oids，tids，hids，rids，gids同时出现时，优先级按此顺序由高到低只取一项。其他同时出现时，并列使用。 */
 func (r *HotelOrdersSearchRequest) SetOids(value string) {
 	r.SetValue("oids", value)
@@ -688,6 +765,7 @@ func (r *HotelOrdersSearchRequest) SetTids(value string) {
 	r.SetValue("tids", value)
 }
 
+
 func (r *HotelOrdersSearchRequest) GetResponse(accessToken string) (*HotelOrdersSearchResponse, []byte, error) {
 	var resp HotelOrdersSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.orders.search", &resp)
@@ -698,26 +776,31 @@ func (r *HotelOrdersSearchRequest) GetResponse(accessToken string) (*HotelOrders
 }
 
 type HotelOrdersSearchResponse struct {
-	HotelOrders  []*HotelOrder `json:"hotel_orders"`
-	TotalResults int           `json:"total_results"`
+	HotelOrders *HotelOrderListObject `json:"hotel_orders"`
+	TotalResults int `json:"total_results"`
 }
 
 type HotelOrdersSearchResponseResult struct {
 	Response *HotelOrdersSearchResponse `json:"hotel_orders_search_response"`
 }
 
+
+
+
+
 /* 此接口用于发布一个集市酒店商品，商品的发布者是当前会话的用户。如果该酒店、该房型、该用户所对应的商品在淘宝集市酒店系统中已经存在，则会返回错误提示。 */
 type HotelRoomAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 面积。可选值：A,B,C,D。分别代表：
+
+/* 面积。可选值：A,B,C,D。分别代表： 
 A：15平米以下，B：16－30平米，C：31－50平米，D：50平米以上 */
 func (r *HotelRoomAddRequest) SetArea(value string) {
 	r.SetValue("area", value)
 }
 
-/* 宽带服务。A,B,C,D。分别代表：
+/* 宽带服务。A,B,C,D。分别代表： 
 A：无宽带，B：免费宽带，C：收费宽带，D：部分收费宽带 */
 func (r *HotelRoomAddRequest) SetBbn(value string) {
 	r.SetValue("bbn", value)
@@ -728,7 +811,7 @@ func (r *HotelRoomAddRequest) SetBedType(value string) {
 	r.SetValue("bed_type", value)
 }
 
-/* 早餐。A,B,C,D,E。分别代表：
+/* 早餐。A,B,C,D,E。分别代表： 
 A：无早，B：单早，C：双早，D：三早，E：多早 */
 func (r *HotelRoomAddRequest) SetBreakfast(value string) {
 	r.SetValue("breakfast", value)
@@ -769,7 +852,7 @@ func (r *HotelRoomAddRequest) SetMultiRoomQuotas(value string) {
 	r.SetValue("multi_room_quotas", value)
 }
 
-/* 支付类型。可选值：A,B,C,D,E。分别代表：
+/* 支付类型。可选值：A,B,C,D,E。分别代表： 
 A：全额支付，B：手续费，C：订金，D：手续费/间夜，E：前台面付 */
 func (r *HotelRoomAddRequest) SetPaymentType(value string) {
 	r.SetValue("payment_type", value)
@@ -805,8 +888,8 @@ func (r *HotelRoomAddRequest) SetReceiptType(value string) {
 	r.SetValue("receipt_type", value)
 }
 
-/* 1. 全额支付类型必填
-2. t代表类别(1表示任意退;2表示不能退;3表示阶梯退)，p代表退款规则（数组）， d代表天数，r代表扣除手续费比率。示例代表的意思就是"阶梯退:提前3天内退订，收取订单总额10%的违约金;提前2天内退订，收取订单总额20%的违约金，提前1天内退订，收取订单总额30%的违约金"。
+/* 1. 全额支付类型必填 
+2. t代表类别(1表示任意退;2表示不能退;3表示阶梯退)，p代表退款规则（数组）， d代表天数，r代表扣除手续费比率。示例代表的意思就是"阶梯退:提前3天内退订，收取订单总额10%的违约金;提前2天内退订，收取订单总额20%的违约金，提前1天内退订，收取订单总额30%的违约金"。 
 3. 任意退、不能退不能指定退款规则;阶梯退不能没有退款规则;阶梯退规则最多10条,且每条规则天数、费率不能相同;阶梯退遵循天数越短,违约金越大的业务规则;天数需为整数,且90>天数>=0;费率需为整数且100<=费率<=0;阶梯退规则只有一条时,费率不能设置为100%;阶梯退规则只有一条时,不能设定0天收取0%; */
 func (r *HotelRoomAddRequest) SetRefundPolicyInfo(value string) {
 	r.SetValue("refund_policy_info", value)
@@ -817,20 +900,20 @@ func (r *HotelRoomAddRequest) SetRid(value string) {
 	r.SetValue("rid", value)
 }
 
-/* 房态信息。可以传今天开始90天内的房态信息。日期必须连续。JSON格式传递。
-date：代表房态日期，格式为YYYY-MM-DD，
-price：代表当天房价，0～99999999，存储的单位是分，
-num：代表当天可售间数，0～999。
-如：
+/* 房态信息。可以传今天开始90天内的房态信息。日期必须连续。JSON格式传递。 
+date：代表房态日期，格式为YYYY-MM-DD， 
+price：代表当天房价，0～99999999，存储的单位是分， 
+num：代表当天可售间数，0～999。 
+如： 
 [{"date":2011-01-28,"price":10000, "num":10},{"date":2011-01-29,"price":12000,"num":10}] */
 func (r *HotelRoomAddRequest) SetRoomQuotas(value string) {
 	r.SetValue("room_quotas", value)
 }
 
-/* 设施服务。JSON格式。
-value值true有此服务，false没有。
-bar：吧台，catv：有线电视，ddd：国内长途电话，idd：国际长途电话，toilet：独立卫生间，pubtoliet：公共卫生间。
-如：
+/* 设施服务。JSON格式。 
+value值true有此服务，false没有。 
+bar：吧台，catv：有线电视，ddd：国内长途电话，idd：国际长途电话，toilet：独立卫生间，pubtoliet：公共卫生间。 
+如： 
 {"bar":false,"catv":false,"ddd":false,"idd":false,"pubtoilet":false,"toilet":false} */
 func (r *HotelRoomAddRequest) SetService(value string) {
 	r.SetValue("service", value)
@@ -856,6 +939,7 @@ func (r *HotelRoomAddRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
+
 func (r *HotelRoomAddRequest) GetResponse(accessToken string) (*HotelRoomAddResponse, []byte, error) {
 	var resp HotelRoomAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.room.add", &resp)
@@ -873,10 +957,15 @@ type HotelRoomAddResponseResult struct {
 	Response *HotelRoomAddResponse `json:"hotel_room_add_response"`
 }
 
+
+
+
+
 /* 此接口用于查询一个商品，根据传入的gid查询商品信息。卖家只能查询自己的商品。 */
 type HotelRoomGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店房间商品gid。必须为数字。gid和item_id至少要传一个。 */
 func (r *HotelRoomGetRequest) SetGid(value string) {
@@ -908,6 +997,7 @@ func (r *HotelRoomGetRequest) SetNeedRoomType(value string) {
 	r.SetValue("need_room_type", value)
 }
 
+
 func (r *HotelRoomGetRequest) GetResponse(accessToken string) (*HotelRoomGetResponse, []byte, error) {
 	var resp HotelRoomGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.room.get", &resp)
@@ -925,22 +1015,28 @@ type HotelRoomGetResponseResult struct {
 	Response *HotelRoomGetResponse `json:"hotel_room_get_response"`
 }
 
+
+
+
+
 /* 此接口用于为商品删除商品图片。 */
 type HotelRoomImgDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店房间商品gid。必须为数字。 */
 func (r *HotelRoomImgDeleteRequest) SetGid(value string) {
 	r.SetValue("gid", value)
 }
 
-/* 图片序号，可选值：1，2，3，4，5。
-如果原图片个数小于等于1，则报错，不能删除图片。
+/* 图片序号，可选值：1，2，3，4，5。 
+如果原图片个数小于等于1，则报错，不能删除图片。 
 如果原图片个数小于待删除的图片序号，则报错，图片序号错误。 */
 func (r *HotelRoomImgDeleteRequest) SetPosition(value string) {
 	r.SetValue("position", value)
 }
+
 
 func (r *HotelRoomImgDeleteRequest) GetResponse(accessToken string) (*HotelRoomImgDeleteResponse, []byte, error) {
 	var resp HotelRoomImgDeleteResponseResult
@@ -959,18 +1055,23 @@ type HotelRoomImgDeleteResponseResult struct {
 	Response *HotelRoomImgDeleteResponse `json:"hotel_room_img_delete_response"`
 }
 
+
+
+
+
 /* 此接口用于为商品上传商品图片。 */
 type HotelRoomImgUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店房间商品gid。必须为数字。 */
 func (r *HotelRoomImgUploadRequest) SetGid(value string) {
 	r.SetValue("gid", value)
 }
 
-/* 酒店商品图片。类型:JPG,GIF;最大长度:500K。支持的文件类型：gif,jpg,jpeg,png。
-如果原图片少于5张，若没传序号或序号大于原图片个数，则在原图片最后添加，否则按序号插入到原图片中去，自动后移。
+/* 酒店商品图片。类型:JPG,GIF;最大长度:500K。支持的文件类型：gif,jpg,jpeg,png。 
+如果原图片少于5张，若没传序号或序号大于原图片个数，则在原图片最后添加，否则按序号插入到原图片中去，自动后移。 
 如果原图片大于5张，若没传序号，则替换最后一张图片，否则在序号位置插入，图片向后移，最后一张被删除。 */
 func (r *HotelRoomImgUploadRequest) SetPic(value string) {
 	r.SetValue("pic", value)
@@ -980,6 +1081,7 @@ func (r *HotelRoomImgUploadRequest) SetPic(value string) {
 func (r *HotelRoomImgUploadRequest) SetPosition(value string) {
 	r.SetValue("position", value)
 }
+
 
 func (r *HotelRoomImgUploadRequest) GetResponse(accessToken string) (*HotelRoomImgUploadResponse, []byte, error) {
 	var resp HotelRoomImgUploadResponseResult
@@ -998,10 +1100,15 @@ type HotelRoomImgUploadResponseResult struct {
 	Response *HotelRoomImgUploadResponse `json:"hotel_room_img_upload_response"`
 }
 
-/* 接入方房态查询结果返回 */
+
+
+
+
+/* 接入方房态查询结果返回(该接口即将废除请勿使用) */
 type HotelRoomQuotasQueryFeedbackRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 选中日期范围内的最大可用房量 */
 func (r *HotelRoomQuotasQueryFeedbackRequest) SetAvaliableRoomCount(value string) {
@@ -1028,8 +1135,8 @@ func (r *HotelRoomQuotasQueryFeedbackRequest) SetMessageId(value string) {
 	r.SetValue("message_id", value)
 }
 
-/* 预订结果
-S:成功
+/* 预订结果  
+S:成功 
 F:失败 */
 func (r *HotelRoomQuotasQueryFeedbackRequest) SetResult(value string) {
 	r.SetValue("result", value)
@@ -1044,6 +1151,7 @@ func (r *HotelRoomQuotasQueryFeedbackRequest) SetRoomQuotas(value string) {
 func (r *HotelRoomQuotasQueryFeedbackRequest) SetTotalRoomPrice(value string) {
 	r.SetValue("total_room_price", value)
 }
+
 
 func (r *HotelRoomQuotasQueryFeedbackRequest) GetResponse(accessToken string) (*HotelRoomQuotasQueryFeedbackResponse, []byte, error) {
 	var resp HotelRoomQuotasQueryFeedbackResponseResult
@@ -1062,18 +1170,23 @@ type HotelRoomQuotasQueryFeedbackResponseResult struct {
 	Response *HotelRoomQuotasQueryFeedbackResponse `json:"hotel_room_quotas_query_feedback_response"`
 }
 
+
+
+
+
 /* 此接口用于更新一个集市酒店商品，根据传入的gid更新商品信息，该商品必须为对应的发布者才能执行更新操作。如果对应的商品在淘宝集市酒店系统中不存在，则会返回错误提示。 */
 type HotelRoomUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 面积。可选值：A,B,C,D。分别代表：
+
+/* 面积。可选值：A,B,C,D。分别代表： 
 A：15平米以下，B：16－30平米，C：31－50平米，D：50平米以上 */
 func (r *HotelRoomUpdateRequest) SetArea(value string) {
 	r.SetValue("area", value)
 }
 
-/* 宽带服务。A,B,C,D。分别代表：
+/* 宽带服务。A,B,C,D。分别代表： 
 A：无宽带，B：免费宽带，C：收费宽带，D：部分收费宽带 */
 func (r *HotelRoomUpdateRequest) SetBbn(value string) {
 	r.SetValue("bbn", value)
@@ -1084,7 +1197,7 @@ func (r *HotelRoomUpdateRequest) SetBedType(value string) {
 	r.SetValue("bed_type", value)
 }
 
-/* 早餐。A,B,C,D,E。分别代表：
+/* 早餐。A,B,C,D,E。分别代表： 
 A：无早，B：单早，C：双早，D：三早，E：多早 */
 func (r *HotelRoomUpdateRequest) SetBreakfast(value string) {
 	r.SetValue("breakfast", value)
@@ -1125,13 +1238,13 @@ func (r *HotelRoomUpdateRequest) SetMultiRoomQuotas(value string) {
 	r.SetValue("multi_room_quotas", value)
 }
 
-/* 支付类型。可选值：A,B,C,D,E。分别代表：
+/* 支付类型。可选值：A,B,C,D,E。分别代表： 
 A：全额支付，B：手续费，C：订金，D：手续费/间夜，E：前台面付 */
 func (r *HotelRoomUpdateRequest) SetPaymentType(value string) {
 	r.SetValue("payment_type", value)
 }
 
-/* 酒店商品图片。类型:JPG,GIF;最大长度:500K。支持的文件类型：gif,jpg,jpeg,png。更新的时候只能更新一张图片，此图片覆盖原有所有图片。如果不传则使用原有所有图片。
+/* 酒店商品图片。类型:JPG,GIF;最大长度:500K。支持的文件类型：gif,jpg,jpeg,png。更新的时候只能更新一张图片，此图片覆盖原有所有图片。如果不传则使用原有所有图片。 
 如需再发图片，需要调用商品图片上传接口，1个商品最多5张图片。 */
 func (r *HotelRoomUpdateRequest) SetPic(value string) {
 	r.SetValue("pic", value)
@@ -1167,20 +1280,20 @@ func (r *HotelRoomUpdateRequest) SetRefundPolicyInfo(value string) {
 	r.SetValue("refund_policy_info", value)
 }
 
-/* 房态信息。可以传今天开始90天内的房态信息。日期必须连续。JSON格式传递。
-date：代表房态日期，格式为YYYY-MM-DD，
-price：代表当天房价，0～99999999，存储的单位是分,
-num：代表当天可售间数，0～999。
-如：
+/* 房态信息。可以传今天开始90天内的房态信息。日期必须连续。JSON格式传递。 
+date：代表房态日期，格式为YYYY-MM-DD， 
+price：代表当天房价，0～99999999，存储的单位是分, 
+num：代表当天可售间数，0～999。 
+如： 
 [{"date":2011-01-28,"price":10000, "num":10},{"date":2011-01-29,"price":12000,"num":10}] */
 func (r *HotelRoomUpdateRequest) SetRoomQuotas(value string) {
 	r.SetValue("room_quotas", value)
 }
 
-/* 设施服务。JSON格式。
-value值true有此服务，false没有。
-bar：吧台，catv：有线电视，ddd：国内长途电话，idd：国际长途电话，toilet：独立卫生间，pubtoliet：公共卫生间。
-如：
+/* 设施服务。JSON格式。 
+value值true有此服务，false没有。 
+bar：吧台，catv：有线电视，ddd：国内长途电话，idd：国际长途电话，toilet：独立卫生间，pubtoliet：公共卫生间。 
+如： 
 {"bar":false,"catv":false,"ddd":false,"idd":false,"pubtoilet":false,"toilet":false} */
 func (r *HotelRoomUpdateRequest) SetService(value string) {
 	r.SetValue("service", value)
@@ -1211,6 +1324,7 @@ func (r *HotelRoomUpdateRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
+
 func (r *HotelRoomUpdateRequest) GetResponse(accessToken string) (*HotelRoomUpdateResponse, []byte, error) {
 	var resp HotelRoomUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.room.update", &resp)
@@ -1228,10 +1342,15 @@ type HotelRoomUpdateResponseResult struct {
 	Response *HotelRoomUpdateResponse `json:"hotel_room_update_response"`
 }
 
+
+
+
+
 /* 此接口用于查询多个酒店商品，根据传入的参数查询商品信息。卖家只能查询自己的商品。 */
 type HotelRoomsSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店房间商品gid列表，多个gid用英文逗号隔开，一次不超过20个。gids，item_ids , hids，rids四项必须传一项，同时传递的情况下，作为查询条件的优先级由高到低依次为gids，item_ids , hids，rids。 */
 func (r *HotelRoomsSearchRequest) SetGids(value string) {
@@ -1278,6 +1397,7 @@ func (r *HotelRoomsSearchRequest) SetRids(value string) {
 	r.SetValue("rids", value)
 }
 
+
 func (r *HotelRoomsSearchRequest) GetResponse(accessToken string) (*HotelRoomsSearchResponse, []byte, error) {
 	var resp HotelRoomsSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.rooms.search", &resp)
@@ -1288,30 +1408,36 @@ func (r *HotelRoomsSearchRequest) GetResponse(accessToken string) (*HotelRoomsSe
 }
 
 type HotelRoomsSearchResponse struct {
-	Rooms        []*Room `json:"rooms"`
-	TotalResults int     `json:"total_results"`
+	Rooms *RoomListObject `json:"rooms"`
+	TotalResults int `json:"total_results"`
 }
 
 type HotelRoomsSearchResponseResult struct {
 	Response *HotelRoomsSearchResponse `json:"hotel_rooms_search_response"`
 }
 
+
+
+
+
 /* 此接口用于更新多个集市酒店商品房态信息，根据传入的gids更新商品信息，该商品必须为对应的发布者才能执行更新操作。如果对应的商品在淘宝集市酒店系统中不存在，则会返回错误提示。是全量更新，非增量，会把之前的房态进行覆盖。 */
 type HotelRoomsUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 多商品房态信息。json encode。每个商品房态参考单商品更新中的room_quota字段。反序列化后入：array(( 'gid'=>1, 'roomQuota'=>array(('date'=>'2011-01-29', 'price'=>100, 'num'=>1),('date'=>'2011-01-30', 'price'=>100, 'num'=>1)),( 'gid'=>2, 'roomQuota'=>array(('date'=>'2011-01-29', 'price'=>100, 'num'=>1),('date'=>'2011-01-30', 'price'=>100, 'num'=>1))) */
 func (r *HotelRoomsUpdateRequest) SetGidRoomQuotaMap(value string) {
 	r.SetValue("gid_room_quota_map", value)
 }
 
-/* 为到店支付卖家特殊使用，可传入多种支付类型的房态信息。
-该参数有值时，忽略gid_room_quota_map参数；
+/* 为到店支付卖家特殊使用，可传入多种支付类型的房态信息。 
+该参数有值时，忽略gid_room_quota_map参数； 
 该参数无值时，使用gid_room_quota_map参数 */
 func (r *HotelRoomsUpdateRequest) SetMultiRoomQuotas(value string) {
 	r.SetValue("multi_room_quotas", value)
 }
+
 
 func (r *HotelRoomsUpdateRequest) GetResponse(accessToken string) (*HotelRoomsUpdateResponse, []byte, error) {
 	var resp HotelRoomsUpdateResponseResult
@@ -1330,12 +1456,17 @@ type HotelRoomsUpdateResponseResult struct {
 	Response *HotelRoomsUpdateResponse `json:"hotel_rooms_update_response"`
 }
 
-/* 1. 此接口用于查询该会话用户作为酒店发布者发布的酒店被审核通过的增量酒店信息。
-2. 查询提交的起始时间至今的增量酒店记录：start_modified：2011-7-1 16:00:00
+
+
+
+
+/* 1. 此接口用于查询该会话用户作为酒店发布者发布的酒店被审核通过的增量酒店信息。 
+2. 查询提交的起始时间至今的增量酒店记录：start_modified：2011-7-1 16:00:00 
 3. 返回数据结果为发布酒店时间的正序排列 */
 type HotelSoldHotelsIncrementGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 【不推荐使用，现在总是返回从修改开始时间到目前为止的所有记录，与修改结束时间不再相关】查询修改结束时间，必须大于修改开始时间（修改时间跨度不能大于1天）。格式：yyyy-MM-dd HH:mm:ss。 */
 func (r *HotelSoldHotelsIncrementGetRequest) SetEndModified(value string) {
@@ -1362,6 +1493,7 @@ func (r *HotelSoldHotelsIncrementGetRequest) SetUseHasNext(value string) {
 	r.SetValue("use_has_next", value)
 }
 
+
 func (r *HotelSoldHotelsIncrementGetRequest) GetResponse(accessToken string) (*HotelSoldHotelsIncrementGetResponse, []byte, error) {
 	var resp HotelSoldHotelsIncrementGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.sold.hotels.increment.get", &resp)
@@ -1372,21 +1504,26 @@ func (r *HotelSoldHotelsIncrementGetRequest) GetResponse(accessToken string) (*H
 }
 
 type HotelSoldHotelsIncrementGetResponse struct {
-	HasNext      bool     `json:"has_next"`
-	Hotels       []*Hotel `json:"hotels"`
-	TotalResults int      `json:"total_results"`
+	HasNext bool `json:"has_next"`
+	Hotels *HotelListObject `json:"hotels"`
+	TotalResults int `json:"total_results"`
 }
 
 type HotelSoldHotelsIncrementGetResponseResult struct {
 	Response *HotelSoldHotelsIncrementGetResponse `json:"hotel_sold_hotels_increment_get_response"`
 }
 
-/* 1. 搜索当前会话用户作为卖家已卖出的增量交易数据
-2. 只能查询时间跨度为一天的增量交易记录：start_modified：2011-7-1 16:00:00 end_modified： 2011-7-2 15:59:59（注意不能写成16:00:00）
+
+
+
+
+/* 1. 搜索当前会话用户作为卖家已卖出的增量交易数据  
+2. 只能查询时间跨度为一天的增量交易记录：start_modified：2011-7-1 16:00:00 end_modified： 2011-7-2 15:59:59（注意不能写成16:00:00）  
 3. 返回数据结果为创建订单时间的倒序 */
 type HotelSoldOrdersIncrementGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 查询修改结束时间，必须大于修改开始时间（修改时间跨度不能大于1天）。格式：yyyy-MM-dd HH:mm:ss。 */
 func (r *HotelSoldOrdersIncrementGetRequest) SetEndModified(value string) {
@@ -1428,6 +1565,7 @@ func (r *HotelSoldOrdersIncrementGetRequest) SetUseHasNext(value string) {
 	r.SetValue("use_has_next", value)
 }
 
+
 func (r *HotelSoldOrdersIncrementGetRequest) GetResponse(accessToken string) (*HotelSoldOrdersIncrementGetResponse, []byte, error) {
 	var resp HotelSoldOrdersIncrementGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.sold.orders.increment.get", &resp)
@@ -1438,21 +1576,26 @@ func (r *HotelSoldOrdersIncrementGetRequest) GetResponse(accessToken string) (*H
 }
 
 type HotelSoldOrdersIncrementGetResponse struct {
-	HasNext      bool          `json:"has_next"`
-	HotelOrders  []*HotelOrder `json:"hotel_orders"`
-	TotalResults int           `json:"total_results"`
+	HasNext bool `json:"has_next"`
+	HotelOrders *HotelOrderListObject `json:"hotel_orders"`
+	TotalResults int `json:"total_results"`
 }
 
 type HotelSoldOrdersIncrementGetResponseResult struct {
 	Response *HotelSoldOrdersIncrementGetResponse `json:"hotel_sold_orders_increment_get_response"`
 }
 
-/* 1. 此接口用于查询该会话用户作为房型发布者发布的房型的审核情况。
-2. 查询提交的起始时间至今的增量房型记录：start_modified：2011-7-1 16:00:00
+
+
+
+
+/* 1. 此接口用于查询该会话用户作为房型发布者发布的房型的审核情况。 
+2. 查询提交的起始时间至今的增量房型记录：start_modified：2011-7-1 16:00:00 
 3. 返回数据结果为发布房型时间正序排列 */
 type HotelSoldTypesIncrementGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 【不推荐使用，现在总是返回从修改开始时间到目前为止的所有记录，与修改结束时间不再相关】查询修改结束时间，必须大于修改开始时间（修改时间跨度不能大于1天）。格式：yyyy-MM-dd HH:mm:ss。 */
 func (r *HotelSoldTypesIncrementGetRequest) SetEndModified(value string) {
@@ -1479,6 +1622,7 @@ func (r *HotelSoldTypesIncrementGetRequest) SetUseHasNext(value string) {
 	r.SetValue("use_has_next", value)
 }
 
+
 func (r *HotelSoldTypesIncrementGetRequest) GetResponse(accessToken string) (*HotelSoldTypesIncrementGetResponse, []byte, error) {
 	var resp HotelSoldTypesIncrementGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.hotel.sold.types.increment.get", &resp)
@@ -1489,20 +1633,25 @@ func (r *HotelSoldTypesIncrementGetRequest) GetResponse(accessToken string) (*Ho
 }
 
 type HotelSoldTypesIncrementGetResponse struct {
-	HasNext      bool        `json:"has_next"`
-	RoomTypes    []*RoomType `json:"room_types"`
-	TotalResults int         `json:"total_results"`
+	HasNext bool `json:"has_next"`
+	RoomTypes *RoomTypeListObject `json:"room_types"`
+	TotalResults int `json:"total_results"`
 }
 
 type HotelSoldTypesIncrementGetResponseResult struct {
 	Response *HotelSoldTypesIncrementGetResponse `json:"hotel_sold_types_increment_get_response"`
 }
 
-/* 此接口用于发布一个房型，房型的发布者是当前会话的用户。如果该房型在淘宝集市酒店下已经存在，则会返回错误提示。
+
+
+
+
+/* 此接口用于发布一个房型，房型的发布者是当前会话的用户。如果该房型在淘宝集市酒店下已经存在，则会返回错误提示。 
 该接口发布的是一个新增房型申请，需要淘宝小二审核 */
 type HotelTypeAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店id。必须为数字 */
 func (r *HotelTypeAddRequest) SetHid(value string) {
@@ -1518,6 +1667,7 @@ func (r *HotelTypeAddRequest) SetName(value string) {
 func (r *HotelTypeAddRequest) SetSiteParam(value string) {
 	r.SetValue("site_param", value)
 }
+
 
 func (r *HotelTypeAddRequest) GetResponse(accessToken string) (*HotelTypeAddResponse, []byte, error) {
 	var resp HotelTypeAddResponseResult
@@ -1536,10 +1686,15 @@ type HotelTypeAddResponseResult struct {
 	Response *HotelTypeAddResponse `json:"hotel_type_add_response"`
 }
 
+
+
+
+
 /* 此接口用于查询一个房型，根据传入的酒店hid，房型名称/别名查询房型信息。 */
 type HotelTypeNameGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 要查询的酒店id。必须为数字 */
 func (r *HotelTypeNameGetRequest) SetHid(value string) {
@@ -1550,6 +1705,7 @@ func (r *HotelTypeNameGetRequest) SetHid(value string) {
 func (r *HotelTypeNameGetRequest) SetName(value string) {
 	r.SetValue("name", value)
 }
+
 
 func (r *HotelTypeNameGetRequest) GetResponse(accessToken string) (*HotelTypeNameGetResponse, []byte, error) {
 	var resp HotelTypeNameGetResponseResult
@@ -1568,11 +1724,16 @@ type HotelTypeNameGetResponseResult struct {
 	Response *HotelTypeNameGetResponse `json:"hotel_type_name_get_response"`
 }
 
-/* 此接口用于更新一个酒店的信息，根据用户传入的hid更新酒店数据。如果该酒店在淘宝集市酒店不存在，则会返回错误提示。
+
+
+
+
+/* 此接口用于更新一个酒店的信息，根据用户传入的hid更新酒店数据。如果该酒店在淘宝集市酒店不存在，则会返回错误提示。 
 该接口发出的是一个更新酒店信息的申请，需要淘宝小二审核。 */
 type HotelUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 酒店地址。长度不能超过120 */
 func (r *HotelUpdateRequest) SetAddress(value string) {
@@ -1584,7 +1745,7 @@ func (r *HotelUpdateRequest) SetCity(value string) {
 	r.SetValue("city", value)
 }
 
-/* domestic为true时，固定China；
+/* domestic为true时，固定China； 
 domestic为false时，传海外国家编码。参见：http://kezhan.trip.taobao.com/countrys.html */
 func (r *HotelUpdateRequest) SetCountry(value string) {
 	r.SetValue("country", value)
@@ -1635,7 +1796,7 @@ func (r *HotelUpdateRequest) SetOrientation(value string) {
 	r.SetValue("orientation", value)
 }
 
-/* 酒店图片。类型:JPG,GIF;最大长度:500K。支持的文件类型：gif,jpg,jpeg,png。
+/* 酒店图片。类型:JPG,GIF;最大长度:500K。支持的文件类型：gif,jpg,jpeg,png。 
 图片没有传，则代表不更新图片，使用原来的图片 */
 func (r *HotelUpdateRequest) SetPic(value string) {
 	r.SetValue("pic", value)
@@ -1651,10 +1812,10 @@ func (r *HotelUpdateRequest) SetRooms(value string) {
 	r.SetValue("rooms", value)
 }
 
-/* 交通距离与设施服务。JSON格式。cityCenterDistance、railwayDistance、airportDistance分别代表距离市中心、距离火车站、距离机场公里数，为不超过3位正整数，默认-1代表无数据。
-其他key值true代表有此服务，false代表没有。
-parking：停车场，airportShuttle：机场接送，rentCar：租车，meetingRoom：会议室，businessCenter：商务中心，swimmingPool：游泳池，fitnessClub：健身中心，laundry：洗衣服务，morningCall：叫早服务，bankCard：接受银行卡，creditCard：接受信用卡，chineseRestaurant：中餐厅，westernRestaurant：西餐厅，cafe：咖啡厅，bar：酒吧，ktv：KTV。
-如：
+/* 交通距离与设施服务。JSON格式。cityCenterDistance、railwayDistance、airportDistance分别代表距离市中心、距离火车站、距离机场公里数，为不超过3位正整数，默认-1代表无数据。 
+其他key值true代表有此服务，false代表没有。 
+parking：停车场，airportShuttle：机场接送，rentCar：租车，meetingRoom：会议室，businessCenter：商务中心，swimmingPool：游泳池，fitnessClub：健身中心，laundry：洗衣服务，morningCall：叫早服务，bankCard：接受银行卡，creditCard：接受信用卡，chineseRestaurant：中餐厅，westernRestaurant：西餐厅，cafe：咖啡厅，bar：酒吧，ktv：KTV。 
+如： 
 {"airportShuttle":true,"parking":false,"fitnessClub":false,"chineseRestaurant":false,"rentCar":false,"laundry":false,"bankCard":false,"cityCenterDistance":-1,"creditCard":false,"westernRestaurant":false,"ktv":false,"railwayDistance":-1,"swimmingPool":false,"cafe":false,"businessCenter":false,"morningCall":false,"bar":false,"meetingRoom":false,"airportDistance":-1} */
 func (r *HotelUpdateRequest) SetService(value string) {
 	r.SetValue("service", value)
@@ -1669,6 +1830,7 @@ func (r *HotelUpdateRequest) SetStoreys(value string) {
 func (r *HotelUpdateRequest) SetTel(value string) {
 	r.SetValue("tel", value)
 }
+
 
 func (r *HotelUpdateRequest) GetResponse(accessToken string) (*HotelUpdateResponse, []byte, error) {
 	var resp HotelUpdateResponseResult
@@ -1687,24 +1849,29 @@ type HotelUpdateResponseResult struct {
 	Response *HotelUpdateResponse `json:"hotel_update_response"`
 }
 
+
+
+
+
 /* 此接口用于查询多个酒店，根据传入的参数查询酒店信息。 */
 type HotelsSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 城市编码。参见：http://kezhan.trip.taobao.com/area.html。
+
+/* 城市编码。参见：http://kezhan.trip.taobao.com/area.html。 
 domestic为true时，province,city,district不能同时为空或为0 */
 func (r *HotelsSearchRequest) SetCity(value string) {
 	r.SetValue("city", value)
 }
 
-/* domestic为true时，固定China；
+/* domestic为true时，固定China； 
 domestic为false时，必须传定义的海外国家编码值，是必填项。参见：http://kezhan.trip.taobao.com/countrys.html */
 func (r *HotelsSearchRequest) SetCountry(value string) {
 	r.SetValue("country", value)
 }
 
-/* 区域（县级市）编码。参见：http://kezhan.trip.taobao.com/area.html。
+/* 区域（县级市）编码。参见：http://kezhan.trip.taobao.com/area.html。 
 domestic为true时，province,city,district不能同时为空或为0 */
 func (r *HotelsSearchRequest) SetDistrict(value string) {
 	r.SetValue("district", value)
@@ -1725,11 +1892,12 @@ func (r *HotelsSearchRequest) SetPageNo(value string) {
 	r.SetValue("page_no", value)
 }
 
-/* 省份编码。参见：http://kezhan.trip.taobao.com/area.html。
+/* 省份编码。参见：http://kezhan.trip.taobao.com/area.html。 
 domestic为true时，province,city,district不能同时为空或为0 */
 func (r *HotelsSearchRequest) SetProvince(value string) {
 	r.SetValue("province", value)
 }
+
 
 func (r *HotelsSearchRequest) GetResponse(accessToken string) (*HotelsSearchResponse, []byte, error) {
 	var resp HotelsSearchResponseResult
@@ -1741,10 +1909,13 @@ func (r *HotelsSearchRequest) GetResponse(accessToken string) (*HotelsSearchResp
 }
 
 type HotelsSearchResponse struct {
-	Hotels       []*Hotel `json:"hotels"`
-	TotalResults int      `json:"total_results"`
+	Hotels *HotelListObject `json:"hotels"`
+	TotalResults int `json:"total_results"`
 }
 
 type HotelsSearchResponseResult struct {
 	Response *HotelsSearchResponse `json:"hotels_search_response"`
 }
+
+
+

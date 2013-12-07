@@ -3,6 +3,6 @@
 // license that can be found in the LICENSE file.
 
 // 天猫逆向流程API
-// auto sdk from taobao ApiMetadata.xml version 20130808
+// auto sdk from taobao ApiMetadata.xml version 20131207
 // auther: dz7changkong@qq.com
 package eai

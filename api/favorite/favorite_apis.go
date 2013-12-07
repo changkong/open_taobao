@@ -5,13 +5,18 @@
 package favorite
 
 import (
-	"github.com/changkong/open_taobao"
+	"github.com/yaofangou/open_taobao"
 )
+
+
+
+
 
 /* 添加商品或店铺到收藏夹 */
 type FavoriteAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* ITEM表示宝贝，SHOP表示店铺，只能传入这两者之一 */
 func (r *FavoriteAddRequest) SetCollectType(value string) {
@@ -27,6 +32,7 @@ func (r *FavoriteAddRequest) SetItemNumid(value string) {
 func (r *FavoriteAddRequest) SetShared(value string) {
 	r.SetValue("shared", value)
 }
+
 
 func (r *FavoriteAddRequest) GetResponse(accessToken string) (*FavoriteAddResponse, []byte, error) {
 	var resp FavoriteAddResponseResult
@@ -45,10 +51,15 @@ type FavoriteAddResponseResult struct {
 	Response *FavoriteAddResponse `json:"favorite_add_response"`
 }
 
+
+
+
+
 /* 查询淘宝用户收藏的商品或店铺信息 */
 type FavoriteSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* ITEM表示宝贝，SHOP表示商铺，collect_type只能为这两者之一 */
 func (r *FavoriteSearchRequest) SetCollectType(value string) {
@@ -60,6 +71,7 @@ func (r *FavoriteSearchRequest) SetPageNo(value string) {
 	r.SetValue("page_no", value)
 }
 
+
 func (r *FavoriteSearchRequest) GetResponse(accessToken string) (*FavoriteSearchResponse, []byte, error) {
 	var resp FavoriteSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.favorite.search", &resp)
@@ -70,10 +82,13 @@ func (r *FavoriteSearchRequest) GetResponse(accessToken string) (*FavoriteSearch
 }
 
 type FavoriteSearchResponse struct {
-	CollectItems []*CollectItem `json:"collect_items"`
-	TotalResults int            `json:"total_results"`
+	CollectItems *CollectItemListObject `json:"collect_items"`
+	TotalResults int `json:"total_results"`
 }
 
 type FavoriteSearchResponseResult struct {
 	Response *FavoriteSearchResponse `json:"favorite_search_response"`
 }
+
+
+

@@ -5,13 +5,19 @@
 package product
 
 import (
-	"github.com/changkong/open_taobao"
+	"github.com/yaofangou/open_taobao"
 )
+
+
+
+
 
 /* 查询用户设置的售后服务模板，仅返回标题和id */
 type AftersaleGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *AftersaleGetRequest) GetResponse(accessToken string) (*AftersaleGetResponse, []byte, error) {
 	var resp AftersaleGetResponseResult
@@ -23,22 +29,27 @@ func (r *AftersaleGetRequest) GetResponse(accessToken string) (*AftersaleGetResp
 }
 
 type AftersaleGetResponse struct {
-	AfterSales []*AfterSale `json:"after_sales"`
+	AfterSales *AfterSaleListObject `json:"after_sales"`
 }
 
 type AftersaleGetResponseResult struct {
 	Response *AftersaleGetResponse `json:"aftersale_get_response"`
 }
 
-/* 此接口用于新增一个商品
-商品所属的卖家是当前会话的用户
-商品的属性和sku的属性有包含的关系，商品的价格要位于sku的价格区间之中（例如，sku价格有5元、10元两种，那么商品的价格就需要大于等于5元，小于等于10元，否则新增商品会失败）
-商品的类目和商品的价格、sku的价格都有一定的相关性（具体的关系要通过类目属性查询接口获得）
-商品的运费承担方式和邮费设置有相关性，卖家承担运费不用设置邮费，买家承担运费需要设置邮费
+
+
+
+
+/* 此接口用于新增一个商品  
+商品所属的卖家是当前会话的用户  
+商品的属性和sku的属性有包含的关系，商品的价格要位于sku的价格区间之中（例如，sku价格有5元、10元两种，那么商品的价格就需要大于等于5元，小于等于10元，否则新增商品会失败）  
+商品的类目和商品的价格、sku的价格都有一定的相关性（具体的关系要通过类目属性查询接口获得）  
+商品的运费承担方式和邮费设置有相关性，卖家承担运费不用设置邮费，买家承担运费需要设置邮费  
 当关键属性值选择了“其他”的时候，需要输入input_pids和input_str商品才能添加成功。 */
 type ItemAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 售后说明模板id */
 func (r *ItemAddRequest) SetAfterSaleId(value string) {
@@ -55,9 +66,9 @@ func (r *ItemAddRequest) SetAuctionPoint(value string) {
 	r.SetValue("auction_point", value)
 }
 
-/* 代充商品类型。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：
-no_mark(不做类型标记)
-time_card(点卡软件代充)
+/* 代充商品类型。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型： 
+no_mark(不做类型标记) 
+time_card(点卡软件代充) 
 fee_card(话费软件代充) */
 func (r *ItemAddRequest) SetAutoFill(value string) {
 	r.SetValue("auto_fill", value)
@@ -97,7 +108,7 @@ func (r *ItemAddRequest) SetDesc(value string) {
 	r.SetValue("desc", value)
 }
 
-/* 商品描述模块化，模块列表，由List<ItemDescModule>转化成jsonArray存入，后端逻辑验证通过，拼装成模块内容+锚点导航后存入desc中。数据结构具体参见Item_Desc_Module */
+/* 商品描述模块化，模块列表，具体数据结构参见Item_Desc_Module。详细的使用方法可参考下面FAQ中说明。 */
 func (r *ItemAddRequest) SetDescModules(value string) {
 	r.SetValue("desc_modules", value)
 }
@@ -187,17 +198,20 @@ func (r *ItemAddRequest) SetFoodSecuritySupplier(value string) {
 	r.SetValue("food_security.supplier", value)
 }
 
-/* 运费承担方式。可选值:seller（卖家承担）,buyer(买家承担);默认值:seller。卖家承担不用设置邮费和postage_id.买家承担的时候，必填邮费和postage_id
+/* 运费承担方式。可选值:seller（卖家承担）,buyer(买家承担);默认值:seller。卖家承担不用设置邮费和postage_id.买家承担的时候，必填邮费和postage_id  
 如果用户设置了运费模板会优先使用运费模板，否则要同步设置邮费（post_fee,express_fee,ems_fee） */
 func (r *ItemAddRequest) SetFreightPayer(value string) {
 	r.SetValue("freight_payer", value)
 }
 
-/* 针对全球购卖家的库存类型业务，
-有两种库存类型：现货和代购
-参数值为1时代表现货，值为2时代表代购
-如果传值为这两个值之外的值，会报错;
-如果不是全球购卖家，这两个值即使设置也不会处理 */
+/* 全球购商品采购地（地区/国家）,默认值只在全球购商品采购地（库存类型选择情况生效），地区国家值为（美国, 香港, 日本, 英国, 新西兰, 德国, 韩国, 荷兰, 澳洲, 法国, 意大利, 台湾, 澳门, 加拿大, 瑞士, 西班牙, 泰国, 新加坡, 马来西亚, 菲律宾, 其他） */
+func (r *ItemAddRequest) SetGlobalStockCountry(value string) {
+	r.SetValue("global_stock_country", value)
+}
+
+/* 全球购商品采购地（库存类型）， 
+有两种库存类型：现货和代购 
+参数值为1时代表现货，值为2时代表代购。注意：使用时请与 全球购商品采购地（地区/国家）配合使用 */
 func (r *ItemAddRequest) SetGlobalStockType(value string) {
 	r.SetValue("global_stock_type", value)
 }
@@ -267,15 +281,15 @@ func (r *ItemAddRequest) SetIsXinpin(value string) {
 	r.SetValue("is_xinpin", value)
 }
 
-/* 表示商品的体积，如果需要使用按体积计费的运费模板，一定要设置这个值。该值的单位为立方米（m3），如果是其他单位，请转换成成立方米。
-该值支持两种格式的设置：格式1：bulk:3,单位为立方米(m3),表示直接设置为商品的体积。格式2：length:10;breadth:10;height:10，单位为米（m）。体积和长宽高都支持小数类型。
-在传入体积或长宽高时候，不能带单位。体积的单位默认为立方米（m3），长宽高的单位默认为米(m)
+/* 表示商品的体积，如果需要使用按体积计费的运费模板，一定要设置这个值。该值的单位为立方米（m3），如果是其他单位，请转换成成立方米。 
+该值支持两种格式的设置：格式1：bulk:3,单位为立方米(m3),表示直接设置为商品的体积。格式2：length:10;breadth:10;height:10，单位为米（m）。体积和长宽高都支持小数类型。 
+在传入体积或长宽高时候，不能带单位。体积的单位默认为立方米（m3），长宽高的单位默认为米(m) 
 该值支持两种格式的设置：格式1：bulk:3,单位为立方米(m3),表示直接设置为商品的体积。格式2：length:10;breadth:10;height:10，单位为米（m） */
 func (r *ItemAddRequest) SetItemSize(value string) {
 	r.SetValue("item_size", value)
 }
 
-/* 商品的重量，用于按重量计费的运费模板。注意：单位为kg。
+/* 商品的重量，用于按重量计费的运费模板。注意：单位为kg。 
 只能传入数值类型（包含小数），不能带单位，单位默认为kg。 */
 func (r *ItemAddRequest) SetItemWeight(value string) {
 	r.SetValue("item_weight", value)
@@ -296,9 +310,9 @@ func (r *ItemAddRequest) SetLocalityLifeChooseLogis(value string) {
 	r.SetValue("locality_life.choose_logis", value)
 }
 
-/* 本地生活电子交易凭证业务，目前此字段只涉及到的信息为有效期;
-如果有效期为起止日期类型，此值为2012-08-06,2012-08-16
-如果有效期为【购买成功日 至】类型则格式为2012-08-16
+/* 本地生活电子交易凭证业务，目前此字段只涉及到的信息为有效期; 
+如果有效期为起止日期类型，此值为2012-08-06,2012-08-16 
+如果有效期为【购买成功日 至】类型则格式为2012-08-16 
 如果有效期为天数类型则格式为15 */
 func (r *ItemAddRequest) SetLocalityLifeExpirydate(value string) {
 	r.SetValue("locality_life.expirydate", value)
@@ -319,13 +333,18 @@ func (r *ItemAddRequest) SetLocalityLifeOnsaleAutoRefundRatio(value string) {
 	r.SetValue("locality_life.onsale_auto_refund_ratio", value)
 }
 
-/* 退款比例，
+/* 退款比例， 
 百分比%前的数字,1-100的正整数值 */
 func (r *ItemAddRequest) SetLocalityLifeRefundRatio(value string) {
 	r.SetValue("locality_life.refund_ratio", value)
 }
 
-/* 核销打款
+/* 退款码费承担方。发布电子凭证宝贝的时候会增加“退款码费承担方”配置项，可选填：(1)s（卖家承担） (2)b(买家承担) */
+func (r *ItemAddRequest) SetLocalityLifeRefundmafee(value string) {
+	r.SetValue("locality_life.refundmafee", value)
+}
+
+/* 核销打款  
 1代表核销打款 0代表非核销打款 */
 func (r *ItemAddRequest) SetLocalityLifeVerification(value string) {
 	r.SetValue("locality_life.verification", value)
@@ -341,7 +360,7 @@ func (r *ItemAddRequest) SetLocationState(value string) {
 	r.SetValue("location.state", value)
 }
 
-/* 商品数量，取值范围:0-999999的整数。且需要等于Sku所有数量的和。
+/* 商品数量，取值范围:0-900000000的整数。且需要等于Sku所有数量的和。 
 拍卖商品中增加拍只能为1，荷兰拍要在[2,500)范围内。 */
 func (r *ItemAddRequest) SetNum(value string) {
 	r.SetValue("num", value)
@@ -352,7 +371,7 @@ func (r *ItemAddRequest) SetOuterId(value string) {
 	r.SetValue("outer_id", value)
 }
 
-/* 拍卖宝贝的保证金。对于增价拍和荷兰拍来说保证金有两种模式：淘宝默认模式（首次出价金额的10%），自定义固定保证金（固定冻结金额只能输入不超过30万的正整数），并且保证金只冻结1次。对于降价拍来说保证金只有淘宝默认的（竞拍价格的10% * 竞拍数量），并且每次出价都需要冻结保证金。
+/* 拍卖宝贝的保证金。对于增价拍和荷兰拍来说保证金有两种模式：淘宝默认模式（首次出价金额的10%），自定义固定保证金（固定冻结金额只能输入不超过30万的正整数），并且保证金只冻结1次。对于降价拍来说保证金只有淘宝默认的（竞拍价格的10% * 竞拍数量），并且每次出价都需要冻结保证金。 
 对于拍卖宝贝来说，保证金是必须的，但是默认使用淘宝默认保证金模式，只有用户需要使用自定义固定保证金的时候才需要使用到这个参数，如果该参数不传或传入0则代表使用默认。 */
 func (r *ItemAddRequest) SetPaimaiInfoDeposit(value string) {
 	r.SetValue("paimai_info.deposit", value)
@@ -398,7 +417,7 @@ func (r *ItemAddRequest) SetPostageId(value string) {
 	r.SetValue("postage_id", value)
 }
 
-/* 商品价格。取值范围:0-100000000;精确到2位小数;单位:元。如:200.07，表示:200元7分。需要在正确的价格区间内。
+/* 商品价格。取值范围:0-100000000;精确到2位小数;单位:元。如:200.07，表示:200元7分。需要在正确的价格区间内。 
 拍卖商品对应的起拍价。 */
 func (r *ItemAddRequest) SetPrice(value string) {
 	r.SetValue("price", value)
@@ -429,7 +448,7 @@ func (r *ItemAddRequest) SetScenicTicketPayWay(value string) {
 	r.SetValue("scenic_ticket_pay_way", value)
 }
 
-/* 商品卖点信息，最长15个字符。仅天猫商家可用。 */
+/* 商品卖点信息，最长150个字符。仅天猫商家可用。 */
 func (r *ItemAddRequest) SetSellPoint(value string) {
 	r.SetValue("sell_point", value)
 }
@@ -444,7 +463,7 @@ func (r *ItemAddRequest) SetSellerCids(value string) {
 	r.SetValue("seller_cids", value)
 }
 
-/* Sku的外部id串，结构如：1234,1342,…
+/* Sku的外部id串，结构如：1234,1342,… 
 sku_properties, sku_quantities, sku_prices, sku_outer_ids在输入数据时要一一对应，如果没有sku_outer_ids也要写上这个参数，入参是","(这个是两个sku的示列，逗号数应该是sku个数减1)；该参数最大长度是512个字节 */
 func (r *ItemAddRequest) SetSkuOuterIds(value string) {
 	r.SetValue("sku_outer_ids", value)
@@ -455,7 +474,7 @@ func (r *ItemAddRequest) SetSkuPrices(value string) {
 	r.SetValue("sku_prices", value)
 }
 
-/* 更新的Sku的属性串，调用taobao.itemprops.get获取类目属性，如果属性是销售属性，再用taobao.itempropvalues.get取得vid。格式:pid:vid;pid:vid,多个sku之间用逗号分隔。该字段内的销售属性（自定义的除外）也需要在props字段填写。sku的销售属性需要一同选取，如:颜色，尺寸。如果新增商品包含了sku，则此字段一定要传入。这个字段的长度要控制在512个字节以内。
+/* 更新的Sku的属性串，调用taobao.itemprops.get获取类目属性，如果属性是销售属性，再用taobao.itempropvalues.get取得vid。格式:pid:vid;pid:vid,多个sku之间用逗号分隔。该字段内的销售属性（自定义的除外）也需要在props字段填写。sku的销售属性需要一同选取，如:颜色，尺寸。如果新增商品包含了sku，则此字段一定要传入。这个字段的长度要控制在512个字节以内。 
 如果有自定义销售属性，则格式为pid:vid;pid2:vid2;$pText:vText , 其中$pText:vText为自定义属性。限制：其中$pText的’$’前缀不能少，且pText和vText文本中不可以存在冒号:和分号;以及逗号， */
 func (r *ItemAddRequest) SetSkuProperties(value string) {
 	r.SetValue("sku_properties", value)
@@ -471,7 +490,7 @@ func (r *ItemAddRequest) SetSkuSpecIds(value string) {
 	r.SetValue("sku_spec_ids", value)
 }
 
-/* 新旧程度。可选值：new(新)，second(二手)，unused(闲置)。B商家不能发布二手商品。
+/* 新旧程度。可选值：new(新)，second(二手)，unused(闲置)。B商家不能发布二手商品。 
 如果是二手商品，特定类目下属性里面必填新旧成色属性 */
 func (r *ItemAddRequest) SetStuffStatus(value string) {
 	r.SetValue("stuff_status", value)
@@ -484,13 +503,13 @@ func (r *ItemAddRequest) SetSubStock(value string) {
 	r.SetValue("sub_stock", value)
 }
 
-/* 宝贝标题。不能超过60字符，受违禁词控制。天猫图书管控类目最大允许120字符； */
+/* 宝贝标题。不能超过30字符，受违禁词控制。天猫图书管控类目最大允许120字符； */
 func (r *ItemAddRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
 
-/* 发布类型。可选值:fixed(一口价),auction(拍卖)。B商家不能发布拍卖商品，而且拍卖商品是没有SKU的。
-拍卖商品发布时需要附加拍卖商品信息：拍卖类型(paimai_info.mode，拍卖类型包括三种：增价拍[1]，荷兰拍[2]以及降价拍[3])，商品数量(num)，起拍价(price)，价格幅度(increament)，保证金(paimai_info.deposit)。另外拍卖商品支持自定义销售周期，通过paimai_info.valid_hour和paimai_info.valid_minute来指定。对于降价拍来说需要设置降价周期(paimai_info.interval)和拍卖保留价(paimai_info.reserve)。
+/* 发布类型。可选值:fixed(一口价),auction(拍卖)。B商家不能发布拍卖商品，而且拍卖商品是没有SKU的。 
+拍卖商品发布时需要附加拍卖商品信息：拍卖类型(paimai_info.mode，拍卖类型包括三种：增价拍[1]，荷兰拍[2]以及降价拍[3])，商品数量(num)，起拍价(price)，价格幅度(increament)，保证金(paimai_info.deposit)。另外拍卖商品支持自定义销售周期，通过paimai_info.valid_hour和paimai_info.valid_minute来指定。对于降价拍来说需要设置降价周期(paimai_info.interval)和拍卖保留价(paimai_info.reserve)。 
 注意：通过taobao.item.get接口获取拍卖信息时，会返回除了valid_hour和valid_minute之外的所有拍卖信息。 */
 func (r *ItemAddRequest) SetType(value string) {
 	r.SetValue("type", value)
@@ -505,6 +524,7 @@ func (r *ItemAddRequest) SetValidThru(value string) {
 func (r *ItemAddRequest) SetWeight(value string) {
 	r.SetValue("weight", value)
 }
+
 
 func (r *ItemAddRequest) GetResponse(accessToken string) (*ItemAddResponse, []byte, error) {
 	var resp ItemAddResponseResult
@@ -523,10 +543,48 @@ type ItemAddResponseResult struct {
 	Response *ItemAddResponse `json:"item_add_response"`
 }
 
+
+
+
+
+/* 在新的发布模式下，isv需要先获取一份发布规则，然后根据规则传入数据。该接口提供规则查询功能 */
+type ItemAddRulesGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 发布宝贝的叶子类目id */
+func (r *ItemAddRulesGetRequest) SetCategoryId(value string) {
+	r.SetValue("category_id", value)
+}
+
+
+func (r *ItemAddRulesGetRequest) GetResponse(accessToken string) (*ItemAddRulesGetResponse, []byte, error) {
+	var resp ItemAddRulesGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.add.rules.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type ItemAddRulesGetResponse struct {
+	AddRules string `json:"add_rules"`
+}
+
+type ItemAddRulesGetResponseResult struct {
+	Response *ItemAddRulesGetResponse `json:"item_add_rules_get_response"`
+}
+
+
+
+
+
 /* 根据类目id和宝贝描述规范化打标类型获取该类目可用的宝贝描述模块中的锚点 */
 type ItemAnchorGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 对应类目编号 */
 func (r *ItemAnchorGetRequest) SetCatId(value string) {
@@ -538,6 +596,7 @@ func (r *ItemAnchorGetRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *ItemAnchorGetRequest) GetResponse(accessToken string) (*ItemAnchorGetResponse, []byte, error) {
 	var resp ItemAnchorGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.anchor.get", &resp)
@@ -548,18 +607,23 @@ func (r *ItemAnchorGetRequest) GetResponse(accessToken string) (*ItemAnchorGetRe
 }
 
 type ItemAnchorGetResponse struct {
-	AnchorModules []*IdsModule `json:"anchor_modules"`
-	TotalResults  int          `json:"total_results"`
+	AnchorModules *IdsModuleListObject `json:"anchor_modules"`
+	TotalResults int `json:"total_results"`
 }
 
 type ItemAnchorGetResponseResult struct {
 	Response *ItemAnchorGetResponse `json:"item_anchor_get_response"`
 }
 
+
+
+
+
 /* 淘宝助理提供的发布商城商品接口，在发布时 先查询是否有这个产品，有则将商品绑定到该产品上发布；如果没有这个产品，自动帮用户新建产品，再将商品绑定到该产品上发布。错误码参考taobao.product.add、taobao.product.img.upload、taobao.product.propimg.upload、taobao.item.add */
 type ItemBsellerAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 售后服务说明模板id */
 func (r *ItemBsellerAddRequest) SetAfterSaleId(value string) {
@@ -576,9 +640,9 @@ func (r *ItemBsellerAddRequest) SetAuctionPoint(value string) {
 	r.SetValue("auction_point", value)
 }
 
-/* 代充商品类型。只有少数类目下的商品可以标记上此字段，具体哪些类目可以上传可以通过taobao.itemcat.features.get获得。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：
-*no_mark(不做类型标记)
-*time_card(点卡软件代充)
+/* 代充商品类型。只有少数类目下的商品可以标记上此字段，具体哪些类目可以上传可以通过taobao.itemcat.features.get获得。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：  
+*no_mark(不做类型标记)  
+*time_card(点卡软件代充)  
 *fee_card(话费软件代充) */
 func (r *ItemBsellerAddRequest) SetAutoFill(value string) {
 	r.SetValue("auto_fill", value)
@@ -619,22 +683,22 @@ func (r *ItemBsellerAddRequest) SetExpressFee(value string) {
 	r.SetValue("express_fee", value)
 }
 
-/* 宝贝特征值，格式为：
+/* 宝贝特征值，格式为： 
 【key1:value1;key2:value2;key3:value3;】，key和value用【:】分隔，key&value之间用【;】分隔，只有在Top支持的特征值才能保存到宝贝上，目前支持的Key列表为：mysize_tp */
 func (r *ItemBsellerAddRequest) SetFeatures(value string) {
 	r.SetValue("features", value)
 }
 
-/* 运费承担方式。可选值:seller（卖家承担）,buyer(买家承担);默认值:seller。卖家承担不用设置邮费和postage_id.买家承担的时候，必填邮费和postage_id
+/* 运费承担方式。可选值:seller（卖家承担）,buyer(买家承担);默认值:seller。卖家承担不用设置邮费和postage_id.买家承担的时候，必填邮费和postage_id  
 如果用户设置了运费模板会优先使用运费模板，否则要同步设置邮费（post_fee,express_fee,ems_fee */
 func (r *ItemBsellerAddRequest) SetFreightPayer(value string) {
 	r.SetValue("freight_payer", value)
 }
 
-/* 针对全球购卖家的库存类型业务，
-有两种库存类型：现货和代购
-参数值为1时代表现货，值为2时代表代购
-如果传值为这两个值之外的值，会报错;
+/* 针对全球购卖家的库存类型业务， 
+有两种库存类型：现货和代购 
+参数值为1时代表现货，值为2时代表代购 
+如果传值为这两个值之外的值，会报错; 
 如果不是全球购卖家，这两个值即使设置也不会处理 */
 func (r *ItemBsellerAddRequest) SetGlobalStockType(value string) {
 	r.SetValue("global_stock_type", value)
@@ -735,9 +799,9 @@ func (r *ItemBsellerAddRequest) SetLocalityLifeChooseLogis(value string) {
 	r.SetValue("locality_life.choose_logis", value)
 }
 
-/* 本地生活电子交易凭证业务，目前此字段只涉及到的信息为有效期;
-如果有效期为起止日期类型，此值为2012-08-06,2012-08-16
-如果有效期为【购买成功日 至】类型则格式为2012-08-16
+/* 本地生活电子交易凭证业务，目前此字段只涉及到的信息为有效期; 
+如果有效期为起止日期类型，此值为2012-08-06,2012-08-16 
+如果有效期为【购买成功日 至】类型则格式为2012-08-16 
 如果有效期为天数类型则格式为15 */
 func (r *ItemBsellerAddRequest) SetLocalityLifeExpirydate(value string) {
 	r.SetValue("locality_life.expirydate", value)
@@ -758,13 +822,13 @@ func (r *ItemBsellerAddRequest) SetLocalityLifeOnsaleAutoRefundRatio(value strin
 	r.SetValue("locality_life.onsale_auto_refund_ratio", value)
 }
 
-/* 退款比例，
+/* 退款比例， 
 百分比%前的数字,1-100的正整数值 */
 func (r *ItemBsellerAddRequest) SetLocalityLifeRefundRatio(value string) {
 	r.SetValue("locality_life.refund_ratio", value)
 }
 
-/* 核销打款
+/* 核销打款  
 1代表核销打款 0代表非核销打款 */
 func (r *ItemBsellerAddRequest) SetLocalityLifeVerification(value string) {
 	r.SetValue("locality_life.verification", value)
@@ -830,9 +894,9 @@ func (r *ItemBsellerAddRequest) SetProps(value string) {
 	r.SetValue("props", value)
 }
 
-/* 秒杀商品类型。暂时不能使用。打上秒杀标记的商品，用户只能下架并不能再上架，其他任何编辑或删除操作都不能进行。如果用户想取消秒杀标记，需要联系小二进行操作。如果秒杀结束需要自由编辑请联系活动负责人（小二）去掉秒杀标记。可选类型
-web_only(只能通过web网络秒杀)
-wap_only(只能通过wap网络秒杀)
+/* 秒杀商品类型。暂时不能使用。打上秒杀标记的商品，用户只能下架并不能再上架，其他任何编辑或删除操作都不能进行。如果用户想取消秒杀标记，需要联系小二进行操作。如果秒杀结束需要自由编辑请联系活动负责人（小二）去掉秒杀标记。可选类型 
+web_only(只能通过web网络秒杀) 
+wap_only(只能通过wap网络秒杀) 
 web_and_wap(既能通过web秒杀也能通过wap秒杀) */
 func (r *ItemBsellerAddRequest) SetSecondKill(value string) {
 	r.SetValue("second_kill", value)
@@ -873,7 +937,7 @@ func (r *ItemBsellerAddRequest) SetSkuSpecIds(value string) {
 	r.SetValue("sku_spec_ids", value)
 }
 
-/* 新旧程度。可选值：new(新)，second(二手)，unused(闲置)。B商家不能发布二手商品。
+/* 新旧程度。可选值：new(新)，second(二手)，unused(闲置)。B商家不能发布二手商品。 
 如果是二手商品，特定类目下属性里面必填新旧成色属性 */
 func (r *ItemBsellerAddRequest) SetStuffStatus(value string) {
 	r.SetValue("stuff_status", value)
@@ -909,6 +973,7 @@ func (r *ItemBsellerAddRequest) SetWeight(value string) {
 	r.SetValue("weight", value)
 }
 
+
 func (r *ItemBsellerAddRequest) GetResponse(accessToken string) (*ItemBsellerAddResponse, []byte, error) {
 	var resp ItemBsellerAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.bseller.add", &resp)
@@ -926,10 +991,15 @@ type ItemBsellerAddResponseResult struct {
 	Response *ItemBsellerAddResponse `json:"item_bseller_add_response"`
 }
 
+
+
+
+
 /* 提供的发布集市商品接口，接口参数除了包括taobao.item.vip.add的参数外，新增一个sub_pic_paths参数，为图片空间的url，本方法会在发布商品同时，将这些图片作为副图关联到新商品。 */
 type ItemCsellerAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 售后服务说明模板id */
 func (r *ItemCsellerAddRequest) SetAfterSaleId(value string) {
@@ -941,9 +1011,9 @@ func (r *ItemCsellerAddRequest) SetApproveStatus(value string) {
 	r.SetValue("approve_status", value)
 }
 
-/* 代充商品类型。只有少数类目下的商品可以标记上此字段，具体哪些类目可以上传可以通过taobao.itemcat.features.get获得。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：
-*no_mark(不做类型标记)
-*time_card(点卡软件代充)
+/* 代充商品类型。只有少数类目下的商品可以标记上此字段，具体哪些类目可以上传可以通过taobao.itemcat.features.get获得。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：  
+*no_mark(不做类型标记)  
+*time_card(点卡软件代充)  
 *fee_card(话费软件代充) */
 func (r *ItemCsellerAddRequest) SetAutoFill(value string) {
 	r.SetValue("auto_fill", value)
@@ -979,22 +1049,22 @@ func (r *ItemCsellerAddRequest) SetExpressFee(value string) {
 	r.SetValue("express_fee", value)
 }
 
-/* 宝贝特征值，格式为：
+/* 宝贝特征值，格式为： 
 【key1:value1;key2:value2;key3:value3;】，key和value用【:】分隔，key&value之间用【;】分隔，只有在Top支持的特征值才能保存到宝贝上，目前支持的Key列表为：mysize_tp */
 func (r *ItemCsellerAddRequest) SetFeatures(value string) {
 	r.SetValue("features", value)
 }
 
-/* 运费承担方式。可选值:seller（卖家承担）,buyer(买家承担);默认值:seller。卖家承担不用设置邮费和postage_id.买家承担的时候，必填邮费和postage_id
+/* 运费承担方式。可选值:seller（卖家承担）,buyer(买家承担);默认值:seller。卖家承担不用设置邮费和postage_id.买家承担的时候，必填邮费和postage_id  
 如果用户设置了运费模板会优先使用运费模板，否则要同步设置邮费（post_fee,express_fee,ems_fee */
 func (r *ItemCsellerAddRequest) SetFreightPayer(value string) {
 	r.SetValue("freight_payer", value)
 }
 
-/* 针对全球购卖家的库存类型业务，
-有两种库存类型：现货和代购
-参数值为1时代表现货，值为2时代表代购
-如果传值为这两个值之外的值，会报错;
+/* 针对全球购卖家的库存类型业务， 
+有两种库存类型：现货和代购 
+参数值为1时代表现货，值为2时代表代购 
+如果传值为这两个值之外的值，会报错; 
 如果不是全球购卖家，这两个值即使设置也不会处理 */
 func (r *ItemCsellerAddRequest) SetGlobalStockType(value string) {
 	r.SetValue("global_stock_type", value)
@@ -1095,9 +1165,9 @@ func (r *ItemCsellerAddRequest) SetLocalityLifeChooseLogis(value string) {
 	r.SetValue("locality_life.choose_logis", value)
 }
 
-/* 本地生活电子交易凭证业务，目前此字段只涉及到的信息为有效期;
-如果有效期为起止日期类型，此值为2012-08-06,2012-08-16
-如果有效期为【购买成功日 至】类型则格式为2012-08-16
+/* 本地生活电子交易凭证业务，目前此字段只涉及到的信息为有效期; 
+如果有效期为起止日期类型，此值为2012-08-06,2012-08-16 
+如果有效期为【购买成功日 至】类型则格式为2012-08-16 
 如果有效期为天数类型则格式为15 */
 func (r *ItemCsellerAddRequest) SetLocalityLifeExpirydate(value string) {
 	r.SetValue("locality_life.expirydate", value)
@@ -1118,13 +1188,13 @@ func (r *ItemCsellerAddRequest) SetLocalityLifeOnsaleAutoRefundRatio(value strin
 	r.SetValue("locality_life.onsale_auto_refund_ratio", value)
 }
 
-/* 退款比例，
+/* 退款比例， 
 百分比%前的数字,1-100的正整数值 */
 func (r *ItemCsellerAddRequest) SetLocalityLifeRefundRatio(value string) {
 	r.SetValue("locality_life.refund_ratio", value)
 }
 
-/* 核销打款
+/* 核销打款  
 1代表核销打款 0代表非核销打款 */
 func (r *ItemCsellerAddRequest) SetLocalityLifeVerification(value string) {
 	r.SetValue("locality_life.verification", value)
@@ -1185,9 +1255,9 @@ func (r *ItemCsellerAddRequest) SetProps(value string) {
 	r.SetValue("props", value)
 }
 
-/* 秒杀商品类型。暂时不能使用。打上秒杀标记的商品，用户只能下架并不能再上架，其他任何编辑或删除操作都不能进行。如果用户想取消秒杀标记，需要联系小二进行操作。如果秒杀结束需要自由编辑请联系活动负责人（小二）去掉秒杀标记。可选类型
-web_only(只能通过web网络秒杀)
-wap_only(只能通过wap网络秒杀)
+/* 秒杀商品类型。暂时不能使用。打上秒杀标记的商品，用户只能下架并不能再上架，其他任何编辑或删除操作都不能进行。如果用户想取消秒杀标记，需要联系小二进行操作。如果秒杀结束需要自由编辑请联系活动负责人（小二）去掉秒杀标记。可选类型 
+web_only(只能通过web网络秒杀) 
+wap_only(只能通过wap网络秒杀) 
 web_and_wap(既能通过web秒杀也能通过wap秒杀) */
 func (r *ItemCsellerAddRequest) SetSecondKill(value string) {
 	r.SetValue("second_kill", value)
@@ -1228,7 +1298,7 @@ func (r *ItemCsellerAddRequest) SetSkuSpecIds(value string) {
 	r.SetValue("sku_spec_ids", value)
 }
 
-/* 新旧程度。可选值：new(新)，second(二手)，unused(闲置)。B商家不能发布二手商品。
+/* 新旧程度。可选值：new(新)，second(二手)，unused(闲置)。B商家不能发布二手商品。 
 如果是二手商品，特定类目下属性里面必填新旧成色属性 */
 func (r *ItemCsellerAddRequest) SetStuffStatus(value string) {
 	r.SetValue("stuff_status", value)
@@ -1264,6 +1334,7 @@ func (r *ItemCsellerAddRequest) SetWeight(value string) {
 	r.SetValue("weight", value)
 }
 
+
 func (r *ItemCsellerAddRequest) GetResponse(accessToken string) (*ItemCsellerAddResponse, []byte, error) {
 	var resp ItemCsellerAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.cseller.add", &resp)
@@ -1281,15 +1352,21 @@ type ItemCsellerAddResponseResult struct {
 	Response *ItemCsellerAddResponse `json:"item_cseller_add_response"`
 }
 
+
+
+
+
 /* 删除单条商品 */
 type ItemDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 商品数字ID，该参数必须 */
 func (r *ItemDeleteRequest) SetNumIid(value string) {
 	r.SetValue("num_iid", value)
 }
+
 
 func (r *ItemDeleteRequest) GetResponse(accessToken string) (*ItemDeleteResponse, []byte, error) {
 	var resp ItemDeleteResponseResult
@@ -1308,13 +1385,185 @@ type ItemDeleteResponseResult struct {
 	Response *ItemDeleteResponse `json:"item_delete_response"`
 }
 
-/* 获取单个商品的详细信息
+
+
+
+
+/* 调用该接口 会创建一个二级类目为网络文学原创电子书商品 */
+type ItemEbookSerialAddRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 作者。长度不能超过60个字符 */
+func (r *ItemEbookSerialAddRequest) SetAuthor(value string) {
+	r.SetValue("author", value)
+}
+
+/* 叶子类目id */
+func (r *ItemEbookSerialAddRequest) SetCid(value string) {
+	r.SetValue("cid", value)
+}
+
+/* 版权到期时间，如2013-08-06 */
+func (r *ItemEbookSerialAddRequest) SetCopyrightEnd(value string) {
+	r.SetValue("copyright_end", value)
+}
+
+/* 版权文件。不得小于350*500；类型:jpg,png；大小不能超过2M */
+func (r *ItemEbookSerialAddRequest) SetCopyrightFiles(value string) {
+	r.SetValue("copyright_files", value)
+}
+
+/* 商品主图片。类型:JPG,PNG;最大:2M */
+func (r *ItemEbookSerialAddRequest) SetCover(value string) {
+	r.SetValue("cover", value)
+}
+
+/* 宝贝描述。字数要大于5个字符，小于25000个字符，受违禁词控制 */
+func (r *ItemEbookSerialAddRequest) SetDesc(value string) {
+	r.SetValue("desc", value)
+}
+
+/* 书名。长度不能超过60个字符 */
+func (r *ItemEbookSerialAddRequest) SetName(value string) {
+	r.SetValue("name", value)
+}
+
+/* 商品外部编码，该字段的最大长度是512个字节 */
+func (r *ItemEbookSerialAddRequest) SetOuterId(value string) {
+	r.SetValue("outer_id", value)
+}
+
+/* 不能为0；如：0.50元/章 或者 0.50元/千字；取值范围:0.01-9999.99;精确到2位小数;单位:元。如:5.07，表示:5元7分. */
+func (r *ItemEbookSerialAddRequest) SetPrice(value string) {
+	r.SetValue("price", value)
+}
+
+/* 相关链接。不超过128个字符 */
+func (r *ItemEbookSerialAddRequest) SetRelationLink(value string) {
+	r.SetValue("relation_link", value)
+}
+
+/* 售卖方式。目前取值范围0、1； 
+0：按章节售卖 1：按千字售卖 */
+func (r *ItemEbookSerialAddRequest) SetSellWay(value string) {
+	r.SetValue("sell_way", value)
+}
+
+/* 宝贝标题。不能超过60字符，受违禁词控制 */
+func (r *ItemEbookSerialAddRequest) SetTitle(value string) {
+	r.SetValue("title", value)
+}
+
+
+func (r *ItemEbookSerialAddRequest) GetResponse(accessToken string) (*ItemEbookSerialAddResponse, []byte, error) {
+	var resp ItemEbookSerialAddResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.ebook.serial.add", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type ItemEbookSerialAddResponse struct {
+	Item *Item `json:"item"`
+}
+
+type ItemEbookSerialAddResponseResult struct {
+	Response *ItemEbookSerialAddResponse `json:"item_ebook_serial_add_response"`
+}
+
+
+
+
+
+/* 更新连载电子书信息 */
+type ItemEbookSerialUpdateRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 作者。长度不能超过60个字符 */
+func (r *ItemEbookSerialUpdateRequest) SetAuthor(value string) {
+	r.SetValue("author", value)
+}
+
+/* 叶子类目id */
+func (r *ItemEbookSerialUpdateRequest) SetCid(value string) {
+	r.SetValue("cid", value)
+}
+
+/* 商品主图片。类型:JPG,PNG;最大:2M */
+func (r *ItemEbookSerialUpdateRequest) SetCover(value string) {
+	r.SetValue("cover", value)
+}
+
+/* 宝贝描述。字数要大于5个字符，小于25000个字符，受违禁词控制 */
+func (r *ItemEbookSerialUpdateRequest) SetDesc(value string) {
+	r.SetValue("desc", value)
+}
+
+/* 宝贝数字id */
+func (r *ItemEbookSerialUpdateRequest) SetItemId(value string) {
+	r.SetValue("item_id", value)
+}
+
+/* 书名。长度不能超过60个字符 */
+func (r *ItemEbookSerialUpdateRequest) SetName(value string) {
+	r.SetValue("name", value)
+}
+
+/* 商品外部编码，该字段的最大长度是512个字节 */
+func (r *ItemEbookSerialUpdateRequest) SetOuterId(value string) {
+	r.SetValue("outer_id", value)
+}
+
+/* 不能为0；如：0.50元/章 或者 0.50元/千字；取值范围:0.01-9999.99;精确到2位小数;单位:元。如:5.07，表示:5元7分. */
+func (r *ItemEbookSerialUpdateRequest) SetPrice(value string) {
+	r.SetValue("price", value)
+}
+
+/* 相关链接。不超过128个字符 */
+func (r *ItemEbookSerialUpdateRequest) SetRelationLink(value string) {
+	r.SetValue("relation_link", value)
+}
+
+/* 宝贝标题。不能超过60字符，受违禁词控制 */
+func (r *ItemEbookSerialUpdateRequest) SetTitle(value string) {
+	r.SetValue("title", value)
+}
+
+
+func (r *ItemEbookSerialUpdateRequest) GetResponse(accessToken string) (*ItemEbookSerialUpdateResponse, []byte, error) {
+	var resp ItemEbookSerialUpdateResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.ebook.serial.update", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type ItemEbookSerialUpdateResponse struct {
+	Item *Item `json:"item"`
+}
+
+type ItemEbookSerialUpdateResponseResult struct {
+	Response *ItemEbookSerialUpdateResponse `json:"item_ebook_serial_update_response"`
+}
+
+
+
+
+
+/* 获取单个商品的详细信息  
 卖家未登录时只能获得这个商品的公开数据，卖家登录后可以获取商品的所有数据 */
 type ItemGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 需要返回的商品对象字段。可选值：Item商品结构体中所有字段均可返回；多个字段用“,”分隔。如果想返回整个子对象，那字段为item_img，如果是想返回子对象里面的字段，那字段为item_img.url。新增返回字段：second_kill（是否秒杀商品）、auto_fill（代充商品类型）,props_name（商品属性名称）。新增返回字段：item_weight(商品的重量，格式为数字，包含小数)、item_size(商品的体积，格式为数字，包含小数)、change_prop（商品基础色数据） */
+
+/* 需要返回的商品对象字段，如title,price,desc_modules等。可选值：Item商品结构体中所有字段均可返回；多个字段用“,”分隔。<br>新增返回字段：item_weight(商品的重量，格式为数字，包含小数)、item_size(商品的体积，格式为数字，包含小数)、change_prop（商品基础色数据） */
 func (r *ItemGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
@@ -1328,6 +1577,7 @@ func (r *ItemGetRequest) SetNumIid(value string) {
 func (r *ItemGetRequest) SetTrackIid(value string) {
 	r.SetValue("track_iid", value)
 }
+
 
 func (r *ItemGetRequest) GetResponse(accessToken string) (*ItemGetResponse, []byte, error) {
 	var resp ItemGetResponseResult
@@ -1346,12 +1596,17 @@ type ItemGetResponseResult struct {
 	Response *ItemGetResponse `json:"item_get_response"`
 }
 
-/* 删除itemimg_id 所指定的商品图片
-传入的num_iid所对应的商品必须属于当前会话的用户
+
+
+
+
+/* 删除itemimg_id 所指定的商品图片  
+传入的num_iid所对应的商品必须属于当前会话的用户  
 itemimg_id对应的图片需要属于num_iid对应的商品 */
 type ItemImgDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品图片ID */
 func (r *ItemImgDeleteRequest) SetId(value string) {
@@ -1362,6 +1617,7 @@ func (r *ItemImgDeleteRequest) SetId(value string) {
 func (r *ItemImgDeleteRequest) SetNumIid(value string) {
 	r.SetValue("num_iid", value)
 }
+
 
 func (r *ItemImgDeleteRequest) GetResponse(accessToken string) (*ItemImgDeleteResponse, []byte, error) {
 	var resp ItemImgDeleteResponseResult
@@ -1380,13 +1636,18 @@ type ItemImgDeleteResponseResult struct {
 	Response *ItemImgDeleteResponse `json:"item_img_delete_response"`
 }
 
-/* 添加一张商品图片到num_iid指定的商品中
-传入的num_iid所对应的商品必须属于当前会话的用户
-如果更新图片需要设置itemimg_id，且该itemimg_id的图片记录需要属于传入的num_iid对应的商品。如果新增图片则不用设置
+
+
+
+
+/* 添加一张商品图片到num_iid指定的商品中  
+传入的num_iid所对应的商品必须属于当前会话的用户  
+如果更新图片需要设置itemimg_id，且该itemimg_id的图片记录需要属于传入的num_iid对应的商品。如果新增图片则不用设置  
 商品图片有数量和大小上的限制，根据卖家享有的服务（如：卖家订购了多图服务等），商品图片数量限制不同。 */
 type ItemImgUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品图片id(如果是更新图片，则需要传该参数) */
 func (r *ItemImgUploadRequest) SetId(value string) {
@@ -1413,6 +1674,7 @@ func (r *ItemImgUploadRequest) SetPosition(value string) {
 	r.SetValue("position", value)
 }
 
+
 func (r *ItemImgUploadRequest) GetResponse(accessToken string) (*ItemImgUploadResponse, []byte, error) {
 	var resp ItemImgUploadResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.img.upload", &resp)
@@ -1430,13 +1692,18 @@ type ItemImgUploadResponseResult struct {
 	Response *ItemImgUploadResponse `json:"item_img_upload_response"`
 }
 
-/* * 关联一张商品图片到num_iid指定的商品中
- * 传入的num_iid所对应的商品必须属于当前会话的用户
- * 商品图片关联在卖家身份和图片来源上的限制，卖家要是B卖家或订购了多图服务才能关联图片，并且图片要来自于卖家自己的图片空间才行
- * 商品图片数量有限制。不管是上传的图片还是关联的图片，他们的总数不能超过一定限额 */
+
+
+
+
+/* * 关联一张商品图片到num_iid指定的商品中 
+    * 传入的num_iid所对应的商品必须属于当前会话的用户 
+    * 商品图片关联在卖家身份和图片来源上的限制，卖家要是B卖家或订购了多图服务才能关联图片，并且图片要来自于卖家自己的图片空间才行 
+    * 商品图片数量有限制。不管是上传的图片还是关联的图片，他们的总数不能超过一定限额 */
 type ItemJointImgRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品图片id(如果是更新图片，则需要传该参数) */
 func (r *ItemJointImgRequest) SetId(value string) {
@@ -1463,6 +1730,7 @@ func (r *ItemJointImgRequest) SetPosition(value string) {
 	r.SetValue("position", value)
 }
 
+
 func (r *ItemJointImgRequest) GetResponse(accessToken string) (*ItemJointImgResponse, []byte, error) {
 	var resp ItemJointImgResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.joint.img", &resp)
@@ -1480,14 +1748,19 @@ type ItemJointImgResponseResult struct {
 	Response *ItemJointImgResponse `json:"item_joint_img_response"`
 }
 
-/* * 关联一张商品属性图片到num_iid指定的商品中
- * 传入的num_iid所对应的商品必须属于当前会话的用户
- * 图片的属性必须要是颜色的属性，这个在前台显示的时候需要和sku进行关联的
- * 商品图片关联在卖家身份和图片来源上的限制，卖家要是B卖家或订购了多图服务才能关联图片，并且图片要来自于卖家自己的图片空间才行
- * 商品图片数量有限制。不管是上传的图片还是关联的图片，他们的总数不能超过一定限额，最多不能超过24张（每个颜色属性都有一张） */
+
+
+
+
+/* * 关联一张商品属性图片到num_iid指定的商品中 
+    * 传入的num_iid所对应的商品必须属于当前会话的用户 
+    * 图片的属性必须要是颜色的属性，这个在前台显示的时候需要和sku进行关联的 
+    * 商品图片关联在卖家身份和图片来源上的限制，卖家要是B卖家或订购了多图服务才能关联图片，并且图片要来自于卖家自己的图片空间才行 
+    * 商品图片数量有限制。不管是上传的图片还是关联的图片，他们的总数不能超过一定限额，最多不能超过24张（每个颜色属性都有一张） */
 type ItemJointPropimgRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 属性图片ID。如果是新增不需要填写 */
 func (r *ItemJointPropimgRequest) SetId(value string) {
@@ -1514,6 +1787,7 @@ func (r *ItemJointPropimgRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
 }
 
+
 func (r *ItemJointPropimgRequest) GetResponse(accessToken string) (*ItemJointPropimgResponse, []byte, error) {
 	var resp ItemJointPropimgResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.joint.propimg", &resp)
@@ -1531,10 +1805,15 @@ type ItemJointPropimgResponseResult struct {
 	Response *ItemJointPropimgResponse `json:"item_joint_propimg_response"`
 }
 
+
+
+
+
 /* 更新商品价格 */
 type ItemPriceUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 售后服务说明模板id */
 func (r *ItemPriceUpdateRequest) SetAfterSaleId(value string) {
@@ -1551,9 +1830,9 @@ func (r *ItemPriceUpdateRequest) SetAuctionPoint(value string) {
 	r.SetValue("auction_point", value)
 }
 
-/* 代充商品类型。只有少数类目下的商品可以标记上此字段，具体哪些类目可以上传可以通过taobao.itemcat.features.get获得。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：
-no_mark(不做类型标记)
-time_card(点卡软件代充)
+/* 代充商品类型。只有少数类目下的商品可以标记上此字段，具体哪些类目可以上传可以通过taobao.itemcat.features.get获得。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：  
+no_mark(不做类型标记)  
+time_card(点卡软件代充)  
 fee_card(话费软件代充) */
 func (r *ItemPriceUpdateRequest) SetAutoFill(value string) {
 	r.SetValue("auto_fill", value)
@@ -1784,6 +2063,7 @@ func (r *ItemPriceUpdateRequest) SetWeight(value string) {
 	r.SetValue("weight", value)
 }
 
+
 func (r *ItemPriceUpdateRequest) GetResponse(accessToken string) (*ItemPriceUpdateResponse, []byte, error) {
 	var resp ItemPriceUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.price.update", &resp)
@@ -1801,12 +2081,17 @@ type ItemPriceUpdateResponseResult struct {
 	Response *ItemPriceUpdateResponse `json:"item_price_update_response"`
 }
 
-/* 删除propimg_id 所指定的商品属性图片
-传入的num_iid所对应的商品必须属于当前会话的用户
+
+
+
+
+/* 删除propimg_id 所指定的商品属性图片  
+传入的num_iid所对应的商品必须属于当前会话的用户  
 propimg_id对应的属性图片需要属于num_iid对应的商品 */
 type ItemPropimgDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品属性图片ID */
 func (r *ItemPropimgDeleteRequest) SetId(value string) {
@@ -1817,6 +2102,7 @@ func (r *ItemPropimgDeleteRequest) SetId(value string) {
 func (r *ItemPropimgDeleteRequest) SetNumIid(value string) {
 	r.SetValue("num_iid", value)
 }
+
 
 func (r *ItemPropimgDeleteRequest) GetResponse(accessToken string) (*ItemPropimgDeleteResponse, []byte, error) {
 	var resp ItemPropimgDeleteResponseResult
@@ -1835,14 +2121,19 @@ type ItemPropimgDeleteResponseResult struct {
 	Response *ItemPropimgDeleteResponse `json:"item_propimg_delete_response"`
 }
 
-/* 添加一张商品属性图片到num_iid指定的商品中
-传入的num_iid所对应的商品必须属于当前会话的用户
-图片的属性必须要是颜色的属性，这个在前台显示的时候需要和sku进行关联的
-商品属性图片只有享有服务的卖家（如：淘宝大卖家、订购了淘宝多图服务的卖家）才能上传
+
+
+
+
+/* 添加一张商品属性图片到num_iid指定的商品中  
+传入的num_iid所对应的商品必须属于当前会话的用户  
+图片的属性必须要是颜色的属性，这个在前台显示的时候需要和sku进行关联的  
+商品属性图片只有享有服务的卖家（如：淘宝大卖家、订购了淘宝多图服务的卖家）才能上传  
 商品属性图片有数量和大小上的限制，最多不能超过24张（每个颜色属性都有一张）。 */
 type ItemPropimgUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 属性图片ID。如果是新增不需要填写 */
 func (r *ItemPropimgUploadRequest) SetId(value string) {
@@ -1869,6 +2160,7 @@ func (r *ItemPropimgUploadRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
 }
 
+
 func (r *ItemPropimgUploadRequest) GetResponse(accessToken string) (*ItemPropimgUploadResponse, []byte, error) {
 	var resp ItemPropimgUploadResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.propimg.upload", &resp)
@@ -1886,10 +2178,15 @@ type ItemPropimgUploadResponseResult struct {
 	Response *ItemPropimgUploadResponse `json:"item_propimg_upload_response"`
 }
 
+
+
+
+
 /* 提供按照全量或增量形式修改宝贝/SKU库存的功能 */
 type ItemQuantityUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品数字ID，必填参数 */
 func (r *ItemQuantityUpdateRequest) SetNumIid(value string) {
@@ -1916,6 +2213,7 @@ func (r *ItemQuantityUpdateRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *ItemQuantityUpdateRequest) GetResponse(accessToken string) (*ItemQuantityUpdateResponse, []byte, error) {
 	var resp ItemQuantityUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.quantity.update", &resp)
@@ -1933,18 +2231,24 @@ type ItemQuantityUpdateResponseResult struct {
 	Response *ItemQuantityUpdateResponse `json:"item_quantity_update_response"`
 }
 
-/* 将当前用户指定商品设置为橱窗推荐状态
-橱窗推荐需要用户有剩余橱窗位才可以顺利执行
-这个Item所属卖家从传入的session中获取，需要session绑定
+
+
+
+
+/* 将当前用户指定商品设置为橱窗推荐状态 
+橱窗推荐需要用户有剩余橱窗位才可以顺利执行 
+这个Item所属卖家从传入的session中获取，需要session绑定 
 需要判断橱窗推荐是否已满，橱窗推荐已满停止调用橱窗推荐接口，2010年1月底开放查询剩余橱窗推荐数后可以按数量橱窗推荐商品 */
 type ItemRecommendAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 商品数字ID，该参数必须 */
 func (r *ItemRecommendAddRequest) SetNumIid(value string) {
 	r.SetValue("num_iid", value)
 }
+
 
 func (r *ItemRecommendAddRequest) GetResponse(accessToken string) (*ItemRecommendAddResponse, []byte, error) {
 	var resp ItemRecommendAddResponseResult
@@ -1963,16 +2267,22 @@ type ItemRecommendAddResponseResult struct {
 	Response *ItemRecommendAddResponse `json:"item_recommend_add_response"`
 }
 
-/* 取消当前用户指定商品的橱窗推荐状态
+
+
+
+
+/* 取消当前用户指定商品的橱窗推荐状态 
 这个Item所属卖家从传入的session中获取，需要session绑定 */
 type ItemRecommendDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 商品数字ID，该参数必须 */
 func (r *ItemRecommendDeleteRequest) SetNumIid(value string) {
 	r.SetValue("num_iid", value)
 }
+
 
 func (r *ItemRecommendDeleteRequest) GetResponse(accessToken string) (*ItemRecommendDeleteResponse, []byte, error) {
 	var resp ItemRecommendDeleteResponseResult
@@ -1991,11 +2301,16 @@ type ItemRecommendDeleteResponseResult struct {
 	Response *ItemRecommendDeleteResponse `json:"item_recommend_delete_response"`
 }
 
-/* 新增一个sku到num_iid指定的商品中
+
+
+
+
+/* 新增一个sku到num_iid指定的商品中  
 传入的iid所对应的商品必须属于当前会话的用户 */
 type ItemSkuAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* sku所属商品的价格。当用户新增sku，使商品价格不属于sku价格之间的时候，用于修改商品的价格，使sku能够添加成功 */
 func (r *ItemSkuAddRequest) SetItemPrice(value string) {
@@ -2022,7 +2337,7 @@ func (r *ItemSkuAddRequest) SetPrice(value string) {
 	r.SetValue("price", value)
 }
 
-/* Sku属性串。格式:pid:vid;pid:vid,如:1627207:3232483;1630696:3284570,表示:机身颜色:军绿色;手机套餐:一电一充。
+/* Sku属性串。格式:pid:vid;pid:vid,如:1627207:3232483;1630696:3284570,表示:机身颜色:军绿色;手机套餐:一电一充。 
 如果包含自定义属性则格式为pid:vid;pid2:vid2;$pText:vText , 其中$pText:vText为自定义属性。限制：其中$pText的‘$’前缀不能少，且pText和vText文本中不可以存在 冒号:和分号;以及逗号， */
 func (r *ItemSkuAddRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
@@ -2037,6 +2352,7 @@ func (r *ItemSkuAddRequest) SetQuantity(value string) {
 func (r *ItemSkuAddRequest) SetSpecId(value string) {
 	r.SetValue("spec_id", value)
 }
+
 
 func (r *ItemSkuAddRequest) GetResponse(accessToken string) (*ItemSkuAddResponse, []byte, error) {
 	var resp ItemSkuAddResponseResult
@@ -2055,11 +2371,16 @@ type ItemSkuAddResponseResult struct {
 	Response *ItemSkuAddResponse `json:"item_sku_add_response"`
 }
 
-/* 删除一个sku的数据
+
+
+
+
+/* 删除一个sku的数据 
 需要删除的sku通过属性properties进行匹配查找 */
 type ItemSkuDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* sku所属商品的数量,大于0的整数。当用户删除sku，使商品数量不等于sku数量之和时候，用于修改商品的数量，使sku能够删除成功。特别是删除最后一个sku的时候，一定要设置商品数量到正常的值，否则删除失败 */
 func (r *ItemSkuDeleteRequest) SetItemNum(value string) {
@@ -2086,6 +2407,7 @@ func (r *ItemSkuDeleteRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
 }
 
+
 func (r *ItemSkuDeleteRequest) GetResponse(accessToken string) (*ItemSkuDeleteResponse, []byte, error) {
 	var resp ItemSkuDeleteResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.sku.delete", &resp)
@@ -2103,11 +2425,16 @@ type ItemSkuDeleteResponseResult struct {
 	Response *ItemSkuDeleteResponse `json:"item_sku_delete_response"`
 }
 
-/* 获取sku_id所对应的sku数据
+
+
+
+
+/* 获取sku_id所对应的sku数据  
 sku_id对应的sku要属于传入的nick对应的卖家 */
 type ItemSkuGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需返回的字段列表。可选值：Sku结构体中的所有字段；字段之间用“,”分隔。 */
 func (r *ItemSkuGetRequest) SetFields(value string) {
@@ -2129,6 +2456,7 @@ func (r *ItemSkuGetRequest) SetSkuId(value string) {
 	r.SetValue("sku_id", value)
 }
 
+
 func (r *ItemSkuGetRequest) GetResponse(accessToken string) (*ItemSkuGetResponse, []byte, error) {
 	var resp ItemSkuGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.sku.get", &resp)
@@ -2146,10 +2474,15 @@ type ItemSkuGetResponseResult struct {
 	Response *ItemSkuGetResponse `json:"item_sku_get_response"`
 }
 
+
+
+
+
 /* 更新商品SKU的价格 */
 type ItemSkuPriceUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* sku所属商品的价格。当用户更新sku，使商品价格不属于sku价格之间的时候，用于修改商品的价格，使sku能够更新成功 */
 func (r *ItemSkuPriceUpdateRequest) SetItemPrice(value string) {
@@ -2186,6 +2519,7 @@ func (r *ItemSkuPriceUpdateRequest) SetQuantity(value string) {
 	r.SetValue("quantity", value)
 }
 
+
 func (r *ItemSkuPriceUpdateRequest) GetResponse(accessToken string) (*ItemSkuPriceUpdateResponse, []byte, error) {
 	var resp ItemSkuPriceUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.sku.price.update", &resp)
@@ -2203,14 +2537,19 @@ type ItemSkuPriceUpdateResponseResult struct {
 	Response *ItemSkuPriceUpdateResponse `json:"item_sku_price_update_response"`
 }
 
-/* *更新一个sku的数据
-*需要更新的sku通过属性properties进行匹配查找
-*商品的数量和价格必须大于等于0
-*sku记录会更新到指定的num_iid对应的商品中
+
+
+
+
+/* *更新一个sku的数据  
+*需要更新的sku通过属性properties进行匹配查找  
+*商品的数量和价格必须大于等于0  
+*sku记录会更新到指定的num_iid对应的商品中  
 *num_iid对应的商品必须属于当前的会话用户 */
 type ItemSkuUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* sku所属商品的价格。当用户更新sku，使商品价格不属于sku价格之间的时候，用于修改商品的价格，使sku能够更新成功 */
 func (r *ItemSkuUpdateRequest) SetItemPrice(value string) {
@@ -2237,7 +2576,7 @@ func (r *ItemSkuUpdateRequest) SetPrice(value string) {
 	r.SetValue("price", value)
 }
 
-/* Sku属性串。格式:pid:vid;pid:vid,如: 1627207:3232483;1630696:3284570,表示机身颜色:军绿色;手机套餐:一电一充。
+/* Sku属性串。格式:pid:vid;pid:vid,如: 1627207:3232483;1630696:3284570,表示机身颜色:军绿色;手机套餐:一电一充。 
 如果包含自定义属性，则格式为pid:vid;pid2:vid2;$pText:vText , 其中$pText:vText为自定义属性。限制：其中$pText的’$’前缀不能少，且pText和vText文本中不可以存在 冒号:和分号;以及逗号， */
 func (r *ItemSkuUpdateRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
@@ -2252,6 +2591,7 @@ func (r *ItemSkuUpdateRequest) SetQuantity(value string) {
 func (r *ItemSkuUpdateRequest) SetSpecId(value string) {
 	r.SetValue("spec_id", value)
 }
+
 
 func (r *ItemSkuUpdateRequest) GetResponse(accessToken string) (*ItemSkuUpdateResponse, []byte, error) {
 	var resp ItemSkuUpdateResponseResult
@@ -2270,10 +2610,15 @@ type ItemSkuUpdateResponseResult struct {
 	Response *ItemSkuUpdateResponse `json:"item_sku_update_response"`
 }
 
+
+
+
+
 /* * 获取多个商品下的所有sku */
 type ItemSkusGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需返回的字段列表。可选值：Sku结构体中的所有字段；字段之间用“,”分隔。 */
 func (r *ItemSkusGetRequest) SetFields(value string) {
@@ -2285,6 +2630,7 @@ func (r *ItemSkusGetRequest) SetNumIids(value string) {
 	r.SetValue("num_iids", value)
 }
 
+
 func (r *ItemSkusGetRequest) GetResponse(accessToken string) (*ItemSkusGetResponse, []byte, error) {
 	var resp ItemSkusGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.skus.get", &resp)
@@ -2295,17 +2641,23 @@ func (r *ItemSkusGetRequest) GetResponse(accessToken string) (*ItemSkusGetRespon
 }
 
 type ItemSkusGetResponse struct {
-	Skus []*Sku `json:"skus"`
+	Skus *SkuListObject `json:"skus"`
 }
 
 type ItemSkusGetResponseResult struct {
 	Response *ItemSkusGetResponse `json:"item_skus_get_response"`
 }
 
+
+
+
+
 /* 查询当前登录用户的店铺的宝贝详情页的模板名称 */
 type ItemTemplatesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *ItemTemplatesGetRequest) GetResponse(accessToken string) (*ItemTemplatesGetResponse, []byte, error) {
 	var resp ItemTemplatesGetResponseResult
@@ -2317,21 +2669,26 @@ func (r *ItemTemplatesGetRequest) GetResponse(accessToken string) (*ItemTemplate
 }
 
 type ItemTemplatesGetResponse struct {
-	ItemTemplateList []*ItemTemplate `json:"item_template_list"`
+	ItemTemplateList *ItemTemplateListObject `json:"item_template_list"`
 }
 
 type ItemTemplatesGetResponseResult struct {
 	Response *ItemTemplatesGetResponse `json:"item_templates_get_response"`
 }
 
-/* 根据传入的num_iid更新对应的商品的数据
-传入的num_iid所对应的商品必须属于当前会话的用户
-商品的属性和sku的属性有包含的关系，商品的价格要位于sku的价格区间之中（例如，sku价格有5元、10元两种，那么商品的价格就需要大于等于5元，小于等于10元，否则更新商品会失败）
-商品的类目和商品的价格、sku的价格都有一定的相关性（具体的关系要通过类目属性查询接口获得）
+
+
+
+
+/* 根据传入的num_iid更新对应的商品的数据  
+传入的num_iid所对应的商品必须属于当前会话的用户  
+商品的属性和sku的属性有包含的关系，商品的价格要位于sku的价格区间之中（例如，sku价格有5元、10元两种，那么商品的价格就需要大于等于5元，小于等于10元，否则更新商品会失败）  
+商品的类目和商品的价格、sku的价格都有一定的相关性（具体的关系要通过类目属性查询接口获得）  
 当关键属性值更新为“其他”的时候，需要输入input_pids和input_str商品才能更新成功。该接口不支持产品属性修改。 */
 type ItemUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 售后服务说明模板id */
 func (r *ItemUpdateRequest) SetAfterSaleId(value string) {
@@ -2348,9 +2705,9 @@ func (r *ItemUpdateRequest) SetAuctionPoint(value string) {
 	r.SetValue("auction_point", value)
 }
 
-/* 代充商品类型。只有少数类目下的商品可以标记上此字段，具体哪些类目可以上传可以通过taobao.itemcat.features.get获得。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：
-no_mark(不做类型标记)
-time_card(点卡软件代充)
+/* 代充商品类型。只有少数类目下的商品可以标记上此字段，具体哪些类目可以上传可以通过taobao.itemcat.features.get获得。在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型：  
+no_mark(不做类型标记)  
+time_card(点卡软件代充)  
 fee_card(话费软件代充) */
 func (r *ItemUpdateRequest) SetAutoFill(value string) {
 	r.SetValue("auto_fill", value)
@@ -2376,12 +2733,12 @@ func (r *ItemUpdateRequest) SetDesc(value string) {
 	r.SetValue("desc", value)
 }
 
-/* 商品描述模块化，模块列表，由List<ItemDescModule>转化成jsonArray存入，后端逻辑验证通过，拼装成模块内容+锚点导航后存入desc中。数据结构具体参见Item_Desc_Module */
+/* 商品描述模块化，模块列表；数据结构可参考Item_Desc_Module 。详细使用说明：http://open.taobao.com/support/question_detail.htm?spm=0.0.0.0.cRcj3S&id=147498 ； */
 func (r *ItemUpdateRequest) SetDescModules(value string) {
 	r.SetValue("desc_modules", value)
 }
 
-/* 支持宝贝信息的删除,如需删除对应的食品安全信息中的储藏方法、保质期， 则应该设置此参数的值为：food_security.plan_storage,food_security.period; 各个参数的名称之间用【,】分割, 如果对应的参数有设置过值，即使在这个列表中，也不会被删除; 目前支持此功能的宝贝信息如下：食品安全信息所有字段、电子交易凭证字段（locality_life，locality_life.verification，locality_life.refund_ratio，locality_life.network_id ，locality_life.onsale_auto_refund_ratio） */
+/* 支持宝贝信息的删除,如需删除对应的食品安全信息中的储藏方法、保质期， 则应该设置此参数的值为：food_security.plan_storage,food_security.period; 各个参数的名称之间用【,】分割, 如果对应的参数有设置过值，即使在这个列表中，也不会被删除; 目前支持此功能的宝贝信息如下：食品安全信息所有字段、电子交易凭证字段（locality_life，locality_life.verification，locality_life.refund_ratio，locality_life.network_id ，locality_life.onsale_auto_refund_ratio）。支持对全球购宝贝信息的清除（字符串中包含global_stock） */
 func (r *ItemUpdateRequest) SetEmptyFields(value string) {
 	r.SetValue("empty_fields", value)
 }
@@ -2476,11 +2833,13 @@ func (r *ItemUpdateRequest) SetFreightPayer(value string) {
 	r.SetValue("freight_payer", value)
 }
 
-/* 针对全球购卖家的库存类型业务，
-有两种库存类型：现货和代购
-参数值为1时代表现货，值为2时代表代购
-如果传值为这两个值之外的值，会报错;
-如果不是全球购卖家，这两个值即使设置也不会处理 */
+/* 全球购商品采购地（地区/国家）,默认值只在全球购商品采购地（库存类型选择情况生效），地区国家值为（美国, 香港, 日本, 英国, 新西兰, 德国, 韩国, 荷兰, 澳洲, 法国, 意大利, 台湾, 澳门, 加拿大, 瑞士, 西班牙, 泰国, 新加坡, 马来西亚, 菲律宾, 其他） */
+func (r *ItemUpdateRequest) SetGlobalStockCountry(value string) {
+	r.SetValue("global_stock_country", value)
+}
+
+/* 全球购商品采购地（库存类型） 
+全球购商品有两种库存类型：现货和代购 参数值为1时代表现货，值为2时代表代购。注意：使用时请与 全球购商品采购地（地区/国家）配合使用 */
 func (r *ItemUpdateRequest) SetGlobalStockType(value string) {
 	r.SetValue("global_stock_type", value)
 }
@@ -2555,9 +2914,9 @@ func (r *ItemUpdateRequest) SetIsXinpin(value string) {
 	r.SetValue("is_xinpin", value)
 }
 
-/* 表示商品的体积，如果需要使用按体积计费的运费模板，一定要设置这个值。该值的单位为立方米（m3），如果是其他单位，请转换成成立方米。
-该值支持两种格式的设置：格式1：bulk:3,单位为立方米(m3),表示直接设置为商品的体积。格式2：length:10;breadth:10;height:10，单位为米（m）。体积和长宽高都支持小数类型。
-在传入体积或长宽高时候，不能带单位。体积的单位默认为立方米（m3），长宽高的单位默认为米(m)
+/* 表示商品的体积，如果需要使用按体积计费的运费模板，一定要设置这个值。该值的单位为立方米（m3），如果是其他单位，请转换成成立方米。 
+该值支持两种格式的设置：格式1：bulk:3,单位为立方米(m3),表示直接设置为商品的体积。格式2：length:10;breadth:10;height:10，单位为米（m）。体积和长宽高都支持小数类型。 
+在传入体积或长宽高时候，不能带单位。体积的单位默认为立方米（m3），长宽高的单位默认为米(m) 
 在编辑的时候，如果需要删除体积属性，请设置该值为0，如bulk:0 */
 func (r *ItemUpdateRequest) SetItemSize(value string) {
 	r.SetValue("item_size", value)
@@ -2578,17 +2937,17 @@ func (r *ItemUpdateRequest) SetListTime(value string) {
 	r.SetValue("list_time", value)
 }
 
-/* 编辑电子凭证宝贝时候表示是否使用邮寄
-0: 代表不使用邮寄；
-1：代表使用邮寄；
+/* 编辑电子凭证宝贝时候表示是否使用邮寄 
+0: 代表不使用邮寄； 
+1：代表使用邮寄； 
 如果不设置这个值，代表不使用邮寄 */
 func (r *ItemUpdateRequest) SetLocalityLifeChooseLogis(value string) {
 	r.SetValue("locality_life.choose_logis", value)
 }
 
-/* 本地生活电子交易凭证业务，目前此字段只涉及到的信息为有效期;
-如果有效期为起止日期类型，此值为2012-08-06,2012-08-16
-如果有效期为【购买成功日 至】类型则格式为2012-08-16
+/* 本地生活电子交易凭证业务，目前此字段只涉及到的信息为有效期; 
+如果有效期为起止日期类型，此值为2012-08-06,2012-08-16 
+如果有效期为【购买成功日 至】类型则格式为2012-08-16 
 如果有效期为天数类型则格式为15 */
 func (r *ItemUpdateRequest) SetLocalityLifeExpirydate(value string) {
 	r.SetValue("locality_life.expirydate", value)
@@ -2614,6 +2973,11 @@ func (r *ItemUpdateRequest) SetLocalityLifeRefundRatio(value string) {
 	r.SetValue("locality_life.refund_ratio", value)
 }
 
+/* 退款码费承担方。发布电子凭证宝贝的时候会增加“退款码费承担方”配置项，可选填：(1)s（卖家承担） (2)b(买家承担) */
+func (r *ItemUpdateRequest) SetLocalityLifeRefundmafee(value string) {
+	r.SetValue("locality_life.refundmafee", value)
+}
+
 /* 核销打款,1代表核销打款 0代表非核销打款; 在参数empty_fields里设置locality_life.verification可删除核销打款 */
 func (r *ItemUpdateRequest) SetLocalityLifeVerification(value string) {
 	r.SetValue("locality_life.verification", value)
@@ -2629,7 +2993,7 @@ func (r *ItemUpdateRequest) SetLocationState(value string) {
 	r.SetValue("location.state", value)
 }
 
-/* 商品数量，取值范围:0-999999的整数。且需要等于Sku所有数量的和 拍卖商品中增加拍只能为1，荷兰拍要在[2,500)范围内。 */
+/* 商品数量，取值范围:0-900000000的整数。且需要等于Sku所有数量的和 拍卖商品中增加拍只能为1，荷兰拍要在[2,500)范围内。 */
 func (r *ItemUpdateRequest) SetNum(value string) {
 	r.SetValue("num", value)
 }
@@ -2644,7 +3008,7 @@ func (r *ItemUpdateRequest) SetOuterId(value string) {
 	r.SetValue("outer_id", value)
 }
 
-/* 拍卖宝贝的保证金。对于增价拍和荷兰拍来说保证金有两种模式：淘宝默认模式（首次出价金额的10%），自定义固定保证金（固定冻结金额只能输入不超过30万的正整数），并且保证金只冻结1次。对于降价拍来说保证金只有淘宝默认的（竞拍价格的10% * 竞拍数量），并且每次出价都需要冻结保证金。
+/* 拍卖宝贝的保证金。对于增价拍和荷兰拍来说保证金有两种模式：淘宝默认模式（首次出价金额的10%），自定义固定保证金（固定冻结金额只能输入不超过30万的正整数），并且保证金只冻结1次。对于降价拍来说保证金只有淘宝默认的（竞拍价格的10% * 竞拍数量），并且每次出价都需要冻结保证金。 
 对于拍卖宝贝来说，保证金是必须的，但是默认使用淘宝默认保证金模式，只有用户需要使用自定义固定保证金的时候才需要使用到这个参数。如果该参数不传或传入0则代表使用默认。 */
 func (r *ItemUpdateRequest) SetPaimaiInfoDeposit(value string) {
 	r.SetValue("paimai_info.deposit", value)
@@ -2720,7 +3084,7 @@ func (r *ItemUpdateRequest) SetScenicTicketPayWay(value string) {
 	r.SetValue("scenic_ticket_pay_way", value)
 }
 
-/* 商品卖点信息，最长15个字符。仅天猫商家可用。 */
+/* 商品卖点信息，最长150个字符。仅天猫商家可用。 */
 func (r *ItemUpdateRequest) SetSellPoint(value string) {
 	r.SetValue("sell_point", value)
 }
@@ -2772,7 +3136,7 @@ func (r *ItemUpdateRequest) SetSubStock(value string) {
 	r.SetValue("sub_stock", value)
 }
 
-/* 宝贝标题. 不能超过60字符,受违禁词控制 */
+/* 宝贝标题. 不能超过30字符,受违禁词控制 */
 func (r *ItemUpdateRequest) SetTitle(value string) {
 	r.SetValue("title", value)
 }
@@ -2786,6 +3150,7 @@ func (r *ItemUpdateRequest) SetValidThru(value string) {
 func (r *ItemUpdateRequest) SetWeight(value string) {
 	r.SetValue("weight", value)
 }
+
 
 func (r *ItemUpdateRequest) GetResponse(accessToken string) (*ItemUpdateResponse, []byte, error) {
 	var resp ItemUpdateResponseResult
@@ -2804,16 +3169,22 @@ type ItemUpdateResponseResult struct {
 	Response *ItemUpdateResponse `json:"item_update_response"`
 }
 
-/* * 单个商品下架
- * 输入的num_iid必须属于当前会话用户 */
+
+
+
+
+/* * 单个商品下架 
+    * 输入的num_iid必须属于当前会话用户 */
 type ItemUpdateDelistingRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品数字ID，该参数必须 */
 func (r *ItemUpdateDelistingRequest) SetNumIid(value string) {
 	r.SetValue("num_iid", value)
 }
+
 
 func (r *ItemUpdateDelistingRequest) GetResponse(accessToken string) (*ItemUpdateDelistingResponse, []byte, error) {
 	var resp ItemUpdateDelistingResponseResult
@@ -2832,11 +3203,16 @@ type ItemUpdateDelistingResponseResult struct {
 	Response *ItemUpdateDelistingResponse `json:"item_update_delisting_response"`
 }
 
-/* * 单个商品上架
+
+
+
+
+/* * 单个商品上架 
 * 输入的num_iid必须属于当前会话用户 */
 type ItemUpdateListingRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需要上架的商品的数量。取值范围:大于零的整数。如果商品有sku，则上架数量默认为所有sku数量总和，不可修改。否则商品数量根据设置数量调整为num */
 func (r *ItemUpdateListingRequest) SetNum(value string) {
@@ -2847,6 +3223,7 @@ func (r *ItemUpdateListingRequest) SetNum(value string) {
 func (r *ItemUpdateListingRequest) SetNumIid(value string) {
 	r.SetValue("num_iid", value)
 }
+
 
 func (r *ItemUpdateListingRequest) GetResponse(accessToken string) (*ItemUpdateListingResponse, []byte, error) {
 	var resp ItemUpdateListingResponseResult
@@ -2865,11 +3242,16 @@ type ItemUpdateListingResponseResult struct {
 	Response *ItemUpdateListingResponse `json:"item_update_listing_response"`
 }
 
-/* 跟据卖家设定的商品外部id获取商品
+
+
+
+
+/* 跟据卖家设定的商品外部id获取商品  
 这个商品对应卖家从传入的session中获取，需要session绑定 */
 type ItemsCustomGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需返回的字段列表。可选值：Item商品结构体中的所有字段；多个字段之间用“,”分隔。如果想返回整个子对象，那字段为item_img，如果是想返回子对象里面的字段，那字段为item_img.url。新增返回字段：one_station标记商品是否淘1站商品 */
 func (r *ItemsCustomGetRequest) SetFields(value string) {
@@ -2881,6 +3263,7 @@ func (r *ItemsCustomGetRequest) SetOuterId(value string) {
 	r.SetValue("outer_id", value)
 }
 
+
 func (r *ItemsCustomGetRequest) GetResponse(accessToken string) (*ItemsCustomGetResponse, []byte, error) {
 	var resp ItemsCustomGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.items.custom.get", &resp)
@@ -2891,21 +3274,25 @@ func (r *ItemsCustomGetRequest) GetResponse(accessToken string) (*ItemsCustomGet
 }
 
 type ItemsCustomGetResponse struct {
-	Items []*Item `json:"items"`
+	Items *ItemListObject `json:"items"`
 }
 
 type ItemsCustomGetResponseResult struct {
 	Response *ItemsCustomGetResponse `json:"items_custom_get_response"`
 }
 
-/* 获取当前用户作为卖家的仓库中的商品列表，并能根据传入的搜索条件对仓库中的商品列表进行过滤
+
+
+
+
+/* 获取当前用户作为卖家的仓库中的商品列表，并能根据传入的搜索条件对仓库中的商品列表进行过滤  
 只能获得商品的部分信息，商品的详细信息请通过taobao.item.get获取 */
 type ItemsInventoryGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 分类字段。可选值:
 
+/* 分类字段。可选值:<br>
 regular_shelved(定时上架)<br>
 never_on_shelf(从未上架)<br>
 off_shelf(我下架的)<br>
@@ -2913,7 +3300,7 @@ for_shelved(等待所有上架)<br>
 
 sold_out(全部卖完)<br>
 violation_off_shelf(违规下架的)<br>
-默认查询的是for_shelved(等待所有上架)这个状态的商品<br>
+默认查询for_shelved(等待所有上架)这个状态的商品<br>
 <font color='red'>注：for_shelved(等待所有上架)=regular_shelved(定时上架)+never_on_shelf(从未上架)+off_shelf(我下架的)</font> */
 func (r *ItemsInventoryGetRequest) SetBanner(value string) {
 	r.SetValue("banner", value)
@@ -2929,13 +3316,8 @@ func (r *ItemsInventoryGetRequest) SetEndModified(value string) {
 	r.SetValue("end_modified", value)
 }
 
-/* 需返回的字段列表。可选值：Item商品结构体中的以下字段：
-approve_status,num_iid,title,nick,type,cid,pic_url,num,props,valid_thru,
-
-list_time,price,has_discount,has_invoice,has_warranty,has_showcase,
-
-modified,delist_time,postage_id,seller_cids,outer_id；字段之间用“,”分隔。
-
+/* 需返回的字段列表。可选值为 Item 商品结构体中的以下字段： 
+approve_status,num_iid,title,nick,type,cid,pic_url,num,props,valid_thru, list_time,price,has_discount,has_invoice,has_warranty,has_showcase, modified,delist_time,postage_id,seller_cids,outer_id；字段之间用“,”分隔。<br> 
 不支持其他字段，如果需要获取其他字段数据，调用taobao.item.get。 */
 func (r *ItemsInventoryGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
@@ -2986,6 +3368,7 @@ func (r *ItemsInventoryGetRequest) SetStartModified(value string) {
 	r.SetValue("start_modified", value)
 }
 
+
 func (r *ItemsInventoryGetRequest) GetResponse(accessToken string) (*ItemsInventoryGetResponse, []byte, error) {
 	var resp ItemsInventoryGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.items.inventory.get", &resp)
@@ -2996,20 +3379,25 @@ func (r *ItemsInventoryGetRequest) GetResponse(accessToken string) (*ItemsInvent
 }
 
 type ItemsInventoryGetResponse struct {
-	Items        []*Item `json:"items"`
-	TotalResults int     `json:"total_results"`
+	Items *ItemListObject `json:"items"`
+	TotalResults int `json:"total_results"`
 }
 
 type ItemsInventoryGetResponseResult struct {
 	Response *ItemsInventoryGetResponse `json:"items_inventory_get_response"`
 }
 
+
+
+
+
 /* 查看非公开属性时需要用户登录 */
 type ItemsListGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 需要返回的商品对象字段。可选值：Item商品结构体中所有字段均可返回；多个字段用“,”分隔。如果想返回整个子对象，那字段为itemimg，如果是想返回子对象里面的字段，那字段为itemimg.url。 */
+
+/* 需要返回的商品对象字段。可选值：Item商品结构体中字段均可返回(除item_weight,item_size)；多个字段用“,”分隔。如果想返回整个子对象，那字段为itemimg，如果是想返回子对象里面的字段，那字段为itemimg.url。 */
 func (r *ItemsListGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
@@ -3024,6 +3412,7 @@ func (r *ItemsListGetRequest) SetTrackIids(value string) {
 	r.SetValue("track_iids", value)
 }
 
+
 func (r *ItemsListGetRequest) GetResponse(accessToken string) (*ItemsListGetResponse, []byte, error) {
 	var resp ItemsListGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.items.list.get", &resp)
@@ -3034,18 +3423,23 @@ func (r *ItemsListGetRequest) GetResponse(accessToken string) (*ItemsListGetResp
 }
 
 type ItemsListGetResponse struct {
-	Items []*Item `json:"items"`
+	Items *ItemListObject `json:"items"`
 }
 
 type ItemsListGetResponseResult struct {
 	Response *ItemsListGetResponse `json:"items_list_get_response"`
 }
 
-/* 获取当前用户作为卖家的出售中的商品列表，并能根据传入的搜索条件对出售中的商品列表进行过滤
+
+
+
+
+/* 获取当前用户作为卖家的出售中的商品列表，并能根据传入的搜索条件对出售中的商品列表进行过滤  
 只能获得商品的部分信息，商品的详细信息请通过taobao.item.get获取 */
 type ItemsOnsaleGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品类目ID。ItemCat中的cid字段。可以通过taobao.itemcats.get取到 */
 func (r *ItemsOnsaleGetRequest) SetCid(value string) {
@@ -3057,7 +3451,7 @@ func (r *ItemsOnsaleGetRequest) SetEndModified(value string) {
 	r.SetValue("end_modified", value)
 }
 
-/* 需返回的字段列表。可选值：Item商品结构体中的以下字段：
+/* 需返回的字段列表。可选值：Item商品结构体中的以下字段： 
 approve_status,num_iid,title,nick,type,cid,pic_url,num,props,valid_thru,list_time,price,has_discount,has_invoice,has_warranty,has_showcase,modified,delist_time,postage_id,seller_cids,outer_id；字段之间用“,”分隔。
 不支持其他字段，如果需要获取其他字段数据，调用taobao.item.get。 */
 func (r *ItemsOnsaleGetRequest) SetFields(value string) {
@@ -3094,7 +3488,7 @@ func (r *ItemsOnsaleGetRequest) SetPageNo(value string) {
 	r.SetValue("page_no", value)
 }
 
-/* 每页条数。取值范围:大于零的整数;最大值：200；默认值：40。用此接口获取数据时，当翻页获取的条数（page_no*page_size）超过10万,为了保护后台搜索引擎，接口将报错。所以请大家尽可能的细化自己的搜索条件，例如根据修改时间分段获取商品 */
+/* 每页条数。取值范围:大于零的整数;最大值：200；默认值：40。用此接口获取数据时，当翻页获取的条数（page_no*page_size）超过2万,为了保护后台搜索引擎，接口将报错。所以请大家尽可能的细化自己的搜索条件，例如根据修改时间分段获取商品 */
 func (r *ItemsOnsaleGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
@@ -3114,6 +3508,7 @@ func (r *ItemsOnsaleGetRequest) SetStartModified(value string) {
 	r.SetValue("start_modified", value)
 }
 
+
 func (r *ItemsOnsaleGetRequest) GetResponse(accessToken string) (*ItemsOnsaleGetResponse, []byte, error) {
 	var resp ItemsOnsaleGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.items.onsale.get", &resp)
@@ -3124,20 +3519,25 @@ func (r *ItemsOnsaleGetRequest) GetResponse(accessToken string) (*ItemsOnsaleGet
 }
 
 type ItemsOnsaleGetResponse struct {
-	Items        []*Item `json:"items"`
-	TotalResults int     `json:"total_results"`
+	Items *ItemListObject `json:"items"`
+	TotalResults int `json:"total_results"`
 }
 
 type ItemsOnsaleGetResponseResult struct {
 	Response *ItemsOnsaleGetResponse `json:"items_onsale_get_response"`
 }
 
-/* 获取类目ID，必需是叶子类目ID；调用taobao.itemcats.get.v2获取
-传入关键属性,结构:pid:vid;pid:vid.调用taobao.itemprops.get.v2获取pid,
+
+
+
+
+/* 获取类目ID，必需是叶子类目ID；调用taobao.itemcats.get.v2获取  
+传入关键属性,结构:pid:vid;pid:vid.调用taobao.itemprops.get.v2获取pid, 
 调用taobao.itempropvalues.get获取vid;如果碰到用户自定义属性,请用customer_props. */
 type ProductAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 非关键属性结构:pid:vid;pid:vid.<br>
 非关键属性<font color=red>不包含</font>关键属性、销售属性、用户自定义属性、商品属性;
@@ -3157,7 +3557,7 @@ func (r *ProductAddRequest) SetCustomerProps(value string) {
 	r.SetValue("customer_props", value)
 }
 
-/* 产品描述.最大25000个字节 */
+/* 产品描述.最大不超过25000个字符 */
 func (r *ProductAddRequest) SetDesc(value string) {
 	r.SetValue("desc", value)
 }
@@ -3177,7 +3577,7 @@ func (r *ProductAddRequest) SetMajor(value string) {
 	r.SetValue("major", value)
 }
 
-/* 市场ID，1为新增C2C市场的产品信息， 2为新增B2C市场的产品信息。
+/* 市场ID，1为新增C2C市场的产品信息， 2为新增B2C市场的产品信息。 
 不填写此值则C用户新增B2C市场的产品信息，B用户新增B2C市场的产品信息。 */
 func (r *ProductAddRequest) SetMarketId(value string) {
 	r.SetValue("market_id", value)
@@ -3188,7 +3588,7 @@ func (r *ProductAddRequest) SetMarketTime(value string) {
 	r.SetValue("market_time", value)
 }
 
-/* 产品名称,最大60个字节. */
+/* 产品名称,最大30个字符. */
 func (r *ProductAddRequest) SetName(value string) {
 	r.SetValue("name", value)
 }
@@ -3198,8 +3598,8 @@ func (r *ProductAddRequest) SetOuterId(value string) {
 	r.SetValue("outer_id", value)
 }
 
-/* 包装清单。注意，在管控类目下，包装清单不能为空，同时保证清单的格式为：
-名称:数字;名称:数字;
+/* 包装清单。注意，在管控类目下，包装清单不能为空，同时保证清单的格式为： 
+名称:数字;名称:数字; 
 其中，名称不能违禁、不能超过60字符，数字不能超过999 */
 func (r *ProductAddRequest) SetPackingList(value string) {
 	r.SetValue("packing_list", value)
@@ -3230,6 +3630,7 @@ func (r *ProductAddRequest) SetSellPt(value string) {
 	r.SetValue("sell_pt", value)
 }
 
+
 func (r *ProductAddRequest) GetResponse(accessToken string) (*ProductAddResponse, []byte, error) {
 	var resp ProductAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.product.add", &resp)
@@ -3247,12 +3648,17 @@ type ProductAddResponseResult struct {
 	Response *ProductAddResponse `json:"product_add_response"`
 }
 
-/* 两种方式查看一个产品详细信息:
-传入product_id来查询
+
+
+
+
+/* 两种方式查看一个产品详细信息:  
+传入product_id来查询  
 传入cid和props来查询 */
 type ProductGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品类目id.调用taobao.itemcats.get获取;必须是叶子类目id,如果没有传product_id,那么cid和props必须要传. */
 func (r *ProductGetRequest) SetCid(value string) {
@@ -3269,7 +3675,7 @@ func (r *ProductGetRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
 
-/* 市场ID，1为取C2C市场的产品信息， 2为取B2C市场的产品信息。
+/* 市场ID，1为取C2C市场的产品信息， 2为取B2C市场的产品信息。 
 不填写此值则默认取C2C的产品信息。 */
 func (r *ProductGetRequest) SetMarketId(value string) {
 	r.SetValue("market_id", value)
@@ -3284,6 +3690,7 @@ func (r *ProductGetRequest) SetProductId(value string) {
 func (r *ProductGetRequest) SetProps(value string) {
 	r.SetValue("props", value)
 }
+
 
 func (r *ProductGetRequest) GetResponse(accessToken string) (*ProductGetResponse, []byte, error) {
 	var resp ProductGetResponseResult
@@ -3302,12 +3709,17 @@ type ProductGetResponseResult struct {
 	Response *ProductGetResponse `json:"product_get_response"`
 }
 
-/* 1.传入非主图ID
-2.传入产品ID
+
+
+
+
+/* 1.传入非主图ID  
+2.传入产品ID  
 删除产品非主图 */
 type ProductImgDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 非主图ID */
 func (r *ProductImgDeleteRequest) SetId(value string) {
@@ -3318,6 +3730,7 @@ func (r *ProductImgDeleteRequest) SetId(value string) {
 func (r *ProductImgDeleteRequest) SetProductId(value string) {
 	r.SetValue("product_id", value)
 }
+
 
 func (r *ProductImgDeleteRequest) GetResponse(accessToken string) (*ProductImgDeleteResponse, []byte, error) {
 	var resp ProductImgDeleteResponseResult
@@ -3336,12 +3749,17 @@ type ProductImgDeleteResponseResult struct {
 	Response *ProductImgDeleteResponse `json:"product_img_delete_response"`
 }
 
-/* 1.传入产品ID
-2.传入图片内容
+
+
+
+
+/* 1.传入产品ID  
+2.传入图片内容  
 注意：图片最大为500K,只支持JPG,GIF格式,如果需要传多张，可调多次 */
 type ProductImgUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 产品图片ID.修改图片时需要传入 */
 func (r *ProductImgUploadRequest) SetId(value string) {
@@ -3368,6 +3786,7 @@ func (r *ProductImgUploadRequest) SetProductId(value string) {
 	r.SetValue("product_id", value)
 }
 
+
 func (r *ProductImgUploadRequest) GetResponse(accessToken string) (*ProductImgUploadResponse, []byte, error) {
 	var resp ProductImgUploadResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.product.img.upload", &resp)
@@ -3385,12 +3804,17 @@ type ProductImgUploadResponseResult struct {
 	Response *ProductImgUploadResponse `json:"product_img_upload_response"`
 }
 
-/* 1.传入属性图片ID
-2.传入产品ID
+
+
+
+
+/* 1.传入属性图片ID  
+2.传入产品ID  
 删除一个产品的属性图片 */
 type ProductPropimgDeleteRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 属性图片ID */
 func (r *ProductPropimgDeleteRequest) SetId(value string) {
@@ -3401,6 +3825,7 @@ func (r *ProductPropimgDeleteRequest) SetId(value string) {
 func (r *ProductPropimgDeleteRequest) SetProductId(value string) {
 	r.SetValue("product_id", value)
 }
+
 
 func (r *ProductPropimgDeleteRequest) GetResponse(accessToken string) (*ProductPropimgDeleteResponse, []byte, error) {
 	var resp ProductPropimgDeleteResponseResult
@@ -3419,14 +3844,19 @@ type ProductPropimgDeleteResponseResult struct {
 	Response *ProductPropimgDeleteResponse `json:"product_propimg_delete_response"`
 }
 
-/* 传入产品ID
-传入props,目前仅支持颜色属性.调用taobao.itemprops.get.v2取得颜色属性pid,
-再用taobao.itempropvalues.get取得vid;格式:pid:vid,只能传入一个颜色pid:vid串;
-传入图片内容
+
+
+
+
+/* 传入产品ID  
+传入props,目前仅支持颜色属性.调用taobao.itemprops.get.v2取得颜色属性pid, 
+再用taobao.itempropvalues.get取得vid;格式:pid:vid,只能传入一个颜色pid:vid串;  
+传入图片内容  
 注意：图片最大为2M,只支持JPG,GIF,如果需要传多张，可调多次 */
 type ProductPropimgUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 产品属性图片ID */
 func (r *ProductPropimgUploadRequest) SetId(value string) {
@@ -3453,6 +3883,7 @@ func (r *ProductPropimgUploadRequest) SetProps(value string) {
 	r.SetValue("props", value)
 }
 
+
 func (r *ProductPropimgUploadRequest) GetResponse(accessToken string) (*ProductPropimgUploadResponse, []byte, error) {
 	var resp ProductPropimgUploadResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.product.propimg.upload", &resp)
@@ -3470,20 +3901,25 @@ type ProductPropimgUploadResponseResult struct {
 	Response *ProductPropimgUploadResponse `json:"product_propimg_upload_response"`
 }
 
-/* 传入产品ID
-可修改字段：outer_id,binds,sale_props,name,price,desc,image
-注意：1.可以修改主图,不能修改子图片,主图最大500K,目前仅支持GIF,JPG
+
+
+
+
+/* 传入产品ID  
+可修改字段：outer_id,binds,sale_props,name,price,desc,image  
+注意：1.可以修改主图,不能修改子图片,主图最大500K,目前仅支持GIF,JPG 
       2.商城卖家产品发布24小时后不能作删除或修改操作 */
 type ProductUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 非关键属性.调用taobao.itemprops.get获取pid,调用taobao.itempropvalues.get获取vid;格式:pid:vid;pid:vid */
 func (r *ProductUpdateRequest) SetBinds(value string) {
 	r.SetValue("binds", value)
 }
 
-/* 产品描述.最大25000个字节 */
+/* 产品描述.最大不超过25000个字符 */
 func (r *ProductUpdateRequest) SetDesc(value string) {
 	r.SetValue("desc", value)
 }
@@ -3503,13 +3939,13 @@ func (r *ProductUpdateRequest) SetMajor(value string) {
 	r.SetValue("major", value)
 }
 
-/* 市场ID，1为更新C2C市场的产品信息， 2为更新B2C市场的产品信息。
+/* 市场ID，1为更新C2C市场的产品信息， 2为更新B2C市场的产品信息。 
 不填写此值则C用户更新B2C市场的产品信息，B用户更新B2C市场的产品信息。 */
 func (r *ProductUpdateRequest) SetMarketId(value string) {
 	r.SetValue("market_id", value)
 }
 
-/* 产品名称.最大60个字节 */
+/* 产品名称.最大不超过30个字符 */
 func (r *ProductUpdateRequest) SetName(value string) {
 	r.SetValue("name", value)
 }
@@ -3549,6 +3985,7 @@ func (r *ProductUpdateRequest) SetSellPt(value string) {
 	r.SetValue("sell_pt", value)
 }
 
+
 func (r *ProductUpdateRequest) GetResponse(accessToken string) (*ProductUpdateResponse, []byte, error) {
 	var resp ProductUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.product.update", &resp)
@@ -3566,11 +4003,16 @@ type ProductUpdateResponseResult struct {
 	Response *ProductUpdateResponse `json:"product_update_response"`
 }
 
-/* 根据淘宝会员帐号搜索所有产品信息，只有天猫商家发布商品时才需要用到。
+
+
+
+
+/* 根据淘宝会员帐号搜索所有产品信息，只有天猫商家发布商品时才需要用到。  
 注意：支持分页，每页最多返回100条,默认值为40,页码从1开始，默认为第一页 */
 type ProductsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需返回的字段列表.可选值:Product数据结构中的所有字段;多个字段之间用","分隔 */
 func (r *ProductsGetRequest) SetFields(value string) {
@@ -3592,6 +4034,7 @@ func (r *ProductsGetRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
+
 func (r *ProductsGetRequest) GetResponse(accessToken string) (*ProductsGetResponse, []byte, error) {
 	var resp ProductsGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.products.get", &resp)
@@ -3602,22 +4045,27 @@ func (r *ProductsGetRequest) GetResponse(accessToken string) (*ProductsGetRespon
 }
 
 type ProductsGetResponse struct {
-	Products []*Product `json:"products"`
+	Products *ProductListObject `json:"products"`
 }
 
 type ProductsGetResponseResult struct {
 	Response *ProductsGetResponse `json:"products_get_response"`
 }
 
-/* 只有天猫商家发布商品时才需要用到；
-两种方式搜索所有产品信息(二种至少传一种):
-传入关键字q搜索
-传入cid和props搜索
-返回值支持:product_id,name,pic_path,cid,props,price,tsc
+
+
+
+
+/* 只有天猫商家发布商品时才需要用到； 
+两种方式搜索所有产品信息(二种至少传一种):  
+传入关键字q搜索  
+传入cid和props搜索  
+返回值支持:product_id,name,pic_path,cid,props,price,tsc 
 当用户指定了cid并且cid为垂直市场（3C电器城、鞋城）的类目id时，默认只返回小二确认的产品。如果用户没有指定cid，或cid为普通的类目，默认返回商家确认或小二确认的产品。如果用户自定了status字段，以指定的status类型为准 */
 type ProductsSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品类目ID.调用taobao.itemcats.get获取. */
 func (r *ProductsSearchRequest) SetCid(value string) {
@@ -3634,7 +4082,7 @@ func (r *ProductsSearchRequest) SetFields(value string) {
 	r.SetValue("fields", value)
 }
 
-/* 市场ID，1为取C2C市场的产品信息， 2为取B2C市场的产品信息。
+/* 市场ID，1为取C2C市场的产品信息， 2为取B2C市场的产品信息。 
 不填写此值则默认取C2C的产品信息。 */
 func (r *ProductsSearchRequest) SetMarketId(value string) {
 	r.SetValue("market_id", value)
@@ -3650,7 +4098,7 @@ func (r *ProductsSearchRequest) SetPageSize(value string) {
 	r.SetValue("page_size", value)
 }
 
-/* 属性,属性值的组合.格式:pid:vid;pid:vid;调用taobao.itemprops.get获取类目属性pid
+/* 属性,属性值的组合.格式:pid:vid;pid:vid;调用taobao.itemprops.get获取类目属性pid  
 ,再用taobao.itempropvalues.get取得vid. */
 func (r *ProductsSearchRequest) SetProps(value string) {
 	r.SetValue("props", value)
@@ -3671,6 +4119,7 @@ func (r *ProductsSearchRequest) SetVerticalMarket(value string) {
 	r.SetValue("vertical_market", value)
 }
 
+
 func (r *ProductsSearchRequest) GetResponse(accessToken string) (*ProductsSearchResponse, []byte, error) {
 	var resp ProductsSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.products.search", &resp)
@@ -3681,19 +4130,24 @@ func (r *ProductsSearchRequest) GetResponse(accessToken string) (*ProductsSearch
 }
 
 type ProductsSearchResponse struct {
-	Products     []*Product `json:"products"`
-	TotalResults int        `json:"total_results"`
+	Products *ProductListObject `json:"products"`
+	TotalResults int `json:"total_results"`
 }
 
 type ProductsSearchResponseResult struct {
 	Response *ProductsSearchResponse `json:"products_search_response"`
 }
 
-/* 跟据卖家设定的Sku的外部id获取商品，如果一个outer_id对应多个Sku会返回所有符合条件的sku
+
+
+
+
+/* 跟据卖家设定的Sku的外部id获取商品，如果一个outer_id对应多个Sku会返回所有符合条件的sku  
 这个Sku所属卖家从传入的session中获取，需要session绑定(注：iid标签里是num_iid的值，可以用作num_iid使用) */
 type SkusCustomGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 需返回的字段列表。可选值：Sku结构体中的所有字段；字段之间用“,”隔开 */
 func (r *SkusCustomGetRequest) SetFields(value string) {
@@ -3705,6 +4159,7 @@ func (r *SkusCustomGetRequest) SetOuterId(value string) {
 	r.SetValue("outer_id", value)
 }
 
+
 func (r *SkusCustomGetRequest) GetResponse(accessToken string) (*SkusCustomGetResponse, []byte, error) {
 	var resp SkusCustomGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.skus.custom.get", &resp)
@@ -3715,17 +4170,22 @@ func (r *SkusCustomGetRequest) GetResponse(accessToken string) (*SkusCustomGetRe
 }
 
 type SkusCustomGetResponse struct {
-	Skus []*Sku `json:"skus"`
+	Skus *SkuListObject `json:"skus"`
 }
 
 type SkusCustomGetResponseResult struct {
 	Response *SkusCustomGetResponse `json:"skus_custom_get_response"`
 }
 
+
+
+
+
 /* 提供按照全量/增量的方式批量修改SKU库存的功能 */
 type SkusQuantityUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品数字ID，必填参数 */
 func (r *SkusQuantityUpdateRequest) SetNumIid(value string) {
@@ -3747,6 +4207,7 @@ func (r *SkusQuantityUpdateRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *SkusQuantityUpdateRequest) GetResponse(accessToken string) (*SkusQuantityUpdateResponse, []byte, error) {
 	var resp SkusQuantityUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.skus.quantity.update", &resp)
@@ -3764,10 +4225,15 @@ type SkusQuantityUpdateResponseResult struct {
 	Response *SkusQuantityUpdateResponse `json:"skus_quantity_update_response"`
 }
 
+
+
+
+
 /* 提供异步获取三个月内的所有（出售中和仓库中）商品详情信息接口。 */
 type TopatsItemsAllGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品修改结束时间，格式yyyyMMdd，取值范围：前90天内~昨天，其中start_time<=end_time，如20120531相当于取商品修改时间到2012-05-31 23:59:59为止的商品。注：如果start_time和end_time相同，表示取一天的商品数据。<span style="color:red">强烈建议图书类卖家把三个月商品拆分成3次来获取，否则单个任务会消耗很长时间。<span> */
 func (r *TopatsItemsAllGetRequest) SetEndTime(value string) {
@@ -3789,6 +4255,7 @@ func (r *TopatsItemsAllGetRequest) SetStatus(value string) {
 	r.SetValue("status", value)
 }
 
+
 func (r *TopatsItemsAllGetRequest) GetResponse(accessToken string) (*TopatsItemsAllGetResponse, []byte, error) {
 	var resp TopatsItemsAllGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.topats.items.all.get", &resp)
@@ -3806,15 +4273,21 @@ type TopatsItemsAllGetResponseResult struct {
 	Response *TopatsItemsAllGetResponse `json:"topats_items_all_get_response"`
 }
 
-/* 商品优惠详情查询，可查询商品设置的详细优惠。包括限时折扣，满就送等官方优惠以及第三方优惠。此接口有调用频率限制请酌情使用，建议使用淘客API获取商品折扣价格。 */
+
+
+
+
+/* 商品优惠详情查询，可查询商品设置的详细优惠。包括限时折扣，满就送等官方优惠以及第三方优惠。 */
 type UmpPromotionGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 商品id */
 func (r *UmpPromotionGetRequest) SetItemId(value string) {
 	r.SetValue("item_id", value)
 }
+
 
 func (r *UmpPromotionGetRequest) GetResponse(accessToken string) (*UmpPromotionGetResponse, []byte, error) {
 	var resp UmpPromotionGetResponseResult
@@ -3833,10 +4306,16 @@ type UmpPromotionGetResponseResult struct {
 	Response *UmpPromotionGetResponse `json:"ump_promotion_get_response"`
 }
 
+
+
+
+
 /* 获取到所有的类目，品牌的控制信息，达尔文类目是会以品牌和类目作为控制的力度来管理商品，所有的控制信息可以通过这个接口获取到信息。 */
 type TmallBrandcatControlGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
+
 
 func (r *TmallBrandcatControlGetRequest) GetResponse(accessToken string) (*TmallBrandcatControlGetResponse, []byte, error) {
 	var resp TmallBrandcatControlGetResponseResult
@@ -3855,10 +4334,58 @@ type TmallBrandcatControlGetResponseResult struct {
 	Response *TmallBrandcatControlGetResponse `json:"tmall_brandcat_control_get_response"`
 }
 
+
+
+
+
+/* 针对监管类目品牌关键属性可输入判断逻辑比较复杂，提供简化属性可输入判断的接口，该接口兼容非关键属性和非监管类目品牌 */
+type TmallBrandcatPropinputGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 品牌ID，如果类目没有品牌，指定null */
+func (r *TmallBrandcatPropinputGetRequest) SetBrandId(value string) {
+	r.SetValue("brand_id", value)
+}
+
+/* 类目ID */
+func (r *TmallBrandcatPropinputGetRequest) SetCid(value string) {
+	r.SetValue("cid", value)
+}
+
+/* 属性ID，如果属性有子属性，请指定最后一级子属性ID，tmall.brandcat.propinput.get返回的即为的该属性ID对应的输入特征，对于有子属性模板的情况指定顶级属性ID即可 */
+func (r *TmallBrandcatPropinputGetRequest) SetPid(value string) {
+	r.SetValue("pid", value)
+}
+
+
+func (r *TmallBrandcatPropinputGetRequest) GetResponse(accessToken string) (*TmallBrandcatPropinputGetResponse, []byte, error) {
+	var resp TmallBrandcatPropinputGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "tmall.brandcat.propinput.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type TmallBrandcatPropinputGetResponse struct {
+	PropertyInput *PropertyInputDO `json:"property_input"`
+}
+
+type TmallBrandcatPropinputGetResponseResult struct {
+	Response *TmallBrandcatPropinputGetResponse `json:"tmall_brandcat_propinput_get_response"`
+}
+
+
+
+
+
 /* 获取被管控的品牌类目下销售信息，销售信息又分成两中，一种是规格属性，要求针对这个属性创建规格信息，第二种是非规格属性（一般会被称为营销属性），这种信息主要是会影响到价格的变化，在做sku的时候会使用到。 */
 type TmallBrandcatSalesproGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 被管控的品牌Id */
 func (r *TmallBrandcatSalesproGetRequest) SetBrandId(value string) {
@@ -3870,6 +4397,7 @@ func (r *TmallBrandcatSalesproGetRequest) SetCatId(value string) {
 	r.SetValue("cat_id", value)
 }
 
+
 func (r *TmallBrandcatSalesproGetRequest) GetResponse(accessToken string) (*TmallBrandcatSalesproGetResponse, []byte, error) {
 	var resp TmallBrandcatSalesproGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "tmall.brandcat.salespro.get", &resp)
@@ -3880,212 +4408,22 @@ func (r *TmallBrandcatSalesproGetRequest) GetResponse(accessToken string) (*Tmal
 }
 
 type TmallBrandcatSalesproGetResponse struct {
-	CatBrandSaleProps []*CatBrandSaleProp `json:"cat_brand_sale_props"`
+	CatBrandSaleProps *CatBrandSalePropListObject `json:"cat_brand_sale_props"`
 }
 
 type TmallBrandcatSalesproGetResponseResult struct {
 	Response *TmallBrandcatSalesproGetResponse `json:"tmall_brandcat_salespro_get_response"`
 }
 
-/* tmall提供给外部商家的接口，外部商家调用接口，可以将商家的图书的类目以及SPU信息推送到tamll的数据库中 */
-type TmallProductBooksAddRequest struct {
-	open_taobao.TaobaoMethodRequest
-}
 
-/* 摘要信息，不支持HTML代码，长度限制5000 */
-func (r *TmallProductBooksAddRequest) SetAbstractMsg(value string) {
-	r.SetValue("abstract_msg", value)
-}
 
-/* 用户的Id,需要确定自己id的可以联系接口负责人 */
-func (r *TmallProductBooksAddRequest) SetAppInfo(value string) {
-	r.SetValue("app_info", value)
-}
 
-/* 作者/著者，最多填写三个人名，超出三个人的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetAuthor(value string) {
-	r.SetValue("author", value)
-}
-
-/* 作者国别/地区，到国家级别 */
-func (r *TmallProductBooksAddRequest) SetAuthorArea(value string) {
-	r.SetValue("author_area", value)
-}
-
-/* 条形码，数字，共13位，9787开头 */
-func (r *TmallProductBooksAddRequest) SetBarCode(value string) {
-	r.SetValue("bar_code", value)
-}
-
-/* 装帧 */
-func (r *TmallProductBooksAddRequest) SetBookBind(value string) {
-	r.SetValue("book_bind", value)
-}
-
-/* 开本，如：16  表示16开本 */
-func (r *TmallProductBooksAddRequest) SetBookSize(value string) {
-	r.SetValue("book_size", value)
-}
-
-/* 版本 */
-func (r *TmallProductBooksAddRequest) SetBookVersion(value string) {
-	r.SetValue("book_version", value)
-}
-
-/* 目录，不支持HTML代码，长度限制为8000 */
-func (r *TmallProductBooksAddRequest) SetCatalog(value string) {
-	r.SetValue("catalog", value)
-}
-
-/* 类目id */
-func (r *TmallProductBooksAddRequest) SetCategoryId(value string) {
-	r.SetValue("category_id", value)
-}
-
-/* 中图分类号，英文字母加数字组成 */
-func (r *TmallProductBooksAddRequest) SetChinaClassifyNo(value string) {
-	r.SetValue("china_classify_no", value)
-}
-
-/* cip数据编号，真实格式：（XXX）第***号，
-导入时，格式为XXX-*** */
-func (r *TmallProductBooksAddRequest) SetCip(value string) {
-	r.SetValue("cip", value)
-}
-
-/* 点评者，只写一个人的名字，超出的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetCommentator(value string) {
-	r.SetValue("commentator", value)
-}
-
-/* 用户自己的Id号 */
-func (r *TmallProductBooksAddRequest) SetCustomId(value string) {
-	r.SetValue("custom_id", value)
-}
-
-/* 图书名称(正副书名) */
-func (r *TmallProductBooksAddRequest) SetDeputyName(value string) {
-	r.SetValue("deputy_name", value)
-}
-
-/* 绘图者，只写一个人的名字，超出的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetDrawor(value string) {
-	r.SetValue("drawor", value)
-}
-
-/* 编者，只写一个人的名字，超出的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetEditor(value string) {
-	r.SetValue("editor", value)
-}
-
-/* 摄影者，只写一个人的名字，超出的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetGraphor(value string) {
-	r.SetValue("graphor", value)
-}
-
-/* 上传图片，图片上传使用byte[]类型 */
-func (r *TmallProductBooksAddRequest) SetImage(value string) {
-	r.SetValue("image", value)
-}
-
-/* 不带‘-’的图书ISBN号
-1. 位数限定：10位 末尾校验,7开头
-2. 位数限定：13位、开头数字限定： 9787开头 */
-func (r *TmallProductBooksAddRequest) SetIsbn(value string) {
-	r.SetValue("isbn", value)
-}
-
-/* 这条记录对应的淘宝的Ids */
-func (r *TmallProductBooksAddRequest) SetItemIds(value string) {
-	r.SetValue("item_ids", value)
-}
-
-/* 口述者，只写一个人的名字，超出的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetNarrator(value string) {
-	r.SetValue("narrator", value)
-}
-
-/* 分册名 */
-func (r *TmallProductBooksAddRequest) SetPartName(value string) {
-	r.SetValue("part_name", value)
-}
-
-/* 分册号 */
-func (r *TmallProductBooksAddRequest) SetPartNo(value string) {
-	r.SetValue("part_no", value)
-}
-
-/* 策划者，只写一个人的名字，超出的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetPlottor(value string) {
-	r.SetValue("plottor", value)
-}
-
-/* 价格支持整数和小数，小数保留小数点后两位，若有多个价格，价格之间通过','号分隔 */
-func (r *TmallProductBooksAddRequest) SetPrice(value string) {
-	r.SetValue("price", value)
-}
-
-/* 出版社名称 */
-func (r *TmallProductBooksAddRequest) SetPublishCompany(value string) {
-	r.SetValue("publish_company", value)
-}
-
-/* 出版时间，格式必须注意：年份/月份 */
-func (r *TmallProductBooksAddRequest) SetPublishYm(value string) {
-	r.SetValue("publish_ym", value)
-}
-
-/* 年号，必须是完整的年份，如：2013，当输入的值不是四位或者首位大于2时，调接口失败 */
-func (r *TmallProductBooksAddRequest) SetReginYear(value string) {
-	r.SetValue("regin_year", value)
-}
-
-/* 注释者，只写一个人的名字，超出的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetScholisat(value string) {
-	r.SetValue("scholisat", value)
-}
-
-/* 丛书名 */
-func (r *TmallProductBooksAddRequest) SetSeriesBooksName(value string) {
-	r.SetValue("series_books_name", value)
-}
-
-/* 此字段废弃 */
-func (r *TmallProductBooksAddRequest) SetSpuImg(value string) {
-	r.SetValue("spu_img", value)
-}
-
-/* 简介，不支持HTML代码，长度不能超过5000 */
-func (r *TmallProductBooksAddRequest) SetSummary(value string) {
-	r.SetValue("summary", value)
-}
-
-/* 译者，只写一个人的名字，超出的以“等”结束 */
-func (r *TmallProductBooksAddRequest) SetTranslator(value string) {
-	r.SetValue("translator", value)
-}
-
-func (r *TmallProductBooksAddRequest) GetResponse(accessToken string) (*TmallProductBooksAddResponse, []byte, error) {
-	var resp TmallProductBooksAddResponseResult
-	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "tmall.product.books.add", &resp)
-	if err != nil {
-		return nil, data, err
-	}
-	return resp.Response, data, err
-}
-
-type TmallProductBooksAddResponse struct {
-	ProductBooks *ProductBooks `json:"product_books"`
-}
-
-type TmallProductBooksAddResponseResult struct {
-	Response *TmallProductBooksAddResponse `json:"tmall_product_books_add_response"`
-}
 
 /* 增加产品规格 */
 type TmallProductSpecAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 产品二维码 */
 func (r *TmallProductSpecAddRequest) SetBarcode(value string) {
@@ -4147,6 +4485,7 @@ func (r *TmallProductSpecAddRequest) SetSpecPropsAlias(value string) {
 	r.SetValue("spec_props_alias", value)
 }
 
+
 func (r *TmallProductSpecAddRequest) GetResponse(accessToken string) (*TmallProductSpecAddResponse, []byte, error) {
 	var resp TmallProductSpecAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "tmall.product.spec.add", &resp)
@@ -4164,19 +4503,25 @@ type TmallProductSpecAddResponseResult struct {
 	Response *TmallProductSpecAddResponse `json:"tmall_product_spec_add_response"`
 }
 
-/* 通过当个的spec_id获取到这个产品规格的信息，主要是因为产品规格是要经过审核的，所以通过这个接口可以获取到是否通过审核
-通过参看这个ProductSpec的status判断：
-1:表示审核通过
-3:表示等待审核。
+
+
+
+
+/* 通过当个的spec_id获取到这个产品规格的信息，主要是因为产品规格是要经过审核的，所以通过这个接口可以获取到是否通过审核 
+通过参看这个ProductSpec的status判断： 
+1:表示审核通过 
+3:表示等待审核。 
 如果你的id找不到数据，那么就是审核被拒绝。 */
 type TmallProductSpecGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 要获取信息的产品规格信息。 */
 func (r *TmallProductSpecGetRequest) SetSpecId(value string) {
 	r.SetValue("spec_id", value)
 }
+
 
 func (r *TmallProductSpecGetRequest) GetResponse(accessToken string) (*TmallProductSpecGetResponse, []byte, error) {
 	var resp TmallProductSpecGetResponseResult
@@ -4195,10 +4540,15 @@ type TmallProductSpecGetResponseResult struct {
 	Response *TmallProductSpecGetResponse `json:"tmall_product_spec_get_response"`
 }
 
+
+
+
+
 /* 上传指定类型的产品规格认证文件，并返回存有上传成功图片url的产品规格对象 */
 type TmallProductSpecPicUploadRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 上传的认证图片文件 */
 func (r *TmallProductSpecPicUploadRequest) SetCertifyPic(value string) {
@@ -4217,6 +4567,7 @@ func (r *TmallProductSpecPicUploadRequest) SetCertifyType(value string) {
 	r.SetValue("certify_type", value)
 }
 
+
 func (r *TmallProductSpecPicUploadRequest) GetResponse(accessToken string) (*TmallProductSpecPicUploadResponse, []byte, error) {
 	var resp TmallProductSpecPicUploadResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "tmall.product.spec.pic.upload", &resp)
@@ -4234,12 +4585,17 @@ type TmallProductSpecPicUploadResponseResult struct {
 	Response *TmallProductSpecPicUploadResponse `json:"tmall_product_spec_pic_upload_response"`
 }
 
+
+
+
+
 /* 按productID下载或品牌下载产品规格，返回一组的产品规格信息。 */
 type TmallProductSpecsGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* 类目的ID号，该id必须和properties同时传入。
+
+/* 类目的ID号，该id必须和properties同时传入。 
 而且只有当product_id不传入的时候才起效果。 */
 func (r *TmallProductSpecsGetRequest) SetCatId(value string) {
 	r.SetValue("cat_id", value)
@@ -4250,11 +4606,12 @@ func (r *TmallProductSpecsGetRequest) SetProductId(value string) {
 	r.SetValue("product_id", value)
 }
 
-/* 关键属性的字符串，pid:vid;pid:vid
+/* 关键属性的字符串，pid:vid;pid:vid 
 该字段必须和cat_id同时传入才起效果。 而且只有当product_id不传入的时候才起效果。 */
 func (r *TmallProductSpecsGetRequest) SetProperties(value string) {
 	r.SetValue("properties", value)
 }
+
 
 func (r *TmallProductSpecsGetRequest) GetResponse(accessToken string) (*TmallProductSpecsGetResponse, []byte, error) {
 	var resp TmallProductSpecsGetResponseResult
@@ -4266,9 +4623,45 @@ func (r *TmallProductSpecsGetRequest) GetResponse(accessToken string) (*TmallPro
 }
 
 type TmallProductSpecsGetResponse struct {
-	ProductSpecs []*ProductSpec `json:"product_specs"`
+	ProductSpecs *ProductSpecListObject `json:"product_specs"`
 }
 
 type TmallProductSpecsGetResponseResult struct {
 	Response *TmallProductSpecsGetResponse `json:"tmall_product_specs_get_response"`
 }
+
+
+
+
+
+/* 批量根据specId查询产品规格审核信息包括产品规格状态，申请人，拒绝原因等 */
+type TmallProductSpecsTicketGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 产品规格ID，多个用逗号分隔 */
+func (r *TmallProductSpecsTicketGetRequest) SetSpecIds(value string) {
+	r.SetValue("spec_ids", value)
+}
+
+
+func (r *TmallProductSpecsTicketGetRequest) GetResponse(accessToken string) (*TmallProductSpecsTicketGetResponse, []byte, error) {
+	var resp TmallProductSpecsTicketGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "tmall.product.specs.ticket.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type TmallProductSpecsTicketGetResponse struct {
+	Tickets *TicketListObject `json:"tickets"`
+}
+
+type TmallProductSpecsTicketGetResponseResult struct {
+	Response *TmallProductSpecsTicketGetResponse `json:"tmall_product_specs_ticket_get_response"`
+}
+
+
+

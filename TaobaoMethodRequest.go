@@ -6,6 +6,7 @@ package open_taobao
 
 import (
 	"errors"
+	"time"
 )
 
 type TaobaoMethodRequest struct {
@@ -20,8 +21,20 @@ func (t *TaobaoMethodRequest) GetResponse(accessToken, apiMethodName string, res
 
 	t.SetValue("method", apiMethodName)
 	t.SetValue("format", "json")
-	t.SetValue("access_token", accessToken)
 	t.SetValue("v", "2.0")
+	if taobaoConfig.isTop {
+		t.SetValue("session", accessToken)
+		t.SetValue("timestamp", time.Now().Format("2006-01-02 15:04:05"))
+		t.SetValue("app_key", taobaoConfig.appKey)
+		t.SetValue("sign_method", "md5")
+		t.SetReqUrl("http://gw.api.taobao.com/router/rest")
+
+		if taobaoConfig.requestUrl != "" {
+			t.SetReqUrl(taobaoConfig.requestUrl)
+		}
+	} else {
+		t.SetValue("access_token", accessToken)
+	}
 
 	return executeRequest(t, resp, InsecureSkipVerify, DisableCompression)
 }

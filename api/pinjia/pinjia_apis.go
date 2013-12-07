@@ -5,13 +5,18 @@
 package pinjia
 
 import (
-	"github.com/changkong/open_taobao"
+	"github.com/yaofangou/open_taobao"
 )
+
+
+
+
 
 /* 新增单个评价(<font color="red">注：在评价之前需要对订单成功的时间进行判定（end_time）,如果超过15天，不能再通过该接口进行评价</font>) */
 type TraderateAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否匿名,卖家评不能匿名。可选值:true(匿名),false(非匿名)。注意：如果交易订单匿名，则评价也匿名 */
 func (r *TraderateAddRequest) SetAnony(value string) {
@@ -43,6 +48,7 @@ func (r *TraderateAddRequest) SetTid(value string) {
 	r.SetValue("tid", value)
 }
 
+
 func (r *TraderateAddRequest) GetResponse(accessToken string) (*TraderateAddResponse, []byte, error) {
 	var resp TraderateAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.traderate.add", &resp)
@@ -60,10 +66,15 @@ type TraderateAddResponseResult struct {
 	Response *TraderateAddResponse `json:"traderate_add_response"`
 }
 
+
+
+
+
 /* 商城卖家给评价做出解释（买家追加评论后、评价超过30天的，都不能再做评价解释） */
 type TraderateExplainAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 子订单ID */
 func (r *TraderateExplainAddRequest) SetOid(value string) {
@@ -74,6 +85,7 @@ func (r *TraderateExplainAddRequest) SetOid(value string) {
 func (r *TraderateExplainAddRequest) SetReply(value string) {
 	r.SetValue("reply", value)
 }
+
 
 func (r *TraderateExplainAddRequest) GetResponse(accessToken string) (*TraderateExplainAddResponse, []byte, error) {
 	var resp TraderateExplainAddResponseResult
@@ -92,10 +104,119 @@ type TraderateExplainAddResponseResult struct {
 	Response *TraderateExplainAddResponse `json:"traderate_explain_add_response"`
 }
 
+
+
+
+
+/* 根据商品id获取这个商品id对应的大家印象 */
+type TraderateImprImprwordByaucidGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 淘宝的商品id */
+func (r *TraderateImprImprwordByaucidGetRequest) SetAuctionId(value string) {
+	r.SetValue("auction_id", value)
+}
+
+
+func (r *TraderateImprImprwordByaucidGetRequest) GetResponse(accessToken string) (*TraderateImprImprwordByaucidGetResponse, []byte, error) {
+	var resp TraderateImprImprwordByaucidGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.traderate.impr.imprword.byaucid.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type TraderateImprImprwordByaucidGetResponse struct {
+	ImprWordList *ImprItemDOListObject `json:"impr_word_list"`
+}
+
+type TraderateImprImprwordByaucidGetResponseResult struct {
+	Response *TraderateImprImprwordByaucidGetResponse `json:"traderate_impr_imprword_byaucid_get_response"`
+}
+
+
+
+
+
+/* 根据卖家nick和交易id（如果是子订单，输入子订单id），查询到该条评价的大家印象标签 */
+type TraderateImprImprwordByfeedidGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 交易订单id号（如果包含子订单，请使用子订单id号） */
+func (r *TraderateImprImprwordByfeedidGetRequest) SetChildTradeId(value string) {
+	r.SetValue("child_trade_id", value)
+}
+
+
+func (r *TraderateImprImprwordByfeedidGetRequest) GetResponse(accessToken string) (*TraderateImprImprwordByfeedidGetResponse, []byte, error) {
+	var resp TraderateImprImprwordByfeedidGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.traderate.impr.imprword.byfeedid.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type TraderateImprImprwordByfeedidGetResponse struct {
+	ImprFeed *ImprFeedIdDO `json:"impr_feed"`
+}
+
+type TraderateImprImprwordByfeedidGetResponseResult struct {
+	Response *TraderateImprImprwordByfeedidGetResponse `json:"traderate_impr_imprword_byfeedid_get_response"`
+}
+
+
+
+
+
+/* 根据淘宝后台类目的一级类目和叶子类目 */
+type TraderateImprImprwordsGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 淘宝叶子类目id */
+func (r *TraderateImprImprwordsGetRequest) SetCatLeafId(value string) {
+	r.SetValue("cat_leaf_id", value)
+}
+
+/* 淘宝一级类目id */
+func (r *TraderateImprImprwordsGetRequest) SetCatRootId(value string) {
+	r.SetValue("cat_root_id", value)
+}
+
+
+func (r *TraderateImprImprwordsGetRequest) GetResponse(accessToken string) (*TraderateImprImprwordsGetResponse, []byte, error) {
+	var resp TraderateImprImprwordsGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.traderate.impr.imprwords.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type TraderateImprImprwordsGetResponse struct {
+	ImprWords []string `json:"impr_words"`
+}
+
+type TraderateImprImprwordsGetResponseResult struct {
+	Response *TraderateImprImprwordsGetResponse `json:"traderate_impr_imprwords_get_response"`
+}
+
+
+
+
+
 /* 针对父子订单新增批量评价(<font color="red">注：在评价之前需要对订单成功的时间进行判定（end_time）,如果超过15天，不用再通过该接口进行评价</font>) */
 type TraderateListAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 是否匿名，卖家评不能匿名。可选值:true(匿名),false(非匿名)。 注意：如果买家匿名购买，那么买家的评价默认匿名 */
 func (r *TraderateListAddRequest) SetAnony(value string) {
@@ -122,6 +243,7 @@ func (r *TraderateListAddRequest) SetTid(value string) {
 	r.SetValue("tid", value)
 }
 
+
 func (r *TraderateListAddRequest) GetResponse(accessToken string) (*TraderateListAddResponse, []byte, error) {
 	var resp TraderateListAddResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.traderate.list.add", &resp)
@@ -139,10 +261,15 @@ type TraderateListAddResponseResult struct {
 	Response *TraderateListAddResponse `json:"traderate_list_add_response"`
 }
 
+
+
+
+
 /* 搜索评价信息，只能获取距今180天内的评价记录(只支持查询卖家给出或得到的评价)。 */
 type TraderatesGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 评价结束时间。如果只输入结束时间，那么全部返回所有评价数据。 */
 func (r *TraderatesGetRequest) SetEndDate(value string) {
@@ -199,6 +326,7 @@ func (r *TraderatesGetRequest) SetUseHasNext(value string) {
 	r.SetValue("use_has_next", value)
 }
 
+
 func (r *TraderatesGetRequest) GetResponse(accessToken string) (*TraderatesGetResponse, []byte, error) {
 	var resp TraderatesGetResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.traderates.get", &resp)
@@ -209,11 +337,14 @@ func (r *TraderatesGetRequest) GetResponse(accessToken string) (*TraderatesGetRe
 }
 
 type TraderatesGetResponse struct {
-	HasNext      bool         `json:"has_next"`
-	TotalResults int          `json:"total_results"`
-	TradeRates   []*TradeRate `json:"trade_rates"`
+	HasNext bool `json:"has_next"`
+	TotalResults int `json:"total_results"`
+	TradeRates *TradeRateListObject `json:"trade_rates"`
 }
 
 type TraderatesGetResponseResult struct {
 	Response *TraderatesGetResponse `json:"traderates_get_response"`
 }
+
+
+

@@ -5,18 +5,24 @@
 package jipiao
 
 import (
-	"github.com/changkong/open_taobao"
+	"github.com/yaofangou/open_taobao"
 )
+
+
+
+
 
 /* 产品批量添加,传入文件大小限制在1M(一般1w条记录不会超过1M),每五分钟只允许调用一次 */
 type JipiaoPoliciesAddRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* (ZIP压缩UTF-8编码JSON)，压缩前格式为:[{数据结构BatchPolicy的json格式},{数据结构BatchPolicy的json格式},...] 示例： [{ "attributes": "rfc=1;ipt=1;fdtod=0000;ldtod=2359", "source": null, "airline": "CZ", "arrAirports": "CSX,CTU,CAN", "autoHkFlag": true, "autoTicketFlag": true, "cabinRules": "[{\"matcher\":{\"mode\":\"ALL\",\"list\":[\"Y\"]},\"priceStrategy\":{\"mode\":\"DISCOUNT\",\"modeBaseValue\":null,\"retention\":5000,\"rebase\":-5},\"backMatcher\":null}]", "changeRule": null, "dayOfWeeks": "1234", "depAirports": "PEK", "ei": "ei", "excludeDate": null, "firstSaleAdvanceDay": null, "flags": null, "flightInfo": "+CA1234,CZ2345", "lastSaleAdvanceDay": null, "memo": "memoUpdate", "officeId": "RRR003", "outProductId": "46f9b762-ea50-4c71-877b-45fa2936277e", "policyType": 8, "refundRule": null, "reissueRule": null, "saleEndDate": "2013-06-19 00:00:00", "saleStartDate": "2013-06-09 00:00:00", "seatInfo": null, "shareSupport": false, "specialRule": null, "travelEndDate": "2013-06-19 00:00:00", "travelStartDate": "2013-06-09 00:00:00" } ] */
 func (r *JipiaoPoliciesAddRequest) SetCompressedPolicies(value string) {
 	r.SetValue("compressed_policies", value)
 }
+
 
 func (r *JipiaoPoliciesAddRequest) GetResponse(accessToken string) (*JipiaoPoliciesAddResponse, []byte, error) {
 	var resp JipiaoPoliciesAddResponseResult
@@ -28,55 +34,61 @@ func (r *JipiaoPoliciesAddRequest) GetResponse(accessToken string) (*JipiaoPolic
 }
 
 type JipiaoPoliciesAddResponse struct {
-	InvokeId  string `json:"invoke_id"`
-	IsSuccess bool   `json:"is_success"`
+	InvokeId string `json:"invoke_id"`
+	IsSuccess bool `json:"is_success"`
 }
 
 type JipiaoPoliciesAddResponseResult struct {
 	Response *JipiaoPoliciesAddResponse `json:"jipiao_policies_add_response"`
 }
 
+
+
+
+
 /* 政策全量增加,会删除政策中字段source值为TOP的记录，并且把新增的记录插入，传入文件大小限制在5M(一般10w条记录不会超过5M),每半小时只允许调用一次 */
 type JipiaoPoliciesFulladdRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
-/* (ZIP压缩UTF-8编码JSON)，压缩前格式为:[{数据结构BatchPolicy的json格式},{数据结构BatchPolicy的json格式},...] 示例：
-[{
-        "attributes": "rfc=1;ipt=1;fdtod=0000;ldtod=2359",
-        "source": null,
-        "airline": "CZ",
-        "arrAirports": "CSX,CTU,CAN",
-        "autoHkFlag": true,
-        "autoTicketFlag": true,
-        "cabinRules": "[{\"matcher\":{\"mode\":\"ALL\",\"list\":[\"Y\"]},\"priceStrategy\":{\"mode\":\"DISCOUNT\",\"modeBaseValue\":null,\"retention\":5000,\"rebase\":-5},\"backMatcher\":null}]",
-        "changeRule": null,
-        "dayOfWeeks": "1234",
-        "depAirports": "PEK",
-        "ei": "ei",
-        "excludeDate": null,
-        "firstSaleAdvanceDay": null,
-        "flags": null,
-        "flightInfo": "+CA1234,CZ2345",
-        "lastSaleAdvanceDay": null,
-        "memo": "memoUpdate",
-        "officeId": "RRR003",
-        "outProductId": "46f9b762-ea50-4c71-877b-45fa2936277e",
-        "policyType": 8,
-        "refundRule": null,
-        "reissueRule": null,
-        "saleEndDate": "2013-06-19 00:00:00",
-        "saleStartDate": "2013-06-09 00:00:00",
-        "seatInfo": null,
-        "shareSupport": false,
-        "specialRule": null,
-        "travelEndDate": "2013-06-19 00:00:00",
-        "travelStartDate": "2013-06-09 00:00:00"
-    }
+
+/* (ZIP压缩UTF-8编码JSON)，压缩前格式为:[{数据结构BatchPolicy的json格式},{数据结构BatchPolicy的json格式},...] 示例： 
+[{ 
+        "attributes": "rfc=1;ipt=1;fdtod=0000;ldtod=2359", 
+        "source": null, 
+        "airline": "CZ", 
+        "arrAirports": "CSX,CTU,CAN", 
+        "autoHkFlag": true, 
+        "autoTicketFlag": true, 
+        "cabinRules": "[{\"matcher\":{\"mode\":\"ALL\",\"list\":[\"Y\"]},\"priceStrategy\":{\"mode\":\"DISCOUNT\",\"modeBaseValue\":null,\"retention\":5000,\"rebase\":-5},\"backMatcher\":null}]", 
+        "changeRule": null, 
+        "dayOfWeeks": "1234", 
+        "depAirports": "PEK", 
+        "ei": "ei", 
+        "excludeDate": null, 
+        "firstSaleAdvanceDay": null, 
+        "flags": null, 
+        "flightInfo": "+CA1234,CZ2345", 
+        "lastSaleAdvanceDay": null, 
+        "memo": "memoUpdate", 
+        "officeId": "RRR003", 
+        "outProductId": "46f9b762-ea50-4c71-877b-45fa2936277e", 
+        "policyType": 8, 
+        "refundRule": null, 
+        "reissueRule": null, 
+        "saleEndDate": "2013-06-19 00:00:00", 
+        "saleStartDate": "2013-06-09 00:00:00", 
+        "seatInfo": null, 
+        "shareSupport": false, 
+        "specialRule": null, 
+        "travelEndDate": "2013-06-19 00:00:00", 
+        "travelStartDate": "2013-06-09 00:00:00" 
+    } 
 ] */
 func (r *JipiaoPoliciesFulladdRequest) SetCompressedPolicies(value string) {
 	r.SetValue("compressed_policies", value)
 }
+
 
 func (r *JipiaoPoliciesFulladdRequest) GetResponse(accessToken string) (*JipiaoPoliciesFulladdResponse, []byte, error) {
 	var resp JipiaoPoliciesFulladdResponseResult
@@ -88,19 +100,24 @@ func (r *JipiaoPoliciesFulladdRequest) GetResponse(accessToken string) (*JipiaoP
 }
 
 type JipiaoPoliciesFulladdResponse struct {
-	Empty     *BatchPolicy `json:"empty"`
-	InvokeId  string       `json:"invoke_id"`
-	IsSuccess bool         `json:"is_success"`
+	Empty *BatchPolicy `json:"empty"`
+	InvokeId string `json:"invoke_id"`
+	IsSuccess bool `json:"is_success"`
 }
 
 type JipiaoPoliciesFulladdResponseResult struct {
 	Response *JipiaoPoliciesFulladdResponse `json:"jipiao_policies_fulladd_response"`
 }
 
+
+
+
+
 /* 根据条件大批量更新产品，目前只支持删除,每十分钟只允许调用一次,更新记录数不能超过10W个 */
 type JipiaoPoliciesstatusUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 航空公司二字码 */
 func (r *JipiaoPoliciesstatusUpdateRequest) SetAirline(value string) {
@@ -142,6 +159,7 @@ func (r *JipiaoPoliciesstatusUpdateRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
 
+
 func (r *JipiaoPoliciesstatusUpdateRequest) GetResponse(accessToken string) (*JipiaoPoliciesstatusUpdateResponse, []byte, error) {
 	var resp JipiaoPoliciesstatusUpdateResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.jipiao.policiesstatus.update", &resp)
@@ -152,18 +170,23 @@ func (r *JipiaoPoliciesstatusUpdateRequest) GetResponse(accessToken string) (*Ji
 }
 
 type JipiaoPoliciesstatusUpdateResponse struct {
-	InvokeId  string `json:"invoke_id"`
-	IsSuccess bool   `json:"is_success"`
+	InvokeId string `json:"invoke_id"`
+	IsSuccess bool `json:"is_success"`
 }
 
 type JipiaoPoliciesstatusUpdateResponseResult struct {
 	Response *JipiaoPoliciesstatusUpdateResponse `json:"jipiao_policiesstatus_update_response"`
 }
 
+
+
+
+
 /* 根据政策id或者政策外部id查询政策信息 */
 type JipiaoPolicyGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* type外0，表示机票政策id；type为1，表示机票政策out_product_id */
 func (r *JipiaoPolicyGetRequest) SetPolicyId(value string) {
@@ -174,6 +197,7 @@ func (r *JipiaoPolicyGetRequest) SetPolicyId(value string) {
 func (r *JipiaoPolicyGetRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
+
 
 func (r *JipiaoPolicyGetRequest) GetResponse(accessToken string) (*JipiaoPolicyGetResponse, []byte, error) {
 	var resp JipiaoPolicyGetResponseResult
@@ -192,29 +216,34 @@ type JipiaoPolicyGetResponseResult struct {
 	Response *JipiaoPolicyGetResponse `json:"jipiao_policy_get_response"`
 }
 
+
+
+
+
 /* 添加/修改一条机票政策 */
 type JipiaoPolicyProcessRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 政策所支持的航空公司二字码 */
 func (r *JipiaoPolicyProcessRequest) SetAirline(value string) {
 	r.SetValue("airline", value)
 }
 
-/* 政策支持的到达机场列表，逗号分隔的机场三字码，
-注：
-1.让利(8)政策，当到达支持多个(最多25)时，出发只能支持一个；
+/* 政策支持的到达机场列表，逗号分隔的机场三字码， 
+注：  
+1.让利(8)政策，当到达支持多个(最多25)时，出发只能支持一个；  
 2.特价(6)/特殊(10)政策，出发/到达城市只支持一个 */
 func (r *JipiaoPolicyProcessRequest) SetArrAirports(value string) {
 	r.SetValue("arr_airports", value)
 }
 
-/* 扩展字段：
-   "rfc" 对应值 1:不退不改不签,2:收费退改签（退、改、签中任意一个收费即为收费退改签）3:免费退改签
-   "ipt" 对应值 1:等额行程单 2:不提供发票5:等额“行程单+发票”（对应旧的2） 6:等额发票（对应旧的1）,例如：rfc=1;ipt=1
-   "fdtod"对应值起飞时间“0000”为0时0分
-   "ldtod"对应值：到达时间“2359”为23时59分 */
+/* 扩展字段： 
+    "rfc" 对应值 1:不退不改不签,2:收费退改签（退、改、签中任意一个收费即为收费退改签）3:免费退改签 
+    "ipt" 对应值 1:等额行程单 2:不提供发票5:等额“行程单+发票”（对应旧的2） 6:等额发票（对应旧的1）,例如：rfc=1;ipt=1 
+    "fdtod"对应值起飞时间“0000”为0时0分  
+    "ldtod"对应值：到达时间“2359”为23时59分 */
 func (r *JipiaoPolicyProcessRequest) SetAttributes(value string) {
 	r.SetValue("attributes", value)
 }
@@ -224,7 +253,7 @@ func (r *JipiaoPolicyProcessRequest) SetAutoHkFlag(value string) {
 	r.SetValue("auto_hk_flag", value)
 }
 
-/* 政策是否支持自动出票，默认不支持，
+/* 政策是否支持自动出票，默认不支持， 
 注：自动出票时，必须同时自动HK */
 func (r *JipiaoPolicyProcessRequest) SetAutoTicketFlag(value string) {
 	r.SetValue("auto_ticket_flag", value)
@@ -251,16 +280,16 @@ func (r *JipiaoPolicyProcessRequest) SetChangeRule(value string) {
 	r.SetValue("change_rule", value)
 }
 
-/* 政策适用的星期几，1-7分别表示周一到周日
-注：特殊政策不能填写该字段；其它政策填写时，
+/* 政策适用的星期几，1-7分别表示周一到周日 
+注：特殊政策不能填写该字段；其它政策填写时， 
 包含全部时需要设置为1234567 */
 func (r *JipiaoPolicyProcessRequest) SetDayOfWeeks(value string) {
 	r.SetValue("day_of_weeks", value)
 }
 
-/* 政策支持的出发机场列表，逗号分隔的机场三字码，
-注：
-1.让利(8)政策，当出发支持多个(最多25)时，到达只能支持一个；
+/* 政策支持的出发机场列表，逗号分隔的机场三字码， 
+注： 
+1.让利(8)政策，当出发支持多个(最多25)时，到达只能支持一个； 
 2.特价(6)/特殊(10)政策，出发/到达城市只支持一个 */
 func (r *JipiaoPolicyProcessRequest) SetDepAirports(value string) {
 	r.SetValue("dep_airports", value)
@@ -271,7 +300,7 @@ func (r *JipiaoPolicyProcessRequest) SetEi(value string) {
 	r.SetValue("ei", value)
 }
 
-/* 政策旅行有效日期中排除指定日期，设定日期将不在搜索结果页面展现
+/* 政策旅行有效日期中排除指定日期，设定日期将不在搜索结果页面展现 
 注：最多排除20天，特殊政策无此设置 */
 func (r *JipiaoPolicyProcessRequest) SetExcludeDate(value string) {
 	r.SetValue("exclude_date", value)
@@ -282,18 +311,18 @@ func (r *JipiaoPolicyProcessRequest) SetFirstSaleAdvanceDay(value string) {
 	r.SetValue("first_sale_advance_day", value)
 }
 
-/* flags是二进制标志
-从右到左数，第1个位表示：不PAT自动HK
-第2个位表示：儿童可与成人同价
+/* flags是二进制标志 
+从右到左数，第1个位表示：不PAT自动HK  
+第2个位表示：儿童可与成人同价 
 比如：“儿童可与成人同价”=true ,“不PAT自动HK”=false,则表示成二进制字符串"10",换算成十进制flags=2 */
 func (r *JipiaoPolicyProcessRequest) SetFlags(value string) {
 	r.SetValue("flags", value)
 }
 
-/* 包含/排除的航班号，注意格式：
-+CA1234,CZ3166，表示包含列表
--CA1234,CZ3166，表示排除列表
-默认包含所有航班；
+/* 包含/排除的航班号，注意格式： 
++CA1234,CZ3166，表示包含列表 
+-CA1234,CZ3166，表示排除列表 
+默认包含所有航班； 
 不支持同时包含和排除 */
 func (r *JipiaoPolicyProcessRequest) SetFlightInfo(value string) {
 	r.SetValue("flight_info", value)
@@ -319,8 +348,8 @@ func (r *JipiaoPolicyProcessRequest) SetOutProductId(value string) {
 	r.SetValue("out_product_id", value)
 }
 
-/* 0，type为0时，不需要设置；
-1，type为1时，表示policy_id为政策id
+/* 0，type为0时，不需要设置； 
+1，type为1时，表示policy_id为政策id 
 2，type为2时，表示policy_id为政策out_product_id */
 func (r *JipiaoPolicyProcessRequest) SetPolicyId(value string) {
 	r.SetValue("policy_id", value)
@@ -376,12 +405,13 @@ func (r *JipiaoPolicyProcessRequest) SetTravelStartDate(value string) {
 	r.SetValue("travel_start_date", value)
 }
 
-/* 0，表示添加政策；
-1，表示按id修改政策；
+/* 0，表示添加政策； 
+1，表示按id修改政策； 
 2，表示按out_product_id修改政策 */
 func (r *JipiaoPolicyProcessRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
+
 
 func (r *JipiaoPolicyProcessRequest) GetResponse(accessToken string) (*JipiaoPolicyProcessResponse, []byte, error) {
 	var resp JipiaoPolicyProcessResponseResult
@@ -394,17 +424,22 @@ func (r *JipiaoPolicyProcessRequest) GetResponse(accessToken string) (*JipiaoPol
 
 type JipiaoPolicyProcessResponse struct {
 	IsSuccess bool `json:"is_success"`
-	PolicyId  int  `json:"policy_id"`
+	PolicyId int `json:"policy_id"`
 }
 
 type JipiaoPolicyProcessResponseResult struct {
 	Response *JipiaoPolicyProcessResponse `json:"jipiao_policy_process_response"`
 }
 
+
+
+
+
 /* 根据外部产品id，进行政策状态更新，挂起/解挂/删除 */
 type JipiaoPolicystatusUpdateRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* type为0，表示机票政策id；type为1，表示机票政策out_product_id；最大支持政策数100，注意不要如果不要超出字符串的长度限制，超出的话，请调小批量的个数 */
 func (r *JipiaoPolicystatusUpdateRequest) SetPolicyId(value string) {
@@ -420,6 +455,7 @@ func (r *JipiaoPolicystatusUpdateRequest) SetStatus(value string) {
 func (r *JipiaoPolicystatusUpdateRequest) SetType(value string) {
 	r.SetValue("type", value)
 }
+
 
 func (r *JipiaoPolicystatusUpdateRequest) GetResponse(accessToken string) (*JipiaoPolicystatusUpdateResponse, []byte, error) {
 	var resp JipiaoPolicystatusUpdateResponseResult
@@ -438,10 +474,15 @@ type JipiaoPolicystatusUpdateResponseResult struct {
 	Response *JipiaoPolicystatusUpdateResponse `json:"jipiao_policystatus_update_response"`
 }
 
+
+
+
+
 /* 国内机票代理商行程单信息回填 */
 type TripJipiaoAgentItinerarySendRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 物流公司代码CODE，如不清楚，请找运营提供 */
 func (r *TripJipiaoAgentItinerarySendRequest) SetCompanyCode(value string) {
@@ -468,6 +509,7 @@ func (r *TripJipiaoAgentItinerarySendRequest) SetSendDate(value string) {
 	r.SetValue("send_date", value)
 }
 
+
 func (r *TripJipiaoAgentItinerarySendRequest) GetResponse(accessToken string) (*TripJipiaoAgentItinerarySendResponse, []byte, error) {
 	var resp TripJipiaoAgentItinerarySendResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.trip.jipiao.agent.itinerary.send", &resp)
@@ -485,10 +527,15 @@ type TripJipiaoAgentItinerarySendResponseResult struct {
 	Response *TripJipiaoAgentItinerarySendResponse `json:"trip_jipiao_agent_itinerary_send_response"`
 }
 
+
+
+
+
 /* 国内机票代理商确认订单接口 */
 type TripJipiaoAgentOrderConfirmRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 国内机票订单id */
 func (r *TripJipiaoAgentOrderConfirmRequest) SetOrderId(value string) {
@@ -499,6 +546,7 @@ func (r *TripJipiaoAgentOrderConfirmRequest) SetOrderId(value string) {
 func (r *TripJipiaoAgentOrderConfirmRequest) SetPnrInfo(value string) {
 	r.SetValue("pnr_info", value)
 }
+
 
 func (r *TripJipiaoAgentOrderConfirmRequest) GetResponse(accessToken string) (*TripJipiaoAgentOrderConfirmResponse, []byte, error) {
 	var resp TripJipiaoAgentOrderConfirmResponseResult
@@ -517,10 +565,15 @@ type TripJipiaoAgentOrderConfirmResponseResult struct {
 	Response *TripJipiaoAgentOrderConfirmResponse `json:"trip_jipiao_agent_order_confirm_response"`
 }
 
+
+
+
+
 /* 国内机票代理商失败订单接口 */
 type TripJipiaoAgentOrderFailRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 失败类型为0，说明备注原因 */
 func (r *TripJipiaoAgentOrderFailRequest) SetFailMemo(value string) {
@@ -536,6 +589,7 @@ func (r *TripJipiaoAgentOrderFailRequest) SetFailType(value string) {
 func (r *TripJipiaoAgentOrderFailRequest) SetOrderId(value string) {
 	r.SetValue("order_id", value)
 }
+
 
 func (r *TripJipiaoAgentOrderFailRequest) GetResponse(accessToken string) (*TripJipiaoAgentOrderFailResponse, []byte, error) {
 	var resp TripJipiaoAgentOrderFailResponseResult
@@ -554,10 +608,15 @@ type TripJipiaoAgentOrderFailResponseResult struct {
 	Response *TripJipiaoAgentOrderFailResponse `json:"trip_jipiao_agent_order_fail_response"`
 }
 
+
+
+
+
 /* 根据淘宝机票政策id搜索订单 */
 type TripJipiaoAgentOrderFindRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 创建订单时间范围的开始时间，注意：当前搜索条件开始结束时间范围不能超过三天，默认开始时间为当前时间往前推三天 （具体天数可能调整） */
 func (r *TripJipiaoAgentOrderFindRequest) SetBeginTime(value string) {
@@ -579,6 +638,7 @@ func (r *TripJipiaoAgentOrderFindRequest) SetPolicyId(value string) {
 	r.SetValue("policy_id", value)
 }
 
+
 func (r *TripJipiaoAgentOrderFindRequest) GetResponse(accessToken string) (*TripJipiaoAgentOrderFindResponse, []byte, error) {
 	var resp TripJipiaoAgentOrderFindResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.trip.jipiao.agent.order.find", &resp)
@@ -596,15 +656,21 @@ type TripJipiaoAgentOrderFindResponseResult struct {
 	Response *TripJipiaoAgentOrderFindResponse `json:"trip_jipiao_agent_order_find_response"`
 }
 
+
+
+
+
 /* 根据淘宝系统订单号获取订单详情信息 */
 type TripJipiaoAgentOrderGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
 
+
 /* 淘宝政策id列表，当前支持列表长度为1，即当前只支持单个订单详情查询 */
 func (r *TripJipiaoAgentOrderGetRequest) SetOrderIds(value string) {
 	r.SetValue("order_ids", value)
 }
+
 
 func (r *TripJipiaoAgentOrderGetRequest) GetResponse(accessToken string) (*TripJipiaoAgentOrderGetResponse, []byte, error) {
 	var resp TripJipiaoAgentOrderGetResponseResult
@@ -616,17 +682,22 @@ func (r *TripJipiaoAgentOrderGetRequest) GetResponse(accessToken string) (*TripJ
 }
 
 type TripJipiaoAgentOrderGetResponse struct {
-	Orders []*AtOrder `json:"orders"`
+	Orders *AtOrderListObject `json:"orders"`
 }
 
 type TripJipiaoAgentOrderGetResponseResult struct {
 	Response *TripJipiaoAgentOrderGetResponse `json:"trip_jipiao_agent_order_get_response"`
 }
 
+
+
+
+
 /* 国内机票代理商手工hk订单（未付款前，手工填写pnr） */
 type TripJipiaoAgentOrderHkRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 国内机票订单id */
 func (r *TripJipiaoAgentOrderHkRequest) SetOrderId(value string) {
@@ -637,6 +708,7 @@ func (r *TripJipiaoAgentOrderHkRequest) SetOrderId(value string) {
 func (r *TripJipiaoAgentOrderHkRequest) SetPnrInfo(value string) {
 	r.SetValue("pnr_info", value)
 }
+
 
 func (r *TripJipiaoAgentOrderHkRequest) GetResponse(accessToken string) (*TripJipiaoAgentOrderHkResponse, []byte, error) {
 	var resp TripJipiaoAgentOrderHkResponseResult
@@ -655,10 +727,15 @@ type TripJipiaoAgentOrderHkResponseResult struct {
 	Response *TripJipiaoAgentOrderHkResponse `json:"trip_jipiao_agent_order_hk_response"`
 }
 
+
+
+
+
 /* 根据条件查询淘宝订单id列表 */
 type TripJipiaoAgentOrderSearchRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 创建订单时间范围的开始时间，注意：当前搜索条件开始结束时间范围不能超过三天，默认开始时间为当前时间往前推三天 （具体天数可能调整） */
 func (r *TripJipiaoAgentOrderSearchRequest) SetBeginTime(value string) {
@@ -690,6 +767,7 @@ func (r *TripJipiaoAgentOrderSearchRequest) SetTripType(value string) {
 	r.SetValue("trip_type", value)
 }
 
+
 func (r *TripJipiaoAgentOrderSearchRequest) GetResponse(accessToken string) (*TripJipiaoAgentOrderSearchResponse, []byte, error) {
 	var resp TripJipiaoAgentOrderSearchResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.trip.jipiao.agent.order.search", &resp)
@@ -707,10 +785,15 @@ type TripJipiaoAgentOrderSearchResponseResult struct {
 	Response *TripJipiaoAgentOrderSearchResponse `json:"trip_jipiao_agent_order_search_response"`
 }
 
+
+
+
+
 /* 国内机票订单接口，确认特殊产品能否支付 */
 type TripJipiaoAgentOrderSpecialConfirmRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 能否支付 */
 func (r *TripJipiaoAgentOrderSpecialConfirmRequest) SetCanPay(value string) {
@@ -737,6 +820,7 @@ func (r *TripJipiaoAgentOrderSpecialConfirmRequest) SetPayLatestTime(value strin
 	r.SetValue("pay_latest_time", value)
 }
 
+
 func (r *TripJipiaoAgentOrderSpecialConfirmRequest) GetResponse(accessToken string) (*TripJipiaoAgentOrderSpecialConfirmResponse, []byte, error) {
 	var resp TripJipiaoAgentOrderSpecialConfirmResponseResult
 	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.trip.jipiao.agent.order.special.confirm", &resp)
@@ -754,10 +838,15 @@ type TripJipiaoAgentOrderSpecialConfirmResponseResult struct {
 	Response *TripJipiaoAgentOrderSpecialConfirmResponse `json:"trip_jipiao_agent_order_special_confirm_response"`
 }
 
+
+
+
+
 /* 淘宝机票代理商成功/解冻订单 */
 type TripJipiaoAgentOrderSuccessRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
+
 
 /* 淘宝系统订单id */
 func (r *TripJipiaoAgentOrderSuccessRequest) SetOrderId(value string) {
@@ -768,6 +857,7 @@ func (r *TripJipiaoAgentOrderSuccessRequest) SetOrderId(value string) {
 func (r *TripJipiaoAgentOrderSuccessRequest) SetSuccessInfo(value string) {
 	r.SetValue("success_info", value)
 }
+
 
 func (r *TripJipiaoAgentOrderSuccessRequest) GetResponse(accessToken string) (*TripJipiaoAgentOrderSuccessResponse, []byte, error) {
 	var resp TripJipiaoAgentOrderSuccessResponseResult
@@ -785,3 +875,6 @@ type TripJipiaoAgentOrderSuccessResponse struct {
 type TripJipiaoAgentOrderSuccessResponseResult struct {
 	Response *TripJipiaoAgentOrderSuccessResponse `json:"trip_jipiao_agent_order_success_response"`
 }
+
+
+
