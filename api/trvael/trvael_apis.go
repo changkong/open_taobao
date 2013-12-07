@@ -603,7 +603,7 @@ func (r *TravelItemsareaGetRequest) GetResponse(accessToken string) (*TravelItem
 }
 
 type TravelItemsareaGetResponse struct {
-	TravelItemsAreaNodes []*TravelItemsAreaNode `json:"travel_items_area_nodes"`
+	TravelItemsAreaNodes *TravelItemsAreaNodeListObject `json:"travel_items_area_nodes"`
 }
 
 type TravelItemsareaGetResponseResult struct {
@@ -641,7 +641,7 @@ func (r *TravelItemspropsGetRequest) GetResponse(accessToken string) (*TravelIte
 }
 
 type TravelItemspropsGetResponse struct {
-	TravelItemsProps []*TravelItemsProp `json:"travel_items_props"`
+	TravelItemsProps *TravelItemsPropListObject `json:"travel_items_props"`
 }
 
 type TravelItemspropsGetResponseResult struct {

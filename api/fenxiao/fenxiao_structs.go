@@ -4,8 +4,14 @@
 
 package fenxiao
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type CooperationListObject struct {
+	Cooperation []*Cooperation `json:"cooperation"`
+
+}
 
 /* 合作分销关系 */
 type Cooperation struct {
@@ -25,6 +31,12 @@ type Cooperation struct {
 
 }
 
+/*  */
+type DealerOrderListObject struct {
+	DealerOrder []*DealerOrder `json:"dealer_order"`
+
+}
+
 /* 采购申请和经销采购单 */
 type DealerOrder struct {
 	AlipayNo string `json:"alipay_no"`
@@ -33,7 +45,7 @@ type DealerOrder struct {
 	AuditTimeApplier string `json:"audit_time_applier"`
 	AuditTimeSupplier string `json:"audit_time_supplier"`
 	CloseReason string `json:"close_reason"`
-	DealerOrderDetails *DealerOrderDetailObject `json:"dealer_order_details"`
+	DealerOrderDetails *DealerOrderDetailListObject `json:"dealer_order_details"`
 	DealerOrderId int `json:"dealer_order_id"`
 	DeliveredQuantityCount int `json:"delivered_quantity_count"`
 	LogisticsFee float64 `json:"logistics_fee"`
@@ -53,9 +65,9 @@ type DealerOrder struct {
 
 }
 
-/* 采购申请和经销采购单 */
-type DealerOrderDetailObject struct {
-	DealerOrderDetails []*DealerOrderDetail `json:"dealer_order_detail"`
+/*  */
+type DealerOrderDetailListObject struct {
+	DealerOrderDetail []*DealerOrderDetail `json:"dealer_order_detail"`
 
 }
 
@@ -91,19 +103,25 @@ type Receiver struct {
 
 }
 
+/*  */
+type DiscountListObject struct {
+	Discount []*Discount `json:"discount"`
+
+}
+
 /* 折扣信息 */
 type Discount struct {
 	Created string `json:"created"`
-	Details *DiscountDetailObject `json:"details"`
+	Details *DiscountDetailListObject `json:"details"`
 	DiscountId int `json:"discount_id"`
 	Modified string `json:"modified"`
 	Name string `json:"name"`
 
 }
 
-/* 折扣信息 */
-type DiscountDetailObject struct {
-	DiscountDetails []*DiscountDetail `json:"discount_detail"`
+/*  */
+type DiscountDetailListObject struct {
+	DiscountDetail []*DiscountDetail `json:"discount_detail"`
 
 }
 
@@ -147,6 +165,12 @@ type DistributorArchive struct {
 
 }
 
+/*  */
+type FenxiaoItemRecordListObject struct {
+	FenxiaoItemRecord []*FenxiaoItemRecord `json:"fenxiao_item_record"`
+
+}
+
 /* 分销商品下载记录 */
 type FenxiaoItemRecord struct {
 	Created string `json:"created"`
@@ -158,11 +182,23 @@ type FenxiaoItemRecord struct {
 
 }
 
+/*  */
+type DistributorItemFlowListObject struct {
+	DistributorItemFlow []*DistributorItemFlow `json:"distributor_item_flow"`
+
+}
+
 /* 分销商品流量 */
 type DistributorItemFlow struct {
 	ItemPv string `json:"item_pv"`
 	ItemUv string `json:"item_uv"`
 	ProductId int `json:"product_id"`
+
+}
+
+/*  */
+type FenxiaoProductListObject struct {
+	FenxiaoProduct []*FenxiaoProduct `json:"fenxiao_product"`
 
 }
 
@@ -179,7 +215,7 @@ type FenxiaoProduct struct {
 	DiscountId int `json:"discount_id"`
 	HaveGuarantee bool `json:"have_guarantee"`
 	HaveInvoice bool `json:"have_invoice"`
-	Images *FenxiaoImageObject `json:"images"`
+	Images *FenxiaoImageListObject `json:"images"`
 	InputProperties string `json:"input_properties"`
 	IsAuthz string `json:"is_authz"`
 	ItemId int `json:"item_id"`
@@ -188,7 +224,7 @@ type FenxiaoProduct struct {
 	Name string `json:"name"`
 	OrdersCount int `json:"orders_count"`
 	OuterId string `json:"outer_id"`
-	Pdus *FenxiaoPduObject `json:"pdus"`
+	Pdus *FenxiaoPduListObject `json:"pdus"`
 	Pictures string `json:"pictures"`
 	Pid int `json:"pid"`
 	PostageEms float64 `json:"postage_ems"`
@@ -207,7 +243,7 @@ type FenxiaoProduct struct {
 	RetailPriceHigh float64 `json:"retail_price_high"`
 	RetailPriceLow float64 `json:"retail_price_low"`
 	ScitemId int `json:"scitem_id"`
-	Skus *FenxiaoSkuObject `json:"skus"`
+	Skus *FenxiaoSkuListObject `json:"skus"`
 	StandardPrice float64 `json:"standard_price"`
 	StandardRetailPrice float64 `json:"standard_retail_price"`
 	Status string `json:"status"`
@@ -216,9 +252,9 @@ type FenxiaoProduct struct {
 
 }
 
-/* 分销产品 */
-type FenxiaoImageObject struct {
-	FenxiaoImages []*FenxiaoImage `json:"fenxiao_image"`
+/*  */
+type FenxiaoImageListObject struct {
+	FenxiaoImage []*FenxiaoImage `json:"fenxiao_image"`
 
 }
 
@@ -232,9 +268,9 @@ type FenxiaoImage struct {
 
 }
 
-/* 分销产品 */
-type FenxiaoPduObject struct {
-	FenxiaoPdus []*FenxiaoPdu `json:"fenxiao_pdu"`
+/*  */
+type FenxiaoPduListObject struct {
+	FenxiaoPdu []*FenxiaoPdu `json:"fenxiao_pdu"`
 
 }
 
@@ -248,9 +284,9 @@ type FenxiaoPdu struct {
 
 }
 
-/* 分销产品 */
-type FenxiaoSkuObject struct {
-	FenxiaoSkus []*FenxiaoSku `json:"fenxiao_sku"`
+/*  */
+type FenxiaoSkuListObject struct {
+	FenxiaoSku []*FenxiaoSku `json:"fenxiao_sku"`
 
 }
 
@@ -267,6 +303,12 @@ type FenxiaoSku struct {
 	ReservedQuantity int `json:"reserved_quantity"`
 	ScitemId int `json:"scitem_id"`
 	StandardPrice string `json:"standard_price"`
+
+}
+
+/*  */
+type DistributorListObject struct {
+	Distributor []*Distributor `json:"distributor"`
 
 }
 
@@ -290,6 +332,12 @@ type Distributor struct {
 
 }
 
+/*  */
+type FenxiaoGradeListObject struct {
+	FenxiaoGrade []*FenxiaoGrade `json:"fenxiao_grade"`
+
+}
+
 /* 分销商等级 */
 type FenxiaoGrade struct {
 	Created string `json:"created"`
@@ -305,6 +353,12 @@ type LoginUser struct {
 	Nick string `json:"nick"`
 	UserId int `json:"user_id"`
 	UserType string `json:"user_type"`
+
+}
+
+/*  */
+type PurchaseOrderListObject struct {
+	PurchaseOrder []*PurchaseOrder `json:"purchase_order"`
 
 }
 
@@ -328,7 +382,7 @@ type PurchaseOrder struct {
 	LogisticsId string `json:"logistics_id"`
 	Memo string `json:"memo"`
 	Modified string `json:"modified"`
-	OrderMessages *OrderMessageObject `json:"order_messages"`
+	OrderMessages *OrderMessageListObject `json:"order_messages"`
 	PayTime string `json:"pay_time"`
 	PayType string `json:"pay_type"`
 	PostFee float64 `json:"post_fee"`
@@ -336,7 +390,7 @@ type PurchaseOrder struct {
 	Shipping string `json:"shipping"`
 	SnapshotUrl string `json:"snapshot_url"`
 	Status string `json:"status"`
-	SubPurchaseOrders *SubPurchaseOrderObject `json:"sub_purchase_orders"`
+	SubPurchaseOrders *SubPurchaseOrderListObject `json:"sub_purchase_orders"`
 	SupplierFlag int `json:"supplier_flag"`
 	SupplierFrom string `json:"supplier_from"`
 	SupplierMemo string `json:"supplier_memo"`
@@ -347,9 +401,9 @@ type PurchaseOrder struct {
 
 }
 
-/* 采购单及子采购单信息 */
-type OrderMessageObject struct {
-	OrderMessages []*OrderMessage `json:"order_message"`
+/*  */
+type OrderMessageListObject struct {
+	OrderMessage []*OrderMessage `json:"order_message"`
 
 }
 
@@ -362,9 +416,9 @@ type OrderMessage struct {
 
 }
 
-/* 采购单及子采购单信息 */
-type SubPurchaseOrderObject struct {
-	SubPurchaseOrders []*SubPurchaseOrder `json:"sub_purchase_order"`
+/*  */
+type SubPurchaseOrderListObject struct {
+	SubPurchaseOrder []*SubPurchaseOrder `json:"sub_purchase_order"`
 
 }
 
@@ -374,6 +428,7 @@ type SubPurchaseOrder struct {
 	BillFee float64 `json:"bill_fee"`
 	BuyerPayment float64 `json:"buyer_payment"`
 	Created string `json:"created"`
+	DiscountFee float64 `json:"discount_fee"`
 	DistributorPayment float64 `json:"distributor_payment"`
 	FenxiaoId int `json:"fenxiao_id"`
 	Id int `json:"id"`
@@ -383,6 +438,7 @@ type SubPurchaseOrder struct {
 	OldSkuProperties string `json:"old_sku_properties"`
 	Order200Status string `json:"order_200_status"`
 	Price float64 `json:"price"`
+	PromotionType string `json:"promotion_type"`
 	RefundFee float64 `json:"refund_fee"`
 	ScItemId int `json:"sc_item_id"`
 	SkuId int `json:"sku_id"`
@@ -399,6 +455,12 @@ type SubPurchaseOrder struct {
 
 }
 
+/*  */
+type GradeDiscountListObject struct {
+	GradeDiscount []*GradeDiscount `json:"grade_discount"`
+
+}
+
 /* 等级折扣数据结构 */
 type GradeDiscount struct {
 	DiscountId int `json:"discount_id"`
@@ -406,6 +468,12 @@ type GradeDiscount struct {
 	Price float64 `json:"price"`
 	SkuId int `json:"sku_id"`
 	TradeType int `json:"trade_type"`
+
+}
+
+/*  */
+type ProductCatListObject struct {
+	ProductCat []*ProductCat `json:"product_cat"`
 
 }
 
@@ -456,6 +524,12 @@ type BuyerRefund struct {
 
 }
 
+/*  */
+type RequisitionListObject struct {
+	Requisition []*Requisition `json:"requisition"`
+
+}
+
 /* 合作申请 */
 type Requisition struct {
 	DistAppraise int `json:"dist_appraise"`
@@ -471,6 +545,12 @@ type Requisition struct {
 	GmtCreate string `json:"gmt_create"`
 	RequisitionId int `json:"requisition_id"`
 	Status int `json:"status"`
+
+}
+
+/*  */
+type TradeMonitorListObject struct {
+	TradeMonitor []*TradeMonitor `json:"trade_monitor"`
 
 }
 
@@ -509,10 +589,22 @@ type TradeMonitor struct {
 
 }
 
+/*  */
+type TipInfoListObject struct {
+	TipInfo []*TipInfo `json:"tip_info"`
+
+}
+
 /* 提示信息对象 */
 type TipInfo struct {
 	Info string `json:"info"`
 	ScItemId string `json:"sc_item_id"`
+
+}
+
+/*  */
+type InventoryAuthorizeInfoListObject struct {
+	InventoryAuthorizeInfo []*InventoryAuthorizeInfo `json:"inventory_authorize_info"`
 
 }
 
@@ -535,6 +627,12 @@ type InventoryAuthorizeInfo struct {
 
 }
 
+/*  */
+type InventorySumListObject struct {
+	InventorySum []*InventorySum `json:"inventory_sum"`
+
+}
+
 /* 商品库存对象 */
 type InventorySum struct {
 	InventoryType int `json:"inventory_type"`
@@ -545,6 +643,12 @@ type InventorySum struct {
 	ScItemCode string `json:"sc_item_code"`
 	ScItemId int `json:"sc_item_id"`
 	StoreCode string `json:"store_code"`
+
+}
+
+/*  */
+type StoreListObject struct {
+	Store []*Store `json:"store"`
 
 }
 
@@ -589,6 +693,12 @@ type ScItem struct {
 
 }
 
+/*  */
+type ScItemMapListObject struct {
+	ScItemMap []*ScItemMap `json:"sc_item_map"`
+
+}
+
 /* 后端商品映射关系对象 */
 type ScItemMap struct {
 	ItemId int `json:"item_id"`
@@ -610,6 +720,12 @@ type QueryPagination struct {
 
 }
 
+/*  */
+type ScItemListObject struct {
+	ScItem []*ScItem `json:"sc_item"`
+
+}
+
 /* 批量异步任务结果 */
 type Task struct {
 	CheckCode string `json:"check_code"`
@@ -618,14 +734,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks *SubtaskObject `json:"subtasks"`
+	Subtasks *SubtaskListObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
 
 }
 
-/* 批量异步任务结果 */
-type SubtaskObject struct {
-	Subtasks []*Subtask `json:"subtask"`
+/*  */
+type SubtaskListObject struct {
+	Subtask []*Subtask `json:"subtask"`
 
 }
 
@@ -634,6 +750,12 @@ type Subtask struct {
 	IsSuccess bool `json:"is_success"`
 	SubTaskRequest string `json:"sub_task_request"`
 	SubTaskResult string `json:"sub_task_result"`
+
+}
+
+/*  */
+type IpcInventoryDetailDoListObject struct {
+	IpcInventoryDetailDo []*IpcInventoryDetailDo `json:"ipc_inventory_detail_do"`
 
 }
 

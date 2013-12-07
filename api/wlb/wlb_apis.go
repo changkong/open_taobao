@@ -59,7 +59,7 @@ func (r *InventoryIpcInventorydetailGetRequest) GetResponse(accessToken string) 
 }
 
 type InventoryIpcInventorydetailGetResponse struct {
-	InventoryDetails []*IpcInventoryDetailDo `json:"inventory_details"`
+	InventoryDetails *IpcInventoryDetailDoListObject `json:"inventory_details"`
 }
 
 type InventoryIpcInventorydetailGetResponseResult struct {
@@ -109,7 +109,7 @@ func (r *WlbInventoryDetailGetRequest) GetResponse(accessToken string) (*WlbInve
 }
 
 type WlbInventoryDetailGetResponse struct {
-	InventoryList []*WlbInventory `json:"inventory_list"`
+	InventoryList *WlbInventoryListObject `json:"inventory_list"`
 	ItemId int `json:"item_id"`
 }
 
@@ -237,7 +237,7 @@ func (r *WlbInventorylogQueryRequest) GetResponse(accessToken string) (*WlbInven
 }
 
 type WlbInventorylogQueryResponse struct {
-	InventoryLogList []*WlbItemInventoryLog `json:"inventory_log_list"`
+	InventoryLogList *WlbItemInventoryLogListObject `json:"inventory_log_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -550,7 +550,7 @@ func (r *WlbItemAuthorizationQueryRequest) GetResponse(accessToken string) (*Wlb
 }
 
 type WlbItemAuthorizationQueryResponse struct {
-	AuthorizationList []*WlbAuthorization `json:"authorization_list"`
+	AuthorizationList *WlbAuthorizationListObject `json:"authorization_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -599,7 +599,7 @@ func (r *WlbItemBatchQueryRequest) GetResponse(accessToken string) (*WlbItemBatc
 }
 
 type WlbItemBatchQueryResponse struct {
-	ItemInventoryBatchList []*WlbItemBatchInventory `json:"item_inventory_batch_list"`
+	ItemInventoryBatchList *WlbItemBatchInventoryListObject `json:"item_inventory_batch_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -854,7 +854,7 @@ func (r *WlbItemConsignmentPageGetRequest) GetResponse(accessToken string) (*Wlb
 
 type WlbItemConsignmentPageGetResponse struct {
 	TotalCount int `json:"total_count"`
-	WlbConsignMents []*WlbConsignMent `json:"wlb_consign_ments"`
+	WlbConsignMents *WlbConsignMentListObject `json:"wlb_consign_ments"`
 }
 
 type WlbItemConsignmentPageGetResponseResult struct {
@@ -958,7 +958,7 @@ func (r *WlbItemMapGetRequest) GetResponse(accessToken string) (*WlbItemMapGetRe
 }
 
 type WlbItemMapGetResponse struct {
-	OutEntityItemList []*OutEntityItem `json:"out_entity_item_list"`
+	OutEntityItemList *OutEntityItemListObject `json:"out_entity_item_list"`
 }
 
 type WlbItemMapGetResponseResult struct {
@@ -1077,7 +1077,7 @@ func (r *WlbItemQueryRequest) GetResponse(accessToken string) (*WlbItemQueryResp
 }
 
 type WlbItemQueryResponse struct {
-	ItemList []*WlbItem `json:"item_list"`
+	ItemList *WlbItemListObject `json:"item_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -1391,7 +1391,7 @@ func (r *WlbNotifyMessagePageGetRequest) GetResponse(accessToken string) (*WlbNo
 
 type WlbNotifyMessagePageGetResponse struct {
 	TotalCount int `json:"total_count"`
-	WlbMessages []*WlbMessage `json:"wlb_messages"`
+	WlbMessages *WlbMessageListObject `json:"wlb_messages"`
 }
 
 type WlbNotifyMessagePageGetResponseResult struct {
@@ -1733,7 +1733,7 @@ func (r *WlbOrderPageGetRequest) GetResponse(accessToken string) (*WlbOrderPageG
 }
 
 type WlbOrderPageGetResponse struct {
-	OrderList []*WlbOrder `json:"order_list"`
+	OrderList *WlbOrderListObject `json:"order_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -1886,7 +1886,7 @@ func (r *WlbOrderdetailDateGetRequest) GetResponse(accessToken string) (*WlbOrde
 }
 
 type WlbOrderdetailDateGetResponse struct {
-	OrderDetailList []*WlbOrderDetail `json:"order_detail_list"`
+	OrderDetailList *WlbOrderDetailListObject `json:"order_detail_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -1930,7 +1930,7 @@ func (r *WlbOrderitemPageGetRequest) GetResponse(accessToken string) (*WlbOrderi
 }
 
 type WlbOrderitemPageGetResponse struct {
-	OrderItemList []*WlbOrderItem `json:"order_item_list"`
+	OrderItemList *WlbOrderItemListObject `json:"order_item_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -2007,7 +2007,7 @@ func (r *WlbOrderscheduleruleQueryRequest) GetResponse(accessToken string) (*Wlb
 }
 
 type WlbOrderscheduleruleQueryResponse struct {
-	OrderScheduleRuleList []*WlbOrderScheduleRule `json:"order_schedule_rule_list"`
+	OrderScheduleRuleList *WlbOrderScheduleRuleListObject `json:"order_schedule_rule_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -2041,7 +2041,7 @@ func (r *WlbOrderstatusGetRequest) GetResponse(accessToken string) (*WlbOrdersta
 }
 
 type WlbOrderstatusGetResponse struct {
-	WlbOrderStatus []*WlbProcessStatus `json:"wlb_order_status"`
+	WlbOrderStatus *WlbProcessStatusListObject `json:"wlb_order_status"`
 }
 
 type WlbOrderstatusGetResponseResult struct {
@@ -2175,7 +2175,7 @@ func (r *WlbReplenishStatisticsRequest) GetResponse(accessToken string) (*WlbRep
 }
 
 type WlbReplenishStatisticsResponse struct {
-	ReplenishList []*WlbReplenish `json:"replenish_list"`
+	ReplenishList *WlbReplenishListObject `json:"replenish_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -2225,7 +2225,7 @@ func (r *WlbSubscriptionQueryRequest) GetResponse(accessToken string) (*WlbSubsc
 }
 
 type WlbSubscriptionQueryResponse struct {
-	SellerSubscriptionList []*WlbSellerSubscription `json:"seller_subscription_list"`
+	SellerSubscriptionList *WlbSellerSubscriptionListObject `json:"seller_subscription_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -2269,7 +2269,7 @@ func (r *WlbTmsorderQueryRequest) GetResponse(accessToken string) (*WlbTmsorderQ
 }
 
 type WlbTmsorderQueryResponse struct {
-	TmsOrderList []*WlbTmsOrder `json:"tms_order_list"`
+	TmsOrderList *WlbTmsOrderListObject `json:"tms_order_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -2311,7 +2311,7 @@ func (r *WlbTradeorderGetRequest) GetResponse(accessToken string) (*WlbTradeorde
 }
 
 type WlbTradeorderGetResponse struct {
-	WlbOrderList []*WlbOrder `json:"wlb_order_list"`
+	WlbOrderList *WlbOrderListObject `json:"wlb_order_list"`
 }
 
 type WlbTradeorderGetResponseResult struct {

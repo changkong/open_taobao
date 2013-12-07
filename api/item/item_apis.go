@@ -86,7 +86,7 @@ func (r *ItemcatsGetRequest) GetResponse(accessToken string) (*ItemcatsGetRespon
 }
 
 type ItemcatsGetResponse struct {
-	ItemCats []*ItemCat `json:"item_cats"`
+	ItemCats *ItemCatListObject `json:"item_cats"`
 	LastModified string `json:"last_modified"`
 }
 
@@ -180,7 +180,7 @@ func (r *ItempropsGetRequest) GetResponse(accessToken string) (*ItempropsGetResp
 }
 
 type ItempropsGetResponse struct {
-	ItemProps []*ItemProp `json:"item_props"`
+	ItemProps *ItemPropListObject `json:"item_props"`
 	LastModified string `json:"last_modified"`
 }
 
@@ -237,59 +237,11 @@ func (r *ItempropvaluesGetRequest) GetResponse(accessToken string) (*Itempropval
 
 type ItempropvaluesGetResponse struct {
 	LastModified string `json:"last_modified"`
-	PropValues []*PropValue `json:"prop_values"`
+	PropValues *PropValueListObject `json:"prop_values"`
 }
 
 type ItempropvaluesGetResponseResult struct {
 	Response *ItempropvaluesGetResponse `json:"itempropvalues_get_response"`
-}
-
-
-
-
-
-/* 全量获取后台类目、类目属性、类目属性值数据 
-<br/>异步API使用方法，请查看：<a href="http://open.taobao.com/doc/detail.htm?id=30">异步API使用说明</a> 
-<br/>1. 每天8点左右会产生今天的全量数据，在8点之前提交获取全量类目数据任务需要等到8点之后才完成，在8点之后提交获取全量类目数据任务可以接近实时返回。 
-<br/>2. 提交任务后，通过taobao.topats.result.get来查看任务执行状态，如果任务已完成，则返回下载URL 
-<br/>3. 如果订阅了主动通知服务，任务完成后TOP会通过HTTP长连接推送消息，通知的消息格式请参考异步API使用文档 
-<br/>4. 下载到的结果是zip压缩包，解压后得到一个标准的csv/json格式的文本文件，文件内容的默认编码格式是UTF-8 */
-type TopatsItemcatsGetRequest struct {
-	open_taobao.TaobaoMethodRequest
-}
-
-
-/* 一级类目ID列表（非一级类目将会被忽略），用半角分号(;)分隔，例如:"16;19562"，一次最多可以获取10个类目的增量数据。<span style="color:red">注：传入0代表获取所有类目的数据,默认获取所有类目数据</span> */
-func (r *TopatsItemcatsGetRequest) SetCids(value string) {
-	r.SetValue("cids", value)
-}
-
-/* 类目数据输出格式，可选值为：csv, json（默认csv格式返回） */
-func (r *TopatsItemcatsGetRequest) SetOutputFormat(value string) {
-	r.SetValue("output_format", value)
-}
-
-/* 获取类目的类型：1代表集市、2代表天猫 */
-func (r *TopatsItemcatsGetRequest) SetType(value string) {
-	r.SetValue("type", value)
-}
-
-
-func (r *TopatsItemcatsGetRequest) GetResponse(accessToken string) (*TopatsItemcatsGetResponse, []byte, error) {
-	var resp TopatsItemcatsGetResponseResult
-	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.topats.itemcats.get", &resp)
-	if err != nil {
-		return nil, data, err
-	}
-	return resp.Response, data, err
-}
-
-type TopatsItemcatsGetResponse struct {
-	Task *Task `json:"task"`
-}
-
-type TopatsItemcatsGetResponseResult struct {
-	Response *TopatsItemcatsGetResponse `json:"topats_itemcats_get_response"`
 }
 
 

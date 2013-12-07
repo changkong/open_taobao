@@ -54,7 +54,7 @@ func (r *CometDiscardinfoGetRequest) GetResponse(accessToken string) (*CometDisc
 }
 
 type CometDiscardinfoGetResponse struct {
-	DiscardInfoList []*DiscardInfo `json:"discard_info_list"`
+	DiscardInfoList *DiscardInfoListObject `json:"discard_info_list"`
 }
 
 type CometDiscardinfoGetResponseResult struct {
@@ -257,7 +257,7 @@ func (r *IncrementCustomersGetRequest) GetResponse(accessToken string) (*Increme
 }
 
 type IncrementCustomersGetResponse struct {
-	AppCustomers []*AppCustomer `json:"app_customers"`
+	AppCustomers *AppCustomerListObject `json:"app_customers"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -333,7 +333,7 @@ func (r *IncrementItemsGetRequest) GetResponse(accessToken string) (*IncrementIt
 }
 
 type IncrementItemsGetResponse struct {
-	NotifyItems []*NotifyItem `json:"notify_items"`
+	NotifyItems *NotifyItemListObject `json:"notify_items"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -395,7 +395,7 @@ func (r *IncrementRefundsGetRequest) GetResponse(accessToken string) (*Increment
 }
 
 type IncrementRefundsGetResponse struct {
-	NotifyRefunds []*NotifyRefund `json:"notify_refunds"`
+	NotifyRefunds *NotifyRefundListObject `json:"notify_refunds"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -490,7 +490,7 @@ func (r *IncrementTradesGetRequest) GetResponse(accessToken string) (*IncrementT
 }
 
 type IncrementTradesGetResponse struct {
-	NotifyTrades []*NotifyTrade `json:"notify_trades"`
+	NotifyTrades *NotifyTradeListObject `json:"notify_trades"`
 	TotalResults int `json:"total_results"`
 }
 

@@ -114,7 +114,7 @@ func (r *WangwangAbstractGetwordlistRequest) GetResponse(accessToken string) (*W
 type WangwangAbstractGetwordlistResponse struct {
 	ErrorMsg string `json:"error_msg"`
 	RetCode int `json:"ret_code"`
-	WordLists []*WordList `json:"word_lists"`
+	WordLists *WordListListObject `json:"word_lists"`
 }
 
 type WangwangAbstractGetwordlistResponseResult struct {
@@ -214,7 +214,7 @@ type WangwangAbstractLogqueryResponse struct {
 	ErrorMsg string `json:"error_msg"`
 	FromId string `json:"from_id"`
 	IsSliced int `json:"is_sliced"`
-	MsgLists []*MsgList `json:"msg_lists"`
+	MsgLists *MsgListListObject `json:"msg_lists"`
 	NextKey string `json:"next_key"`
 	RetCode int `json:"ret_code"`
 	ToId string `json:"to_id"`
@@ -268,7 +268,7 @@ func (r *WangwangEserviceAvgwaittimeGetRequest) GetResponse(accessToken string) 
 }
 
 type WangwangEserviceAvgwaittimeGetResponse struct {
-	WaitingTimeListOnDays []*WaitingTimesOnDay `json:"waiting_time_list_on_days"`
+	WaitingTimeListOnDays *WaitingTimesOnDayListObject `json:"waiting_time_list_on_days"`
 }
 
 type WangwangEserviceAvgwaittimeGetResponseResult struct {
@@ -316,7 +316,7 @@ func (r *WangwangEserviceChatpeersGetRequest) GetResponse(accessToken string) (*
 }
 
 type WangwangEserviceChatpeersGetResponse struct {
-	Chatpeers []*Chatpeer `json:"chatpeers"`
+	Chatpeers *ChatpeerListObject `json:"chatpeers"`
 	Count int `json:"count"`
 	Ret int `json:"ret"`
 }
@@ -366,7 +366,7 @@ func (r *WangwangEserviceEvalsGetRequest) GetResponse(accessToken string) (*Wang
 type WangwangEserviceEvalsGetResponse struct {
 	ResultCode int `json:"result_code"`
 	ResultCount int `json:"result_count"`
-	StaffEvalDetails []*EvalDetail `json:"staff_eval_details"`
+	StaffEvalDetails *EvalDetailListObject `json:"staff_eval_details"`
 }
 
 type WangwangEserviceEvalsGetResponseResult struct {
@@ -419,7 +419,7 @@ func (r *WangwangEserviceEvaluationGetRequest) GetResponse(accessToken string) (
 }
 
 type WangwangEserviceEvaluationGetResponse struct {
-	StaffEvalStatOnDays []*StaffEvalStatOnDay `json:"staff_eval_stat_on_days"`
+	StaffEvalStatOnDays *StaffEvalStatOnDayListObject `json:"staff_eval_stat_on_days"`
 }
 
 type WangwangEserviceEvaluationGetResponseResult struct {
@@ -460,7 +460,7 @@ func (r *WangwangEserviceGroupmemberGetRequest) GetResponse(accessToken string) 
 }
 
 type WangwangEserviceGroupmemberGetResponse struct {
-	GroupMemberList []*GroupMember `json:"group_member_list"`
+	GroupMemberList *GroupMemberListObject `json:"group_member_list"`
 }
 
 type WangwangEserviceGroupmemberGetResponseResult struct {
@@ -508,7 +508,7 @@ func (r *WangwangEserviceLoginlogsGetRequest) GetResponse(accessToken string) (*
 
 type WangwangEserviceLoginlogsGetResponse struct {
 	Count int `json:"count"`
-	Loginlogs []*LoginLog `json:"loginlogs"`
+	Loginlogs *LoginLogListObject `json:"loginlogs"`
 	UserId string `json:"user_id"`
 }
 
@@ -562,7 +562,7 @@ func (r *WangwangEserviceNoreplynumGetRequest) GetResponse(accessToken string) (
 }
 
 type WangwangEserviceNoreplynumGetResponse struct {
-	NonReplyStatOnDays []*NonReplyStatOnDay `json:"non_reply_stat_on_days"`
+	NonReplyStatOnDays *NonReplyStatOnDayListObject `json:"non_reply_stat_on_days"`
 }
 
 type WangwangEserviceNoreplynumGetResponseResult struct {
@@ -617,7 +617,7 @@ func (r *WangwangEserviceOnlinetimeGetRequest) GetResponse(accessToken string) (
 }
 
 type WangwangEserviceOnlinetimeGetResponse struct {
-	OnlineTimesListOnDays []*OnlineTimesOnDay `json:"online_times_list_on_days"`
+	OnlineTimesListOnDays *OnlineTimesOnDayListObject `json:"online_times_list_on_days"`
 }
 
 type WangwangEserviceOnlinetimeGetResponseResult struct {
@@ -673,7 +673,7 @@ func (r *WangwangEserviceReceivenumGetRequest) GetResponse(accessToken string) (
 }
 
 type WangwangEserviceReceivenumGetResponse struct {
-	ReplyStatListOnDays []*ReplyStatOnDay `json:"reply_stat_list_on_days"`
+	ReplyStatListOnDays *ReplyStatOnDayListObject `json:"reply_stat_list_on_days"`
 }
 
 type WangwangEserviceReceivenumGetResponseResult struct {
@@ -703,7 +703,7 @@ func (r *WangwangEserviceStreamweigthsGetRequest) GetResponse(accessToken string
 type WangwangEserviceStreamweigthsGetResponse struct {
 	ResultCode int `json:"result_code"`
 	ResultCount int `json:"result_count"`
-	StaffStreamWeights []*StreamWeight `json:"staff_stream_weights"`
+	StaffStreamWeights *StreamWeightListObject `json:"staff_stream_weights"`
 	TotalWeight int `json:"total_weight"`
 }
 

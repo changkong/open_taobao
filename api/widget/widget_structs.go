@@ -4,7 +4,7 @@
 
 package widget
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* Widget获取到的商品信息 */
@@ -15,21 +15,21 @@ type WidgetItem struct {
 	IsMall bool `json:"is_mall"`
 	ItemId int `json:"item_id"`
 	ItemPics []string `json:"item_pics"`
-	ItemPromotionData *PromotionInItemObject `json:"item_promotion_data"`
+	ItemPromotionData *PromotionInItemListObject `json:"item_promotion_data"`
 	PicUrl string `json:"pic_url"`
 	Price string `json:"price"`
 	Quantity int `json:"quantity"`
 	SellerNick string `json:"seller_nick"`
-	ShopPromotionData *PromotionInShopObject `json:"shop_promotion_data"`
-	SkuProps *WidgetSkuPropsObject `json:"sku_props"`
-	Skus *WidgetSkuObject `json:"skus"`
+	ShopPromotionData *PromotionInShopListObject `json:"shop_promotion_data"`
+	SkuProps *WidgetSkuPropsListObject `json:"sku_props"`
+	Skus *WidgetSkuListObject `json:"skus"`
 	Title string `json:"title"`
 
 }
 
-/* Widget获取到的商品信息 */
-type PromotionInItemObject struct {
-	PromotionInItems []*PromotionInItem `json:"promotion_in_item"`
+/*  */
+type PromotionInItemListObject struct {
+	PromotionInItem []*PromotionInItem `json:"promotion_in_item"`
 
 }
 
@@ -48,9 +48,9 @@ type PromotionInItem struct {
 
 }
 
-/* Widget获取到的商品信息 */
-type PromotionInShopObject struct {
-	PromotionInShops []*PromotionInShop `json:"promotion_in_shop"`
+/*  */
+type PromotionInShopListObject struct {
+	PromotionInShop []*PromotionInShop `json:"promotion_in_shop"`
 
 }
 
@@ -62,9 +62,9 @@ type PromotionInShop struct {
 
 }
 
-/* Widget获取到的商品信息 */
-type WidgetSkuPropsObject struct {
-	WidgetSkuPropss []*WidgetSkuProps `json:"widget_sku_props"`
+/*  */
+type WidgetSkuPropsListObject struct {
+	WidgetSkuProps []*WidgetSkuProps `json:"widget_sku_props"`
 
 }
 
@@ -79,9 +79,9 @@ type WidgetSkuProps struct {
 
 }
 
-/* Widget获取到的商品信息 */
-type WidgetSkuObject struct {
-	WidgetSkus []*WidgetSku `json:"widget_sku"`
+/*  */
+type WidgetSkuListObject struct {
+	WidgetSku []*WidgetSku `json:"widget_sku"`
 
 }
 

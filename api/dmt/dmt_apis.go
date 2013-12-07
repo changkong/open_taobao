@@ -94,7 +94,7 @@ func (r *PictureCategoryGetRequest) GetResponse(accessToken string) (*PictureCat
 }
 
 type PictureCategoryGetResponse struct {
-	PictureCategories []*PictureCategory `json:"picture_categories"`
+	PictureCategories *PictureCategoryListObject `json:"picture_categories"`
 }
 
 type PictureCategoryGetResponseResult struct {
@@ -259,7 +259,7 @@ func (r *PictureGetRequest) GetResponse(accessToken string) (*PictureGetResponse
 }
 
 type PictureGetResponse struct {
-	Pictures []*Picture `json:"pictures"`
+	Pictures *PictureListObject `json:"pictures"`
 	TotalResults int `json:"totalResults"`
 }
 

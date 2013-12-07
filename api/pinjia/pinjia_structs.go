@@ -4,7 +4,7 @@
 
 package pinjia
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 评价列表 */
@@ -25,6 +25,12 @@ type TradeRate struct {
 
 }
 
+/*  */
+type ImprItemDOListObject struct {
+	ImprItemDO []*ImprItemDO `json:"impr_item_d_o"`
+
+}
+
 /* 评价大印象返回的印象词接口 */
 type ImprItemDO struct {
 	AttributeId int `json:"attribute_id"`
@@ -36,15 +42,15 @@ type ImprItemDO struct {
 
 /* 单条交易子订单语义标签对象 */
 type ImprFeedIdDO struct {
-	FeedInfoList *ImprFeedInfoDOObject `json:"feed_info_list"`
+	FeedInfoList *ImprFeedInfoDOListObject `json:"feed_info_list"`
 	Nick string `json:"nick"`
 	Rate int `json:"rate"`
 
 }
 
-/* 单条交易子订单语义标签对象 */
-type ImprFeedInfoDOObject struct {
-	ImprFeedInfoDOs []*ImprFeedInfoDO `json:"impr_feed_info_d_o"`
+/*  */
+type ImprFeedInfoDOListObject struct {
+	ImprFeedInfoDO []*ImprFeedInfoDO `json:"impr_feed_info_d_o"`
 
 }
 
@@ -55,6 +61,12 @@ type ImprFeedInfoDO struct {
 	GmtCreate string `json:"gmt_create"`
 	GmtModified string `json:"gmt_modified"`
 	ImprWords []string `json:"impr_words"`
+
+}
+
+/*  */
+type TradeRateListObject struct {
+	TradeRate []*TradeRate `json:"trade_rate"`
 
 }
 

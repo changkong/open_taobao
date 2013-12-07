@@ -121,7 +121,7 @@ func (r *VasOrderSearchRequest) GetResponse(accessToken string) (*VasOrderSearch
 }
 
 type VasOrderSearchResponse struct {
-	ArticleBizOrders []*ArticleBizOrder `json:"article_biz_orders"`
+	ArticleBizOrders *ArticleBizOrderListObject `json:"article_biz_orders"`
 	TotalItem int `json:"total_item"`
 }
 
@@ -200,7 +200,7 @@ func (r *VasSubscSearchRequest) GetResponse(accessToken string) (*VasSubscSearch
 }
 
 type VasSubscSearchResponse struct {
-	ArticleSubs []*ArticleSub `json:"article_subs"`
+	ArticleSubs *ArticleSubListObject `json:"article_subs"`
 	TotalItem int `json:"total_item"`
 }
 
@@ -239,7 +239,7 @@ func (r *VasSubscribeGetRequest) GetResponse(accessToken string) (*VasSubscribeG
 }
 
 type VasSubscribeGetResponse struct {
-	ArticleUserSubscribes []*ArticleUserSubscribe `json:"article_user_subscribes"`
+	ArticleUserSubscribes *ArticleUserSubscribeListObject `json:"article_user_subscribes"`
 }
 
 type VasSubscribeGetResponseResult struct {

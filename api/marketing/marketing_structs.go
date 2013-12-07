@@ -4,19 +4,19 @@
 
 package marketing
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 优惠信息对象 */
 type PromotionDisplayTop struct {
-	PromotionInItem *PromotionInItemObject `json:"promotion_in_item"`
-	PromotionInShop *PromotionInShopObject `json:"promotion_in_shop"`
+	PromotionInItem *PromotionInItemListObject `json:"promotion_in_item"`
+	PromotionInShop *PromotionInShopListObject `json:"promotion_in_shop"`
 
 }
 
-/* Widget获取到的商品信息 */
-type PromotionInItemObject struct {
-	PromotionInItems []*PromotionInItem `json:"promotion_in_item"`
+/*  */
+type PromotionInItemListObject struct {
+	PromotionInItem []*PromotionInItem `json:"promotion_in_item"`
 
 }
 
@@ -35,9 +35,9 @@ type PromotionInItem struct {
 
 }
 
-/* Widget获取到的商品信息 */
-type PromotionInShopObject struct {
-	PromotionInShops []*PromotionInShop `json:"promotion_in_shop"`
+/*  */
+type PromotionInShopListObject struct {
+	PromotionInShop []*PromotionInShop `json:"promotion_in_shop"`
 
 }
 
@@ -46,6 +46,12 @@ type PromotionInShop struct {
 	Name string `json:"name"`
 	PromotionDetailDesc string `json:"promotion_detail_desc"`
 	PromotionId string `json:"promotion_id"`
+
+}
+
+/*  */
+type PromotionListObject struct {
+	Promotion []*Promotion `json:"promotion"`
 
 }
 
@@ -78,10 +84,28 @@ type Activity struct {
 
 }
 
+/*  */
+type ActivityListObject struct {
+	Activity []*Activity `json:"activity"`
+
+}
+
+/*  */
+type CouponResultListObject struct {
+	CouponResult []*CouponResult `json:"coupon_result"`
+
+}
+
 /* 发放成功的优惠券的信息，包括couponNumber和buyerNick */
 type CouponResult struct {
 	BuyerNick string `json:"buyer_nick"`
 	CouponNumber int `json:"coupon_number"`
+
+}
+
+/*  */
+type ErrorMessageListObject struct {
+	ErrorMessage []*ErrorMessage `json:"error_message"`
 
 }
 
@@ -92,12 +116,24 @@ type ErrorMessage struct {
 
 }
 
+/*  */
+type CouponDetailListObject struct {
+	CouponDetail []*CouponDetail `json:"coupon_detail"`
+
+}
+
 /* 优惠券详细信息 */
 type CouponDetail struct {
 	BuyerNick string `json:"buyer_nick"`
 	Channel string `json:"channel"`
 	CouponNumber int `json:"coupon_number"`
 	State string `json:"state"`
+
+}
+
+/*  */
+type CouponListObject struct {
+	Coupon []*Coupon `json:"coupon"`
 
 }
 
@@ -112,6 +148,12 @@ type Coupon struct {
 
 }
 
+/*  */
+type LimitDiscountDetailListObject struct {
+	LimitDiscountDetail []*LimitDiscountDetail `json:"limit_discount_detail"`
+
+}
+
 /* 限时打折详情 */
 type LimitDiscountDetail struct {
 	EndTime string `json:"end_time"`
@@ -120,6 +162,12 @@ type LimitDiscountDetail struct {
 	LimitDiscountName string `json:"limit_discount_name"`
 	LimitNum int `json:"limit_num"`
 	StartTime string `json:"start_time"`
+
+}
+
+/*  */
+type LimitDiscountListObject struct {
+	LimitDiscount []*LimitDiscount `json:"limit_discount"`
 
 }
 
@@ -133,6 +181,12 @@ type LimitDiscount struct {
 
 }
 
+/*  */
+type MealListObject struct {
+	Meal []*Meal `json:"meal"`
+
+}
+
 /* 搭配套餐类。 */
 type Meal struct {
 	ItemList string `json:"item_list"`
@@ -142,6 +196,12 @@ type Meal struct {
 	MealPrice float64 `json:"meal_price"`
 	PostageId int `json:"postage_id"`
 	Status string `json:"status"`
+
+}
+
+/*  */
+type RangeListObject struct {
+	Range []*Range `json:"range"`
 
 }
 

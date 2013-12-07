@@ -4,7 +4,7 @@
 
 package refund
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 退款结构 */
@@ -61,20 +61,32 @@ type RefundMessage struct {
 	OwnerId int `json:"owner_id"`
 	OwnerNick string `json:"owner_nick"`
 	OwnerRole string `json:"owner_role"`
-	PicUrls *PicUrlObject `json:"pic_urls"`
+	PicUrls *PicUrlListObject `json:"pic_urls"`
 	RefundId int `json:"refund_id"`
 
 }
 
-/* 留言/凭证数据结构 */
-type PicUrlObject struct {
-	PicUrls []*PicUrl `json:"pic_url"`
+/*  */
+type PicUrlListObject struct {
+	PicUrl []*PicUrl `json:"pic_url"`
 
 }
 
 /* 图片链接 */
 type PicUrl struct {
 	Url string `json:"url"`
+
+}
+
+/*  */
+type RefundMessageListObject struct {
+	RefundMessage []*RefundMessage `json:"refund_message"`
+
+}
+
+/*  */
+type RefundListObject struct {
+	Refund []*Refund `json:"refund"`
 
 }
 
@@ -86,14 +98,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks *SubtaskObject `json:"subtasks"`
+	Subtasks *SubtaskListObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
 
 }
 
-/* 批量异步任务结果 */
-type SubtaskObject struct {
-	Subtasks []*Subtask `json:"subtask"`
+/*  */
+type SubtaskListObject struct {
+	Subtask []*Subtask `json:"subtask"`
 
 }
 

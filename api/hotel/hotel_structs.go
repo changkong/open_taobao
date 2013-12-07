@@ -4,7 +4,7 @@
 
 package hotel
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* Hotel（酒店）结构。各字段详细说明可参考接口定义，如：酒店发布接口。 */
@@ -30,7 +30,7 @@ type Hotel struct {
 	PicUrl string `json:"pic_url"`
 	Province int `json:"province"`
 	ProvinceStr string `json:"province_str"`
-	RoomTypes *RoomTypeObject `json:"room_types"`
+	RoomTypes *RoomTypeListObject `json:"room_types"`
 	Rooms int `json:"rooms"`
 	Service string `json:"service"`
 	Status int `json:"status"`
@@ -39,9 +39,9 @@ type Hotel struct {
 
 }
 
-/* Hotel（酒店）结构。各字段详细说明可参考接口定义，如：酒店发布接口。 */
-type RoomTypeObject struct {
-	RoomTypes []*RoomType `json:"room_type"`
+/*  */
+type RoomTypeListObject struct {
+	RoomType []*RoomType `json:"room_type"`
 
 }
 
@@ -80,7 +80,7 @@ type HotelOrder struct {
 	Created string `json:"created"`
 	EndTime string `json:"end_time"`
 	Gid int `json:"gid"`
-	Guests *OrderGuestObject `json:"guests"`
+	Guests *OrderGuestListObject `json:"guests"`
 	Hid int `json:"hid"`
 	LogisticsStatus string `json:"logistics_status"`
 	Message string `json:"message"`
@@ -102,9 +102,9 @@ type HotelOrder struct {
 
 }
 
-/* HotelOrder（酒店订单）结构。各字段详细说明可参考接口定义。注意：trade_status，refund_status，logistics_status不是严格准确的，请以交易API，物流API等得到的订单状态、物流状态为准确依据。 */
-type OrderGuestObject struct {
-	OrderGuests []*OrderGuest `json:"order_guest"`
+/*  */
+type OrderGuestListObject struct {
+	OrderGuest []*OrderGuest `json:"order_guest"`
 
 }
 
@@ -115,6 +115,12 @@ type OrderGuest struct {
 	PersonPos int `json:"person_pos"`
 	RoomPos int `json:"room_pos"`
 	Tel string `json:"tel"`
+
+}
+
+/*  */
+type HotelOrderListObject struct {
+	HotelOrder []*HotelOrder `json:"hotel_order"`
 
 }
 
@@ -155,6 +161,18 @@ type RoomImage struct {
 	Gid int `json:"gid"`
 	Image string `json:"image"`
 	Position int `json:"position"`
+
+}
+
+/*  */
+type RoomListObject struct {
+	Room []*Room `json:"room"`
+
+}
+
+/*  */
+type HotelListObject struct {
+	Hotel []*Hotel `json:"hotel"`
 
 }
 

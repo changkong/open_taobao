@@ -130,7 +130,7 @@ func (r *TraderateImprImprwordByaucidGetRequest) GetResponse(accessToken string)
 }
 
 type TraderateImprImprwordByaucidGetResponse struct {
-	ImprWordList []*ImprItemDO `json:"impr_word_list"`
+	ImprWordList *ImprItemDOListObject `json:"impr_word_list"`
 }
 
 type TraderateImprImprwordByaucidGetResponseResult struct {
@@ -339,7 +339,7 @@ func (r *TraderatesGetRequest) GetResponse(accessToken string) (*TraderatesGetRe
 type TraderatesGetResponse struct {
 	HasNext bool `json:"has_next"`
 	TotalResults int `json:"total_results"`
-	TradeRates []*TradeRate `json:"trade_rates"`
+	TradeRates *TradeRateListObject `json:"trade_rates"`
 }
 
 type TraderatesGetResponseResult struct {

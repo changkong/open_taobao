@@ -4,12 +4,24 @@
 
 package wangwang
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type WordListListObject struct {
+	WordList []*WordList `json:"word_list"`
+
+}
 
 /* 关键词列表 */
 type WordList struct {
 	Word string `json:"word"`
+
+}
+
+/*  */
+type MsgListListObject struct {
+	MsgList []*MsgList `json:"msg_list"`
 
 }
 
@@ -20,14 +32,14 @@ type MsgList struct {
 	Length int `json:"length"`
 	Time string `json:"time"`
 	Type int `json:"type"`
-	UrlLists *UrlListObject `json:"url_lists"`
-	WordLists *WordCountListObject `json:"word_lists"`
+	UrlLists *UrlListListObject `json:"url_lists"`
+	WordLists *WordCountListListObject `json:"word_lists"`
 
 }
 
-/* 聊天记录列表 */
-type UrlListObject struct {
-	UrlLists []*UrlList `json:"url_list"`
+/*  */
+type UrlListListObject struct {
+	UrlList []*UrlList `json:"url_list"`
 
 }
 
@@ -37,9 +49,9 @@ type UrlList struct {
 
 }
 
-/* 聊天记录列表 */
-type WordCountListObject struct {
-	WordCountLists []*WordCountList `json:"word_count_list"`
+/*  */
+type WordCountListListObject struct {
+	WordCountList []*WordCountList `json:"word_count_list"`
 
 }
 
@@ -50,16 +62,22 @@ type WordCountList struct {
 
 }
 
-/* 客户等待（客服）平均时长列表 */
-type WaitingTimesOnDay struct {
-	WaitingDate string `json:"waiting_date"`
-	WaitingTimeByIds *WaitingTimeByIdObject `json:"waiting_time_by_ids"`
+/*  */
+type WaitingTimesOnDayListObject struct {
+	WaitingTimesOnDay []*WaitingTimesOnDay `json:"waiting_times_on_day"`
 
 }
 
 /* 客户等待（客服）平均时长列表 */
-type WaitingTimeByIdObject struct {
-	WaitingTimeByIds []*WaitingTimeById `json:"waiting_time_by_id"`
+type WaitingTimesOnDay struct {
+	WaitingDate string `json:"waiting_date"`
+	WaitingTimeByIds *WaitingTimeByIdListObject `json:"waiting_time_by_ids"`
+
+}
+
+/*  */
+type WaitingTimeByIdListObject struct {
+	WaitingTimeById []*WaitingTimeById `json:"waiting_time_by_id"`
 
 }
 
@@ -70,10 +88,22 @@ type WaitingTimeById struct {
 
 }
 
+/*  */
+type ChatpeerListObject struct {
+	Chatpeer []*Chatpeer `json:"chatpeer"`
+
+}
+
 /* 聊天对象ID列表 */
 type Chatpeer struct {
 	Date string `json:"date"`
 	Uid string `json:"uid"`
+
+}
+
+/*  */
+type EvalDetailListObject struct {
+	EvalDetail []*EvalDetail `json:"eval_detail"`
 
 }
 
@@ -87,29 +117,35 @@ type EvalDetail struct {
 
 }
 
-/* 客服评价统计列表(按天) */
-type StaffEvalStatOnDay struct {
-	EvalDate string `json:"eval_date"`
-	StaffEvalStatByIds *StaffEvalStatByIdObject `json:"staff_eval_stat_by_ids"`
+/*  */
+type StaffEvalStatOnDayListObject struct {
+	StaffEvalStatOnDay []*StaffEvalStatOnDay `json:"staff_eval_stat_on_day"`
 
 }
 
 /* 客服评价统计列表(按天) */
-type StaffEvalStatByIdObject struct {
-	StaffEvalStatByIds []*StaffEvalStatById `json:"staff_eval_stat_by_id"`
+type StaffEvalStatOnDay struct {
+	EvalDate string `json:"eval_date"`
+	StaffEvalStatByIds *StaffEvalStatByIdListObject `json:"staff_eval_stat_by_ids"`
+
+}
+
+/*  */
+type StaffEvalStatByIdListObject struct {
+	StaffEvalStatById []*StaffEvalStatById `json:"staff_eval_stat_by_id"`
 
 }
 
 /* 客服评价统计 */
 type StaffEvalStatById struct {
-	Evaluations *EvaluationObject `json:"evaluations"`
+	Evaluations *EvaluationListObject `json:"evaluations"`
 	ServiceStaffId string `json:"service_staff_id"`
 
 }
 
-/* 客服评价统计 */
-type EvaluationObject struct {
-	Evaluations []*Evaluation `json:"evaluation"`
+/*  */
+type EvaluationListObject struct {
+	Evaluation []*Evaluation `json:"evaluation"`
 
 }
 
@@ -117,6 +153,12 @@ type EvaluationObject struct {
 type Evaluation struct {
 	EvaluationName string `json:"evaluation_name"`
 	EvaluationNum string `json:"evaluation_num"`
+
+}
+
+/*  */
+type GroupMemberListObject struct {
+	GroupMember []*GroupMember `json:"group_member"`
 
 }
 
@@ -128,6 +170,12 @@ type GroupMember struct {
 
 }
 
+/*  */
+type LoginLogListObject struct {
+	LoginLog []*LoginLog `json:"login_log"`
+
+}
+
 /* 登录日志 */
 type LoginLog struct {
 	Time string `json:"time"`
@@ -135,16 +183,22 @@ type LoginLog struct {
 
 }
 
-/* 未回复统计列表(按天) */
-type NonReplyStatOnDay struct {
-	NonreplyDate string `json:"nonreply_date"`
-	NonreplyStatByIds *NonreplyStatByIdObject `json:"nonreply_stat_by_ids"`
+/*  */
+type NonReplyStatOnDayListObject struct {
+	NonReplyStatOnDay []*NonReplyStatOnDay `json:"non_reply_stat_on_day"`
 
 }
 
 /* 未回复统计列表(按天) */
-type NonreplyStatByIdObject struct {
-	NonreplyStatByIds []*NonreplyStatById `json:"nonreply_stat_by_id"`
+type NonReplyStatOnDay struct {
+	NonreplyDate string `json:"nonreply_date"`
+	NonreplyStatByIds *NonreplyStatByIdListObject `json:"nonreply_stat_by_ids"`
+
+}
+
+/*  */
+type NonreplyStatByIdListObject struct {
+	NonreplyStatById []*NonreplyStatById `json:"nonreply_stat_by_id"`
 
 }
 
@@ -156,16 +210,22 @@ type NonreplyStatById struct {
 
 }
 
-/* 某天的客服在线时长列表 */
-type OnlineTimesOnDay struct {
-	OnlineDate string `json:"online_date"`
-	OnlineTimeByIds *OnlineTimeByIdObject `json:"online_time_by_ids"`
+/*  */
+type OnlineTimesOnDayListObject struct {
+	OnlineTimesOnDay []*OnlineTimesOnDay `json:"online_times_on_day"`
 
 }
 
 /* 某天的客服在线时长列表 */
-type OnlineTimeByIdObject struct {
-	OnlineTimeByIds []*OnlineTimeById `json:"online_time_by_id"`
+type OnlineTimesOnDay struct {
+	OnlineDate string `json:"online_date"`
+	OnlineTimeByIds *OnlineTimeByIdListObject `json:"online_time_by_ids"`
+
+}
+
+/*  */
+type OnlineTimeByIdListObject struct {
+	OnlineTimeById []*OnlineTimeById `json:"online_time_by_id"`
 
 }
 
@@ -176,16 +236,22 @@ type OnlineTimeById struct {
 
 }
 
-/* (某天)回复统计列表 */
-type ReplyStatOnDay struct {
-	ReplyDate string `json:"reply_date"`
-	ReplyStatByIds *ReplyStatByIdObject `json:"reply_stat_by_ids"`
+/*  */
+type ReplyStatOnDayListObject struct {
+	ReplyStatOnDay []*ReplyStatOnDay `json:"reply_stat_on_day"`
 
 }
 
 /* (某天)回复统计列表 */
-type ReplyStatByIdObject struct {
-	ReplyStatByIds []*ReplyStatById `json:"reply_stat_by_id"`
+type ReplyStatOnDay struct {
+	ReplyDate string `json:"reply_date"`
+	ReplyStatByIds *ReplyStatByIdListObject `json:"reply_stat_by_ids"`
+
+}
+
+/*  */
+type ReplyStatByIdListObject struct {
+	ReplyStatById []*ReplyStatById `json:"reply_stat_by_id"`
 
 }
 
@@ -193,6 +259,12 @@ type ReplyStatByIdObject struct {
 type ReplyStatById struct {
 	ReplyNum int `json:"reply_num"`
 	UserId string `json:"user_id"`
+
+}
+
+/*  */
+type StreamWeightListObject struct {
+	StreamWeight []*StreamWeight `json:"stream_weight"`
 
 }
 

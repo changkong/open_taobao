@@ -535,7 +535,7 @@ func (r *TmallEaiOrderRefundGoodReturnMgetRequest) GetResponse(accessToken strin
 
 type TmallEaiOrderRefundGoodReturnMgetResponse struct {
 	HasNext bool `json:"has_next"`
-	ReturnBillList []*ReturnBill `json:"return_bill_list"`
+	ReturnBillList *ReturnBillListObject `json:"return_bill_list"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -639,7 +639,7 @@ func (r *TmallEaiOrderRefundMessageGetRequest) GetResponse(accessToken string) (
 }
 
 type TmallEaiOrderRefundMessageGetResponse struct {
-	MessageList []*TmallRefundMessage `json:"message_list"`
+	MessageList *TmallRefundMessageListObject `json:"message_list"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -699,7 +699,7 @@ func (r *TmallEaiOrderRefundMgetRequest) GetResponse(accessToken string) (*Tmall
 
 type TmallEaiOrderRefundMgetResponse struct {
 	HasNext bool `json:"has_next"`
-	RefundBillList []*RefundBill `json:"refund_bill_list"`
+	RefundBillList *RefundBillListObject `json:"refund_bill_list"`
 	TotalResults int `json:"total_results"`
 }
 

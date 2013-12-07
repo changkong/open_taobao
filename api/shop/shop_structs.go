@@ -4,7 +4,7 @@
 
 package shop
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 店铺内卖家自定义类目 */
@@ -17,6 +17,12 @@ type SellerCat struct {
 	PicUrl string `json:"pic_url"`
 	SortOrder int `json:"sort_order"`
 	Type string `json:"type"`
+
+}
+
+/*  */
+type SellerCatListObject struct {
+	SellerCat []*SellerCat `json:"seller_cat"`
 
 }
 
@@ -43,6 +49,12 @@ type ShopScore struct {
 	DeliveryScore string `json:"delivery_score"`
 	ItemScore string `json:"item_score"`
 	ServiceScore string `json:"service_score"`
+
+}
+
+/*  */
+type ShopCatListObject struct {
+	ShopCat []*ShopCat `json:"shop_cat"`
 
 }
 

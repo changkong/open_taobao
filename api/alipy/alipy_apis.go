@@ -868,7 +868,7 @@ func (r *AlipayUserAccountFreezeGetRequest) GetResponse(accessToken string) (*Al
 }
 
 type AlipayUserAccountFreezeGetResponse struct {
-	FreezeItems []*AccountFreeze `json:"freeze_items"`
+	FreezeItems *AccountFreezeListObject `json:"freeze_items"`
 	TotalResults string `json:"total_results"`
 }
 
@@ -1043,7 +1043,7 @@ func (r *AlipayUserTradeSearchRequest) GetResponse(accessToken string) (*AlipayU
 type AlipayUserTradeSearchResponse struct {
 	TotalPages string `json:"total_pages"`
 	TotalResults string `json:"total_results"`
-	TradeRecords []*TradeRecord `json:"trade_records"`
+	TradeRecords *TradeRecordListObject `json:"trade_records"`
 }
 
 type AlipayUserTradeSearchResponseResult struct {

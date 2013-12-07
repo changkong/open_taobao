@@ -82,7 +82,7 @@ func (r *FavoriteSearchRequest) GetResponse(accessToken string) (*FavoriteSearch
 }
 
 type FavoriteSearchResponse struct {
-	CollectItems []*CollectItem `json:"collect_items"`
+	CollectItems *CollectItemListObject `json:"collect_items"`
 	TotalResults int `json:"total_results"`
 }
 

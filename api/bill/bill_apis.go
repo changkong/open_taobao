@@ -39,7 +39,7 @@ func (r *BillAccountsGetRequest) GetResponse(accessToken string) (*BillAccountsG
 }
 
 type BillAccountsGetResponse struct {
-	Accounts []*Account `json:"accounts"`
+	Accounts *AccountListObject `json:"accounts"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -151,7 +151,7 @@ func (r *BillBillsGetRequest) GetResponse(accessToken string) (*BillBillsGetResp
 }
 
 type BillBillsGetResponse struct {
-	Bills []*Bill `json:"bills"`
+	Bills *BillListObject `json:"bills"`
 	HasNext bool `json:"has_next"`
 	TotalResults int `json:"total_results"`
 }
@@ -254,7 +254,7 @@ func (r *BillBookBillsGetRequest) GetResponse(accessToken string) (*BillBookBill
 }
 
 type BillBookBillsGetResponse struct {
-	Bills []*BookBill `json:"bills"`
+	Bills *BookBillListObject `json:"bills"`
 	HasNext bool `json:"has_next"`
 	TotalResults int `json:"total_results"`
 }

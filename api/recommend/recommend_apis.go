@@ -49,7 +49,7 @@ func (r *CategoryrecommendItemsGetRequest) GetResponse(accessToken string) (*Cat
 }
 
 type CategoryrecommendItemsGetResponse struct {
-	FavoriteItems []*FavoriteItem `json:"favorite_items"`
+	FavoriteItems *FavoriteItemListObject `json:"favorite_items"`
 }
 
 type CategoryrecommendItemsGetResponseResult struct {
@@ -97,7 +97,7 @@ func (r *ItemrecommendItemsGetRequest) GetResponse(accessToken string) (*Itemrec
 }
 
 type ItemrecommendItemsGetResponse struct {
-	Values []*FavoriteItem `json:"values"`
+	Values *FavoriteItemListObject `json:"values"`
 }
 
 type ItemrecommendItemsGetResponseResult struct {
@@ -147,7 +147,7 @@ func (r *ShoprecommendItemsGetRequest) GetResponse(accessToken string) (*Shoprec
 }
 
 type ShoprecommendItemsGetResponse struct {
-	FavoriteItems []*FavoriteItem `json:"favorite_items"`
+	FavoriteItems *FavoriteItemListObject `json:"favorite_items"`
 }
 
 type ShoprecommendItemsGetResponseResult struct {
@@ -195,7 +195,7 @@ func (r *ShoprecommendShopsGetRequest) GetResponse(accessToken string) (*Shoprec
 }
 
 type ShoprecommendShopsGetResponse struct {
-	FavoriteShops []*FavoriteShop `json:"favorite_shops"`
+	FavoriteShops *FavoriteShopListObject `json:"favorite_shops"`
 }
 
 type ShoprecommendShopsGetResponseResult struct {
@@ -239,7 +239,7 @@ func (r *UserrecommendItemsGetRequest) GetResponse(accessToken string) (*Userrec
 }
 
 type UserrecommendItemsGetResponse struct {
-	FavoriteItems []*FavoriteItem `json:"favorite_items"`
+	FavoriteItems *FavoriteItemListObject `json:"favorite_items"`
 }
 
 type UserrecommendItemsGetResponseResult struct {

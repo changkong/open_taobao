@@ -4,7 +4,7 @@
 
 package tools
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* KFC 关键词过滤匹配结果 */
@@ -23,14 +23,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks *SubtaskObject `json:"subtasks"`
+	Subtasks *SubtaskListObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
 
 }
 
-/* 批量异步任务结果 */
-type SubtaskObject struct {
-	Subtasks []*Subtask `json:"subtask"`
+/*  */
+type SubtaskListObject struct {
+	Subtask []*Subtask `json:"subtask"`
 
 }
 

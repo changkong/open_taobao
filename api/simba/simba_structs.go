@@ -4,30 +4,370 @@
 
 package simba
 
-const VersionNo = "20131127"
+const VersionNo = "20131207"
 
 
-/* 一页推荐词列表 */
-type RecommendWordPage struct {
+/* 推广组 */
+type ADGroup struct {
+	AdgroupId int `json:"adgroup_id"`
+	CampaignId int `json:"campaign_id"`
+	CategoryIds string `json:"category_ids"`
+	CreateTime string `json:"create_time"`
+	DefaultPrice int `json:"default_price"`
+	IsNonsearchDefaultPrice bool `json:"is_nonsearch_default_price"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+	NonsearchMaxPrice int `json:"nonsearch_max_price"`
+	NonsearchStatus int `json:"nonsearch_status"`
+	NumIid int `json:"num_iid"`
+	OfflineType string `json:"offline_type"`
+	OnlineStatus string `json:"online_status"`
+	Reason string `json:"reason"`
+
+}
+
+/*  */
+type ADGroupCatmatchListObject struct {
+	ADGroupCatmatch []*ADGroupCatmatch `json:"a_d_group_catmatch"`
+
+}
+
+/* 推广组类目出价 */
+type ADGroupCatmatch struct {
+	AdgroupId int `json:"adgroup_id"`
+	CampaignId int `json:"campaign_id"`
+	CatmatchId int `json:"catmatch_id"`
+	CreateTime string `json:"create_time"`
+	IsDefaultPrice bool `json:"is_default_price"`
+	MaxPrice int `json:"max_price"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+	OnlineStatus string `json:"online_status"`
+	Qscore string `json:"qscore"`
+
+}
+
+/* 一页ADGroupCatMatch列表 */
+type ADGroupCatMatchPage struct {
+	AdgroupCatmatchList *ADGroupCatmatchListObject `json:"adgroup_catmatch_list"`
 	PageNo int `json:"page_no"`
 	PageSize int `json:"page_size"`
-	RecommendWordList *RecommendWordListObject `json:"recommend_word_list"`
 	TotalItem int `json:"total_item"`
 
 }
 
-/* 一页推荐词列表 */
-type RecommendWordListObject struct {
-	RecommendWord []*RecommendWord `json:"recommend_word"`
+/* 类目出价预估信息 */
+type ADGroupCatMatchForecast struct {
+	AdgroupId int `json:"adgroup_id"`
+	CatmatchId int `json:"catmatch_id"`
+	Nick string `json:"nick"`
+	PriceClick string `json:"price_click"`
+	PriceCust string `json:"price_cust"`
+	PriceRank string `json:"price_rank"`
 
 }
 
-/* 推荐词 */
-type RecommendWord struct {
-	AveragePrice string `json:"average_price"`
-	Pertinence string `json:"pertinence"`
-	Pv string `json:"pv"`
+/*  */
+type ADGroupListObject struct {
+	ADGroup []*ADGroup `json:"a_d_group"`
+
+}
+
+/* 直通车商品分页对象 */
+type SubwayItemPartition struct {
+	ItemList *SubwayItemListObject `json:"item_list"`
+	OrderBy bool `json:"order_by"`
+	OrderField string `json:"order_field"`
+	PageNo int `json:"page_no"`
+	PageSize int `json:"page_size"`
+	TotalItem int `json:"total_item"`
+
+}
+
+/*  */
+type SubwayItemListObject struct {
+	SubwayItem []*SubwayItem `json:"subway_item"`
+
+}
+
+/* 主站商品对象 */
+type SubwayItem struct {
+	ExtraAttributes *ExtraAttributes `json:"extra_attributes"`
+	NumId int `json:"num_id"`
+	Price float64 `json:"price"`
+	Title string `json:"title"`
+
+}
+
+/* 直通车商品对象属性（Map） */
+type ExtraAttributes struct {
+	PublishTime string `json:"publish_time"`
+	Quantity float64 `json:"quantity"`
+	SalesCount float64 `json:"sales_count"`
+
+}
+
+/* 一页ADGroup列表 */
+type ADGroupPage struct {
+	AdgroupList *ADGroupListObject `json:"adgroup_list"`
+	PageNo int `json:"page_no"`
+	PageSize int `json:"page_size"`
+	TotalItem int `json:"total_item"`
+
+}
+
+/* 推广计划 */
+type Campaign struct {
+	CampaignId int `json:"campaign_id"`
+	CreateTime string `json:"create_time"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+	OnlineStatus string `json:"online_status"`
+	SettleReason string `json:"settle_reason"`
+	SettleStatus string `json:"settle_status"`
+	Title string `json:"title"`
+
+}
+
+/* 推广计划的投放地域 */
+type CampaignArea struct {
+	Area string `json:"area"`
+	CampaignId int `json:"campaign_id"`
+	CreateTime string `json:"create_time"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+
+}
+
+/*  */
+type AreaOptionListObject struct {
+	AreaOption []*AreaOption `json:"area_option"`
+
+}
+
+/* 直通车可推广的地域 */
+type AreaOption struct {
+	AreaId int `json:"area_id"`
+	Level int `json:"level"`
+	Name string `json:"name"`
+	ParentId int `json:"parent_id"`
+
+}
+
+/* 推广计划的日限额 */
+type CampaignBudget struct {
+	Budget int `json:"budget"`
+	CampaignId int `json:"campaign_id"`
+	CreateTime string `json:"create_time"`
+	IsSmooth bool `json:"is_smooth"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+
+}
+
+/*  */
+type ChannelOptionListObject struct {
+	ChannelOption []*ChannelOption `json:"channel_option"`
+
+}
+
+/* Campaign投放频道 */
+type ChannelOption struct {
+	ChannelId int `json:"channel_id"`
+	IsNonsearch bool `json:"is_nonsearch"`
+	IsSearch bool `json:"is_search"`
+	Name string `json:"name"`
+	TrafficName string `json:"traffic_name"`
+	TrafficType string `json:"traffic_type"`
+
+}
+
+/* 推广计划的投放平台 */
+type CampaignPlatform struct {
+	CampaignId int `json:"campaign_id"`
+	CreateTime string `json:"create_time"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+	NonsearchChannels []int `json:"nonsearch_channels"`
+	OutsideDiscount int `json:"outside_discount"`
+	SearchChannels []int `json:"search_channels"`
+
+}
+
+/* 推广计划的分时折扣设置 */
+type CampaignSchedule struct {
+	CampaignId int `json:"campaign_id"`
+	CreateTime string `json:"create_time"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+	Schedule string `json:"schedule"`
+
+}
+
+/*  */
+type CampaignListObject struct {
+	Campaign []*Campaign `json:"campaign"`
+
+}
+
+/* 创意 */
+type Creative struct {
+	AdgroupId int `json:"adgroup_id"`
+	AuditDesc string `json:"audit_desc"`
+	AuditStatus string `json:"audit_status"`
+	CampaignId int `json:"campaign_id"`
+	CreateTime string `json:"create_time"`
+	CreativeId int `json:"creative_id"`
+	ImgUrl string `json:"img_url"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+	Title string `json:"title"`
+
+}
+
+/* 创意修改记录，只记录最后一次修改 */
+type CreativeRecord struct {
+	AuditDesc string `json:"audit_desc"`
+	AuditStatus string `json:"audit_status"`
+	CreateTime string `json:"create_time"`
+	CreativeId int `json:"creative_id"`
+	ImgUrl string `json:"img_url"`
+	ModifiedTime string `json:"modified_time"`
+	ModifyTime string `json:"modify_time"`
+	Nick string `json:"nick"`
+	OldImgUrl string `json:"old_img_url"`
+	OldTitle string `json:"old_title"`
+	Title string `json:"title"`
+
+}
+
+/* 广告创意分页对象 */
+type CreativePage struct {
+	CreativeList *CreativeListObject `json:"creative_list"`
+	PageNo int `json:"page_no"`
+	PageSize int `json:"page_size"`
+	TotalItem int `json:"total_item"`
+
+}
+
+/*  */
+type CreativeListObject struct {
+	Creative []*Creative `json:"creative"`
+
+}
+
+/*  */
+type CreativeRecordListObject struct {
+	CreativeRecord []*CreativeRecord `json:"creative_record"`
+
+}
+
+/*  */
+type INCategoryTopListObject struct {
+	INCategoryTop []*INCategoryTop `json:"i_n_category_top"`
+
+}
+
+/* 类目对象 */
+type INCategoryTop struct {
+	CategoryChildTopList *INCategoryChildTopListObject `json:"category_child_top_list"`
+	CategoryDesc string `json:"category_desc"`
+	CategoryId int `json:"category_id"`
+	CategoryName string `json:"category_name"`
+	CategoryPropertiesList *INCategoryPropertiesListObject `json:"category_properties_list"`
+	CategroyWord string `json:"categroy_word"`
+
+}
+
+/*  */
+type INCategoryChildTopListObject struct {
+	INCategoryChildTop []*INCategoryChildTop `json:"i_n_category_child_top"`
+
+}
+
+/* 类目对象 */
+type INCategoryChildTop struct {
+	CategoryDesc string `json:"category_desc"`
+	CategoryId int `json:"category_id"`
+	CategoryName string `json:"category_name"`
+	CategoryPropertiesList *INCategoryPropertiesListObject `json:"category_properties_list"`
+
+}
+
+/*  */
+type INCategoryPropertiesListObject struct {
+	INCategoryProperties []*INCategoryProperties `json:"i_n_category_properties"`
+
+}
+
+/* 类目属性对象 */
+type INCategoryProperties struct {
+	PropertiesDesc string `json:"properties_desc"`
+	PropertiesId int `json:"properties_id"`
+	PropertiesName string `json:"properties_name"`
+
+}
+
+/*  */
+type INCategoryAnalysisListObject struct {
+	INCategoryAnalysis []*INCategoryAnalysis `json:"i_n_category_analysis"`
+
+}
+
+/* 类目数据分析对象 */
+type INCategoryAnalysis struct {
+	CategoryAreaPer string `json:"category_area_per"`
+	CategoryHpPrice string `json:"category_hp_price"`
+	CategoryId int `json:"category_id"`
+	CategoryName string `json:"category_name"`
+	CategorySourcePer string `json:"category_source_per"`
+
+}
+
+/*  */
+type INCategoryBaseListObject struct {
+	INCategoryBase []*INCategoryBase `json:"i_n_category_base"`
+
+}
+
+/* 类目基础数据对象 */
+type INCategoryBase struct {
+	CategoryId int `json:"category_id"`
+	CategoryName string `json:"category_name"`
+	CategoryPv int `json:"category_pv"`
+	InRecordBaseList *INRecordBaseListObject `json:"in_record_base_list"`
+
+}
+
+/*  */
+type INRecordBaseListObject struct {
+	INRecordBase []*INRecordBase `json:"i_n_record_base"`
+
+}
+
+/* 词基础数据对象 */
+type INRecordBase struct {
+	AvgPrice int `json:"avg_price"`
+	Click int `json:"click"`
+	Competition int `json:"competition"`
+	Ctr float64 `json:"ctr"`
+	Date string `json:"date"`
+	Pv int `json:"pv"`
+
+}
+
+/*  */
+type INWordAnalysisListObject struct {
+	INWordAnalysis []*INWordAnalysis `json:"i_n_word_analysis"`
+
+}
+
+/* 词数据分析对象 */
+type INWordAnalysis struct {
 	Word string `json:"word"`
+	WordAreaPer string `json:"word_area_per"`
+	WordHpPrice string `json:"word_hp_price"`
+	WordSourcePer string `json:"word_source_per"`
 
 }
 
@@ -44,20 +384,42 @@ type INWordBase struct {
 
 }
 
-/* 词基础数据对象 */
-type INRecordBaseListObject struct {
-	INRecordBase []*INRecordBase `json:"i_n_record_base"`
+/*  */
+type INWordCategoryListObject struct {
+	INWordCategory []*INWordCategory `json:"i_n_word_category"`
 
 }
 
-/* 词基础数据对象 */
-type INRecordBase struct {
+/* 词和类目数据对象 */
+type INWordCategory struct {
 	AvgPrice int `json:"avg_price"`
+	CategoryId int `json:"category_id"`
 	Click int `json:"click"`
 	Competition int `json:"competition"`
 	Ctr float64 `json:"ctr"`
 	Date string `json:"date"`
 	Pv int `json:"pv"`
+	Word string `json:"word"`
+
+}
+
+/* 词预估信息 */
+type KeywordForecast struct {
+	KeywordId int `json:"keyword_id"`
+	Nick string `json:"nick"`
+	PriceClick string `json:"price_click"`
+	PriceCust string `json:"price_cust"`
+	PriceRank string `json:"price_rank"`
+	Word string `json:"word"`
+
+}
+
+/* 关键词分页对象 */
+type KeywordPage struct {
+	KeywordList *KeywordListObject `json:"keyword_list"`
+	PageNo int `json:"page_no"`
+	PageSize int `json:"page_size"`
+	TotalItem int `json:"total_item"`
 
 }
 
@@ -83,6 +445,167 @@ type Keyword struct {
 	Nick string `json:"nick"`
 	Qscore string `json:"qscore"`
 	Word string `json:"word"`
+
+}
+
+/*  */
+type KeywordQscoreListObject struct {
+	KeywordQscore []*KeywordQscore `json:"keyword_qscore"`
+
+}
+
+/* 关键词质量得分 */
+type KeywordQscore struct {
+	AdgroupId int `json:"adgroup_id"`
+	CampaignId int `json:"campaign_id"`
+	KeywordId int `json:"keyword_id"`
+	Nick string `json:"nick"`
+	Qscore string `json:"qscore"`
+	Word string `json:"word"`
+
+}
+
+/* 一页推荐词列表 */
+type RecommendWordPage struct {
+	PageNo int `json:"page_no"`
+	PageSize int `json:"page_size"`
+	RecommendWordList *RecommendWordListObject `json:"recommend_word_list"`
+	TotalItem int `json:"total_item"`
+
+}
+
+/*  */
+type RecommendWordListObject struct {
+	RecommendWord []*RecommendWord `json:"recommend_word"`
+
+}
+
+/* 推荐词 */
+type RecommendWord struct {
+	AveragePrice string `json:"average_price"`
+	Pertinence string `json:"pertinence"`
+	Pv string `json:"pv"`
+	Word string `json:"word"`
+
+}
+
+/* 质量得分类 */
+type Qscore struct {
+	CatmatchQscore string `json:"catmatch_qscore"`
+	KeywordQscoreList *KeywordQscoreListObject `json:"keyword_qscore_list"`
+
+}
+
+/*  */
+type ADGroupPlaceListObject struct {
+	ADGroupPlace []*ADGroupPlace `json:"a_d_group_place"`
+
+}
+
+/* 推广组与定向推广位置关系 */
+type ADGroupPlace struct {
+	AdgroupId int `json:"adgroup_id"`
+	CampaignId int `json:"campaign_id"`
+	CreateTime string `json:"create_time"`
+	IsDefaultPrice int `json:"is_default_price"`
+	MaxPrice int `json:"max_price"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+	PlaceId int `json:"place_id"`
+	PlaceName string `json:"place_name"`
+
+}
+
+/*  */
+type DemographicListObject struct {
+	Demographic []*Demographic `json:"demographic"`
+
+}
+
+/* 投放人群 */
+type Demographic struct {
+	CreateTime string `json:"create_time"`
+	GroupId int `json:"group_id"`
+	GroupName string `json:"group_name"`
+	Id int `json:"id"`
+	LastUpdateTime string `json:"last_update_time"`
+	Name string `json:"name"`
+
+}
+
+/*  */
+type PlaceListObject struct {
+	Place []*Place `json:"place"`
+
+}
+
+/* 定向推广位置 */
+type Place struct {
+	CreateTime string `json:"create_time"`
+	LastUpdateTime string `json:"last_update_time"`
+	Name string `json:"name"`
+	PlaceId int `json:"place_id"`
+
+}
+
+/*  */
+type DemographicSettingListObject struct {
+	DemographicSetting []*DemographicSetting `json:"demographic_setting"`
+
+}
+
+/* 投放人群设置 */
+type DemographicSetting struct {
+	CampaignId int `json:"campaign_id"`
+	CreateTime string `json:"create_time"`
+	DemographicId int `json:"demographic_id"`
+	IncrementalPrice int `json:"incremental_price"`
+	ModifiedTime string `json:"modified_time"`
+	Nick string `json:"nick"`
+
+}
+
+/*  */
+type RankedItemListObject struct {
+	RankedItem []*RankedItem `json:"ranked_item"`
+
+}
+
+/* 关键词排名推广商品信息 */
+type RankedItem struct {
+	LinkUrl string `json:"link_url"`
+	MaxPrice float64 `json:"max_price"`
+	Nick string `json:"nick"`
+	Order int `json:"order"`
+	RankScore int `json:"rank_score"`
+	Title string `json:"title"`
+
+}
+
+/* 批量异步任务结果 */
+type Task struct {
+	CheckCode string `json:"check_code"`
+	Created string `json:"created"`
+	DownloadUrl string `json:"download_url"`
+	Method string `json:"method"`
+	Schedule string `json:"schedule"`
+	Status string `json:"status"`
+	Subtasks *SubtaskListObject `json:"subtasks"`
+	TaskId int `json:"task_id"`
+
+}
+
+/*  */
+type SubtaskListObject struct {
+	Subtask []*Subtask `json:"subtask"`
+
+}
+
+/* 批量异步任务的子任务结果 */
+type Subtask struct {
+	IsSuccess bool `json:"is_success"`
+	SubTaskRequest string `json:"sub_task_request"`
+	SubTaskResult string `json:"sub_task_result"`
 
 }
 

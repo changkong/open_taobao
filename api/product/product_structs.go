@@ -4,8 +4,14 @@
 
 package product
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type AfterSaleListObject struct {
+	AfterSale []*AfterSale `json:"after_sale"`
+
+}
 
 /* 卖家设置售后服务对象 */
 type AfterSale struct {
@@ -56,7 +62,7 @@ type Item struct {
 	IsTiming bool `json:"is_timing"`
 	IsVirtual bool `json:"is_virtual"`
 	IsXinpin bool `json:"is_xinpin"`
-	ItemImgs *ItemImgObject `json:"item_imgs"`
+	ItemImgs *ItemImgListObject `json:"item_imgs"`
 	ItemSize string `json:"item_size"`
 	ItemWeight string `json:"item_weight"`
 	ListTime string `json:"list_time"`
@@ -76,7 +82,7 @@ type Item struct {
 	Price float64 `json:"price"`
 	ProductId int `json:"product_id"`
 	PromotedService string `json:"promoted_service"`
-	PropImgs *PropImgObject `json:"prop_imgs"`
+	PropImgs *PropImgListObject `json:"prop_imgs"`
 	PropertyAlias string `json:"property_alias"`
 	Props string `json:"props"`
 	PropsName string `json:"props_name"`
@@ -85,14 +91,14 @@ type Item struct {
 	SellPoint string `json:"sell_point"`
 	SellPromise bool `json:"sell_promise"`
 	SellerCids string `json:"seller_cids"`
-	Skus *SkuObject `json:"skus"`
+	Skus *SkuListObject `json:"skus"`
 	StuffStatus string `json:"stuff_status"`
 	SubStock int `json:"sub_stock"`
 	TemplateId string `json:"template_id"`
 	Title string `json:"title"`
 	Type string `json:"type"`
 	ValidThru int `json:"valid_thru"`
-	Videos *VideoObject `json:"videos"`
+	Videos *VideoListObject `json:"videos"`
 	Violation bool `json:"violation"`
 	WapDesc string `json:"wap_desc"`
 	WapDetailUrl string `json:"wap_detail_url"`
@@ -138,9 +144,9 @@ type FoodSecurity struct {
 
 }
 
-/* Item(商品)结构 */
-type ItemImgObject struct {
-	ItemImgs []*ItemImg `json:"item_img"`
+/*  */
+type ItemImgListObject struct {
+	ItemImg []*ItemImg `json:"item_img"`
 
 }
 
@@ -189,9 +195,9 @@ type PaimaiInfo struct {
 
 }
 
-/* Item(商品)结构 */
-type PropImgObject struct {
-	PropImgs []*PropImg `json:"prop_img"`
+/*  */
+type PropImgListObject struct {
+	PropImg []*PropImg `json:"prop_img"`
 
 }
 
@@ -205,9 +211,9 @@ type PropImg struct {
 
 }
 
-/* Item(商品)结构 */
-type SkuObject struct {
-	Skus []*Sku `json:"sku"`
+/*  */
+type SkuListObject struct {
+	Sku []*Sku `json:"sku"`
 
 }
 
@@ -231,9 +237,9 @@ type Sku struct {
 
 }
 
-/* Item(商品)结构 */
-type VideoObject struct {
-	Videos []*Video `json:"video"`
+/*  */
+type VideoListObject struct {
+	Video []*Video `json:"video"`
 
 }
 
@@ -249,6 +255,12 @@ type Video struct {
 
 }
 
+/*  */
+type IdsModuleListObject struct {
+	IdsModule []*IdsModule `json:"ids_module"`
+
+}
+
 /* 用于保存宝贝描述规范化模块信息 */
 type IdsModule struct {
 	Id int `json:"id"`
@@ -257,11 +269,23 @@ type IdsModule struct {
 
 }
 
+/*  */
+type ItemTemplateListObject struct {
+	ItemTemplate []*ItemTemplate `json:"item_template"`
+
+}
+
 /* 宝贝详情页面信息 */
 type ItemTemplate struct {
 	ShopType int `json:"shop_type"`
 	TemplateId int `json:"template_id"`
 	TemplateName string `json:"template_name"`
+
+}
+
+/*  */
+type ItemListObject struct {
+	Item []*Item `json:"item"`
 
 }
 
@@ -283,10 +307,10 @@ type Product struct {
 	PicPath string `json:"pic_path"`
 	PicUrl string `json:"pic_url"`
 	Price float64 `json:"price"`
-	ProductExtraInfos *ProductExtraInfoObject `json:"product_extra_infos"`
+	ProductExtraInfos *ProductExtraInfoListObject `json:"product_extra_infos"`
 	ProductId int `json:"product_id"`
-	ProductImgs *ProductImgObject `json:"product_imgs"`
-	ProductPropImgs *ProductPropImgObject `json:"product_prop_imgs"`
+	ProductImgs *ProductImgListObject `json:"product_imgs"`
+	ProductPropImgs *ProductPropImgListObject `json:"product_prop_imgs"`
 	PropertyAlias string `json:"property_alias"`
 	Props string `json:"props"`
 	PropsStr string `json:"props_str"`
@@ -303,9 +327,9 @@ type Product struct {
 
 }
 
-/* 产品结构 */
-type ProductExtraInfoObject struct {
-	ProductExtraInfos []*ProductExtraInfo `json:"product_extra_info"`
+/*  */
+type ProductExtraInfoListObject struct {
+	ProductExtraInfo []*ProductExtraInfo `json:"product_extra_info"`
 
 }
 
@@ -318,9 +342,9 @@ type ProductExtraInfo struct {
 
 }
 
-/* 产品结构 */
-type ProductImgObject struct {
-	ProductImgs []*ProductImg `json:"product_img"`
+/*  */
+type ProductImgListObject struct {
+	ProductImg []*ProductImg `json:"product_img"`
 
 }
 
@@ -335,9 +359,9 @@ type ProductImg struct {
 
 }
 
-/* 产品结构 */
-type ProductPropImgObject struct {
-	ProductPropImgs []*ProductPropImg `json:"product_prop_img"`
+/*  */
+type ProductPropImgListObject struct {
+	ProductPropImg []*ProductPropImg `json:"product_prop_img"`
 
 }
 
@@ -353,6 +377,12 @@ type ProductPropImg struct {
 
 }
 
+/*  */
+type ProductListObject struct {
+	Product []*Product `json:"product"`
+
+}
+
 /* 批量异步任务结果 */
 type Task struct {
 	CheckCode string `json:"check_code"`
@@ -361,14 +391,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks *SubtaskObject `json:"subtasks"`
+	Subtasks *SubtaskListObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
 
 }
 
-/* 批量异步任务结果 */
-type SubtaskObject struct {
-	Subtasks []*Subtask `json:"subtask"`
+/*  */
+type SubtaskListObject struct {
+	Subtask []*Subtask `json:"subtask"`
 
 }
 
@@ -382,14 +412,14 @@ type Subtask struct {
 
 /* 优惠信息对象 */
 type PromotionDisplayTop struct {
-	PromotionInItem *PromotionInItemObject `json:"promotion_in_item"`
-	PromotionInShop *PromotionInShopObject `json:"promotion_in_shop"`
+	PromotionInItem *PromotionInItemListObject `json:"promotion_in_item"`
+	PromotionInShop *PromotionInShopListObject `json:"promotion_in_shop"`
 
 }
 
-/* Widget获取到的商品信息 */
-type PromotionInItemObject struct {
-	PromotionInItems []*PromotionInItem `json:"promotion_in_item"`
+/*  */
+type PromotionInItemListObject struct {
+	PromotionInItem []*PromotionInItem `json:"promotion_in_item"`
 
 }
 
@@ -408,9 +438,9 @@ type PromotionInItem struct {
 
 }
 
-/* Widget获取到的商品信息 */
-type PromotionInShopObject struct {
-	PromotionInShops []*PromotionInShop `json:"promotion_in_shop"`
+/*  */
+type PromotionInShopListObject struct {
+	PromotionInShop []*PromotionInShop `json:"promotion_in_shop"`
 
 }
 
@@ -424,13 +454,13 @@ type PromotionInShop struct {
 
 /* 管控的类目以及品牌信息 */
 type BrandCatControlInfo struct {
-	BrandCatControls *BrandCatControlObject `json:"brand_cat_controls"`
+	BrandCatControls *BrandCatControlListObject `json:"brand_cat_controls"`
 
 }
 
-/* 管控的类目以及品牌信息 */
-type BrandCatControlObject struct {
-	BrandCatControls []*BrandCatControl `json:"brand_cat_control"`
+/*  */
+type BrandCatControlListObject struct {
+	BrandCatControl []*BrandCatControl `json:"brand_cat_control"`
 
 }
 
@@ -453,6 +483,12 @@ type PropertyInputDO struct {
 
 }
 
+/*  */
+type CatBrandSalePropListObject struct {
+	CatBrandSaleProp []*CatBrandSaleProp `json:"cat_brand_sale_prop"`
+
+}
+
 /* 被管控的品牌和类目的所对应的销售属性 */
 type CatBrandSaleProp struct {
 	BrandId int `json:"brand_id"`
@@ -467,8 +503,8 @@ type CatBrandSaleProp struct {
 type ProductSpec struct {
 	Barcode string `json:"barcode"`
 	BrandId int `json:"brand_id"`
-	CertifiedPics *CertPicInfoObject `json:"certified_pics"`
-	CertifiedTxts *CertTxtInfoObject `json:"certified_txts"`
+	CertifiedPics *CertPicInfoListObject `json:"certified_pics"`
+	CertifiedTxts *CertTxtInfoListObject `json:"certified_txts"`
 	ChangeProp string `json:"change_prop"`
 	CustomePropsName string `json:"custome_props_name"`
 	LabelPrice int `json:"label_price"`
@@ -483,9 +519,9 @@ type ProductSpec struct {
 
 }
 
-/* ProductSpec(产品规格)结构。 */
-type CertPicInfoObject struct {
-	CertPicInfos []*CertPicInfo `json:"cert_pic_info"`
+/*  */
+type CertPicInfoListObject struct {
+	CertPicInfo []*CertPicInfo `json:"cert_pic_info"`
 
 }
 
@@ -496,9 +532,9 @@ type CertPicInfo struct {
 
 }
 
-/* ProductSpec(产品规格)结构。 */
-type CertTxtInfoObject struct {
-	CertTxtInfos []*CertTxtInfo `json:"cert_txt_info"`
+/*  */
+type CertTxtInfoListObject struct {
+	CertTxtInfo []*CertTxtInfo `json:"cert_txt_info"`
 
 }
 
@@ -506,6 +542,18 @@ type CertTxtInfoObject struct {
 type CertTxtInfo struct {
 	CertType int `json:"cert_type"`
 	Text string `json:"text"`
+
+}
+
+/*  */
+type ProductSpecListObject struct {
+	ProductSpec []*ProductSpec `json:"product_spec"`
+
+}
+
+/*  */
+type TicketListObject struct {
+	Ticket []*Ticket `json:"ticket"`
 
 }
 

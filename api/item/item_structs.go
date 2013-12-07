@@ -4,20 +4,20 @@
 
 package item
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 授权 */
 type SellerAuthorize struct {
-	Brands *BrandObject `json:"brands"`
-	ItemCats *ItemCatObject `json:"item_cats"`
-	XinpinItemCats *ItemCatObject `json:"xinpin_item_cats"`
+	Brands *BrandListObject `json:"brands"`
+	ItemCats *ItemCatListObject `json:"item_cats"`
+	XinpinItemCats *ItemCatListObject `json:"xinpin_item_cats"`
 
 }
 
-/* 授权 */
-type BrandObject struct {
-	Brands []*Brand `json:"brand"`
+/*  */
+type BrandListObject struct {
+	Brand []*Brand `json:"brand"`
 
 }
 
@@ -30,16 +30,16 @@ type Brand struct {
 
 }
 
-/* 授权 */
-type ItemCatObject struct {
-	ItemCats []*ItemCat `json:"item_cat"`
+/*  */
+type ItemCatListObject struct {
+	ItemCat []*ItemCat `json:"item_cat"`
 
 }
 
 /* 商品类目结构 */
 type ItemCat struct {
 	Cid int `json:"cid"`
-	Features *FeatureObject `json:"features"`
+	Features *FeatureListObject `json:"features"`
 	IsParent bool `json:"is_parent"`
 	ModifiedTime string `json:"modified_time"`
 	ModifiedType string `json:"modified_type"`
@@ -50,9 +50,9 @@ type ItemCat struct {
 
 }
 
-/* 商品属性 */
-type FeatureObject struct {
-	Features []*Feature `json:"feature"`
+/*  */
+type FeatureListObject struct {
+	Feature []*Feature `json:"feature"`
 
 }
 
@@ -63,11 +63,17 @@ type Feature struct {
 
 }
 
+/*  */
+type ItemPropListObject struct {
+	ItemProp []*ItemProp `json:"item_prop"`
+
+}
+
 /* 商品属性 */
 type ItemProp struct {
 	ChildTemplate string `json:"child_template"`
 	Cid int `json:"cid"`
-	Features *FeatureObject `json:"features"`
+	Features *FeatureListObject `json:"features"`
 	IsAllowAlias bool `json:"is_allow_alias"`
 	IsColorProp bool `json:"is_color_prop"`
 	IsEnumProp bool `json:"is_enum_prop"`
@@ -83,7 +89,7 @@ type ItemProp struct {
 	ParentPid int `json:"parent_pid"`
 	ParentVid int `json:"parent_vid"`
 	Pid int `json:"pid"`
-	PropValues *PropValueObject `json:"prop_values"`
+	PropValues *PropValueListObject `json:"prop_values"`
 	Required bool `json:"required"`
 	SortOrder int `json:"sort_order"`
 	Status string `json:"status"`
@@ -91,16 +97,16 @@ type ItemProp struct {
 
 }
 
-/* 商品属性 */
-type PropValueObject struct {
-	PropValues []*PropValue `json:"prop_value"`
+/*  */
+type PropValueListObject struct {
+	PropValue []*PropValue `json:"prop_value"`
 
 }
 
 /* 属性值 */
 type PropValue struct {
 	Cid int `json:"cid"`
-	Features *FeatureObject `json:"features"`
+	Features *FeatureListObject `json:"features"`
 	IsParent bool `json:"is_parent"`
 	ModifiedTime string `json:"modified_time"`
 	ModifiedType string `json:"modified_type"`
@@ -111,33 +117,6 @@ type PropValue struct {
 	SortOrder int `json:"sort_order"`
 	Status string `json:"status"`
 	Vid int `json:"vid"`
-
-}
-
-/* 批量异步任务结果 */
-type Task struct {
-	CheckCode string `json:"check_code"`
-	Created string `json:"created"`
-	DownloadUrl string `json:"download_url"`
-	Method string `json:"method"`
-	Schedule string `json:"schedule"`
-	Status string `json:"status"`
-	Subtasks *SubtaskObject `json:"subtasks"`
-	TaskId int `json:"task_id"`
-
-}
-
-/* 批量异步任务结果 */
-type SubtaskObject struct {
-	Subtasks []*Subtask `json:"subtask"`
-
-}
-
-/* 批量异步任务的子任务结果 */
-type Subtask struct {
-	IsSuccess bool `json:"is_success"`
-	SubTaskRequest string `json:"sub_task_request"`
-	SubTaskResult string `json:"sub_task_result"`
 
 }
 

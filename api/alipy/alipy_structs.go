@@ -4,7 +4,7 @@
 
 package alipy
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 小额支付单笔支付 */
@@ -58,14 +58,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks *SubtaskObject `json:"subtasks"`
+	Subtasks *SubtaskListObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
 
 }
 
-/* 批量异步任务结果 */
-type SubtaskObject struct {
-	Subtasks []*Subtask `json:"subtask"`
+/*  */
+type SubtaskListObject struct {
+	Subtask []*Subtask `json:"subtask"`
 
 }
 
@@ -74,6 +74,12 @@ type Subtask struct {
 	IsSuccess bool `json:"is_success"`
 	SubTaskRequest string `json:"sub_task_request"`
 	SubTaskResult string `json:"sub_task_result"`
+
+}
+
+/*  */
+type AccountFreezeListObject struct {
+	AccountFreeze []*AccountFreeze `json:"account_freeze"`
 
 }
 
@@ -114,6 +120,12 @@ type AlipayUserDetail struct {
 	Sex string `json:"sex"`
 	UserStatus string `json:"user_status"`
 	UserType string `json:"user_type"`
+
+}
+
+/*  */
+type TradeRecordListObject struct {
+	TradeRecord []*TradeRecord `json:"trade_record"`
 
 }
 

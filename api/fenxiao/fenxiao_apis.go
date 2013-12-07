@@ -113,7 +113,7 @@ func (r *FenxiaoCooperationGetRequest) GetResponse(accessToken string) (*Fenxiao
 }
 
 type FenxiaoCooperationGetResponse struct {
-	Cooperations []*Cooperation `json:"cooperations"`
+	Cooperations *CooperationListObject `json:"cooperations"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -402,7 +402,7 @@ func (r *FenxiaoDealerRequisitionorderGetRequest) GetResponse(accessToken string
 }
 
 type FenxiaoDealerRequisitionorderGetResponse struct {
-	DealerOrders []*DealerOrder `json:"dealer_orders"`
+	DealerOrders *DealerOrderListObject `json:"dealer_orders"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -495,7 +495,7 @@ func (r *FenxiaoDealerRequisitionorderQueryRequest) GetResponse(accessToken stri
 }
 
 type FenxiaoDealerRequisitionorderQueryResponse struct {
-	DealerOrders []*DealerOrder `json:"dealer_orders"`
+	DealerOrders *DealerOrderListObject `json:"dealer_orders"`
 }
 
 type FenxiaoDealerRequisitionorderQueryResponseResult struct {
@@ -752,7 +752,7 @@ func (r *FenxiaoDiscountsGetRequest) GetResponse(accessToken string) (*FenxiaoDi
 }
 
 type FenxiaoDiscountsGetResponse struct {
-	Discounts []*Discount `json:"discounts"`
+	Discounts *DiscountListObject `json:"discounts"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -849,7 +849,7 @@ func (r *FenxiaoDistributorItemsGetRequest) GetResponse(accessToken string) (*Fe
 }
 
 type FenxiaoDistributorItemsGetResponse struct {
-	Records []*FenxiaoItemRecord `json:"records"`
+	Records *FenxiaoItemRecordListObject `json:"records"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -889,7 +889,7 @@ func (r *FenxiaoDistributorProcuctStaticGetRequest) GetResponse(accessToken stri
 }
 
 type FenxiaoDistributorProcuctStaticGetResponse struct {
-	DistributorItemFlows []*DistributorItemFlow `json:"distributor_item_flows"`
+	DistributorItemFlows *DistributorItemFlowListObject `json:"distributor_item_flows"`
 	IsSuccess bool `json:"is_success"`
 }
 
@@ -984,7 +984,7 @@ func (r *FenxiaoDistributorProductsGetRequest) GetResponse(accessToken string) (
 
 type FenxiaoDistributorProductsGetResponse struct {
 	HasNext bool `json:"has_next"`
-	Products []*FenxiaoProduct `json:"products"`
+	Products *FenxiaoProductListObject `json:"products"`
 }
 
 type FenxiaoDistributorProductsGetResponseResult struct {
@@ -1017,7 +1017,7 @@ func (r *FenxiaoDistributorsGetRequest) GetResponse(accessToken string) (*Fenxia
 }
 
 type FenxiaoDistributorsGetResponse struct {
-	Distributors []*Distributor `json:"distributors"`
+	Distributors *DistributorListObject `json:"distributors"`
 }
 
 type FenxiaoDistributorsGetResponseResult struct {
@@ -1150,7 +1150,7 @@ func (r *FenxiaoGradesGetRequest) GetResponse(accessToken string) (*FenxiaoGrade
 }
 
 type FenxiaoGradesGetResponse struct {
-	FenxiaoGrades []*FenxiaoGrade `json:"fenxiao_grades"`
+	FenxiaoGrades *FenxiaoGradeListObject `json:"fenxiao_grades"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1571,7 +1571,7 @@ func (r *FenxiaoOrdersGetRequest) GetResponse(accessToken string) (*FenxiaoOrder
 }
 
 type FenxiaoOrdersGetResponse struct {
-	PurchaseOrders []*PurchaseOrder `json:"purchase_orders"`
+	PurchaseOrders *PurchaseOrderListObject `json:"purchase_orders"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1840,7 +1840,7 @@ func (r *FenxiaoProductGradepriceGetRequest) GetResponse(accessToken string) (*F
 }
 
 type FenxiaoProductGradepriceGetResponse struct {
-	GradeDiscounts []*GradeDiscount `json:"grade_discounts"`
+	GradeDiscounts *GradeDiscountListObject `json:"grade_discounts"`
 	IsSuccess bool `json:"is_success"`
 }
 
@@ -2288,7 +2288,7 @@ func (r *FenxiaoProductSkusGetRequest) GetResponse(accessToken string) (*Fenxiao
 }
 
 type FenxiaoProductSkusGetResponse struct {
-	Skus []*FenxiaoSku `json:"skus"`
+	Skus *FenxiaoSkuListObject `json:"skus"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -2690,7 +2690,7 @@ func (r *FenxiaoProductcatsGetRequest) GetResponse(accessToken string) (*Fenxiao
 }
 
 type FenxiaoProductcatsGetResponse struct {
-	Productcats []*ProductCat `json:"productcats"`
+	Productcats *ProductCatListObject `json:"productcats"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -2788,7 +2788,7 @@ func (r *FenxiaoProductsGetRequest) GetResponse(accessToken string) (*FenxiaoPro
 }
 
 type FenxiaoProductsGetResponse struct {
-	Products []*FenxiaoProduct `json:"products"`
+	Products *FenxiaoProductListObject `json:"products"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -2977,7 +2977,7 @@ func (r *FenxiaoRefundMessageGetRequest) GetResponse(accessToken string) (*Fenxi
 }
 
 type FenxiaoRefundMessageGetResponse struct {
-	OrderMessages []*OrderMessage `json:"order_messages"`
+	OrderMessages *OrderMessageListObject `json:"order_messages"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -3091,7 +3091,7 @@ func (r *FenxiaoRequisitionsGetRequest) GetResponse(accessToken string) (*Fenxia
 
 type FenxiaoRequisitionsGetResponse struct {
 	IsSuccess bool `json:"is_success"`
-	Requisitions []*Requisition `json:"requisitions"`
+	Requisitions *RequisitionListObject `json:"requisitions"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -3156,7 +3156,7 @@ func (r *FenxiaoTrademonitorGetRequest) GetResponse(accessToken string) (*Fenxia
 
 type FenxiaoTrademonitorGetResponse struct {
 	TotalResults int `json:"total_results"`
-	TradeMonitors []*TradeMonitor `json:"trade_monitors"`
+	TradeMonitors *TradeMonitorListObject `json:"trade_monitors"`
 }
 
 type FenxiaoTrademonitorGetResponseResult struct {
@@ -3226,7 +3226,7 @@ func (r *InventoryAdjustExternalRequest) GetResponse(accessToken string) (*Inven
 
 type InventoryAdjustExternalResponse struct {
 	OperateCode string `json:"operate_code"`
-	TipInfos []*TipInfo `json:"tip_infos"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryAdjustExternalResponseResult struct {
@@ -3275,7 +3275,7 @@ func (r *InventoryAdjustTradeRequest) GetResponse(accessToken string) (*Inventor
 
 type InventoryAdjustTradeResponse struct {
 	OperateCode string `json:"operate_code"`
-	TipInfos []*TipInfo `json:"tip_infos"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryAdjustTradeResponseResult struct {
@@ -3318,7 +3318,7 @@ func (r *InventoryAuthorizeGetRequest) GetResponse(accessToken string) (*Invento
 }
 
 type InventoryAuthorizeGetResponse struct {
-	AuthorizeList []*InventoryAuthorizeInfo `json:"authorize_list"`
+	AuthorizeList *InventoryAuthorizeInfoListObject `json:"authorize_list"`
 }
 
 type InventoryAuthorizeGetResponseResult struct {
@@ -3356,7 +3356,7 @@ func (r *InventoryAuthorizeGetallRequest) GetResponse(accessToken string) (*Inve
 }
 
 type InventoryAuthorizeGetallResponse struct {
-	AuthorizeList []*InventoryAuthorizeInfo `json:"authorize_list"`
+	AuthorizeList *InventoryAuthorizeInfoListObject `json:"authorize_list"`
 }
 
 type InventoryAuthorizeGetallResponseResult struct {
@@ -3399,7 +3399,7 @@ func (r *InventoryAuthorizeRemoveRequest) GetResponse(accessToken string) (*Inve
 }
 
 type InventoryAuthorizeRemoveResponse struct {
-	TipInfos []*TipInfo `json:"tip_infos"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryAuthorizeRemoveResponseResult struct {
@@ -3437,7 +3437,7 @@ func (r *InventoryAuthorizeRemoveallRequest) GetResponse(accessToken string) (*I
 }
 
 type InventoryAuthorizeRemoveallResponse struct {
-	TipInfos []*TipInfo `json:"tip_infos"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryAuthorizeRemoveallResponseResult struct {
@@ -3479,8 +3479,8 @@ func (r *InventoryAuthorizeSetRequest) GetResponse(accessToken string) (*Invento
 }
 
 type InventoryAuthorizeSetResponse struct {
-	AuthorizeResults []*InventoryAuthorizeInfo `json:"authorize_results"`
-	TipInfos []*TipInfo `json:"tip_infos"`
+	AuthorizeResults *InventoryAuthorizeInfoListObject `json:"authorize_results"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryAuthorizeSetResponseResult struct {
@@ -3523,7 +3523,7 @@ func (r *InventoryAuthorizeUpdateRequest) GetResponse(accessToken string) (*Inve
 }
 
 type InventoryAuthorizeUpdateResponse struct {
-	TipInfos []*TipInfo `json:"tip_infos"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryAuthorizeUpdateResponseResult struct {
@@ -3561,7 +3561,7 @@ func (r *InventoryInitialRequest) GetResponse(accessToken string) (*InventoryIni
 }
 
 type InventoryInitialResponse struct {
-	TipInfos []*TipInfo `json:"tip_infos"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryInitialResponseResult struct {
@@ -3599,7 +3599,7 @@ func (r *InventoryInitialItemRequest) GetResponse(accessToken string) (*Inventor
 }
 
 type InventoryInitialItemResponse struct {
-	TipInfos []*TipInfo `json:"tip_infos"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryInitialItemResponseResult struct {
@@ -3648,7 +3648,7 @@ func (r *InventoryOccupyAdjustRequest) GetResponse(accessToken string) (*Invento
 
 type InventoryOccupyAdjustResponse struct {
 	OperateCode string `json:"operate_code"`
-	TipInfos []*TipInfo `json:"tip_infos"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryOccupyAdjustResponseResult struct {
@@ -3696,8 +3696,8 @@ func (r *InventoryQueryRequest) GetResponse(accessToken string) (*InventoryQuery
 }
 
 type InventoryQueryResponse struct {
-	ItemInventorys []*InventorySum `json:"item_inventorys"`
-	TipInfos []*TipInfo `json:"tip_infos"`
+	ItemInventorys *InventorySumListObject `json:"item_inventorys"`
+	TipInfos *TipInfoListObject `json:"tip_infos"`
 }
 
 type InventoryQueryResponseResult struct {
@@ -3775,7 +3775,7 @@ func (r *InventoryStoreManageRequest) GetResponse(accessToken string) (*Inventor
 }
 
 type InventoryStoreManageResponse struct {
-	StoreList []*Store `json:"store_list"`
+	StoreList *StoreListObject `json:"store_list"`
 }
 
 type InventoryStoreManageResponseResult struct {
@@ -3808,7 +3808,7 @@ func (r *InventoryStoreQueryRequest) GetResponse(accessToken string) (*Inventory
 }
 
 type InventoryStoreQueryResponse struct {
-	StoreList []*Store `json:"store_list"`
+	StoreList *StoreListObject `json:"store_list"`
 }
 
 type InventoryStoreQueryResponseResult struct {
@@ -4082,7 +4082,7 @@ func (r *ScitemMapBatchQueryRequest) GetResponse(accessToken string) (*ScitemMap
 }
 
 type ScitemMapBatchQueryResponse struct {
-	ScItemMaps []*ScItemMap `json:"sc_item_maps"`
+	ScItemMaps *ScItemMapListObject `json:"sc_item_maps"`
 }
 
 type ScitemMapBatchQueryResponseResult struct {
@@ -4160,7 +4160,7 @@ func (r *ScitemMapQueryRequest) GetResponse(accessToken string) (*ScitemMapQuery
 }
 
 type ScitemMapQueryResponse struct {
-	ScItemMaps []*ScItemMap `json:"sc_item_maps"`
+	ScItemMaps *ScItemMapListObject `json:"sc_item_maps"`
 }
 
 type ScitemMapQueryResponseResult struct {
@@ -4259,7 +4259,7 @@ type ScitemQueryResponse struct {
 	PageIndex int `json:"page_index"`
 	PageSize int `json:"page_size"`
 	QueryPagination *QueryPagination `json:"query_pagination"`
-	ScItemList []*ScItem `json:"sc_item_list"`
+	ScItemList *ScItemListObject `json:"sc_item_list"`
 	TotalPage int `json:"total_page"`
 }
 
@@ -4523,7 +4523,7 @@ func (r *InventoryIpcInventorydetailGetRequest) GetResponse(accessToken string) 
 }
 
 type InventoryIpcInventorydetailGetResponse struct {
-	InventoryDetails []*IpcInventoryDetailDo `json:"inventory_details"`
+	InventoryDetails *IpcInventoryDetailDoListObject `json:"inventory_details"`
 }
 
 type InventoryIpcInventorydetailGetResponseResult struct {

@@ -682,7 +682,7 @@ func (r *TripJipiaoAgentOrderGetRequest) GetResponse(accessToken string) (*TripJ
 }
 
 type TripJipiaoAgentOrderGetResponse struct {
-	Orders []*AtOrder `json:"orders"`
+	Orders *AtOrderListObject `json:"orders"`
 }
 
 type TripJipiaoAgentOrderGetResponseResult struct {

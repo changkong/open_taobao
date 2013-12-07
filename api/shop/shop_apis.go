@@ -84,7 +84,7 @@ func (r *SellercatsListGetRequest) GetResponse(accessToken string) (*SellercatsL
 }
 
 type SellercatsListGetResponse struct {
-	SellerCats []*SellerCat `json:"seller_cats"`
+	SellerCats *SellerCatListObject `json:"seller_cats"`
 }
 
 type SellercatsListGetResponseResult struct {
@@ -275,7 +275,7 @@ func (r *ShopcatsListGetRequest) GetResponse(accessToken string) (*ShopcatsListG
 }
 
 type ShopcatsListGetResponse struct {
-	ShopCats []*ShopCat `json:"shop_cats"`
+	ShopCats *ShopCatListObject `json:"shop_cats"`
 }
 
 type ShopcatsListGetResponseResult struct {

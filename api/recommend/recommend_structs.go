@@ -4,8 +4,14 @@
 
 package recommend
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type FavoriteItemListObject struct {
+	FavoriteItem []*FavoriteItem `json:"favorite_item"`
+
+}
 
 /* 推荐的关联商品 */
 type FavoriteItem struct {
@@ -16,6 +22,12 @@ type FavoriteItem struct {
 	PromotionPrice float64 `json:"promotion_price"`
 	SellCount int `json:"sell_count"`
 	TrackIid string `json:"track_iid"`
+
+}
+
+/*  */
+type FavoriteShopListObject struct {
+	FavoriteShop []*FavoriteShop `json:"favorite_shop"`
 
 }
 

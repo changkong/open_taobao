@@ -4,8 +4,14 @@
 
 package favorite
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type CollectItemListObject struct {
+	CollectItem []*CollectItem `json:"collect_item"`
+
+}
 
 /* 商品或店铺的信息 */
 type CollectItem struct {

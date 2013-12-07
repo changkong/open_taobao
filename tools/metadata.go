@@ -28,6 +28,9 @@ func (p *PropT) GoName() string {
 }
 
 func (p *PropT) GoType() string {
+	if p.Level == "Object Array" {
+		return GetGoType(p.Type, p.Level) + "ListObject"
+	}
 	return GetGoType(p.Type, p.Level)
 }
 
@@ -87,6 +90,9 @@ func (p *ParamRespT) GoName() string {
 }
 
 func (p *ParamRespT) GoType() string {
+	if p.Level == "Object Array" {
+		return GetGoType(p.Type, p.Level) + "ListObject"
+	}
 	return GetGoType(p.Type, p.Level)
 }
 
@@ -173,12 +179,12 @@ func NewMetadata(filename string, confPackage *ConfPackageT) (*DataT, error) {
 	// 按包获取 api 需要的 struct
 	for _, pkg := range confPackage.Mx {
 		apis := d.MapPkgApi[pkg.Name]
-		structs := d.MapPkgStruct[pkg.Name]
+		structs := make([]*StructT, 0)
 		okStruct := make(map[string]bool)
 		for _, api := range apis {
 			for _, para := range api.Response.Param {
 				if para.Level == "Object" || para.Level == "Object Array" {
-					addApiNeedStructs(para.Type, &d, &structs, okStruct)
+					addApiNeedStructs(para.Type, para.Level, &d, &structs, okStruct)
 				}
 			}
 		}
@@ -188,21 +194,36 @@ func NewMetadata(filename string, confPackage *ConfPackageT) (*DataT, error) {
 	return &d, nil
 }
 
-func addApiNeedStructs(curStructName string, data *DataT, structArray *[]*StructT, okStruct map[string]bool) {
-	_, ok := okStruct[curStructName]
+func addApiNeedStructs(curStructName string, level string, data *DataT, structArray *[]*StructT, okStruct map[string]bool) {
+
+	key := curStructName + level
+	_, ok := okStruct[key]
 	if ok {
 		return
 	}
-	okStruct[curStructName] = true
-	curStruct := data.MapStruct[curStructName]
-	*structArray = append(*structArray, curStruct)
+
+	var curStruct *StructT
+
+	if level == "Object Array" {
+		structName := curStructName + "ListObject"
+
+		props := PropsT{Prop: []*PropT{&PropT{Name: GetTaobaoName(curStructName), Type: curStructName, Level: "List Object"}}}
+		curStruct = &StructT{Name: structName, Desc: "", Props: props}
+		data.MapStruct[curStruct.Name] = curStruct
+
+		okStruct[key] = true
+		*structArray = append(*structArray, curStruct)
+	}
+
+	if !okStruct[curStructName+"Object"] {
+		okStruct[curStructName+"Object"] = true
+		curStruct = data.MapStruct[curStructName]
+		*structArray = append(*structArray, curStruct)
+	}
 
 	for _, v := range curStruct.Props.Prop {
 		if v.Level == "Object" || v.Level == "Object Array" {
-			_, ok := okStruct[v.Type]
-			if !ok {
-				addApiNeedStructs(v.Type, data, structArray, okStruct)
-			}
+			addApiNeedStructs(v.Type, v.Level, data, structArray, okStruct)
 		}
 	}
 }
@@ -269,7 +290,7 @@ func GetTaobaoName(goName string) string {
 
 func GetGoType(TaobaoType, TaobaoLevel string) string {
 	result := ""
-	if TaobaoLevel == "Basic Array" || TaobaoLevel == "Object Array" {
+	if TaobaoLevel == "Basic Array" || TaobaoLevel == "List Object" {
 		result = "[]"
 	}
 	switch TaobaoLevel {
@@ -284,7 +305,7 @@ func GetGoType(TaobaoType, TaobaoLevel string) string {
 		case "Price":
 			result += "float64"
 		}
-	case "Object", "Object Array":
+	case "Object", "Object Array", "List Object":
 		result += "*"
 		result += TaobaoType
 	}

@@ -4,7 +4,7 @@
 
 package trade
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 批量异步任务结果 */
@@ -15,14 +15,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks *SubtaskObject `json:"subtasks"`
+	Subtasks *SubtaskListObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
 
 }
 
-/* 批量异步任务结果 */
-type SubtaskObject struct {
-	Subtasks []*Subtask `json:"subtask"`
+/*  */
+type SubtaskListObject struct {
+	Subtask []*Subtask `json:"subtask"`
 
 }
 
@@ -44,20 +44,20 @@ type TradeAmount struct {
 	Created string `json:"created"`
 	EndTime string `json:"end_time"`
 	ExpressAgencyFee string `json:"express_agency_fee"`
-	OrderAmounts *OrderAmountObject `json:"order_amounts"`
+	OrderAmounts *OrderAmountListObject `json:"order_amounts"`
 	PayTime string `json:"pay_time"`
 	Payment string `json:"payment"`
 	PostFee string `json:"post_fee"`
-	PromotionDetails *PromotionDetailObject `json:"promotion_details"`
+	PromotionDetails *PromotionDetailListObject `json:"promotion_details"`
 	SellerCodFee string `json:"seller_cod_fee"`
 	Tid int `json:"tid"`
 	TotalFee string `json:"total_fee"`
 
 }
 
-/* 交易订单的帐务信息详情 */
-type OrderAmountObject struct {
-	OrderAmounts []*OrderAmount `json:"order_amount"`
+/*  */
+type OrderAmountListObject struct {
+	OrderAmount []*OrderAmount `json:"order_amount"`
 
 }
 
@@ -79,9 +79,9 @@ type OrderAmount struct {
 
 }
 
-/* 交易订单的帐务信息详情 */
-type PromotionDetailObject struct {
-	PromotionDetails []*PromotionDetail `json:"promotion_detail"`
+/*  */
+type PromotionDetailListObject struct {
+	PromotionDetail []*PromotionDetail `json:"promotion_detail"`
 
 }
 
@@ -147,7 +147,7 @@ type Trade struct {
 	Num int `json:"num"`
 	NumIid int `json:"num_iid"`
 	NutFeature string `json:"nut_feature"`
-	Orders *OrderObject `json:"orders"`
+	Orders *OrderListObject `json:"orders"`
 	PayTime string `json:"pay_time"`
 	Payment string `json:"payment"`
 	PicPath string `json:"pic_path"`
@@ -155,7 +155,7 @@ type Trade struct {
 	PostFee string `json:"post_fee"`
 	Price string `json:"price"`
 	Promotion string `json:"promotion"`
-	PromotionDetails *PromotionDetailObject `json:"promotion_details"`
+	PromotionDetails *PromotionDetailListObject `json:"promotion_details"`
 	RealPointFee int `json:"real_point_fee"`
 	ReceivedPayment string `json:"received_payment"`
 	ReceiverAddress string `json:"receiver_address"`
@@ -178,7 +178,7 @@ type Trade struct {
 	SellerPhone string `json:"seller_phone"`
 	SellerRate bool `json:"seller_rate"`
 	SendTime string `json:"send_time"`
-	ServiceOrders *ServiceOrderObject `json:"service_orders"`
+	ServiceOrders *ServiceOrderListObject `json:"service_orders"`
 	ShippingType string `json:"shipping_type"`
 	Snapshot string `json:"snapshot"`
 	SnapshotUrl string `json:"snapshot_url"`
@@ -199,9 +199,9 @@ type Trade struct {
 
 }
 
-/* 交易结构 */
-type OrderObject struct {
-	Orders []*Order `json:"order"`
+/*  */
+type OrderListObject struct {
+	Order []*Order `json:"order"`
 
 }
 
@@ -254,9 +254,9 @@ type Order struct {
 
 }
 
-/* 交易结构 */
-type ServiceOrderObject struct {
-	ServiceOrders []*ServiceOrder `json:"service_order"`
+/*  */
+type ServiceOrderListObject struct {
+	ServiceOrder []*ServiceOrder `json:"service_order"`
 
 }
 
@@ -283,6 +283,12 @@ type TradeConfirmFee struct {
 	ConfirmFee float64 `json:"confirm_fee"`
 	ConfirmPostFee float64 `json:"confirm_post_fee"`
 	IsLastOrder bool `json:"is_last_order"`
+
+}
+
+/*  */
+type TradeListObject struct {
+	Trade []*Trade `json:"trade"`
 
 }
 

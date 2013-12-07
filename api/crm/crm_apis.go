@@ -29,7 +29,7 @@ func (r *CrmGradeGetRequest) GetResponse(accessToken string) (*CrmGradeGetRespon
 }
 
 type CrmGradeGetResponse struct {
-	GradePromotions []*GradePromotion `json:"grade_promotions"`
+	GradePromotions *GradePromotionListObject `json:"grade_promotions"`
 }
 
 type CrmGradeGetResponseResult struct {
@@ -546,7 +546,7 @@ func (r *CrmGroupsGetRequest) GetResponse(accessToken string) (*CrmGroupsGetResp
 }
 
 type CrmGroupsGetResponse struct {
-	Groups []*Group `json:"groups"`
+	Groups *GroupListObject `json:"groups"`
 	TotalResult int `json:"total_result"`
 }
 
@@ -782,7 +782,7 @@ func (r *CrmMembersGetRequest) GetResponse(accessToken string) (*CrmMembersGetRe
 }
 
 type CrmMembersGetResponse struct {
-	Members []*BasicMember `json:"members"`
+	Members *BasicMemberListObject `json:"members"`
 	TotalResult int `json:"total_result"`
 }
 
@@ -912,7 +912,7 @@ func (r *CrmMembersIncrementGetRequest) GetResponse(accessToken string) (*CrmMem
 }
 
 type CrmMembersIncrementGetResponse struct {
-	Members []*BasicMember `json:"members"`
+	Members *BasicMemberListObject `json:"members"`
 	TotalResult int `json:"total_result"`
 }
 
@@ -1042,7 +1042,7 @@ func (r *CrmMembersSearchRequest) GetResponse(accessToken string) (*CrmMembersSe
 }
 
 type CrmMembersSearchResponse struct {
-	Members []*CrmMember `json:"members"`
+	Members *CrmMemberListObject `json:"members"`
 	TotalResult int `json:"total_result"`
 }
 
@@ -1147,7 +1147,7 @@ func (r *HanoiActionGetListRequest) GetResponse(accessToken string) (*HanoiActio
 }
 
 type HanoiActionGetListResponse struct {
-	Hanoiactions []*ActionInfo `json:"hanoiactions"`
+	Hanoiactions *ActionInfoListObject `json:"hanoiactions"`
 	Total int `json:"total"`
 }
 
@@ -1266,7 +1266,7 @@ func (r *HanoiAttributesGetRequest) GetResponse(accessToken string) (*HanoiAttri
 
 type HanoiAttributesGetResponse struct {
 	PageResult *PageResult `json:"page_result"`
-	Values []*AttributeVO `json:"values"`
+	Values *AttributeVOListObject `json:"values"`
 }
 
 type HanoiAttributesGetResponseResult struct {
@@ -1701,7 +1701,7 @@ func (r *HanoiDocumentsGetRequest) GetResponse(accessToken string) (*HanoiDocume
 
 type HanoiDocumentsGetResponse struct {
 	PageResult *PageResult `json:"page_result"`
-	Values []*DocumentVO `json:"values"`
+	Values *DocumentVOListObject `json:"values"`
 }
 
 type HanoiDocumentsGetResponseResult struct {
@@ -1906,7 +1906,7 @@ func (r *HanoiFunctionSearchRequest) GetResponse(accessToken string) (*HanoiFunc
 }
 
 type HanoiFunctionSearchResponse struct {
-	Functions []*Function `json:"functions"`
+	Functions *FunctionListObject `json:"functions"`
 	Total int `json:"total"`
 }
 
@@ -2397,7 +2397,7 @@ func (r *HanoiGroupLabelQueryRequest) GetResponse(accessToken string) (*HanoiGro
 }
 
 type HanoiGroupLabelQueryResponse struct {
-	Values []*InnerLabel `json:"values"`
+	Values *InnerLabelListObject `json:"values"`
 }
 
 type HanoiGroupLabelQueryResponseResult struct {
@@ -2501,7 +2501,7 @@ func (r *HanoiGroupListQueryRequest) GetResponse(accessToken string) (*HanoiGrou
 
 type HanoiGroupListQueryResponse struct {
 	Total int `json:"total"`
-	Values []*HanoiLabelGroup `json:"values"`
+	Values *HanoiLabelGroupListObject `json:"values"`
 }
 
 type HanoiGroupListQueryResponseResult struct {
@@ -2973,7 +2973,7 @@ func (r *HanoiLabelListQueryRequest) GetResponse(accessToken string) (*HanoiLabe
 
 type HanoiLabelListQueryResponse struct {
 	Total int `json:"total"`
-	Values []*Label `json:"values"`
+	Values *LabelListObject `json:"values"`
 }
 
 type HanoiLabelListQueryResponseResult struct {
@@ -3011,7 +3011,7 @@ func (r *HanoiLabelParaQueryRequest) GetResponse(accessToken string) (*HanoiLabe
 }
 
 type HanoiLabelParaQueryResponse struct {
-	Values []*ParameterVO `json:"values"`
+	Values *ParameterVOListObject `json:"values"`
 }
 
 type HanoiLabelParaQueryResponseResult struct {
@@ -3351,7 +3351,7 @@ func (r *HanoiRangesGetRequest) GetResponse(accessToken string) (*HanoiRangesGet
 
 type HanoiRangesGetResponse struct {
 	PageResult *PageResult `json:"page_result"`
-	Values []*RangeVO `json:"values"`
+	Values *RangeVOListObject `json:"values"`
 }
 
 type HanoiRangesGetResponseResult struct {
@@ -3571,7 +3571,7 @@ func (r *HanoiTemplateListQueryRequest) GetResponse(accessToken string) (*HanoiT
 
 type HanoiTemplateListQueryResponse struct {
 	Total int `json:"total"`
-	Values []*Template `json:"values"`
+	Values *TemplateListObject `json:"values"`
 }
 
 type HanoiTemplateListQueryResponseResult struct {
@@ -3797,7 +3797,7 @@ func (r *HanoiTypesGetRequest) GetResponse(accessToken string) (*HanoiTypesGetRe
 
 type HanoiTypesGetResponse struct {
 	PageResult *PageResult `json:"page_result"`
-	Values []*TypeVO `json:"values"`
+	Values *TypeVOListObject `json:"values"`
 }
 
 type HanoiTypesGetResponseResult struct {
@@ -3825,7 +3825,7 @@ func (r *TmallCrmEquityGetRequest) GetResponse(accessToken string) (*TmallCrmEqu
 }
 
 type TmallCrmEquityGetResponse struct {
-	GradeEquitys []*GradeEquity `json:"grade_equitys"`
+	GradeEquitys *GradeEquityListObject `json:"grade_equitys"`
 }
 
 type TmallCrmEquityGetResponseResult struct {

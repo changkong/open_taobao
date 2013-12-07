@@ -4,8 +4,14 @@
 
 package delivery
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type AreaListObject struct {
+	Area []*Area `json:"area"`
+
+}
 
 /* 地址区域结构 */
 type Area struct {
@@ -23,7 +29,7 @@ type DeliveryTemplate struct {
 	Assumer int `json:"assumer"`
 	ConsignAreaId int `json:"consign_area_id"`
 	Created string `json:"created"`
-	FeeList *TopFeeObject `json:"fee_list"`
+	FeeList *TopFeeListObject `json:"fee_list"`
 	Modified string `json:"modified"`
 	Name string `json:"name"`
 	Supports string `json:"supports"`
@@ -32,9 +38,9 @@ type DeliveryTemplate struct {
 
 }
 
-/* 运费模板对象 */
-type TopFeeObject struct {
-	TopFees []*TopFee `json:"top_fee"`
+/*  */
+type TopFeeListObject struct {
+	TopFee []*TopFee `json:"top_fee"`
 
 }
 
@@ -46,6 +52,12 @@ type TopFee struct {
 	ServiceType string `json:"service_type"`
 	StartFee string `json:"start_fee"`
 	StartStandard string `json:"start_standard"`
+
+}
+
+/*  */
+type DeliveryTemplateListObject struct {
+	DeliveryTemplate []*DeliveryTemplate `json:"delivery_template"`
 
 }
 
@@ -67,6 +79,18 @@ type AddressResult struct {
 	SellerCompany string `json:"seller_company"`
 	SendDef bool `json:"send_def"`
 	ZipCode string `json:"zip_code"`
+
+}
+
+/*  */
+type AddressResultListObject struct {
+	AddressResult []*AddressResult `json:"address_result"`
+
+}
+
+/*  */
+type LogisticsCompanyListObject struct {
+	LogisticsCompany []*LogisticsCompany `json:"logistics_company"`
 
 }
 
@@ -118,6 +142,18 @@ type Location struct {
 
 }
 
+/*  */
+type ShippingListObject struct {
+	Shipping []*Shipping `json:"shipping"`
+
+}
+
+/*  */
+type LogisticsPartnerListObject struct {
+	LogisticsPartner []*LogisticsPartner `json:"logistics_partner"`
+
+}
+
 /* 查询揽送范围之内的物流公司信息 */
 type LogisticsPartner struct {
 	Carriage *CarriageDetail `json:"carriage"`
@@ -152,6 +188,12 @@ type PartnerDetail struct {
 
 }
 
+/*  */
+type TransitStepInfoListObject struct {
+	TransitStepInfo []*TransitStepInfo `json:"transit_step_info"`
+
+}
+
 /* 物流跟踪信息的一条 */
 type TransitStepInfo struct {
 	Action string `json:"action"`
@@ -160,6 +202,12 @@ type TransitStepInfo struct {
 	StatusDesc string `json:"status_desc"`
 	StatusTime string `json:"status_time"`
 	Time string `json:"time"`
+
+}
+
+/*  */
+type AddressReachableResultListObject struct {
+	AddressReachableResult []*AddressReachableResult `json:"address_reachable_result"`
 
 }
 

@@ -4,8 +4,14 @@
 
 package bill
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type AccountListObject struct {
+	Account []*Account `json:"account"`
+
+}
 
 /* 费用科目 */
 type Account struct {
@@ -41,6 +47,12 @@ type Bill struct {
 
 }
 
+/*  */
+type BillListObject struct {
+	Bill []*Bill `json:"bill"`
+
+}
+
 /* 虚拟账户账单结构 */
 type BookBill struct {
 	AccountId int `json:"account_id"`
@@ -52,6 +64,12 @@ type BookBill struct {
 	JournalType int `json:"journal_type"`
 	OtherAlipayId string `json:"other_alipay_id"`
 	TaobaoAlipayId string `json:"taobao_alipay_id"`
+
+}
+
+/*  */
+type BookBillListObject struct {
+	BookBill []*BookBill `json:"book_bill"`
 
 }
 

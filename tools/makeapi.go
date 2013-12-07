@@ -114,6 +114,7 @@ func MakeApis(confPackage *ConfPackageT, data *DataT) *[]string {
 		tdata.ViewPath = "./template/"
 		tdata.Apis = data.MapPkgApi[v.Name]
 		tdata.Structs = data.MapPkgStruct[v.Name]
+
 		err := MakePkg(tdata)
 		if err != nil {
 			fmt.Println("      [error]", err)

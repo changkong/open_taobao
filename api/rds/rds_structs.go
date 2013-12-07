@@ -4,7 +4,7 @@
 
 package rds
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* rds创建、查询、删除返回结果数据结构 */
@@ -22,6 +22,12 @@ type RdsDbInfo struct {
 	Password string `json:"password"`
 	Uid string `json:"uid"`
 	UserName string `json:"user_name"`
+
+}
+
+/*  */
+type RdsDbInfoListObject struct {
+	RdsDbInfo []*RdsDbInfo `json:"rds_db_info"`
 
 }
 

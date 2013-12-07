@@ -4,7 +4,7 @@
 
 package subuser
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 子账号角色 */
@@ -12,16 +12,16 @@ type Role struct {
 	CreateTime string `json:"create_time"`
 	Description string `json:"description"`
 	ModifiedTime string `json:"modified_time"`
-	Permissions *PermissionObject `json:"permissions"`
+	Permissions *PermissionListObject `json:"permissions"`
 	RoleId int `json:"role_id"`
 	RoleName string `json:"role_name"`
 	SellerId int `json:"seller_id"`
 
 }
 
-/* 子账号所拥有的权限对象(直接赋予的权限和通过角色赋予的权限的总和对象) */
-type PermissionObject struct {
-	Permissions []*Permission `json:"permission"`
+/*  */
+type PermissionListObject struct {
+	Permission []*Permission `json:"permission"`
 
 }
 
@@ -31,6 +31,12 @@ type Permission struct {
 	ParentCode string `json:"parent_code"`
 	PermissionCode string `json:"permission_code"`
 	PermissionName string `json:"permission_name"`
+
+}
+
+/*  */
+type SubUserInfoListObject struct {
+	SubUserInfo []*SubUserInfo `json:"sub_user_info"`
 
 }
 
@@ -46,16 +52,22 @@ type SubUserInfo struct {
 
 }
 
-/* 子账号所拥有的权限对象(直接赋予的权限和通过角色赋予的权限的总和对象) */
-type SubUserPermission struct {
-	Permissions *PermissionObject `json:"permissions"`
-	Roles *RoleObject `json:"roles"`
+/*  */
+type RoleListObject struct {
+	Role []*Role `json:"role"`
 
 }
 
 /* 子账号所拥有的权限对象(直接赋予的权限和通过角色赋予的权限的总和对象) */
-type RoleObject struct {
-	Roles []*Role `json:"role"`
+type SubUserPermission struct {
+	Permissions *PermissionListObject `json:"permissions"`
+	Roles *RoleListObject `json:"roles"`
+
+}
+
+/*  */
+type DepartmentListObject struct {
+	Department []*Department `json:"department"`
 
 }
 
@@ -64,6 +76,12 @@ type Department struct {
 	DepartmentId int `json:"department_id"`
 	DepartmentName string `json:"department_name"`
 	ParentId int `json:"parent_id"`
+
+}
+
+/*  */
+type DutyListObject struct {
+	Duty []*Duty `json:"duty"`
 
 }
 
@@ -101,6 +119,12 @@ type SubUserFullInfo struct {
 	UserId int `json:"user_id"`
 	UserNick string `json:"user_nick"`
 	WorkLocation string `json:"work_location"`
+
+}
+
+/*  */
+type SubAccountInfoListObject struct {
+	SubAccountInfo []*SubAccountInfo `json:"sub_account_info"`
 
 }
 

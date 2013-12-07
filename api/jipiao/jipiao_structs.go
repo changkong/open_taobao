@@ -4,7 +4,7 @@
 
 package jipiao
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 全量、增量的添加政策压缩包的json对应对象 */
@@ -91,13 +91,19 @@ type SearchOrderResult struct {
 
 }
 
+/*  */
+type AtOrderListObject struct {
+	AtOrder []*AtOrder `json:"at_order"`
+
+}
+
 /* 国内机票订单数据结构【top订单优化】 */
 type AtOrder struct {
 	BaseInfo *BaseInfo `json:"base_info"`
 	CorpInfo *CorpInfo `json:"corp_info"`
 	Extra string `json:"extra"`
 	Itinerary *Itinerary `json:"itinerary"`
-	SegmentInfos *SegmentInfoObject `json:"segment_infos"`
+	SegmentInfos *SegmentInfoListObject `json:"segment_infos"`
 
 }
 
@@ -165,9 +171,9 @@ type Itinerary struct {
 
 }
 
-/* 国内机票订单数据结构【top订单优化】 */
-type SegmentInfoObject struct {
-	SegmentInfos []*SegmentInfo `json:"segment_info"`
+/*  */
+type SegmentInfoListObject struct {
+	SegmentInfo []*SegmentInfo `json:"segment_info"`
 
 }
 
@@ -196,7 +202,7 @@ type SegmentInfo struct {
 	FlightType string `json:"flight_type"`
 	InsurePromotionPrice int `json:"insure_promotion_price"`
 	Memo string `json:"memo"`
-	Passengers *PassergerObject `json:"passengers"`
+	Passengers *PassergerListObject `json:"passengers"`
 	PolicyId int `json:"policy_id"`
 	PolicyType int `json:"policy_type"`
 	Price int `json:"price"`
@@ -207,9 +213,9 @@ type SegmentInfo struct {
 
 }
 
-/* 国内机票航段信息数据结构，【订单优化】 */
-type PassergerObject struct {
-	Passergers []*Passerger `json:"passerger"`
+/*  */
+type PassergerListObject struct {
+	Passerger []*Passerger `json:"passerger"`
 
 }
 

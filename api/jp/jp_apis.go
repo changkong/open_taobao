@@ -124,10 +124,10 @@ func (r *TmallItemsDiscountSearchRequest) GetResponse(accessToken string) (*Tmal
 }
 
 type TmallItemsDiscountSearchResponse struct {
-	BrandList []*TmallBrand `json:"brand_list"`
-	CatList []*TmallCat `json:"cat_list"`
-	ItemList []*TmallSearchItem `json:"item_list"`
-	MinisiteList []*TmallMinisite `json:"minisite_list"`
+	BrandList *TmallBrandListObject `json:"brand_list"`
+	CatList *TmallCatListObject `json:"cat_list"`
+	ItemList *TmallSearchItemListObject `json:"item_list"`
+	MinisiteList *TmallMinisiteListObject `json:"minisite_list"`
 	Page int `json:"page"`
 	PageSize int `json:"page_size"`
 	ParamValue string `json:"param_value"`
@@ -166,7 +166,7 @@ func (r *TmallSelectedItemsSearchRequest) GetResponse(accessToken string) (*Tmal
 }
 
 type TmallSelectedItemsSearchResponse struct {
-	ItemList []*SelectedItem `json:"item_list"`
+	ItemList *SelectedItemListObject `json:"item_list"`
 }
 
 type TmallSelectedItemsSearchResponseResult struct {
@@ -213,7 +213,7 @@ func (r *TmallTemaiItemsSearchRequest) GetResponse(accessToken string) (*TmallTe
 }
 
 type TmallTemaiItemsSearchResponse struct {
-	ItemList []*TmallSearchTmItem `json:"item_list"`
+	ItemList *TmallSearchTmItemListObject `json:"item_list"`
 	Page int `json:"page"`
 	PageSize int `json:"page_size"`
 	TotalPage int `json:"total_page"`
@@ -250,7 +250,7 @@ func (r *TmallTemaiSubcatsSearchRequest) GetResponse(accessToken string) (*Tmall
 }
 
 type TmallTemaiSubcatsSearchResponse struct {
-	CatList []*TmallTmCat `json:"cat_list"`
+	CatList *TmallTmCatListObject `json:"cat_list"`
 }
 
 type TmallTemaiSubcatsSearchResponseResult struct {

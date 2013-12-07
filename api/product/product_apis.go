@@ -29,7 +29,7 @@ func (r *AftersaleGetRequest) GetResponse(accessToken string) (*AftersaleGetResp
 }
 
 type AftersaleGetResponse struct {
-	AfterSales []*AfterSale `json:"after_sales"`
+	AfterSales *AfterSaleListObject `json:"after_sales"`
 }
 
 type AftersaleGetResponseResult struct {
@@ -448,7 +448,7 @@ func (r *ItemAddRequest) SetScenicTicketPayWay(value string) {
 	r.SetValue("scenic_ticket_pay_way", value)
 }
 
-/* 商品卖点信息，最长15个字符。仅天猫商家可用。 */
+/* 商品卖点信息，最长150个字符。仅天猫商家可用。 */
 func (r *ItemAddRequest) SetSellPoint(value string) {
 	r.SetValue("sell_point", value)
 }
@@ -547,6 +547,39 @@ type ItemAddResponseResult struct {
 
 
 
+/* 在新的发布模式下，isv需要先获取一份发布规则，然后根据规则传入数据。该接口提供规则查询功能 */
+type ItemAddRulesGetRequest struct {
+	open_taobao.TaobaoMethodRequest
+}
+
+
+/* 发布宝贝的叶子类目id */
+func (r *ItemAddRulesGetRequest) SetCategoryId(value string) {
+	r.SetValue("category_id", value)
+}
+
+
+func (r *ItemAddRulesGetRequest) GetResponse(accessToken string) (*ItemAddRulesGetResponse, []byte, error) {
+	var resp ItemAddRulesGetResponseResult
+	data, err := r.TaobaoMethodRequest.GetResponse(accessToken, "taobao.item.add.rules.get", &resp)
+	if err != nil {
+		return nil, data, err
+	}
+	return resp.Response, data, err
+}
+
+type ItemAddRulesGetResponse struct {
+	AddRules string `json:"add_rules"`
+}
+
+type ItemAddRulesGetResponseResult struct {
+	Response *ItemAddRulesGetResponse `json:"item_add_rules_get_response"`
+}
+
+
+
+
+
 /* 根据类目id和宝贝描述规范化打标类型获取该类目可用的宝贝描述模块中的锚点 */
 type ItemAnchorGetRequest struct {
 	open_taobao.TaobaoMethodRequest
@@ -574,7 +607,7 @@ func (r *ItemAnchorGetRequest) GetResponse(accessToken string) (*ItemAnchorGetRe
 }
 
 type ItemAnchorGetResponse struct {
-	AnchorModules []*IdsModule `json:"anchor_modules"`
+	AnchorModules *IdsModuleListObject `json:"anchor_modules"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -2608,7 +2641,7 @@ func (r *ItemSkusGetRequest) GetResponse(accessToken string) (*ItemSkusGetRespon
 }
 
 type ItemSkusGetResponse struct {
-	Skus []*Sku `json:"skus"`
+	Skus *SkuListObject `json:"skus"`
 }
 
 type ItemSkusGetResponseResult struct {
@@ -2636,7 +2669,7 @@ func (r *ItemTemplatesGetRequest) GetResponse(accessToken string) (*ItemTemplate
 }
 
 type ItemTemplatesGetResponse struct {
-	ItemTemplateList []*ItemTemplate `json:"item_template_list"`
+	ItemTemplateList *ItemTemplateListObject `json:"item_template_list"`
 }
 
 type ItemTemplatesGetResponseResult struct {
@@ -3051,7 +3084,7 @@ func (r *ItemUpdateRequest) SetScenicTicketPayWay(value string) {
 	r.SetValue("scenic_ticket_pay_way", value)
 }
 
-/* 商品卖点信息，最长15个字符。仅天猫商家可用。 */
+/* 商品卖点信息，最长150个字符。仅天猫商家可用。 */
 func (r *ItemUpdateRequest) SetSellPoint(value string) {
 	r.SetValue("sell_point", value)
 }
@@ -3241,7 +3274,7 @@ func (r *ItemsCustomGetRequest) GetResponse(accessToken string) (*ItemsCustomGet
 }
 
 type ItemsCustomGetResponse struct {
-	Items []*Item `json:"items"`
+	Items *ItemListObject `json:"items"`
 }
 
 type ItemsCustomGetResponseResult struct {
@@ -3346,7 +3379,7 @@ func (r *ItemsInventoryGetRequest) GetResponse(accessToken string) (*ItemsInvent
 }
 
 type ItemsInventoryGetResponse struct {
-	Items []*Item `json:"items"`
+	Items *ItemListObject `json:"items"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -3390,7 +3423,7 @@ func (r *ItemsListGetRequest) GetResponse(accessToken string) (*ItemsListGetResp
 }
 
 type ItemsListGetResponse struct {
-	Items []*Item `json:"items"`
+	Items *ItemListObject `json:"items"`
 }
 
 type ItemsListGetResponseResult struct {
@@ -3486,7 +3519,7 @@ func (r *ItemsOnsaleGetRequest) GetResponse(accessToken string) (*ItemsOnsaleGet
 }
 
 type ItemsOnsaleGetResponse struct {
-	Items []*Item `json:"items"`
+	Items *ItemListObject `json:"items"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -4012,7 +4045,7 @@ func (r *ProductsGetRequest) GetResponse(accessToken string) (*ProductsGetRespon
 }
 
 type ProductsGetResponse struct {
-	Products []*Product `json:"products"`
+	Products *ProductListObject `json:"products"`
 }
 
 type ProductsGetResponseResult struct {
@@ -4097,7 +4130,7 @@ func (r *ProductsSearchRequest) GetResponse(accessToken string) (*ProductsSearch
 }
 
 type ProductsSearchResponse struct {
-	Products []*Product `json:"products"`
+	Products *ProductListObject `json:"products"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -4137,7 +4170,7 @@ func (r *SkusCustomGetRequest) GetResponse(accessToken string) (*SkusCustomGetRe
 }
 
 type SkusCustomGetResponse struct {
-	Skus []*Sku `json:"skus"`
+	Skus *SkuListObject `json:"skus"`
 }
 
 type SkusCustomGetResponseResult struct {
@@ -4375,7 +4408,7 @@ func (r *TmallBrandcatSalesproGetRequest) GetResponse(accessToken string) (*Tmal
 }
 
 type TmallBrandcatSalesproGetResponse struct {
-	CatBrandSaleProps []*CatBrandSaleProp `json:"cat_brand_sale_props"`
+	CatBrandSaleProps *CatBrandSalePropListObject `json:"cat_brand_sale_props"`
 }
 
 type TmallBrandcatSalesproGetResponseResult struct {
@@ -4590,7 +4623,7 @@ func (r *TmallProductSpecsGetRequest) GetResponse(accessToken string) (*TmallPro
 }
 
 type TmallProductSpecsGetResponse struct {
-	ProductSpecs []*ProductSpec `json:"product_specs"`
+	ProductSpecs *ProductSpecListObject `json:"product_specs"`
 }
 
 type TmallProductSpecsGetResponseResult struct {
@@ -4623,7 +4656,7 @@ func (r *TmallProductSpecsTicketGetRequest) GetResponse(accessToken string) (*Tm
 }
 
 type TmallProductSpecsTicketGetResponse struct {
-	Tickets []*Ticket `json:"tickets"`
+	Tickets *TicketListObject `json:"tickets"`
 }
 
 type TmallProductSpecsTicketGetResponseResult struct {

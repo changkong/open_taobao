@@ -4,8 +4,14 @@
 
 package crm
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type GradePromotionListObject struct {
+	GradePromotion []*GradePromotion `json:"grade_promotion"`
+
+}
 
 /* 卖家设置的等级优惠信息 */
 type GradePromotion struct {
@@ -19,6 +25,12 @@ type GradePromotion struct {
 
 }
 
+/*  */
+type GroupListObject struct {
+	Group []*Group `json:"group"`
+
+}
+
 /* 描述分组的数据结构 */
 type Group struct {
 	GroupCreate string `json:"group_create"`
@@ -27,6 +39,12 @@ type Group struct {
 	GroupName string `json:"group_name"`
 	MemberCount int `json:"member_count"`
 	Status string `json:"status"`
+
+}
+
+/*  */
+type BasicMemberListObject struct {
+	BasicMember []*BasicMember `json:"basic_member"`
 
 }
 
@@ -45,6 +63,12 @@ type BasicMember struct {
 	Status string `json:"status"`
 	TradeAmount float64 `json:"trade_amount"`
 	TradeCount int `json:"trade_count"`
+
+}
+
+/*  */
+type CrmMemberListObject struct {
+	CrmMember []*CrmMember `json:"crm_member"`
 
 }
 
@@ -70,6 +94,12 @@ type CrmMember struct {
 
 }
 
+/*  */
+type ActionInfoListObject struct {
+	ActionInfo []*ActionInfo `json:"action_info"`
+
+}
+
 /* 动作action */
 type ActionInfo struct {
 	ActionCode string `json:"action_code"`
@@ -91,6 +121,12 @@ type PageResult struct {
 
 }
 
+/*  */
+type AttributeVOListObject struct {
+	AttributeVO []*AttributeVO `json:"attribute_v_o"`
+
+}
+
 /* 属性（指标）信息 */
 type AttributeVO struct {
 	ClazzType int `json:"clazz_type"`
@@ -98,7 +134,7 @@ type AttributeVO struct {
 	Description string `json:"description"`
 	DocumentId int `json:"document_id"`
 	Id int `json:"id"`
-	ParamKeys *ParamKeyVOObject `json:"param_keys"`
+	ParamKeys *ParamKeyVOListObject `json:"param_keys"`
 	Title string `json:"title"`
 	TopAccess int `json:"top_access"`
 	TypeId int `json:"type_id"`
@@ -106,9 +142,9 @@ type AttributeVO struct {
 
 }
 
-/* 属性（指标）信息 */
-type ParamKeyVOObject struct {
-	ParamKeyVOs []*ParamKeyVO `json:"param_key_v_o"`
+/*  */
+type ParamKeyVOListObject struct {
+	ParamKeyVO []*ParamKeyVO `json:"param_key_v_o"`
 
 }
 
@@ -122,6 +158,12 @@ type ParamKeyVO struct {
 	Sort int `json:"sort"`
 	Type int `json:"type"`
 	Value string `json:"value"`
+
+}
+
+/*  */
+type DocumentVOListObject struct {
+	DocumentVO []*DocumentVO `json:"document_v_o"`
 
 }
 
@@ -147,10 +189,28 @@ type Function struct {
 
 }
 
+/*  */
+type FunctionListObject struct {
+	Function []*Function `json:"function"`
+
+}
+
+/*  */
+type InnerLabelListObject struct {
+	InnerLabel []*InnerLabel `json:"inner_label"`
+
+}
+
 /* 用于表示分组中的标签 */
 type InnerLabel struct {
 	LabelId int `json:"label_id"`
 	Level int `json:"level"`
+
+}
+
+/*  */
+type HanoiLabelGroupListObject struct {
+	HanoiLabelGroup []*HanoiLabelGroup `json:"hanoi_label_group"`
 
 }
 
@@ -169,6 +229,12 @@ type HanoiLabelGroup struct {
 
 }
 
+/*  */
+type LabelListObject struct {
+	Label []*Label `json:"label"`
+
+}
+
 /* 标签 */
 type Label struct {
 	BizStatus int `json:"biz_status"`
@@ -181,6 +247,12 @@ type Label struct {
 	Open bool `json:"open"`
 	Scene int `json:"scene"`
 	TemplateId int `json:"template_id"`
+
+}
+
+/*  */
+type ParameterVOListObject struct {
+	ParameterVO []*ParameterVO `json:"parameter_v_o"`
 
 }
 
@@ -199,6 +271,12 @@ type TemplateResult struct {
 
 }
 
+/*  */
+type RangeVOListObject struct {
+	RangeVO []*RangeVO `json:"range_v_o"`
+
+}
+
 /* 值域对象 */
 type RangeVO struct {
 	Description string `json:"description"`
@@ -206,6 +284,12 @@ type RangeVO struct {
 	Id int `json:"id"`
 	Key string `json:"key"`
 	Value string `json:"value"`
+
+}
+
+/*  */
+type TemplateListObject struct {
+	Template []*Template `json:"template"`
 
 }
 
@@ -223,11 +307,23 @@ type Template struct {
 
 }
 
+/*  */
+type TypeVOListObject struct {
+	TypeVO []*TypeVO `json:"type_v_o"`
+
+}
+
 /* 类型对象 */
 type TypeVO struct {
 	Description string `json:"description"`
 	Id int `json:"id"`
 	Name string `json:"name"`
+
+}
+
+/*  */
+type GradeEquityListObject struct {
+	GradeEquity []*GradeEquity `json:"grade_equity"`
 
 }
 

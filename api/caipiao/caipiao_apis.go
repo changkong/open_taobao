@@ -29,7 +29,7 @@ func (r *CaipiaoGoodsInfoGetRequest) GetResponse(accessToken string) (*CaipiaoGo
 }
 
 type CaipiaoGoodsInfoGetResponse struct {
-	Results []*LotteryWangcaiSellerGoodsInfo `json:"results"`
+	Results *LotteryWangcaiSellerGoodsInfoListObject `json:"results"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -237,7 +237,7 @@ func (r *CaipiaoLotterytypesGetRequest) GetResponse(accessToken string) (*Caipia
 }
 
 type CaipiaoLotterytypesGetResponse struct {
-	Results []*LotteryType `json:"results"`
+	Results *LotteryTypeListObject `json:"results"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -286,7 +286,7 @@ func (r *CaipiaoPresentItemsGetRequest) GetResponse(accessToken string) (*Caipia
 }
 
 type CaipiaoPresentItemsGetResponse struct {
-	Results []*LotteryWangcaiPresent `json:"results"`
+	Results *LotteryWangcaiPresentListObject `json:"results"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -320,7 +320,7 @@ func (r *CaipiaoPresentStatGetRequest) GetResponse(accessToken string) (*Caipiao
 }
 
 type CaipiaoPresentStatGetResponse struct {
-	Results []*LotteryWangcaiPresentStat `json:"results"`
+	Results *LotteryWangcaiPresentStatListObject `json:"results"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -372,7 +372,7 @@ func (r *CaipiaoPresentWinItemsGetRequest) GetResponse(accessToken string) (*Cai
 }
 
 type CaipiaoPresentWinItemsGetResponse struct {
-	Results []*LotteryWangcaiPresent `json:"results"`
+	Results *LotteryWangcaiPresentListObject `json:"results"`
 	TotalResults int `json:"total_results"`
 }
 

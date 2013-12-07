@@ -4,13 +4,25 @@
 
 package taobaoke
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type TaobaokeAuthorizeListObject struct {
+	TaobaokeAuthorize []*TaobaokeAuthorize `json:"taobaoke_authorize"`
+
+}
 
 /* 淘宝客返利授权 */
 type TaobaokeAuthorize struct {
 	Param string `json:"param"`
 	Rebate bool `json:"rebate"`
+
+}
+
+/*  */
+type TaobaokePaymentListObject struct {
+	TaobaokePayment []*TaobaokePayment `json:"taobaoke_payment"`
 
 }
 

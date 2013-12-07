@@ -4,7 +4,7 @@
 
 package trvael
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* 旅游商品结构。 */
@@ -31,7 +31,7 @@ type TravelItems struct {
 	IsTdcy bool `json:"is_tdcy"`
 	IsTiming bool `json:"is_timing"`
 	ItemId int `json:"item_id"`
-	ItemImgs *TravelItemsImgObject `json:"item_imgs"`
+	ItemImgs *TravelItemsImgListObject `json:"item_imgs"`
 	ListTime string `json:"list_time"`
 	LocalityLife *TravelItemsLocalityLife `json:"locality_life"`
 	Location string `json:"location"`
@@ -50,12 +50,12 @@ type TravelItems struct {
 	SecondKill string `json:"second_kill"`
 	SellerCids string `json:"seller_cids"`
 	ShopingInfo string `json:"shoping_info"`
-	Skus *TravelItemsSkuObject `json:"skus"`
+	Skus *TravelItemsSkuListObject `json:"skus"`
 	Start string `json:"start"`
 	SubStock int `json:"sub_stock"`
 	TicketInfo string `json:"ticket_info"`
 	Title string `json:"title"`
-	TravelItemsCombos *TravelItemsComboObject `json:"travel_items_combos"`
+	TravelItemsCombos *TravelItemsComboListObject `json:"travel_items_combos"`
 	Type string `json:"type"`
 	UsedShowcase int `json:"used_showcase"`
 	Violation bool `json:"violation"`
@@ -64,9 +64,9 @@ type TravelItems struct {
 
 }
 
-/* 旅游商品结构。 */
-type TravelItemsImgObject struct {
-	TravelItemsImgs []*TravelItemsImg `json:"travel_items_img"`
+/*  */
+type TravelItemsImgListObject struct {
+	TravelItemsImg []*TravelItemsImg `json:"travel_items_img"`
 
 }
 
@@ -91,9 +91,9 @@ type TravelItemsLocalityLife struct {
 
 }
 
-/* 旅游商品结构。 */
-type TravelItemsSkuObject struct {
-	TravelItemsSkus []*TravelItemsSku `json:"travel_items_sku"`
+/*  */
+type TravelItemsSkuListObject struct {
+	TravelItemsSku []*TravelItemsSku `json:"travel_items_sku"`
 
 }
 
@@ -111,16 +111,16 @@ type TravelItemsSku struct {
 
 }
 
-/* 旅游商品结构。 */
-type TravelItemsComboObject struct {
-	TravelItemsCombos []*TravelItemsCombo `json:"travel_items_combo"`
+/*  */
+type TravelItemsComboListObject struct {
+	TravelItemsCombo []*TravelItemsCombo `json:"travel_items_combo"`
 
 }
 
 /* 旅游度假线路套餐价格日历结构。 */
 type TravelItemsCombo struct {
 	Combo *TravelItemsPropValue `json:"combo"`
-	ComboPriceCalendars *TravelItemsPriceCalendarObject `json:"combo_price_calendars"`
+	ComboPriceCalendars *TravelItemsPriceCalendarListObject `json:"combo_price_calendars"`
 
 }
 
@@ -135,9 +135,9 @@ type TravelItemsPropValue struct {
 
 }
 
-/* 旅游度假线路套餐价格日历结构。 */
-type TravelItemsPriceCalendarObject struct {
-	TravelItemsPriceCalendars []*TravelItemsPriceCalendar `json:"travel_items_price_calendar"`
+/*  */
+type TravelItemsPriceCalendarListObject struct {
+	TravelItemsPriceCalendar []*TravelItemsPriceCalendar `json:"travel_items_price_calendar"`
 
 }
 
@@ -152,16 +152,28 @@ type TravelItemsPriceCalendar struct {
 
 }
 
+/*  */
+type TravelItemsAreaNodeListObject struct {
+	TravelItemsAreaNode []*TravelItemsAreaNode `json:"travel_items_area_node"`
+
+}
+
 /* 旅游度假商品地区结构。 */
 type TravelItemsAreaNode struct {
-	SubPropValues *TravelItemsPropValueObject `json:"sub_prop_values"`
+	SubPropValues *TravelItemsPropValueListObject `json:"sub_prop_values"`
 	TravelItemsPropValue *TravelItemsPropValue `json:"travel_items_prop_value"`
 
 }
 
-/* 旅游商品类目属性结构 */
-type TravelItemsPropValueObject struct {
-	TravelItemsPropValues []*TravelItemsPropValue `json:"travel_items_prop_value"`
+/*  */
+type TravelItemsPropValueListObject struct {
+	TravelItemsPropValue []*TravelItemsPropValue `json:"travel_items_prop_value"`
+
+}
+
+/*  */
+type TravelItemsPropListObject struct {
+	TravelItemsProp []*TravelItemsProp `json:"travel_items_prop"`
 
 }
 
@@ -176,7 +188,7 @@ type TravelItemsProp struct {
 	Name string `json:"name"`
 	Pid int `json:"pid"`
 	SortOrder int `json:"sort_order"`
-	TravelItemsPropValues *TravelItemsPropValueObject `json:"travel_items_prop_values"`
+	TravelItemsPropValues *TravelItemsPropValueListObject `json:"travel_items_prop_values"`
 
 }
 

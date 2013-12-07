@@ -39,7 +39,7 @@ func (r *TaobaokeRebateAuthGetRequest) GetResponse(accessToken string) (*Taobaok
 }
 
 type TaobaokeRebateAuthGetResponse struct {
-	Results []*TaobaokeAuthorize `json:"results"`
+	Results *TaobaokeAuthorizeListObject `json:"results"`
 }
 
 type TaobaokeRebateAuthGetResponseResult struct {
@@ -136,7 +136,7 @@ func (r *TaobaokeRebateReportGetRequest) GetResponse(accessToken string) (*Taoba
 }
 
 type TaobaokeRebateReportGetResponse struct {
-	TaobaokePayments []*TaobaokePayment `json:"taobaoke_payments"`
+	TaobaokePayments *TaobaokePaymentListObject `json:"taobaoke_payments"`
 }
 
 type TaobaokeRebateReportGetResponseResult struct {

@@ -4,8 +4,14 @@
 
 package caipiao
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type LotteryWangcaiSellerGoodsInfoListObject struct {
+	LotteryWangcaiSellerGoodsInfo []*LotteryWangcaiSellerGoodsInfo `json:"lottery_wangcai_seller_goods_info"`
+
+}
 
 /* 卖家商品信息 */
 type LotteryWangcaiSellerGoodsInfo struct {
@@ -17,10 +23,22 @@ type LotteryWangcaiSellerGoodsInfo struct {
 
 }
 
+/*  */
+type LotteryTypeListObject struct {
+	LotteryType []*LotteryType `json:"lottery_type"`
+
+}
+
 /* 淘宝彩票彩种信息描述 */
 type LotteryType struct {
 	Id int `json:"id"`
 	Name string `json:"name"`
+
+}
+
+/*  */
+type LotteryWangcaiPresentListObject struct {
+	LotteryWangcaiPresent []*LotteryWangcaiPresent `json:"lottery_wangcai_present"`
 
 }
 
@@ -33,6 +51,12 @@ type LotteryWangcaiPresent struct {
 	StakeCount int `json:"stake_count"`
 	UserNick string `json:"user_nick"`
 	WinFee int `json:"win_fee"`
+
+}
+
+/*  */
+type LotteryWangcaiPresentStatListObject struct {
+	LotteryWangcaiPresentStat []*LotteryWangcaiPresentStat `json:"lottery_wangcai_present_stat"`
 
 }
 

@@ -618,8 +618,7 @@ type TradeSnapshotGetResponseResult struct {
 
 /* 搜索当前会话用户作为卖家已卖出的交易数据（只能获取到三个月以内的交易信息） 
 <br/>1. 返回的数据结果是以订单的创建时间倒序排列的。 
-<br/>2. 返回的数据结果只包含了订单的部分数据，可通过taobao.trade.fullinfo.get获取订单详情。 
-<br/>3. <span style="color:red">通过异步接口<a href="http://api.taobao.com/apidoc/api.htm?path=cid:5-apiId:11117">taobao.topats.trades.sold.get</a>可以一次性获取卖家3个月内的订单详情数据。 */
+<br/>2. 返回的数据结果只包含了订单的部分数据，可通过taobao.trade.fullinfo.get获取订单详情。 */
 type TradesSoldGetRequest struct {
 	open_taobao.TaobaoMethodRequest
 }
@@ -728,7 +727,7 @@ taohua(淘花网交易类型）
 waimai(外卖交易类型）
 nopaid（即时到帐/趣味猜交易类型）
 step (万人团) eticket(电子凭证) 
-tmall_i18n（天猫国际）;nopaid （无付款交易）
+tmall_i18n（天猫国际）;nopaid （无付款交易）cycle_purchase（周期购）insurance_plus（保险）finance（基金）
 注：guarantee_trade是一个组合查询条件，并不是一种交易类型，获取批量或单个订单中不会返回此种类型的订单。 */
 func (r *TradesSoldGetRequest) SetType(value string) {
 	r.SetValue("type", value)
@@ -752,7 +751,7 @@ func (r *TradesSoldGetRequest) GetResponse(accessToken string) (*TradesSoldGetRe
 type TradesSoldGetResponse struct {
 	HasNext bool `json:"has_next"`
 	TotalResults int `json:"total_results"`
-	Trades []*Trade `json:"trades"`
+	Trades *TradeListObject `json:"trades"`
 }
 
 type TradesSoldGetResponseResult struct {
@@ -849,7 +848,7 @@ taohua(桃花网交易类型）
 waimai(外卖交易类型）
 nopaid（即时到帐/趣味猜交易类型）
  eticket(电子凭证) 
-tmall_i18n（天猫国际）;nopaid（无付款交易）
+tmall_i18n（天猫国际）;nopaid（无付款交易）cycle_purchase（周期购）insurance_plus（保险）finance（基金）
 注：guarantee_trade是一个组合查询条件，并不是一种交易类型，获取批量或单个订单中不会返回此种类型的订单。 */
 func (r *TradesSoldIncrementGetRequest) SetType(value string) {
 	r.SetValue("type", value)
@@ -873,7 +872,7 @@ func (r *TradesSoldIncrementGetRequest) GetResponse(accessToken string) (*Trades
 type TradesSoldIncrementGetResponse struct {
 	HasNext bool `json:"has_next"`
 	TotalResults int `json:"total_results"`
-	Trades []*Trade `json:"trades"`
+	Trades *TradeListObject `json:"trades"`
 }
 
 type TradesSoldIncrementGetResponseResult struct {
@@ -989,7 +988,7 @@ func (r *TradesSoldIncrementvGetRequest) GetResponse(accessToken string) (*Trade
 type TradesSoldIncrementvGetResponse struct {
 	HasNext bool `json:"has_next"`
 	TotalResults int `json:"total_results"`
-	Trades []*Trade `json:"trades"`
+	Trades *TradeListObject `json:"trades"`
 }
 
 type TradesSoldIncrementvGetResponseResult struct {

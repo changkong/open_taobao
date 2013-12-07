@@ -776,7 +776,7 @@ func (r *HotelOrdersSearchRequest) GetResponse(accessToken string) (*HotelOrders
 }
 
 type HotelOrdersSearchResponse struct {
-	HotelOrders []*HotelOrder `json:"hotel_orders"`
+	HotelOrders *HotelOrderListObject `json:"hotel_orders"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1408,7 +1408,7 @@ func (r *HotelRoomsSearchRequest) GetResponse(accessToken string) (*HotelRoomsSe
 }
 
 type HotelRoomsSearchResponse struct {
-	Rooms []*Room `json:"rooms"`
+	Rooms *RoomListObject `json:"rooms"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1505,7 +1505,7 @@ func (r *HotelSoldHotelsIncrementGetRequest) GetResponse(accessToken string) (*H
 
 type HotelSoldHotelsIncrementGetResponse struct {
 	HasNext bool `json:"has_next"`
-	Hotels []*Hotel `json:"hotels"`
+	Hotels *HotelListObject `json:"hotels"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1577,7 +1577,7 @@ func (r *HotelSoldOrdersIncrementGetRequest) GetResponse(accessToken string) (*H
 
 type HotelSoldOrdersIncrementGetResponse struct {
 	HasNext bool `json:"has_next"`
-	HotelOrders []*HotelOrder `json:"hotel_orders"`
+	HotelOrders *HotelOrderListObject `json:"hotel_orders"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1634,7 +1634,7 @@ func (r *HotelSoldTypesIncrementGetRequest) GetResponse(accessToken string) (*Ho
 
 type HotelSoldTypesIncrementGetResponse struct {
 	HasNext bool `json:"has_next"`
-	RoomTypes []*RoomType `json:"room_types"`
+	RoomTypes *RoomTypeListObject `json:"room_types"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1909,7 +1909,7 @@ func (r *HotelsSearchRequest) GetResponse(accessToken string) (*HotelsSearchResp
 }
 
 type HotelsSearchResponse struct {
-	Hotels []*Hotel `json:"hotels"`
+	Hotels *HotelListObject `json:"hotels"`
 	TotalResults int `json:"total_results"`
 }
 

@@ -4,8 +4,14 @@
 
 package notice
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type DiscardInfoListObject struct {
+	DiscardInfo []*DiscardInfo `json:"discard_info"`
+
+}
 
 /* 用户丢失消息的数据结构 */
 type DiscardInfo struct {
@@ -25,15 +31,15 @@ type AppCustomer struct {
 	Modified string `json:"modified"`
 	Nick string `json:"nick"`
 	Status string `json:"status"`
-	Subscriptions *SubscriptionObject `json:"subscriptions"`
+	Subscriptions *SubscriptionListObject `json:"subscriptions"`
 	Type []string `json:"type"`
 	UserId int `json:"user_id"`
 
 }
 
-/* 开通增量消息服务的应用用户 */
-type SubscriptionObject struct {
-	Subscriptions []*Subscription `json:"subscription"`
+/*  */
+type SubscriptionListObject struct {
+	Subscription []*Subscription `json:"subscription"`
 
 }
 
@@ -41,6 +47,18 @@ type SubscriptionObject struct {
 type Subscription struct {
 	Status string `json:"status"`
 	Topic string `json:"topic"`
+
+}
+
+/*  */
+type AppCustomerListObject struct {
+	AppCustomer []*AppCustomer `json:"app_customer"`
+
+}
+
+/*  */
+type NotifyItemListObject struct {
+	NotifyItem []*NotifyItem `json:"notify_item"`
 
 }
 
@@ -62,6 +80,12 @@ type NotifyItem struct {
 
 }
 
+/*  */
+type NotifyRefundListObject struct {
+	NotifyRefund []*NotifyRefund `json:"notify_refund"`
+
+}
+
 /* 退款通知消息 */
 type NotifyRefund struct {
 	BuyerNick string `json:"buyer_nick"`
@@ -74,6 +98,12 @@ type NotifyRefund struct {
 	Status string `json:"status"`
 	Tid int `json:"tid"`
 	UserId int `json:"user_id"`
+
+}
+
+/*  */
+type NotifyTradeListObject struct {
+	NotifyTrade []*NotifyTrade `json:"notify_trade"`
 
 }
 
@@ -101,14 +131,14 @@ type Task struct {
 	Method string `json:"method"`
 	Schedule string `json:"schedule"`
 	Status string `json:"status"`
-	Subtasks *SubtaskObject `json:"subtasks"`
+	Subtasks *SubtaskListObject `json:"subtasks"`
 	TaskId int `json:"task_id"`
 
 }
 
-/* 批量异步任务结果 */
-type SubtaskObject struct {
-	Subtasks []*Subtask `json:"subtask"`
+/*  */
+type SubtaskListObject struct {
+	Subtask []*Subtask `json:"subtask"`
 
 }
 

@@ -4,8 +4,14 @@
 
 package fuwu
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
+
+/*  */
+type ArticleBizOrderListObject struct {
+	ArticleBizOrder []*ArticleBizOrder `json:"article_biz_order"`
+
+}
 
 /* 应用订单信息 */
 type ArticleBizOrder struct {
@@ -29,6 +35,12 @@ type ArticleBizOrder struct {
 
 }
 
+/*  */
+type ArticleSubListObject struct {
+	ArticleSub []*ArticleSub `json:"article_sub"`
+
+}
+
 /* 应用订购信息 */
 type ArticleSub struct {
 	ArticleCode string `json:"article_code"`
@@ -40,6 +52,12 @@ type ArticleSub struct {
 	ItemName string `json:"item_name"`
 	Nick string `json:"nick"`
 	Status int `json:"status"`
+
+}
+
+/*  */
+type ArticleUserSubscribeListObject struct {
+	ArticleUserSubscribe []*ArticleUserSubscribe `json:"article_user_subscribe"`
 
 }
 

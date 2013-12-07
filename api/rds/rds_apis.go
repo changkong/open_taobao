@@ -115,7 +115,7 @@ func (r *RdsDbGetRequest) GetResponse(accessToken string) (*RdsDbGetResponse, []
 }
 
 type RdsDbGetResponse struct {
-	RdsDbInfos []*RdsDbInfo `json:"rds_db_infos"`
+	RdsDbInfos *RdsDbInfoListObject `json:"rds_db_infos"`
 }
 
 type RdsDbGetResponseResult struct {

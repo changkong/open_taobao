@@ -4,22 +4,22 @@
 
 package jp
 
-const VersionNo = "20131202"
+const VersionNo = "20131207"
 
 
 /* Appkey的站点导购数据 */
 type SpmResult struct {
 	AppKey string `json:"app_key"`
 	Date string `json:"date"`
-	SpmModules *TopSpmObject `json:"spm_modules"`
-	SpmPages *TopSpmObject `json:"spm_pages"`
+	SpmModules *TopSpmListObject `json:"spm_modules"`
+	SpmPages *TopSpmListObject `json:"spm_pages"`
 	SpmSite *TopSpm `json:"spm_site"`
 
 }
 
-/* Appkey的站点导购数据 */
-type TopSpmObject struct {
-	TopSpms []*TopSpm `json:"top_spm"`
+/*  */
+type TopSpmListObject struct {
+	TopSpm []*TopSpm `json:"top_spm"`
 
 }
 
@@ -35,6 +35,12 @@ type TopSpm struct {
 
 }
 
+/*  */
+type TmallBrandListObject struct {
+	TmallBrand []*TmallBrand `json:"tmall_brand"`
+
+}
+
 /* 天猫搜索品牌信息 */
 type TmallBrand struct {
 	BrandId int `json:"brand_id"`
@@ -42,10 +48,22 @@ type TmallBrand struct {
 
 }
 
+/*  */
+type TmallCatListObject struct {
+	TmallCat []*TmallCat `json:"tmall_cat"`
+
+}
+
 /* 天猫搜索类目信息 */
 type TmallCat struct {
 	CatId int `json:"cat_id"`
 	CatName string `json:"cat_name"`
+
+}
+
+/*  */
+type TmallSearchItemListObject struct {
+	TmallSearchItem []*TmallSearchItem `json:"tmall_search_item"`
 
 }
 
@@ -70,6 +88,12 @@ type TmallSearchItem struct {
 
 }
 
+/*  */
+type TmallMinisiteListObject struct {
+	TmallMinisite []*TmallMinisite `json:"tmall_minisite"`
+
+}
+
 /* 天猫搜索Minisite信息 */
 type TmallMinisite struct {
 	Id int `json:"id"`
@@ -79,12 +103,24 @@ type TmallMinisite struct {
 
 }
 
+/*  */
+type SelectedItemListObject struct {
+	SelectedItem []*SelectedItem `json:"selected_item"`
+
+}
+
 /* 天猫精选商品列表 */
 type SelectedItem struct {
 	Cid int `json:"cid"`
 	ItemScore string `json:"item_score"`
 	ShopId int `json:"shop_id"`
 	TrackIid string `json:"track_iid"`
+
+}
+
+/*  */
+type TmallSearchTmItemListObject struct {
+	TmallSearchTmItem []*TmallSearchTmItem `json:"tmall_search_tm_item"`
 
 }
 
@@ -104,6 +140,12 @@ type TmallSearchTmItem struct {
 	Title string `json:"title"`
 	TrackIid string `json:"track_iid"`
 	Volume int `json:"volume"`
+
+}
+
+/*  */
+type TmallTmCatListObject struct {
+	TmallTmCat []*TmallTmCat `json:"tmall_tm_cat"`
 
 }
 

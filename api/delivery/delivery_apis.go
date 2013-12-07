@@ -34,7 +34,7 @@ func (r *AreasGetRequest) GetResponse(accessToken string) (*AreasGetResponse, []
 }
 
 type AreasGetResponse struct {
-	Areas []*Area `json:"areas"`
+	Areas *AreaListObject `json:"areas"`
 }
 
 type AreasGetResponseResult struct {
@@ -265,7 +265,7 @@ func (r *DeliveryTemplateGetRequest) GetResponse(accessToken string) (*DeliveryT
 }
 
 type DeliveryTemplateGetResponse struct {
-	DeliveryTemplates []*DeliveryTemplate `json:"delivery_templates"`
+	DeliveryTemplates *DeliveryTemplateListObject `json:"delivery_templates"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -418,7 +418,7 @@ func (r *DeliveryTemplatesGetRequest) GetResponse(accessToken string) (*Delivery
 }
 
 type DeliveryTemplatesGetResponse struct {
-	DeliveryTemplates []*DeliveryTemplate `json:"delivery_templates"`
+	DeliveryTemplates *DeliveryTemplateListObject `json:"delivery_templates"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -682,7 +682,7 @@ func (r *LogisticsAddressSearchRequest) GetResponse(accessToken string) (*Logist
 }
 
 type LogisticsAddressSearchResponse struct {
-	Addresses []*AddressResult `json:"addresses"`
+	Addresses *AddressResultListObject `json:"addresses"`
 }
 
 type LogisticsAddressSearchResponseResult struct {
@@ -731,7 +731,7 @@ func (r *LogisticsCompaniesGetRequest) GetResponse(accessToken string) (*Logisti
 }
 
 type LogisticsCompaniesGetResponse struct {
-	LogisticsCompanies []*LogisticsCompany `json:"logistics_companies"`
+	LogisticsCompanies *LogisticsCompanyListObject `json:"logistics_companies"`
 }
 
 type LogisticsCompaniesGetResponseResult struct {
@@ -1382,7 +1382,7 @@ func (r *LogisticsOrdersDetailGetRequest) GetResponse(accessToken string) (*Logi
 }
 
 type LogisticsOrdersDetailGetResponse struct {
-	Shippings []*Shipping `json:"shippings"`
+	Shippings *ShippingListObject `json:"shippings"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1472,7 +1472,7 @@ func (r *LogisticsOrdersGetRequest) GetResponse(accessToken string) (*LogisticsO
 }
 
 type LogisticsOrdersGetResponse struct {
-	Shippings []*Shipping `json:"shippings"`
+	Shippings *ShippingListObject `json:"shippings"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -1667,7 +1667,7 @@ func (r *LogisticsPartnersGetRequest) GetResponse(accessToken string) (*Logistic
 }
 
 type LogisticsPartnersGetResponse struct {
-	LogisticsPartners []*LogisticsPartner `json:"logistics_partners"`
+	LogisticsPartners *LogisticsPartnerListObject `json:"logistics_partners"`
 }
 
 type LogisticsPartnersGetResponseResult struct {
@@ -1720,7 +1720,7 @@ type LogisticsTraceSearchResponse struct {
 	OutSid string `json:"out_sid"`
 	Status string `json:"status"`
 	Tid int `json:"tid"`
-	TraceList []*TransitStepInfo `json:"trace_list"`
+	TraceList *TransitStepInfoListObject `json:"trace_list"`
 }
 
 type LogisticsTraceSearchResponseResult struct {
@@ -1773,7 +1773,7 @@ func (r *LogisticsAddressReachableRequest) GetResponse(accessToken string) (*Log
 }
 
 type LogisticsAddressReachableResponse struct {
-	ReachableResultList []*AddressReachableResult `json:"reachable_result_list"`
+	ReachableResultList *AddressReachableResultListObject `json:"reachable_result_list"`
 }
 
 type LogisticsAddressReachableResponseResult struct {

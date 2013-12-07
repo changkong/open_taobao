@@ -128,7 +128,7 @@ func (r *SellercenterRolemembersGetRequest) GetResponse(accessToken string) (*Se
 }
 
 type SellercenterRolemembersGetResponse struct {
-	Subusers []*SubUserInfo `json:"subusers"`
+	Subusers *SubUserInfoListObject `json:"subusers"`
 }
 
 type SellercenterRolemembersGetResponseResult struct {
@@ -161,7 +161,7 @@ func (r *SellercenterRolesGetRequest) GetResponse(accessToken string) (*Sellerce
 }
 
 type SellercenterRolesGetResponse struct {
-	Roles []*Role `json:"roles"`
+	Roles *RoleListObject `json:"roles"`
 }
 
 type SellercenterRolesGetResponseResult struct {
@@ -227,7 +227,7 @@ func (r *SellercenterSubusersGetRequest) GetResponse(accessToken string) (*Selle
 }
 
 type SellercenterSubusersGetResponse struct {
-	Subusers []*SubUserInfo `json:"subusers"`
+	Subusers *SubUserInfoListObject `json:"subusers"`
 }
 
 type SellercenterSubusersGetResponseResult struct {
@@ -260,7 +260,7 @@ func (r *SellercenterUserPermissionsGetRequest) GetResponse(accessToken string) 
 }
 
 type SellercenterUserPermissionsGetResponse struct {
-	Permissions []*Permission `json:"permissions"`
+	Permissions *PermissionListObject `json:"permissions"`
 }
 
 type SellercenterUserPermissionsGetResponseResult struct {
@@ -422,7 +422,7 @@ func (r *SubuserDepartmentsGetRequest) GetResponse(accessToken string) (*Subuser
 }
 
 type SubuserDepartmentsGetResponse struct {
-	Departments []*Department `json:"departments"`
+	Departments *DepartmentListObject `json:"departments"`
 }
 
 type SubuserDepartmentsGetResponseResult struct {
@@ -584,7 +584,7 @@ func (r *SubuserDutysGetRequest) GetResponse(accessToken string) (*SubuserDutysG
 }
 
 type SubuserDutysGetResponse struct {
-	Dutys []*Duty `json:"dutys"`
+	Dutys *DutyListObject `json:"dutys"`
 }
 
 type SubuserDutysGetResponseResult struct {
@@ -904,7 +904,7 @@ func (r *SubusersGetRequest) GetResponse(accessToken string) (*SubusersGetRespon
 }
 
 type SubusersGetResponse struct {
-	Subaccounts []*SubAccountInfo `json:"subaccounts"`
+	Subaccounts *SubAccountInfoListObject `json:"subaccounts"`
 }
 
 type SubusersGetResponseResult struct {

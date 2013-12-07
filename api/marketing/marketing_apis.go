@@ -125,7 +125,7 @@ func (r *MarketingPromotionsGetRequest) GetResponse(accessToken string) (*Market
 }
 
 type MarketingPromotionsGetResponse struct {
-	Promotions []*Promotion `json:"promotions"`
+	Promotions *PromotionListObject `json:"promotions"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -278,7 +278,7 @@ func (r *PromotionActivityGetRequest) GetResponse(accessToken string) (*Promotio
 }
 
 type PromotionActivityGetResponse struct {
-	Activitys []*Activity `json:"activitys"`
+	Activitys *ActivityListObject `json:"activitys"`
 }
 
 type PromotionActivityGetResponseResult struct {
@@ -364,8 +364,8 @@ func (r *PromotionCouponSendRequest) GetResponse(accessToken string) (*Promotion
 }
 
 type PromotionCouponSendResponse struct {
-	CouponResults []*CouponResult `json:"coupon_results"`
-	FailureBuyers []*ErrorMessage `json:"failure_buyers"`
+	CouponResults *CouponResultListObject `json:"coupon_results"`
+	FailureBuyers *ErrorMessageListObject `json:"failure_buyers"`
 	IsSuccess bool `json:"is_success"`
 }
 
@@ -474,7 +474,7 @@ func (r *PromotionCoupondetailGetRequest) GetResponse(accessToken string) (*Prom
 }
 
 type PromotionCoupondetailGetResponse struct {
-	CouponDetails []*CouponDetail `json:"coupon_details"`
+	CouponDetails *CouponDetailListObject `json:"coupon_details"`
 	IsHaveNextPage bool `json:"is_have_next_page"`
 	TotalResults int `json:"total_results"`
 }
@@ -529,7 +529,7 @@ func (r *PromotionCouponsGetRequest) GetResponse(accessToken string) (*Promotion
 }
 
 type PromotionCouponsGetResponse struct {
-	Coupons []*Coupon `json:"coupons"`
+	Coupons *CouponListObject `json:"coupons"`
 	TotalResults int `json:"total_results"`
 }
 
@@ -563,7 +563,7 @@ func (r *PromotionLimitdiscountDetailGetRequest) GetResponse(accessToken string)
 }
 
 type PromotionLimitdiscountDetailGetResponse struct {
-	ItemDiscountDetailList []*LimitDiscountDetail `json:"item_discount_detail_list"`
+	ItemDiscountDetailList *LimitDiscountDetailListObject `json:"item_discount_detail_list"`
 }
 
 type PromotionLimitdiscountDetailGetResponseResult struct {
@@ -616,7 +616,7 @@ func (r *PromotionLimitdiscountGetRequest) GetResponse(accessToken string) (*Pro
 }
 
 type PromotionLimitdiscountGetResponse struct {
-	LimitDiscountList []*LimitDiscount `json:"limit_discount_list"`
+	LimitDiscountList *LimitDiscountListObject `json:"limit_discount_list"`
 	TotalCount int `json:"total_count"`
 }
 
@@ -655,7 +655,7 @@ func (r *PromotionMealGetRequest) GetResponse(accessToken string) (*PromotionMea
 }
 
 type PromotionMealGetResponse struct {
-	MealList []*Meal `json:"meal_list"`
+	MealList *MealListObject `json:"meal_list"`
 }
 
 type PromotionMealGetResponseResult struct {
@@ -1351,7 +1351,7 @@ func (r *UmpRangeGetRequest) GetResponse(accessToken string) (*UmpRangeGetRespon
 }
 
 type UmpRangeGetResponse struct {
-	Ranges []*Range `json:"ranges"`
+	Ranges *RangeListObject `json:"ranges"`
 }
 
 type UmpRangeGetResponseResult struct {
